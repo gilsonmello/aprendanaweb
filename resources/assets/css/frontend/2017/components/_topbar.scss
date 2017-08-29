@@ -1,0 +1,65 @@
+.brj-topbar {
+  // Common
+  background-color: white;
+  &-link {
+    margin-left: 24px;
+    &, &-label, & i {
+      display: inline-block;
+      line-height: 24px;
+      vertical-align: middle;
+    }
+    &-label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    i {
+      font-size: 16px;
+      margin-right: 2px;
+    }
+  }
+
+  // Topbar (Top)
+  &-main {
+    border-bottom: 1px solid #E6E6E6;
+    height: 60px;
+    width: 100%;
+    line-height: 60px;
+    &-logo {
+      height: 40px;
+    }
+    &-search {
+      margin-top: 10px;
+      height: 40px;
+    }
+    &-col-logo {
+      padding-left: 0;
+    }
+    &-col-options {
+      padding-right: 0;
+    }
+    button {
+      margin-left: 24px;
+    }
+  }
+
+  // Topbar (Bottom)
+  &-menu {
+    height: 60px;
+    width: 100%;
+    line-height: 60px;
+    padding-left: 0;
+    padding-right: 0;
+    .brj-topbar-link:first-child {
+      margin-left: 0;
+    }
+    &-right {
+      float: right;
+      a {
+        font-size: 12px;
+        color: #1E376D;
+        text-decoration: none;
+        margin-left: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+.brj-course-card {
+  margin-bottom: 16px;
+  width: 100%;
+  min-height: 320px;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
+  border: 1px solid #E6E6E6;
+  &-cover {
+    width: 100%;
+    height: 128px;
+    background-position: center;
+    background-image: url(https://www.brasiljuridico.com.br/uploads/banners/32/direito_medico_YzDX.jpg);
+    background-size: cover;
+  }
+  &-content {
+    padding: 16px;
+    .title {
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #1E376D;
+      font-size: 16px;
+    }
+    .description {
+      color: #808080;
+      line-height: 18px;
+      font-weight: 300;
+    }
+    .price {
+      margin-top: 16px;
+      color: #676767;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 19px;
+      .old-price {
+        color: #B3B3B3;
+        text-decoration: line-through;
+      }
+    }
+    .teachers {
+      h4 {
+        color: #808080;
+        font-size: 12px;
+        padding-top: 8px;
+        border-top: 1px solid #E6E6E6;
+        margin-top: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+      .teacher {
+        width: 100%;
+        /* two teachers */
+        &:first-child:nth-last-child(2),
+        &:first-child:nth-last-child(2) ~ .teacher {
+            width: 50%;
+        }
+        float: left;
+        &-image {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          float: left;
+        }
+        &-name {
+          padding-right: 16px;
+          @include ellipsis(calc(100% - 24px - 8px));
+          line-height: 24px;
+          margin-left: 8px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

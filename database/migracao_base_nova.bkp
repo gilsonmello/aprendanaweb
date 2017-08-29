@@ -1,0 +1,461 @@
+-- tirar caracteres "h" "m" de cargo_horaria na tabela de pacote
+
+-- mudar default dos campos de datas das tabelas (contents, view, view_log)
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+delete from newsletters;
+
+insert into newsletters (id, name, email, created_at, updated_at, deleted_at)
+select id, nome, email, data_cadastro, data_cadastro, null from brjrestore.newsletters;
+
+delete from sectors;
+
+-- insert into sectors (id, name, created_at, updated_at, deleted_at, hours_to_reply, message_finish)
+-- select id, titulo, now(), now(), null, 48, '' from brjrestore.areas_contatos where excluido = false;
+
+insert into sectors values (1, 'Dúvidas gerais', now(), now(), null, 48, '');
+insert into sectors values (2, 'Sugestões', now(), now(), null, 48, '');
+insert into sectors values (3, 'Críticas', now(), now(), null, 48, '');
+insert into sectors values (4, 'Acadêmico - Calendário de aulas', now(), now(), null, 48, '');
+insert into sectors values (5, 'Acadêmico - Material didático', now(), now(), null, 48, '');
+insert into sectors values (6, 'Acadêmico - Corpo docente', now(), now(), null, 48, '');
+insert into sectors values (7, 'Acadêmico - Conteúdo das aulas', now(), now(), null, 48, '');
+insert into sectors values (8, 'Certificados', now(), now(), null, 48, '');
+insert into sectors values (9, 'Acadêmico - Lançamento de cursos', now(), now(), null, 48, '');
+insert into sectors values (10, 'Financeiro - Cancelamento', now(), now(), null, 48, '');
+insert into sectors values (11, 'Acadêmico - Prorrogação de matrícula', now(), now(), null, 48, '');
+insert into sectors values (12, 'Acadêmico - Prorrogação de visualizações', now(), now(), null, 48, '');
+insert into sectors values (13, 'Acadêmico - Outras informações', now(), now(), null, 48, '');
+insert into sectors values (14, 'Financeiro - Comprovante de pagamento', now(), now(), null, 48, '');
+insert into sectors values (15, 'Financeiro - Emissão de nota fiscal', now(), now(), null, 48, '');
+insert into sectors values (16, 'Financeiro - Forma de Pagamento', now(), now(), null, 48, '');
+insert into sectors values (17, 'Financeiro - Problemas durante a compra', now(), now(), null, 48, '');
+insert into sectors values (18, 'Financeiro - Compra institucional', now(), now(), null, 48, '');
+insert into sectors values (19, 'Tecnologia - Problema com o vídeo', now(), now(), null, 48, '');
+insert into sectors values (20, 'Tecnologia - Esqueci o login e a senha', now(), now(), null, 48, '');
+insert into sectors values (21, 'Tecnologia - Requisitos mínimos', now(), now(), null, 48, '');
+insert into sectors values (22, 'Tecnologia - Outros problemas', now(), now(), null, 48, '');
+
+delete from assigned_roles where user_id > 300;
+
+-- insert into assigned_roles values (1, 1, 1);
+--
+-- insert into assigned_roles values (2, 1, 3);
+
+delete from users where id > 300;
+
+-- insert into users (id, name, email, password, status, confirmation_code, confirmed, created_at, updated_at, deleted_at)
+-- select id + 100, nome, email, 'XXXXXXXX', 1, senha, true, data_cadastro, data_cadastro, null from brjrestore.administradores where id not in ( 8, 18, 16, 14, 29, 32);
+--
+-- insert into assigned_roles( id, user_id, role_id)
+-- select id + 100, id + 100, 1 from brjrestore.administradores where id not in ( 8, 18, 16, 14, 29, 32);
+--
+-- insert into users (id, name, email, password, status, confirmation_code, confirmed, created_at, updated_at, deleted_at, photo, resume)
+-- select id + 200, nome, email, 'XXXXXXXX', 1, senha, true, data_cadastro, data_cadastro, null, nome_foto, descricao
+-- from brjrestore.professores where excluido = false and id not in ( 6, 42, 43, 44);
+--
+-- insert into assigned_roles( id, user_id, role_id)
+-- select id + 200, id + 200, 2 from brjrestore.professores where excluido = false and id not in ( 6, 42, 43, 44);
+
+UPDATE brjrestore.alunos SET data_nascimento = '1990-01-01' WHERE year(data_nascimento) = 0;
+
+UPDATE brjrestore.alunos SET data_ultimo_acesso = '1990-01-01' WHERE year(data_ultimo_acesso) = 0;
+
+insert into users (id, name, email, password, status, confirmation_code, confirmed, created_at, updated_at, deleted_at, photo,
+cel, personal_id, address, professional_number, neighborhood, city_id, zip, address_number, address_comp,
+is_newsletter_subscriber, gender, birthdate, last_access)
+select a.id + 300, nome, email, 'XXXXXXXX', 1, senha, true, data_cadastro, data_cadastro, null, arquivo_foto,
+ mid(telefone, 1, 20), cpf, mid(logradouro, 1, 100), '',  mid(bairro, 1, 100), c.id, cep, mid(numero, 1, 10), mid(complemento, 1, 100),
+0, if(sexo=2,'F','M'), data_nascimento, data_ultimo_acesso
+from brjrestore.alunos a, cities c, states s
+where excluido = false and short = estado and c.state_id = s.id and c.name = cidade
+and email not in ('bruno.moura@agencianuve.com.br', 'mariana@brasiljuridico.com.br', 'gesoaldo@brasiljuridico.com.br', 'edmarsampaio@gmail.com', 'adrianacarvalho@brasiljuridico.com.br', 'adhemarfontes@gmail.com', 'daniele@brasiljuridico.com.br', 'cinara@brasiljuridico.com.br', 'daiane@brasiljuridico.com.br', 'gilson@brasiljuridico.com.br',  'bruno@brasiljuridico.com.br', 'lucas.reis@salvedigital.com.br', 'paulo@jus.com.br', 'adhemar.fontes@ipq.com.br', 'joao@joaoglicerio.com'    );
+
+insert into users (id, name, email, password, status, confirmation_code, confirmed, created_at, updated_at, deleted_at, photo,
+cel, personal_id, address, professional_number, neighborhood, city_id, zip, address_number, address_comp,
+is_newsletter_subscriber, gender, birthdate, last_access)
+select id + 300, nome, email, 'XXXXXXXX', 1, senha, true, data_cadastro, data_cadastro, null, arquivo_foto,
+ mid(telefone, 1, 20), cpf, mid(logradouro, 1, 100), '',  mid(bairro, 1, 100), null, cep, mid(numero, 1, 10), mid(complemento, 1, 100),
+0, if(sexo=2,'F','M'), data_nascimento, data_ultimo_acesso
+from brjrestore.alunos where excluido = false and email not in ( 'acioly@brasiljuridico.com.br', '', 'bruno.moura@agencianuve.com.br', 'mariana@brasiljuridico.com.br', 'gesoaldo@brasiljuridico.com.br', 'edmarsampaio@gmail.com', 'adrianacarvalho@brasiljuridico.com.br', 'adhemarfontes@gmail.com', 'daniele@brasiljuridico.com.br', 'cinara@brasiljuridico.com.br', 'daiane@brasiljuridico.com.br', 'gilson@brasiljuridico.com.br',  'bruno@brasiljuridico.com.br', 'lucas.reis@salvedigital.com.br', 'paulo@jus.com.br', 'adhemar.fontes@ipq.com.br', 'joao@joaoglicerio.com'     )
+and id not in (
+select a.id from brjrestore.alunos a, cities c, states s
+where a.cidade = c.name and short = a.estado and s.id = c.state_id and excluido = false);
+
+insert into assigned_roles( id, user_id, role_id)
+select id + 300, id + 300, 3 from brjrestore.alunos where (id +300) in (select id from users);
+
+-- delete from tags;
+--
+-- insert into tags (id, name, description, created_at, updated_at, user_moderator_id, active_at)
+-- select id, titulo, null, data_cadastro, data_cadastro, 1, data_cadastro
+-- from brjrestore.assuntos where excluido = false;
+
+-- delete from news;
+--
+-- insert into news (id, title, content, date, tags, link, img, activation_date, slug, video, deleted_at,  created_at, updated_at, hits )
+-- select id, titulo, descricao, data_publicacao, '', '', '', data_publicacao, slug, null, null, data_cadastro, data_cadastro, visualizacoes
+-- from brjrestore.noticias where titulo != '' and excluido = 0;
+
+
+-- delete from articles;
+--
+-- delete from article_user;
+--
+-- insert into articles (id, title, content, date, tags, link, img, activation_date, slug, video, deleted_at, status, created_at, updated_at, hits )
+-- select id, titulo, descricao, data_publicacao, '', '', '', data_publicacao, slug, null, null, 1, data_cadastro, data_cadastro, visualizacoes
+-- from brjrestore.artigos where titulo != '' and excluido = 0;
+--
+-- insert into article_user
+-- select a.id, a.id, p.id + 200 from brjrestore.artigos a, brjrestore.autores u, brjrestore.professores p
+-- where a.titulo != '' and a.excluido = 0 and u.id = a.autor_id and u.nome = p.nome and p.excluido = 0;
+
+delete from ticket_messages;
+
+delete from tickets;
+
+insert into tickets (id, user_student_id, sector_id, message, date_dead_line_reply, is_replied, is_finished, created_at, updated_at, deleted_at)
+select id, aluno_id + 300, 1, descricao, DATE_ADD(data_cadastro ,INTERVAL 5 DAY), respondida, status, data_cadastro, data_cadastro, null
+from  brjrestore.iteracoes where iteracao_id = 0;
+
+insert into ticket_messages (id, ticket_id, user_id, message, created_at, updated_at, deleted_at)
+select id, iteracao_id, aluno_id + 300, descricao, data_cadastro, data_cadastro, null
+from  brjrestore.iteracoes where iteracao_id != 0 and aluno_id != 0;
+
+insert into ticket_messages (id, ticket_id, user_id, message, created_at, updated_at, deleted_at)
+select id, iteracao_id, administrador_id + 100, descricao, data_cadastro, data_cadastro, null
+from  brjrestore.iteracoes where iteracao_id != 0 and administrador_id != 0;
+
+-- delete from videos;
+--
+-- delete from video_user;
+--
+-- insert into videos (id, title, slug, content, url, tags, img, status, created_at, updated_at, activation_date, hits )
+--  select id, titulo, slug, descricao, substr(link, locate('https://www.you', link), locate('width=', link) - locate('https://www.you', link) - 2), '', img, 1, data_cadastro, data_cadastro, data_publicacao, visualizacoes
+--  from brjrestore.videos where titulo != '' and excluido = 0;
+--
+-- insert into video_user
+-- select a.id, a.id, p.id + 200, now(), now(), null from brjrestore.videos a, brjrestore.autores u, brjrestore.professores p
+-- where a.titulo != '' and a.excluido = 0 and u.id = a.autor_id and u.nome = p.nome and p.excluido = 0;
+--
+
+-- delete from sections;
+--
+-- delete from subsections;
+--
+-- alter table sections modify name varchar(100) not null;
+--
+-- insert into sections (id, name, created_at, updated_at, deleted_at)
+-- select id, nome, now(), now(), null from brjrestore.categorias where excluido = 0 and status = 1;
+--
+-- alter table subsections modify name varchar(100) not null;
+--
+-- insert into subsections (id, name, created_at, updated_at, deleted_at, section_id)
+-- select id, nome, now(), now(), null, id from brjrestore.categorias where excluido = 0 and status = 1;
+--
+-- update sections set color = '#0c5c34', slug = 'carreira-juridica' where id = 1;
+-- update sections set color = '#ebb60d', slug = 'combinadas' where id = 12;
+-- update sections set color =  '#e3793f', slug = 'concursos' where id = 13;
+-- update sections set color =  '#46b19b', slug = 'isoladas' where id = 9;
+-- update sections set color =  '#df4849', slug = 'novo-cpc-' where id = 14;
+-- update sections set color =  '#075890', slug =  'temas' where id = 15;
+-- update sections set color =  '#46b19b', slug =  'isoladas---resolucao-de-questoes' where id = 16;
+
+
+update brjrestore.pacotes set carga_horaria = TRIM(REPLACE(carga_horaria, 'h/aula', ''));
+
+update brjrestore.pacotes set carga_horaria = TRIM(REPLACE(carga_horaria, 'horas', ''));
+
+update brjrestore.pacotes set carga_horaria = TRIM(carga_horaria);
+
+update brjrestore.pacotes set carga_horaria = '0' where carga_horaria = '';
+
+delete from courses;
+
+insert into courses (id, subsection_id, user_admin_id, title, description, course_content, slug, tags, video_ad_url, activation_date, price, discount_price, featured_img, is_active, teachers_percentage,
+created_at, updated_at, deleted_at, average_grade, orders_count, special_offer, access_time, workload, max_view, percentage_certificate )
+select p.id, categoria_id, 1, p.titulo, descricao, conteudo, slug, '', referencia, p.data_cadastro, preco_sem_desconto, preco, imagem, p.status, valor_liquido_professores,
+p.data_cadastro, p.data_cadastro, null, 7, 0, 0, duracao, CAST(trim(carga_horaria) AS UNSIGNED), p.visualizacoes, 75
+from brjrestore.pacotes p , brjrestore.categorias_pacotes c, brjrestore.midias m
+where pacote_id = p.id and m.id = p.midia_id and p.excluido = 0 and c.categoria_id != 17;
+
+insert into courses (id, subsection_id, user_admin_id, title, description, course_content, slug, tags, video_ad_url, activation_date, price, discount_price, featured_img, is_active, teachers_percentage,
+created_at, updated_at, deleted_at, average_grade, orders_count, special_offer, access_time, workload, max_view, percentage_certificate)
+select p.id, categoria_id, 1, p.titulo, descricao, conteudo, slug, '', null, p.data_cadastro, preco_sem_desconto, preco, imagem, p.status, valor_liquido_professores,
+p.data_cadastro, p.data_cadastro, null, 7, 0, 0, duracao, CAST(trim(carga_horaria) AS UNSIGNED), p.visualizacoes, 75
+from brjrestore.pacotes p , brjrestore.categorias_pacotes c
+where pacote_id = p.id and p.midia_id = 0 and p.excluido = 0  and c.categoria_id != 17;
+
+
+delete from modules;
+
+insert into modules (id, name, description, price, subsection_id, video_ad_url, sequence, is_active, tags, is_sold_separately, activation_date, discount_price, featured_img,
+created_at, updated_at, deleted_at, course_id)
+select c.id, a.titulo, null, null, null, null, null, 1, '', 0, null, null, null,
+c.data_cadastro, c.data_cadastro, null, pacote_id
+from brjrestore.modpacotes m, brjrestore.cursos c, brjrestore.assuntos a
+where c.modpacote_id = m.id and c.assunto_id = a.id and m.excluido = 0 and c.excluido = 0 ;
+
+delete from course_teachers;
+
+insert into course_teachers (course_id, teacher_id, percentage, created_at, updated_at, deleted_at)
+select pacote_id, p.professor_id + 200, sum(porcentagem), now(), now(), null
+from brjrestore.modpacotes m, brjrestore.cursos c, brjrestore.cursos_professores p
+where c.modpacote_id = m.id and p.curso_id = c.id and m.excluido = 0 and c.excluido = 0 and p.professor_id != 0
+and (p.professor_id + 200) in (select id from users)
+and pacote_id in (select id from courses)
+group by pacote_id, p.professor_id, now();
+
+delete from lessons;
+
+insert into lessons (id, title, description, price, is_active, tags, sequence, featured_img, duration, activation_date, discount_price, subsection_id, video_ad_url,
+created_at, updated_at, deleted_at, module_id)
+select distinct a.id, '', null, null, 1, '', a.ordem, null, 0, null, null, null, null,
+a.data_cadastro, a.data_cadastro, null, curso_id
+from brjrestore.aulas a
+where a.excluido = 0;
+
+-- UPDATE TITULO DAS AULAS - como??
+
+delete from lesson_teachers;
+
+
+insert into lesson_teachers (lesson_id, teacher_id, percentage, created_at, updated_at, deleted_at)
+select distinct a.id, p.professor_id + 200, 0, '2016-02-13', '2016-02-13', null
+from brjrestore.cursos c, brjrestore.cursos_professores p, brjrestore.aulas a
+where p.curso_id = c.id and a.curso_id = c.id
+and  c.excluido = 0 and a.excluido = 0 and p.professor_id != 0;
+
+
+-- DISTRIBUIR OS PERCENTUAIS DOS PROFESSORES NAS AULAS
+
+alter table contents modify column url varchar(300);
+
+delete from contents;
+
+insert into contents (id, title, description, url, is_video, is_free, sequence, created_at, updated_at, deleted_at, lesson_id)
+select distinct a.id, trim(m.titulo), null, m.referencia, 1, 0, 0, m.data_cadastro, m.data_cadastro, null, a.aula_id
+from brjrestore.aulas_midias a, brjrestore.midias m
+where a.midia_id = m.id and m.excluido = 0 and m.tipo = 'embed';
+
+drop table if exists contents_temp;
+
+create table contents_temp as select * from contents;
+
+create index idx_contents_temp_lesson_id on contents_temp (lesson_id);
+
+update contents
+set sequence = (Select count(*) + 1
+			from contents_temp
+			where contents_temp.lesson_id = contents.lesson_id and contents.id > contents_temp.id)
+where is_video = 1;
+
+insert into contents (id, title, description, url, is_video, is_free, sequence, created_at, updated_at, deleted_at, lesson_id)
+select distinct a.id, trim(m.titulo), m.tipo, m.referencia, 0, 0, 0, m.data_cadastro, m.data_cadastro, null, a.aula_id
+from brjrestore.aulas_midias a, brjrestore.midias m
+where a.midia_id = m.id and m.excluido = 0 and m.tipo != 'embed';
+
+drop table if exists contents_temp;
+
+-- delete from partners;
+--
+-- insert into partners (id, name, source, contact, phone, days_subscribe)
+-- select id, nome, utm_source, '', '', 10
+-- from brjrestore.parcerias_campanhas;
+
+delete from coupons;
+
+insert into coupons (id, name, code, start_date, due_date, `limit`, used, percentage, value, created_at, updated_at, deleted_at, institutional, partner_id)
+select id, titulo, codigo, data_inicio, data_fim, quantidade_uso, quantidade_usado, porcentagem, dinheiro, data_cadastro, data_cadastro, null, 0, parceiras_campanhas_id
+from brjrestore.cupons where excluido = 0;
+
+update coupons set partner_id = null where partner_id = 0;
+
+delete from orders;
+
+UPDATE brjrestore.pedidos SET data_cancelamento = null WHERE year(data_cancelamento) = 0;
+
+UPDATE brjrestore.pedidos SET data_liberacao = null WHERE year(data_liberacao) = 0;
+
+insert into orders (id, student_id, coupon_id, status_id, date_registration, date_confirmation, date_cancel, price, discount_price, created_at, updated_at, deleted_at)
+select id, aluno_id + 300, cupom_id, status, data_cadastro, data_liberacao, data_cancelamento, preco + ifnull(dinheiro_cupom, 0), (preco + ifnull(dinheiro_cupom, 0)) - ifnull(dinheiro_cupom, 0), data_cadastro, data_cadastro, null
+from brjrestore.pedidos where preco_liquido = 0 and porcentagem_cupom != 0;
+
+insert into orders (id, student_id, coupon_id, status_id, date_registration, date_confirmation, date_cancel, price, discount_price, created_at, updated_at, deleted_at)
+select id, aluno_id + 300, cupom_id, status, data_cadastro, data_liberacao, data_cancelamento, preco, preco, data_cadastro, data_cadastro, null
+from brjrestore.pedidos where preco_liquido = 0 and porcentagem_cupom = 0;
+
+insert into orders (id, student_id, coupon_id, status_id, date_registration, date_confirmation, date_cancel, price, discount_price, created_at, updated_at, deleted_at)
+select id, aluno_id + 300, cupom_id, status, data_cadastro, data_liberacao, data_cancelamento, preco + ifnull(dinheiro_cupom, 0), preco_liquido, data_cadastro, data_cadastro, null
+from brjrestore.pedidos where preco_liquido != 0;
+
+
+update orders set status_id = 12 where status_id = 0;
+update orders set status_id = 12 where status_id = 1;
+update orders set status_id = 12 where status_id = 2;
+update orders set status_id = 15 where status_id = 3;
+update orders set status_id = 14 where status_id = 5;
+update orders set status_id = 14 where status_id = 4;
+update orders set status_id = 14 where status_id = 6;
+update orders set status_id = 5 where status_id = 15;
+update orders set status_id = 4 where status_id = 14;
+update orders set status_id = 2 where status_id = 12;
+
+delete from order_courses;
+
+delete from order_modules;
+
+delete from order_lessons;
+
+insert into order_courses (id, order_id, course_id, price, discount_price, created_at, updated_at, deleted_at)
+select id, pedido_id, pacote_id, preco, preco, now(), now(), null
+from brjrestore.itens;
+
+delete from enrollments;
+
+UPDATE brjrestore.matriculas SET data_expiracao = data_cadastro WHERE year(data_expiracao) = 0;
+
+insert into enrollments(id, student_id, course_id, module_id, lesson_id, date_begin, date_end, is_active, is_paid, created_at, updated_at, deleted_at, order_id)
+select id, aluno_id + 300, pacote_id, null, null, data_cadastro, data_expiracao, ativo, 1, data_cadastro, data_cadastro, null, pedido_id
+from brjrestore.matriculas;
+
+delete from view;
+
+ALTER TABLE view AUTO_INCREMENT = 1;
+
+insert into view ( enrollment_id, content_id, max_view, view, created_at, updated_at, deleted_at)
+select matricula_id, a.id, 2, count(*), now(), now(), null
+from brjrestore.visualizacoes v, brjrestore.aulas_midias a
+where v.aula_id = a.aula_id and v.midia_id = a.midia_id and v.excluido = false
+group by   matricula_id, a.id, now(), now();
+
+delete from view_log;
+
+ALTER TABLE view_log AUTO_INCREMENT = 1;
+
+insert into view_log ( enrollment_id, content_id, datetime_view, video_index_seconds, created_at, updated_at, deleted_at)
+select matricula_id, a.id, data, 0, data, data, null
+from brjrestore.visualizacoes v, brjrestore.aulas_midias a
+where v.aula_id = a.aula_id and v.midia_id = a.midia_id and v.excluido = false;
+
+update orders set discount_price = price where discount_price = 0;
+
+update courses set price = discount_price  where price = 0;
+
+-- update orders set date_confirmation = null where date_confirmation = '0000-00-00 00:00:00';
+--
+-- update orders set date_cancel = null where date_cancel = '0000-00-00 00:00:00';
+
+update courses set orders_count = (select count(*) from orders, order_courses where courses.id = order_courses.course_id and order_courses.order_id = orders.id and status_id = 4);
+
+update users set orders_count = (select count(*) from orders, order_courses, course_teachers where order_courses.order_id = orders.id and status_id = 4 and course_teachers.course_id = order_courses.course_id and course_teachers.teacher_id = users.id);
+
+update contents set url = substr(url, locate('src=', url) + 5, locate('width=', url) - locate('src=', url) - 7) where is_video = 1;
+
+update contents set url = concat('http:',  url) where is_video = 1 and locate('http', url) = 0;
+
+update courses set video_ad_url = substr(video_ad_url, locate('src=', video_ad_url) + 5, locate('width=', video_ad_url) - locate('src=', video_ad_url) - 7) ;
+
+update courses set video_ad_url = concat('http:',  video_ad_url) where locate('http', video_ad_url) = 0;
+
+update courses set price = discount_price where price = 0;
+
+update courses set percentage_certificate = 75;
+
+delete from sections;
+
+delete from subsections;
+
+INSERT INTO sections (id, name, created_at, updated_at, deleted_at, color, slug, addimg, sequence, active) VALUES
+(1, 'Carreira Jurídica', '2016-01-19 14:02:34', '2016-05-25 01:20:03', NULL, '#973838', 'carreira-juridica', 'carreira-juridica.jpg', 1, 0),
+(9, 'Isoladas', '2016-01-19 14:02:34', '2016-05-25 01:19:56', NULL, '#46b19b', 'isoladas', 'isoladas.jpg', 1, 0),
+(12, 'Combinadas e Isoladas', '2016-01-19 14:02:34', '2016-05-25 01:29:49', NULL, '#3f51b5', 'combinadas-e-isoladas', 'combinadas_e_isoladas_M99Y.jpg', 2, 1),
+(13, 'SAAP OAB', '2016-01-19 14:02:34', '2016-05-27 20:41:38', NULL, '#498c33', 'saap-oab', 'saap_oab_63Cu.jpg', 1, 1),
+(14, 'Novo CPC', '2016-01-19 14:02:34', '2016-05-25 01:30:12', NULL, '#28638c', 'novo-cpc-', 'novo_cpc_SgJc.jpg', 3, 1),
+(15, 'Temas', '2016-01-19 14:02:34', '2016-05-25 01:20:29', NULL, '#fda44c', 'temas', 'novo-cpc.jpg', 1, 0),
+(16, 'SAAPS', '2016-01-19 14:02:34', '2016-05-25 01:18:30', NULL, '#51596c', 'saaps', 'saaps_53HO.jpeg', 1, 0),
+(17, 'SAAP', '2016-01-22 22:24:01', '2016-02-18 19:51:23', '2016-02-18 19:51:23', '#F0E68C', 'saaps', 'saap.jpg', 1, 1),
+(18, 'Eleições 2016', '2016-05-25 01:22:06', '2016-05-27 20:41:27', NULL, '#ead729', 'eleicoes-2016', 'eleicoes_XbBQ.jpg', 4, 1);
+
+INSERT INTO subsections (id, name, created_at, updated_at, deleted_at, section_id, slug) VALUES
+(1, 'Carreira Jurídica', '2016-01-19 14:02:35', '2016-01-19 14:02:35', NULL, 1, NULL),
+(9, 'Isoladas', '2016-01-19 14:02:35', '2016-01-19 14:02:35', NULL, 9, NULL),
+(12, 'Combinadas', '2016-01-19 14:02:35', '2016-01-19 14:02:35', NULL, 12, NULL),
+(13, 'SAAP OAB', '2016-01-19 14:02:35', '2016-05-25 01:40:19', NULL, 13, NULL),
+(14, 'Novo CPC', '2016-01-19 14:02:35', '2016-01-19 14:02:35', NULL, 14, NULL),
+(15, 'Temas', '2016-01-19 14:02:35', '2016-01-19 14:02:35', NULL, 15, NULL),
+(16, 'Isoladas - Resolução de Questões', '2016-01-19 14:02:35', '2016-01-19 14:02:35', NULL, 16, NULL),
+(17, 'Combinadas e Isoladas', '2016-05-25 01:22:39', '2016-05-25 01:22:39', NULL, 12, NULL),
+(18, 'Eleições', '2016-05-25 01:22:53', '2016-05-25 01:22:53', NULL, 18, NULL);
+
+
+update courses set subsection_id = 17 where subsection_id != 14 and subsection_id != 15;
+
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- marcar noticias como destaque
+
+-- marcar cursos como destaque?
+
+-- CADASTRAR BIANCA
+
+--  ASSOCIAR NANDA A ADMINISTRADOR
+
+-- Tirar <BR> do Novo CPC
+
+-- Cadastrar professores do Eleicoes e associar as aulas
+
+-- buscar artigos sem autores
+
+-- buscar viedos sem autores
+
+-- preencher package x teacher
+
+-- preencher sector x user
+
+
+-- update users set id = 270 where id = 2543;
+-- update users set id = 271 where id = 2548;
+-- update users set id = 272 where id = 2549;
+-- update users set id = 273 where id = 2551;
+-- update users set id = 274 where id = 2555;
+-- update users set id = 275 where id = 2556;
+-- update users set id = 276 where id = 2557;
+-- update users set id = 277 where id = 2558;
+-- update users set id = 278 where id = 2559;
+-- update users set id = 279 where id = 2560;
+-- update users set id = 280 where id = 2561;
+-- update users set id = 281 where id = 2562;
+--
+-- update exams set teacher_message_id = 270 where teacher_message_id = 2543;
+-- update exams set teacher_message_id = 271 where teacher_message_id = 2548;
+-- update exams set teacher_message_id = 272 where teacher_message_id = 2549;
+-- update exams set teacher_message_id = 273 where teacher_message_id = 2551;
+-- update exams set teacher_message_id = 274 where teacher_message_id = 2555;
+-- update exams set teacher_message_id = 275 where teacher_message_id = 2556;
+-- update exams set teacher_message_id = 276 where teacher_message_id = 2557;
+-- update exams set teacher_message_id = 277 where teacher_message_id = 2558;
+--
+-- update questions set teacher_id = 270 where teacher_id = 2543;
+-- update questions set teacher_id = 271 where teacher_id = 2548;
+-- update questions set teacher_id = 272 where teacher_id = 2549;
+-- update questions set teacher_id = 273 where teacher_id = 2551;
+-- update questions set teacher_id = 274 where teacher_id = 2555;
+-- update questions set teacher_id = 275 where teacher_id = 2556;
+-- update questions set teacher_id = 276 where teacher_id = 2557;
+-- update questions set teacher_id = 277 where teacher_id = 2558;
+--
+-- update assigned_roles set user_id = 270 where user_id = 2543;
+-- update assigned_roles set user_id = 271 where user_id = 2548;
+-- update assigned_roles set user_id = 272 where user_id = 2549;
+-- update assigned_roles set user_id = 273 where user_id = 2551;
+-- update assigned_roles set user_id = 274 where user_id = 2555;
+-- update assigned_roles set user_id = 275 where user_id = 2556;
+-- update assigned_roles set user_id = 276 where user_id = 2557;
+-- update assigned_roles set user_id = 277 where user_id = 2558;
+-- update assigned_roles set user_id = 278 where user_id = 2559;
+-- update assigned_roles set user_id = 279 where user_id = 2560;
+-- update assigned_roles set user_id = 280 where user_id = 2561;
+-- update assigned_roles set user_id = 281 where user_id = 2562;

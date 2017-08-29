@@ -1,0 +1,26 @@
+.brj-footer {
+  background-color: #1E376D;
+  color: white;
+  padding-top: 34px;
+  padding-bottom: 96px;
+  &-title {
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+  a {
+    display: block;
+    &, &:hover, &:focus, &:active {
+      text-decoration: none;
+      color: white;
+      font-weight: 200;
+      margin-bottom: 8px;
+    }
+  }
+  &-newsletter-text {
+    font-weight: 200;
+    margin-bottom: 8px;
+  }
+  &-newsletter-btn {
+    margin-top: 8px;
+  }
+}

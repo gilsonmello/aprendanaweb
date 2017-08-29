@@ -1,0 +1,35 @@
+Todo para criação de novo módulo
+
+---- Permissões e sidebar menu ok
+- criar nova permissão [painel] ok
+- atribuir a permissão para algum papel [painel] ok
+- criar menu habilitado para permissão [sidebar.php] ok
+- criar tradução do menu [menus.php] ok
+
+---- Rotas e views
+- criar arquivo com rotas habilitadas para permissão [app/Http/Routes/Backend/] ok
+- incluir arquivo de rotas criado no rota principal [app/Http/Routes/routes.php] ok
+- criar controller com metodos do CRUD [app/Http/Controllers/Backend] ok
+- criar pasta para views do backend [resources/views/backend/] ok
+- criar arquivos blade da view [index, create, edit, show] ok
+
+---- Comunicação com o banco e listagem básica
+- criar tabela [cli sgdb ou migrations] ok
+- criar model [app/ ou artisan] ok
+- criar pasta repositorios [app/Repositories/Backend/] ok
+- criar contract e repository na pasta de repositorios ok
+- adicionar bindings ao BackendServiceProvider.php ok
+- criar metodo no controller para entregar dados para a view ok
+- criar trait com ações da listagem (editar,excluir) [app/Services/Article/Traits/] ok
+- adicionar trait no modelo [app/] ok
+
+---- Cadastro de registro
+- criar arquivo create.blade.php na pasta view do modulo [resources/views/backend/] ok
+- verificar se o metodo store está recebendo o request do modulo ok
+- criar request do metodo na pasta do modulo em http [app/Http/Requests] ok
+- adicionar metodo create no contract do modulo [app/Repositories/Backend/] ok
+- adicionar metodo create no repositorio do modulo [app/Repositories/Backend/] ok
+- adicionar metodo stub no repositorio (stub monta chave e valor para inserção) ok
+
+---- Edição e remoção de registro
+- seguir os passos de cadastro e um abraço

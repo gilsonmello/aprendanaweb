@@ -1,0 +1,17 @@
+{
+<<<<<<< HEAD
+  "css/backend.css": "css/backend-3cb816b1ec.css",
+  "css/classroom.css": "css/classroom-662e3a152f.css",
+  "css/frontend.css": "css/frontend-ad58f4869b.css",
+  "js/backend.js": "js/backend-9f79650b8b.js",
+  "js/classroom.js": "js/classroom-fa854fb217.js",
+  "js/frontend.js": "js/frontend-f4d8c5b461.js"
+=======
+  "css/backend.css": "css/backend-1bebe00ebf.css",
+  "css/classroom.css": "css/classroom-f1c5eecfef.css",
+  "css/frontend.css": "css/frontend-61b29f785a.css",
+  "js/backend.js": "js/backend-2ebcb24eda.js",
+  "js/classroom.js": "js/classroom-fe9c841943.js",
+  "js/frontend.js": "js/frontend-81133a01ef.js"
+>>>>>>> d5964827a863bfb14a598b0cf069a649f2bca1bb
+}

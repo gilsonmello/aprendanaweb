@@ -1,0 +1,54 @@
+.brj-new-card {
+  margin-bottom: 16px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
+  border: 1px solid #E6E6E6;
+  &-cover {
+    width: 100%;
+    height: 184px;
+    background-position: center;
+    background-image: url(https://www.brasiljuridico.com.br/uploads/news/423/fausto_de_sanctis_o_crime_prospera_onde_a_regulacao_e_frouxa_5MIx_size400.jpeg);
+    background-size: cover;
+  }
+  &-content {
+    padding: 16px;
+    .title {
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 4px;
+      color: #333333;
+      font-size: 20px;
+    }
+    .date {
+      color: #808080;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .description {
+      color: #333;
+      line-height: 18px;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+}
+
+.brj-top-news {
+  .brj-new-card {
+    border: none;
+    border-bottom: 1px solid #E6E6E6;
+    &:last-child {
+      border-bottom: none;
+    }
+    box-shadow: none;
+    &-cover {
+      display: none;
+    }
+    &-content {
+      padding: 0;
+      padding-bottom: 16px;
+    }
+  }
+}

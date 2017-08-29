@@ -1,0 +1,31 @@
+<?php namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+/**
+ * Class StateServiceProvider
+ * @package App\Providers
+ */
+class CriterionServiceProvider extends ServiceProvider
+{
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerBindings();
+    }
+
+    /**
+     * Register service provider bindings
+     */
+    public function registerBindings() {
+        $this->app->bind(
+            'App\Repositories\Frontend\Criterion\CriterionContract',
+            'App\Repositories\Frontend\Criterion\EloquentCriterionRepository'
+        );
+    }
+}

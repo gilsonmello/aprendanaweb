@@ -1,0 +1,185 @@
+.brj-home {
+  &-hero {
+    width: 100%;
+    height: 400px;
+    background-color: #F4F6F5;
+    padding: 80px;
+    h1 {
+      color: #333333;
+    }
+    p {
+      color: #808080;
+      font-weight: 200;
+    }
+    // background-image: url(http://www.passionsports.in/wp-content/uploads/2015/04/shutterstock_12539833.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 50%;
+    .btn-brj-primary {
+      margin-right: 24px;
+    }
+  }
+  &-courses-content {
+    background-color: #FAFAFA;
+    padding-bottom: 48px;
+  }
+  &-header {
+    margin-top: 56px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E6E6E6;
+    height: 44px;
+    &-mark {
+      float: left;
+      height: 32px;
+      width: 2px;
+      background-color: #6E9BFB;
+      margin-right: 24px;
+      &.mark-blue {
+        background-color: #6E9BFB;
+      }
+      &.mark-orange {
+        background-color: #FF5722;
+      }
+    }
+    &-title {
+      float: left;
+      color: #333333;
+      line-height: 32px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    &-paginator {
+      line-height: 32px;
+      vertical-align: middle;
+      float: right;
+      color: #666666;
+      a {
+        &, &:hover, &:active, &:focus {
+          color: #666666;
+          text-decoration: none;
+          font-size: 10px;
+        }
+      }
+      &-view-all {
+        margin-right: 18px;
+      }
+      &-previous, &-next {
+        &, &--disabled {
+          i { font-size: 32px; }
+          display: inline-block;
+          line-height: 24px;
+          vertical-align: middle;
+        }
+        &--disabled {
+          opacity: 0.4;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  &-top-news {
+    &-header {
+      margin-top: 56px;
+      margin-bottom: 24px;
+      line-height: 43px;
+      border-bottom: 1px solid #E6E6E6;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  &-catchphrase {
+    max-width: 600px;
+    &-content {
+      background-color: #FAFAFA;
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+    &-title {
+      color: #333333;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    &-text {
+      margin-left: 26px;
+      font-size: 24px;
+      font-weight: 300;
+      color: #333333;
+      line-height: 32px;
+    }
+    &-meet-teachers {
+      margin-left: 26px;
+      margin-top: 16px;
+      a {
+        &, &:hover, &:active, &:focus {
+          color: #6E9BFB;
+          font-size: 12px;
+          line-height: 20px;
+          text-decoration: none;
+        }
+      }
+      i {
+        font-size: 16px;
+        display: inline-block;
+        line-height: 24px;
+        vertical-align: middle;
+      }
+    }
+    &-teachers {
+      width: 100%;
+      height: 144px;
+      background-image: url(/public/img/teachers.png)
+    }
+  }
+
+  &-catchphrase-quote {
+
+    position: absolute;
+    right: 24px;
+    top: 20px;
+
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 4px 16px 0 rgba(0,0,0,0.26);
+    border-radius: 2px;
+    width: 500px;
+    background-color: white;
+    height: 224px;
+    padding: 24px;
+    &-image {
+      float: left;
+      width: 96px;
+      text-align: center;
+      img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+    }
+    &-content {
+      float: right;
+      width: calc(100% - 96px);
+      color: #808080;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 200;
+      &-author-name {
+        font-weight: bold;
+        color: rgba(0,0,0,0.8);
+        margin-top: 24px;
+      }
+    }
+  }
+
+  &-payment-methods {
+    background: white;
+    width: 100%;
+    height: 128px;
+  }
+
+}
+
+// Depoimento do aluno
+.brj-home-catchphrase-content .container {
+  position: relative;
+}
