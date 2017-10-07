@@ -57,17 +57,17 @@
         </div><!-- ./wrapper -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{asset('js/vendor/jquery-1.11.2.min.js')}}"><\/script>')</script>
-        {!! HTML::script('js/vendor/bootstrap.min.js') !!}
-        {!! HTML::script('js/vendor/select2.full.min.js') !!}
-        {!! HTML::script('js/vendor/bootstrap3-wysihtml5.all.min.js') !!}
-        {!! HTML::script('js/vendor/bootstrap-datepicker.js') !!}
-        {!! HTML::script('js/vendor/inputmask.js') !!}
-        {!! HTML::script('js/vendor/jquery.inputmask.js') !!}
-        {!! HTML::script('js/vendor/jquery.maskMoney.js') !!}
-        {!! HTML::script('js/vendor/inputmask.extensions.js') !!}
-        {!! HTML::script('js/vendor/dataTables.bootstrap.js') !!}
-        {!! HTML::script('js/vendor/jquery.dataTables.js') !!}
-        {!! HTML::script('js/vendor/bootstrap-colorpicker.min.js') !!}
+        {!! HTML::script('js/bootstrap.min.js') !!}
+        {!! HTML::script('js/select2.full.min.js') !!}
+        {!! HTML::script('js/bootstrap3-wysihtml5.all.min.js') !!}
+        {!! HTML::script('js/bootstrap-datepicker.js') !!}
+        {!! HTML::script('js/inputmask.js') !!}
+        {!! HTML::script('js/jquery.inputmask.js') !!}
+        {!! HTML::script('js/jquery.maskMoney.js') !!}
+        {!! HTML::script('js/inputmask.extensions.js') !!}
+        {!! HTML::script('js/dataTables.bootstrap.js') !!}
+        {!! HTML::script('js/jquery.dataTables.js') !!}
+        {!! HTML::script('js/bootstrap-colorpicker.min.js') !!}
 
 
         @yield('before-scripts-end')
