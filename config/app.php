@@ -9,7 +9,7 @@ return [
       |
       | The application name for use within the UI of the application
      */
-    'name' => 'Brasil Jurídico',
+    'name' => 'Aprenda na Web',
     /*
       |--------------------------------------------------------------------------
       | Application Debug Mode

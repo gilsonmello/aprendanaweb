@@ -18,7 +18,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="{!!route('backend.dashboard')!!}" class="logo"><b>Brasil Jur&iacute;dico</b></a>
+    <a href="{!!route('backend.dashboard')!!}" class="logo"><b>{{ app_name() }}</b></a>
 
 
     <!-- Header Navbar -->

@@ -1,0 +1,41 @@
+Lembrando que é necessário ter:
+Git, NodeJs 7.0, NPM, gulp, gulp-cli,
+se forem usar o phpmyadmin, pesquisem como habilitar importação de arquivos maiores, se não ocorrerá o erro que o arquivo é grande demais. Depois disso, importem o banco de dados aprenda_na_web instalado em seu PC. Caso usem outro software como exemplo: o sqlyog, não precisará fazer isso e sim somente importar.
+
+
+Comandos de instalação do NPM
+
+1 - Naveguem até a pasta onde está localizado o seu projeto, ex no windows cd c:\wamp64\www\aprendanaweb ou no linux cd /var/www/html/aprendanaweb
+
+2 - npm install
+
+3 - npm install --global gulp-cli
+
+4 - gulp --production para recompilar os scripts e css do projeto	
+
+---------------------------------------------------------
+
+Comandos de instalação do composer e configurações do sistema
+
+1 - Acessem o arquivo composer.json
+	Removam a linha 75, 76, 77
+
+2 - Digitem: composer install  | Espere baixar todos os arquivos
+	Obs: No momento da instalação, talvez seja necessário gerar um Personal Access Token na sua conta do git. No menu Settings do git, tem a opção de Access Token, estando lá gerem uma chave e informe-a.
+
+3 - Copie o arquivo .env.example e salvem com o nome .env, se preferir renomei o nome do arquivo .env.example para .env
+
+4 - Digitem php artisan key:generate
+
+5 - Acessem o arquivo .env 
+	Configure seu host, banco, usuário e senha do mysql
+    DB_HOST=localhost
+	DB_DATABASE=aprenda_na_web
+	DB_USERNAME=root
+	DB_PASSWORD=exemplo_senha
+
+6 - Digitem: php artisan serve e acessem a url: http://localhost:8000(página inicial) ou http://localhost:8000(parte administrativa, com usuário admin@admin.com e senha administrador) e o sistema estará funcionando.
+
+
+Extras - O sistema utiliza o gulp para compilação de javascript e css, caso precisem executar atualização do script e css, acesse o arquivo gulpfile.js e verifique as configurações atuais.
+O comando para recompilação é o gulp --production

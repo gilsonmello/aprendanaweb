@@ -125,7 +125,7 @@ class NewsletterController extends Controller {
                 ], function ($message) use ($data, $protocol) {
                     /*$message->to($_POST['email'], $_POST['name'])*/
                     $message->to($data['email'], $data['name'])
-                    ->from("atendimento@brasiljuridico.com.br", app_name())
+                    ->from("aprendawebunidom@gmail.com", app_name())
                     ->subject('Parabéns! Seu E-book de Ética chegou!')
                     ->attach($protocol.$_SERVER['HTTP_HOST'].'/ebook_etica.pdf');
                 });
@@ -139,7 +139,7 @@ class NewsletterController extends Controller {
                 ], function ($message) use ($newsletter, $protocol) {
                     /*$message->to($_POST['email'], $_POST['name'])*/
                     $message->to($newsletter->email, $newsletter->name)
-                    ->from("atendimento@brasiljuridico.com.br", app_name())
+                    ->from("aprendawebunidom@gmail.com", app_name())
                     ->subject('Parabéns! Seu E-book de Ética chegou!')
                     ->attach($protocol.$_SERVER['HTTP_HOST'].'/ebook_etica.pdf');
                 });

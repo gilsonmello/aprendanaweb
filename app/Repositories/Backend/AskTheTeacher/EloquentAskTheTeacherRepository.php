@@ -196,15 +196,8 @@ class EloquentAskTheTeacherRepository implements AskTheTeacherContract {
                     ], 
                     function ($message) use ($student_name, $tutor_name, $tutor_email) {
                         $message->from($tutor_email, $tutor_name);
-                        $message->to(
-                            [ 
-                                'fontenele@brasiljuridico.com.br', 
-                                'biancamacedo@brasiljuridico.com.br', 
-                                'ppachecorodrigo@gmail.com',
-                                'jeferson@brasiljuridico.com.br'
-                            ], 
-                            'Brasil Jurídico'
-                        )->subject('Brasil Jurídico :: Resposta do Tutor');
+                        $message->to('aprendawebunidom@gmail.com', 'Aprenda na Web')
+                        ->subject('Aprenda na Web :: Resposta do Tutor');
                 });
             }
             

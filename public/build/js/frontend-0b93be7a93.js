@@ -4735,7 +4735,7 @@ responsive:!0,responsiveRefreshRate:200,responsiveBaseWidth:g,baseClass:"owl-car
  * 
  * Open source under the BSD License. 
  * 
- * Copyright å© 2008 George McGinley Smith
+ * Copyright ï¿½ï¿½ 2008 George McGinley Smith
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, 
@@ -4770,7 +4770,7 @@ jQuery.easing.jswing=jQuery.easing.swing;jQuery.extend(jQuery.easing,{def:"easeO
  * 
  * Open source under the BSD License. 
  * 
- * Copyright å© 2001 Robert Penner
+ * Copyright ï¿½ï¿½ 2001 Robert Penner
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, 

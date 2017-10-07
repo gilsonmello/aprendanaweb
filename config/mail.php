@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'host' => env('MAIL_HOST', 'smtp.ipq.com.br'),
+	'host' => env('MAIL_HOST', 'smtp.mandrill.com'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,10 @@ return [
 	|
 	*/
 
-	'from' => ['address' => env('MAIL_FROM', null), 'name' => env('MAIL_NAME', null)],
+	'from' => [
+		'address' => env('MAIL_FROM', 'aprendawebunidom@gmail.com'), 
+		'name' => env('MAIL_NAME', 'Aprenda na Web')
+	],
 
 	/*
 	|--------------------------------------------------------------------------
