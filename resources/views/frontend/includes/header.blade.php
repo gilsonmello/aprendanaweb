@@ -3,7 +3,7 @@
     <div class="navbar" role="banner">
         <div class="container">
             <a class="secondary-logo" href="{!! route('home') !!}">
-                <img class="img-responsive" src="/img/frontend/Logo_Brasil_Juridico_Cursos_Online.png" alt="Brasil Jurídico">
+                <img class="img-responsive" src="/img/frontend/aprendanaweb.jpg" alt="Brasil Jurídico">
             </a>
         </div>
         <div class="topbar">
