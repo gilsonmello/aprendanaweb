@@ -2,7 +2,7 @@
     <div class="section">
         <div class="row">
             <div class="site-content col-md-12">
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-6" style="width: 100%;">
                         <div class="post feature-post">
                             <div class="entry-header">
@@ -14,7 +14,7 @@
                         </div>
                     </div>  
                 </div>
-                <br> 
+                <br>  --}}
                 <div class="row">
                     @if (count($firstBanner) != 0)
                     <div class="col-sm-6">
