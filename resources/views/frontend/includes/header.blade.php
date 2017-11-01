@@ -10,7 +10,7 @@
             <div class="container">
                 <div id="topbar" class="navbar-header">                         
                     <a class="navbar-brand" href="{!! route('home') !!}">
-                        <img class="main-logo img-responsive" id="logonavbar" src="/img/frontend/Logo_Brasil_Juridico_Cursos_Online.png" alt="Brasil Jurídico">
+                        <img class="main-logo img-responsive" id="logonavbar" src="/img/frontend/aprendanaweb.jpg" alt="Brasil Jurídico">
                     </a>
                     <div class="hidden-xs hidden-sm">
                         <div id="topbar-right">
