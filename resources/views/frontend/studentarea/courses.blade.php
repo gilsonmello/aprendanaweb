@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="progress">
                                                                     <span style="width: {{ $actual }}%;" class="progress-bar progress-bar-success @if(abs($actual - $ideal) < 10 )
-                                                                            yellow-saffron
+                                                                            yellow-saffron">
                                                                     @elseif($actual - $ideal > 10)
                                                                     @endif
                                                                             <span class="sr-only">{{ $actual }}% progress</span>

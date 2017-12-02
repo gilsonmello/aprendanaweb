@@ -7,17 +7,6 @@ Notícias - Página {{ $news->currentPage() }} | {{app_name()}}
 @section('content')
 
 <section id="main-content">
-
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8&appId=1650169501913609";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
     <div class="container">
         <section id="search-meaning">
             <h1 class="section-title">Notícias</h1>
@@ -94,32 +83,56 @@ Notícias - Página {{ $news->currentPage() }} | {{app_name()}}
         <div class="row">
 
             <div class="col-md-6">
-                @for($i=0;$i< 5;$i++)
-                <div class="noticia">
-                    <div class="entry-date">
-                        <span class="publish-date">{{$news[$i]->date}}</span>
-                    </div>
-                    <h4>
-                        <a href="{{ route("news.show", [$news[$i]->slug]) }}">{{ $news[$i]->title }}</a>
-                    </h4>
-                </div>
-
-                @endfor
+                @if($news->count() > 5)
+                    @for($i = 0; $i < 5; $i++)
+                        <div class="noticia">
+                            <div class="entry-date">
+                                <span class="publish-date">{{$news[$i]->date}}</span>
+                            </div>
+                            <h4>
+                                <a href="{{ route("news.show", [$news[$i]->slug]) }}">{{ $news[$i]->title }}</a>
+                            </h4>
+                        </div>
+                    @endfor
+                @else
+                    @for($i=0;$i < $news->count() ;$i++)
+                        <div class="noticia">
+                            <div class="entry-date">
+                                <span class="publish-date">{{$news[$i]->date}}</span>
+                            </div>
+                            <h4>
+                                <a href="{{ route("news.show", [$news[$i]->slug]) }}">{{ $news[$i]->title }}</a>
+                            </h4>
+                        </div>
+                    @endfor
+                @endif
             </div>
 
 
             <div class="col-md-6">
-                @for($i=5;$i<10;$i++)
-                <div class="noticia">
-                    <div class="entry-date">
-                        <span class="publish-date">{{$news[$i]->date}}</span>
-                    </div>
-                    <h4>
-                        <a href="{{ route("news.show", [$news[$i]->slug]) }}">{{ $news[$i]->title }}</a>
-                    </h4>
-                </div>
-
-                @endfor
+                @if($news->count() > 10)
+                    @for($i = 5;$i < 10; $i++)
+                        <div class="noticia">
+                            <div class="entry-date">
+                                <span class="publish-date">{{$news[$i]->date}}</span>
+                            </div>
+                            <h4>
+                                <a href="{{ route("news.show", [$news[$i]->slug]) }}">{{ $news[$i]->title }}</a>
+                            </h4>
+                        </div>
+                    @endfor
+                @else
+                    @for($i = 5;$i < $news->count(); $i++)
+                        <div class="noticia">
+                            <div class="entry-date">
+                                <span class="publish-date">{{$news[$i]->date}}</span>
+                            </div>
+                            <h4>
+                                <a href="{{ route("news.show", [$news[$i]->slug]) }}">{{ $news[$i]->title }}</a>
+                            </h4>
+                        </div>
+                    @endfor
+                @endif
             </div>
         </div>
         <div class="clearfix"><br/></div>

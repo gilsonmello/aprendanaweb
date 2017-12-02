@@ -1,4 +1,3514 @@
-function findAddressBrazil(t,e,i,a,s,o){if("42.700-000"==t.val())e.val("-"),i.val("Lauro de Freitas"),a.val("BA"),s.val("CENTRO"),o.val("CENTRO");else{var n=$.ajax({url:"https://viacep.com.br/ws/"+t.val().replace(/\D/g,"")+"/json/",method:"POST",dataType:"jsonp"});n.done(function(t){e.val(t.ibge),i.val(t.localidade),a.val(t.uf),s.val(t.logradouro),o.val(t.bairro)}),n.fail(function(t,e){i.val("Falha na busca da cidade")})}}function returnAddressBrazil(t){var e,i=$.ajax({url:"https://viacep.com.br/ws/"+t+"/json/",method:"POST",dataType:"jsonp"});i.done(function(t){e.cityCode=t.ibge,e.cityName=t.localidade,e.state=t.uf,e.address=logradouro,e.neighborhood=t.bairro})}function image_url(t,e,i,a,s){if(a=void 0==a?"":"_size"+a,void 0==s&&(s="generic.png"),void 0==i||""==i)return"/img/system/"+s;var o=i.split(".");return i="/uploads/"+t+"/"+e+"/"+o[0]+a+"."+o[1]}function insertion_sort(t){for(var e=t.length,i=1;i<e;i++){for(var a=t[i],s=i;s>0&&t[s-1]>a;)t[s]=t[s-1],s-=1;t[s]=a}return t}function php_to_javascript_date(t){var e=t.match(/^(\d+)-(\d+)-(\d+) (\d+)\:(\d+)\:(\d+)$/),i=new Date(e[1],e[2]-1,e[3],e[4],e[5],e[6]);return i}function mark_as_read(){$(".notification-menu .content").on("click",function(){$.ajax({url:"/exam/get-next-question",type:"POST",data:{question:next,"from-result":from_result},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){}})})}function convertToSlug(t){t=t.replace(/^\s+|\s+$/g,""),t=t.toLowerCase();for(var e="ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;",i="aaaaaeeeeeiiiiooooouuuunc------",a=0,s=e.length;a<s;a++)t=t.replace(new RegExp(e.charAt(a),"g"),i.charAt(a));return t=t.replace(/[^a-z0-9 -]/g,"").replace(/\s+/g,"-").replace(/-+/g,"-")}function createSelect(t,e,i,a){var s;s=void 0==e?"/admin/"+t+"/select":e;var o,n=a;o=t instanceof jQuery?t:$("."+t+"-select"),void 0==i?o.select2({minimumInputLength:3,ajax:{type:"POST",url:s,dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return void 0!=n?{term:t.term,other:n}:{term:t.term}},processResults:function(t){return{results:t}}}}):o.select2({minimumInputLength:3,dropdownParent:i,ajax:{type:"POST",url:s,dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return void 0!=n?{term:t.term,other:n}:{term:t.term}},processResults:function(t){return{results:t}}}})}function generateUUID(){var t=(new Date).getTime(),e="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(e){var i=(t+16*Math.random())%16|0;return t=Math.floor(t/16),("x"==e?i:3&i|8).toString(16)});return e}function setRandom(){$("#random_code").on("click",function(){$('[name="code"]').val(generateUUID())})}function _init(){$.AdminLTE.layout={activate:function(){var t=this;t.fix(),t.fixSidebar(),$(window,".wrapper").resize(function(){t.fix(),t.fixSidebar()})},fix:function(){var t=$(".main-header").outerHeight()+$(".main-footer").outerHeight(),e=$(window).height(),i=$(".sidebar").height();$("body").hasClass("fixed")?$(".content-wrapper, .right-side").css("min-height",e-$(".main-footer").outerHeight()):e>=i?$(".content-wrapper, .right-side").css("min-height",e-t):$(".content-wrapper, .right-side").css("min-height",i)},fixSidebar:function(){return $("body").hasClass("fixed")?("undefined"==typeof $.fn.slimScroll&&console&&console.error("Error: the fixed layout requires the slimscroll plugin!"),void($.AdminLTE.options.sidebarSlimScroll&&"undefined"!=typeof $.fn.slimScroll&&($(".sidebar").slimScroll({destroy:!0}).height("auto"),$(".sidebar").slimscroll({height:$(window).height()-$(".main-header").height()+"px",color:"rgba(0,0,0,0.2)",size:"3px"})))):void("undefined"!=typeof $.fn.slimScroll&&$(".sidebar").slimScroll({destroy:!0}).height("auto"))}},$.AdminLTE.pushMenu=function(t){var e=this.options.screenSizes;$(t).click(function(t){t.preventDefault(),$(window).width()>e.sm-1?$("body").toggleClass("sidebar-collapse"):$("body").hasClass("sidebar-open")?($("body").removeClass("sidebar-open"),$("body").removeClass("sidebar-collapse")):$("body").addClass("sidebar-open")}),$(".content-wrapper").click(function(){$(window).width()<=e.sm-1&&$("body").hasClass("sidebar-open")&&$("body").removeClass("sidebar-open")})},$.AdminLTE.tree=function(t){var e=this;$("li a",$(t)).click(function(t){var i=$(this),a=i.next();if(a.is(".treeview-menu")&&a.is(":visible"))a.slideUp("normal",function(){a.removeClass("menu-open")}),a.parent("li").removeClass("active");else if(a.is(".treeview-menu")&&!a.is(":visible")){var s=i.parents("ul").first(),o=s.find("ul:visible").slideUp("normal");o.removeClass("menu-open");var n=i.parent("li");a.slideDown("normal",function(){a.addClass("menu-open"),s.find("li.active").removeClass("active"),n.addClass("active"),e.layout.fix()})}a.is(".treeview-menu")&&t.preventDefault()})},$.AdminLTE.boxWidget={activate:function(){var t=$.AdminLTE.options,e=this;$(t.boxWidgetOptions.boxWidgetSelectors.collapse).click(function(t){t.preventDefault(),e.collapse($(this))}),$(t.boxWidgetOptions.boxWidgetSelectors.remove).click(function(t){t.preventDefault(),e.remove($(this))})},collapse:function(t){var e=t.parents(".box").first(),i=e.find(".box-body, .box-footer");e.hasClass("collapsed-box")?(t.children(".fa-plus").removeClass("fa-plus").addClass("fa-minus"),i.slideDown(300,function(){e.removeClass("collapsed-box")})):(t.children(".fa-minus").removeClass("fa-minus").addClass("fa-plus"),i.slideUp(300,function(){e.addClass("collapsed-box")}))},remove:function(t){var e=t.parents(".box").first();e.slideUp()},options:$.AdminLTE.options.boxWidgetOptions}}function modalGroupQuestionChangeSequence(t){$("#group_question_id").val(t),$("#modalGroupQuestionChangeSequence").modal("toggle")}function add_course_material(){$("#add-course-material").on("click",function(){$("#course-material-form").show()}),remove_course_material(),save_course_material()}function add_course_teachers(){$(".remove-course-teacher").click(function(){$(this).parent().parent().css("display","none"),$.ajax({type:"POST",url:"/admin/courses/remove-course-teacher",data:{course:$("#course_id").val(),teacher:$(this).parent().parent().find(".course-teachers-select").val()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){console.log($(this).parent().parent()),$(this).parent().parent().remove(),flash_success("Professor excluído com sucesso!")}})}),$("#calculate-percentage-teacher").click(function(){$.ajax({type:"POST",url:"/admin/courses/totalizeTeachers",data:{course:$("#course_id").val()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#course-teachers").html(t),flash_success("Totalização concluida")}})}),$("#save-course-teachers").click(function(){var t={},e=0;return $("[name |='course-teacher-name']").each(function(i){var a=$(this).val(),s=$(this).parent().parent().find(".course-teacher-percentage").val();s=s.replace(",","."),e+=+s,t[a]=s}),e>100?void flash_danger("Soma das porcentagens superior a 100%"):void $.ajax({type:"POST",url:"/admin/courses/updatecourseteachers",data:{teachers:t,course:$("#course_id").val()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){flash_success("Professores salvos com sucesso")}})}),$(".add-course-teacher").off("click").on("click",function(){var t,e,i,a=0;t=$(".form-course-teachers").last().clone(!0),console.log(t),$(".form-course-teachers").last().after(t),e=$("#course-teachers-fields").children.length+a,i=$(".form-course-teachers").last(),$('[name|="course-teacher-name"]').last().attr("name","course-teacher-name-"+e),$('[name|="course-teacher-name"]').last().attr("id","course-teacher-name-"+e),i.attr("name","course-teachers-name-"+e),i.val(""),$("label[for=name]").last().text("Professor "+e),a++})}function add_module_edit(){$(".edit-module").click(function(){$(this).parent().hasClass("selected")||$(this).parent().click();var t=$(this).data("target-id"),e=setInterval(function(){$("#lessons").data("selected-module")==t&&($("#lessons-tab").click(),clearInterval(e))},100)})}function createModuleTable(){function t(t){$.ajax({type:"GET",url:"/admin/courses/aggregate-course/"+t,headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(e){var a=JSON.parse(e);try{for(i=0;i<a.length;i++){var s='<i class="delete-aggregation-exam-of-course fa fa-times" onClick="deleteAggregatedExamToCourse('+t+","+a[i].id+')" style="color:red; cursor: pointer"></i>';$("#aggregated-saap-table tr:last").after("<tr><td>"+a[i].title+"</td><td>"+s+"</td></tr>")}}catch(o){"error"in e&&flash_danger(e.error)}}})}$(".nav-tabs").on("click","a",function(t){t.preventDefault(),$(this).tab("show")}).on("click","span",function(){var t=$(this).siblings("a");$(t.attr("href")).remove(),$(this).parent().remove(),$(".nav-tabs li").children("a").first().click()});var e={};e.name=$(this).closest(".form-input").children(".form-control").val();var a=$("#module-table").DataTable({initComplete:function(t,e){add_module_edit(),add_delete_module()},processing:!0,columnDefs:[{visible:!1,targets:[0,2]}],ajax:{url:"/admin/courses/"+$("#course_id").val()+"/datatables",type:"POST",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")}},serverSide:!0,language:{url:"//cdn.datatables.net/plug-ins/1.10.9/i18n/Portuguese-Brasil.json"}});$(".add-module").click(function(t){t.preventDefault();var e={};e.name=$(this).parent().find("input").val(),e.course_id=$("#course_id").val();var i=$(this).parent(),s=$(this).closest(".form-group").clone(!0);$("#fields .form-group").last().after(s),newField=$("#fields .form-control").last(),newField.attr("name","module-name"),newField.val(""),newField.focus(),$("label[for=name]").last().text("Nova disciplina"),$.ajax({type:"POST",url:"/admin/courses/modules",data:{name:e.name,course_id:e.course_id},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){try{$.parseJSON(t);i.remove(),a.draw(!1),add_module_edit(),add_delete_module()}catch(e){"error"in t&&flash_danger(t.error)}}})}),$(".event_aggregate-saap").click(function(){var e=$("#aggregate-saap_li").attr("course-id");t(e)}),$(".aggregate-saap-to-course").click(function(t){t.preventDefault();var e={};e.course_id_bought=$("#course_id").val(),e.exam_id_extra=$("#exam_id option:selected").val(),e.exam_title=$("#exam_id option:selected").text(),$.ajax({type:"POST",url:"/admin/courses/aggregate-course",data:{course_id_bought:e.course_id_bought,exam_id_extra:e.exam_id_extra,exam_title:e.exam_title},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){try{var i='<i class="delete-aggregation-exam-of-course fa fa-times" onClick="deleteAggregatedExamToCourse('+e.course_id_bought+","+e.exam_id_extra+')" style="color:red; cursor: pointer"></i>';$("#aggregated-saap-table tr:last").after("<tr><td>"+e.exam_title+"</td><td>"+i+"</td></tr>")}catch(a){"error"in t&&flash_danger(t.error)}}})}),$("[name|='module-name']").on("keypress",function(t){13==t.which&&(t.preventDefault(),$(this).parent().next(".add-module").click())}),$("[name|='lesson-group']").children().on("keypress",function(t){13==t.which&&(t.preventDefault(),$(this).next(".add-lesson").click())});var s,o;$("#module-table tbody").on("click","tr",function(){$(this).hasClass("selected")?$(this).removeClass("selected"):($("#lessons-tab").not("[href='#lessons']").attr("data-toggle","tab"),$("#lessons-tab").not("[href='#lessons']").attr("href","#lessons"),$("#lessons-tab").not("[class='']").parent().attr("class",""),a.$("tr.selected").removeClass("selected"),null!=s&&s.destroy(),$(this).addClass("selected"),$(".dynamic-tab").remove(),o=a.row(this).data()[0],add_new_tab("edit-module",a.row(this).data()[1],"Edição ","#edit-module"),add_tab_content("/admin/courses/editmodule",{module_id:a.row(this).data()[0]},"edit-module",function(){$("#save-module").off("click").on("click",function(){post_form(o,"edit-module","updatemodule"),$("#module-table").DataTable().ajax.reload(function(){add_delete_module()}),$("#module-table").on("draw.dt",function(){add_delete_module()})})}),s=$("#lessons-table").DataTable({processing:!0,columnDefs:[{visible:!1,targets:0}],initComplete:function(t,e){console.log("selected"+o),add_delete_lesson(),$("#lessons-table").on("draw.dt",function(){console.log("enter"),add_delete_lesson(),add_edit_questions()}),add_edit_questions(),$(".tags-select").select2({tags:!0,minimumInputLength:3,ajax:{type:"POST",url:"/admin/tags/select",dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return{term:t.term}},processResults:function(t){return{results:t}}}})},ajax:{url:"/admin/courses/"+o+"/lessons",type:"POST",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")}},serverSide:!0,language:{url:"//cdn.datatables.net/plug-ins/1.10.9/i18n/Portuguese-Brasil.json"}}),update_sequence("lesson-sequence",o),$("#lessons").data("selected-module",o),$("#lessons-table tbody").dblclick(function(){$(".nav-tabs li").children("a").last().click()}))});var n;$("#lessons-table").on("click","tr",function(){if($(this).hasClass("selected"))$(this).removeClass("selected");else{s.$("tr.selected").removeClass("selected"),$(".dynamic-tab").remove(),$(this).addClass("selected"),n=s.row(this).data()[0];var t=$(".nav-tabs li").size()+1,e=s.row(this).data()[1];null!=e&&""!=e||(e=s.row(this).data()[2]),add_new_tab("edit-lesson",e,"Edição ","#edit-lesson"),add_tab_content("/admin/courses/editlessons",{lesson_id:s.row(this).data()[0]},"edit-lesson",function(){$("#save-lesson").off("click").on("click",function(){post_form(n,"edit-lesson","updatelesson"),$("#lessons-table").DataTable().ajax.reload(function(){add_delete_lesson(),add_edit_questions()}),$("#lessons-table").on("draw.dt",function(){add_delete_lesson(),add_edit_questions()})})}),t++,add_new_tab("video",e,"Vídeos","#add-videos"),add_tab_content("/admin/courses/editvideos",{lesson_id:s.row(this).data()[0]},"add-videos",function(){save_videos(n,$("#save-videos")),$(".content-preview").click(function(){$("#vimeoPreviewModal").modal("toggle");var t=$(this).parent().parent().find(".content-url").val();t.startsWith("vimeo:")&&(t="https://player.vimeo.com/video/"+t.substring(6)),$("#vimeo-preview").attr("src",t)})}),t++,add_teachers(n,e),t++,add_material(n,e)}}),$(".add-lesson").click(function(t){t.preventDefault();var e=o,i=$(this).parent().parent().find("[name|='lesson-name']").val(),a=$(this).parent().parent().find("[name|='lesson-sequence']").val(),n=$(this).parent().parent().find("[name|='lesson-name']").val(),r=$(this).parent().parent();$.ajax({type:"POST",url:"/admin/courses/addlessons",data:{module_id:e,title:i,sequence:a,duration:n},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){var e=r.clone(!0);clear_form_elements(e);var i=$(".lesson-fields").last();console.log("[name='"+e.attr("name")+"']"),console.log(i.find("[name='lesson-sequence']").val()),console.log(i),e.find("lesson-box [name|='lesson-sequence']").val(i.find("[name='lesson-sequence']").val()),i.after(e),r.remove();$.parseJSON(t);s.draw(!1)}})}),$("#unblock-course").on("click",function(){verify_unblock()})}function add_new_tab(t,e,i,a){var s="#"+t+"-tab";$(s).length<=0?$('<li><a id="'+s+'" href="'+a+'" class="dynamic-tab" data-toggle="tab">'+i+" de "+e+"</a></li>").appendTo(".nav-tabs"):($(s).attr("href",a),$(s).text(i+"de "+e))}function add_tab_content(t,e,i,a){var s="#"+i;console.log("content_id:"+s),$.ajax({type:"POST",url:t,data:e,headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){if($(s).length<=0){var e=$('<div class="tab-pane" id="'+i+'">'+t+"</div>").appendTo(".tab-content");remove_changed_attribute(e.attr("id")),change_watcher(e.attr("id"))}else $(s).html(t),remove_changed_attribute(s),change_watcher(s);a()}})}function add_delete_lesson(){$(".delete-lesson").off("click").click(function(){confirm("Tem certeza que deseja excluir esse item?")&&$.ajax({type:"POST",url:"/admin/courses/remove-lesson",data:{lesson:$(this).data("target-id")},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#lessons-table").DataTable().ajax.reload(function(){add_delete_lesson(),add_edit_questions()}),$("#lessons-table").on("draw.dt",function(){add_delete_lesson(),add_edit_questions()}),"true"==t?flash_success("Aula excluída com sucesso!"):flash_danger("full"==t?"Há alunos cursando essa aula.":"Não foi possível excluir a aula")}})})}function add_course_edit_questions(){$(".create-course-questions").click(function(){$("courseGroupSubjectModal").find("*").addBack().off(),$.ajax({url:"/admin/courses/create-group",type:"POST",data:{course:$(this).data("")},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){}})})}function add_edit_questions(){$(".create-questions").click(function(){$("#groupSubjectModal").find("*").addBack().off(),$.ajax({url:"/admin/courses/create-group",type:"POST",data:{lesson:$(this).data("target-id")},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#groupSubjectModal").html(t),$("#groupSubjectModal").modal("toggle"),$("#groupSubjectModal").on("shown.bs.modal",function(){createSelect("subject",void 0,$("#groupSubjectModal")),add_save_relation_event(),$("#add-subject").off("click").click(function(){$(".subject-select").select2("destroy").end(),$(".subject-question-row").last().after($(".subject-question-row").first().clone()),$(".subject-select").last().val(""),createSelect("subject",void 0,$("#groupSubjectModal")),$(".delete-relation").find("*").addBack().off(),$(".delete-relation").click(function(){$(this).parent().parent().remove()})}),$(".delete-relation").click(function(){$(this).parent().parent().remove()})})}})})}function add_save_relation_event(){$("#save-relation").click(function(){$.ajax({url:"/admin/courses/save-lesson-group",type:"POST",data:{fields:$("#group-form").serialize()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#groupSubjectLabel").css("display","none"),$("#savedGroupLabel").css("display","block"),setTimeout(function(){$("#groupSubjectLabel").css("display","block"),$("#savedGroupLabel").css("display","none")},3e3)}})})}function add_edit_course_questions(){createSelect("subject-course",void 0),add_save_course_relation_event(),$("#add-course-subject").off("click").click(function(){$(".subject-course-select").select2("destroy").end(),$(".subject-course-question-row").last().after($(".subject-course-question-row").first().clone()),$(".subject-course-select").last().val(""),$("[name='question_count[]']").last().val(0),createSelect("subject-course",void 0),$(".delete-course-relation").find("*").addBack().off(),$(".delete-course-relation").click(function(){$(this).parent().parent().remove()})}),$(".delete-course-relation").click(function(){$(this).parent().parent().remove()}),$(".create-course-questions").click(function(){$("#courseQuestionModal").find("*").addBack().off()})}function add_save_course_relation_event(){$("#save-course-relation").click(function(){""==$("#course-group-duration").val()?flash_danger("É obrigatório informar a duração da avaliação!"):isNaN($("#course-group-duration").val())?flash_danger("Duração inválida! Informe um número válido no campo"):($(this).text("Salvando..."),0==$("#group-course-form").data("saved")?(console.log($("#save-course-relation").data("target-id")),$.ajax({url:"/admin/courses/create-course-group",type:"POST",data:{course:$("#save-course-relation").data("target")},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$.ajax({url:"/admin/courses/save-course-group",type:"POST",data:{fields:$("#group-course-form").serialize(),"course-group-id":t},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#groupCourseSubjectLabel").css("display","none"),$("#savedGroupCourseLabel").css("display","block"),setTimeout(function(){$("#groupCourseSubjectLabel").css("display","block"),$("#savedGroupCourseLabel").css("display","none"),flash_success("Grupo foi criado com sucesso!"),$("#save-course-relation").text("Salvar")},3e3)}})}})):$.ajax({url:"/admin/courses/save-course-group",type:"POST",data:{fields:$("#group-course-form").serialize()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#groupCourseSubjectLabel").css("display","none"),$("#savedGroupCourseLabel").css("display","block"),setTimeout(function(){$("#groupCourseSubjectLabel").css("display","block"),$("#savedGroupCourseLabel").css("display","none"),flash_success("Grupo foi atualizado com sucesso!"),$("#save-course-relation").text("Salvar")},3e3)}}))})}function remove_material(){$(".remove-material").on("click",function(){var t=$(this);$.ajax({type:"POST",url:"/admin/courses/remove-material",data:{content:$(this).data("content")},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(e){$(t).parent().remove()}})})}function add_material(t,e){add_new_tab("material",e,"Materiais ","#add-material"),add_tab_content("/admin/courses/material",{lesson_id:t},"add-material",function(){$("#add-material").on("click",function(){$("#material-form").show()}),remove_material(),save_material()})}function save_material(){console.log("enter the submit"),$("#material-form").submit(function(t){t.preventDefault();var e=new FormData(this);return $.ajax({url:"/admin/courses/savematerial",type:"POST",data:e,success:function(t){alert(t)},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,processData:!1,contentType:!1,success:function(t){var e;e=".pdf"==t.extension?'<li class="fa fa-file-pdf-o">':".pps"==t.extension?'<li class="fa fa-file-powerpoint-o" >':".doc"==t.extension||".docx"==t.extension?'<li class="fa fa-file-word-o" >':".png"==t.extension||".jpg"==t.extension||"jpeg"==t.extension?'<li class= "fa fa-file-image-o" >':'<li class="fa fa-file" >',e=e+'<a name="material-file"  data-id="'+t.id+'" data-url="'+t.url+'" href="/'+t.url+'">'+t.choosen+'</a> <a type="button" class="fa fa-times remove-material" data-content="'+t.id+'" style="color:red"></a></li>',$("#content-files").append(e+"<br/>"),$("#material-name").val(""),remove_material()}}),!1})}function save_course_material(){$("#course-material-form").submit(function(t){t.preventDefault();var e=new FormData(this);return $.ajax({url:"/admin/courses/savecoursematerial",type:"POST",data:e,headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,processData:!1,contentType:!1,success:function(t){var e;e=".pdf"==t.extension?'<li class="fa fa-file-pdf-o">':".pps"==t.extension?'<li class="fa fa-file-powerpoint-o" >':".doc"==t.extension||".docx"==t.extension?'<li class="fa fa-file-word-o" >':".png"==t.extension||".jpg"==t.extension||"jpeg"==t.extension?'<li class= "fa fa-file-image-o" >':'<li class="fa fa-file" >',e=e+'<a name="course-material-file"  data-id="'+t.id+'" data-url="'+t.url+'" href="/'+t.url+'">'+t.choosen+'</a> <a type="button" class="fa fa-times remove-material" data-content="'+t.id+'" style="color:red"></a></li>',$("#course-content-files").append(e+"<br/>"),$("#course-material-name").val(""),remove_course_material()}}),!1})}function remove_course_material(){$(".remove-course-material").on("click",function(){var t=$(this);$.ajax({type:"POST",url:"/admin/courses/remove-course-material",data:{"course-content":$(this).data("content")},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(e){$(t).parent().remove()}})})}function add_teachers(t,e){add_new_tab("teacher-percentage",e,"Professores ","#add-teachers"),add_tab_content("/admin/courses/editteachers",{lesson_id:t},"add-teachers",function(){save_teachers(t,$("#save-teachers"),$("[name|=teacher-name]")),$(".teachers-select").select2({width:"resolve",minimumInputLength:3,ajax:{type:"POST",url:"/admin/teachers/select",dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return{term:t.term}},processResults:function(t){return{results:t}}}}),$(".equal-divide").click(function(){equal_percentage(i,$("[name|='teacher-percentage']"))}),$(".remove-lesson-teacher").click(function(){$(this).parent().parent().css("display","none"),$.ajax({type:"POST",url:"/admin/courses/remove-lesson-teacher",data:{lesson:t,teacher:$(this).parent().parent().find(".teachers-select").val()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){console.log($(this).parent().parent()),$(this).parent().parent().remove(),flash_success("Professor excluído com sucesso!")}})});var e,i,a,s=0;$(".add-teacher").off("click").on("click",function(){$(".teachers-select").last().select2("destroy"),e=$(".form-teachers").last().clone(!0),$(".teachers-select").last().select2({width:"resolve",minimumInputLength:3,ajax:{type:"POST",url:"/admin/teachers/select",dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return{term:t.term}},processResults:function(t){return{results:t}}}}),$(".form-teachers").last().after(e),i=$("#teachers-fields").children.length+s,a=$(".form-teachers").last(),$('[name|="teacher-name"]').last().attr("name","teacher-name-"+i),$('[name|="teacher-name"]').last().attr("id","teacher-name-"+i),a.attr("name","teachers-name-"+i),a.val(""),$("label[for=name]").last().text("Professor "+i),s++,$(".teachers-select").last().select2({width:"resolve",minimumInputLength:3,ajax:{type:"POST",url:"/admin/teachers/select",dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return{term:t.term}},processResults:function(t){return{results:t}}}})})})}function create_new_field_dynamic(t,e,i,a){var s,o,n,r=a;t.one("change",function(){s=$(this).closest(".form-group").clone(!0),r+=1,$("#fields .form-group").last().after(s),o=$("#fields").children.length+r,n=$("#fields .form-control").last(),n.attr("name",i+"-name-"+o),n.val(""),$("label[for=name]").last().text(e+" "+o),create_new_field_dynamic(n,"module","Atividade",2)})}function create_new_tab(t,e,i,a,s){$('<li><a href="#'+e+"-"+id+'" class="dynamic-tab" data-toggle="tab">'+t+" "+name+"</a></li>").appendTo(".nav-tabs")}function create_new_tab_from_view(t,e,i,a){var s=i.row(this).data()[0],o=i.row(this).data()[1];$('<li><a href="#'+e+"-"+s+'" class="dynamic-tab" data-toggle="tab">'+t+" "+o+"</a></li>").appendTo(".nav-tabs"),$.ajax({type:"POST",url:"/admin/courses/"+a,data:{id:s},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$('<div class="tab-pane" id='+e+"-"+s+'">'+t+"</div>").appendTo(".tab-content")}})}function create_new_table_tab(t,e,i,a){var s,o=i.row(this).data()[0];return s=$("#"+e).DataTable({processing:!0,columnDefs:[{visible:!1,targets:0}],ajax:{url:"/admin/courses/"+o+"/"+a,type:"POST",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")}},serverSide:!0,language:{url:"//cdn.datatables.net/plug-ins/1.10.9/i18n/Portuguese-Brasil.json"}})}function update_sequence(t,e){with_max_table_sequence(e,function(e){$("[name|='"+t+"'").each(function(t){$(this).val(+e+(+t+1))})})}function save_teachers(t,e,i){e.on("click",function(){var e={},i=0;return $("[name|='teacher-name']").each(function(t){var a=$(this).val(),s=$(this).parent().parent().find("[name|='teacher-percentage']").val();console.log($(this).parent().parent()),i+=+s,e[a]=s}),console.log($(this).parent().parent()),console.log(i),i>100?void flash_danger("Soma das porcentagens superior a 100%"):void $.ajax({type:"POST",url:"/admin/courses/updateteachers",data:{teachers:e,lesson_id:t},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){flash_success("Professores salvos com sucesso")}})})}function save_videos(t,e){e.off("click").on("click",function(){console.log(t),console.log($("[name='video[]']"));var e={};$("[name='video[]']").each(function(t){var i=$(this).data("sequence");e[Number(i)]=$(this).val()}),console.log(e),$.ajax({type:"POST",url:"/admin/courses/updatevideos",data:{video:e,lesson_id:t},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#lessons-table").DataTable().ajax.reload(function(){add_delete_lesson(),add_edit_questions()}),$("#lessons-table").on("draw.dt",function(){add_delete_lesson(),add_edit_questions()}),flash_success("Vídeos salvos com sucesso"),remove_changed_attribute("add-videos-")}})})}function save_module(t,e){e.off("click").on("click",function(){$.ajax({type:"POST",url:"/admin/courses/updatemodule",data:{module_id:t,module:$("[id='edit-module']").serialize()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){"error"in t?flash_danger(t.error):flash_success(t.success)},error:function(t){flash_danger(404==t.status?"Erro na comunicação com o servidor. Entre em contato com um administrador do sistema":"O sistema encontrou um erro de código "+t.status+". Entre em contato com o suporte técnico informando o código de erro")}})})}function save_lesson(t){}function post_form(t,e,i,a){$.ajax({type:"POST",url:"/admin/courses/"+i,data:{id:t,form:$("[id='"+e+"']").serialize()},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){"error"in t?flash_danger(t.error):flash_success(t.success),void 0!==a&&a(t)}})}function change_watcher(t,e){$("[id^='"+t+"'] .form-control").not("[data-changed='true']").off("input").on("input",function(){$(this).attr("data-changed","true");var i=$("[href='#"+t+"'");i.text().indexOf(" {modificado} ")==-1&&(i.text(i.text()+" {modificado} "),void 0!=e&&e())})}function remove_changed_attribute(t){$("[id^='"+t+"'] .form-control [data-changed='true']").removeAttr("data-change");var e=$("[href='#"+t+"'");e.text().indexOf(" {modificado} ")!=-1&&e.text(e.text().replace(" {modificado} ",""))}function is_changed(t){var e=$("[href='#"+t+"'");return e.text().indexOf(" {modificado} ")==-1}function change_context_watcher(t){}function equal_percentage(t,e){var i=100/t;i=i.toFixed(2),e.val(i)}function with_max_table_sequence(t,e){$.ajax({type:"POST",url:"/admin/courses/maxsequence",data:{id:t},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){e(t)}})}function add_delete_module(){$(".delete-module").click(function(){confirm("Tem certeza que deseja excluir esse item?")&&$.ajax({type:"POST",url:"/admin/courses/remove-module",data:{module:$(this).data("target-id")},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){$("#module-table").DataTable().ajax.reload(function(){add_module_edit(),add_delete_module()}),"true"==t?flash_success("Disciplina excluída com sucesso!"):flash_danger("full"==t?"Há aulas associadas a essa disciplina.":"Não foi possível excluir a disciplina")}})})}function verify_unblock(){var t=$("#course_id").val();$.ajax({type:"POST",url:"/admin/courses/unblock",data:{course:t},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(t){"error"in t?(flash_danger(t.error),$("html,body").animate({scrollTop:0},700)):(flash_success(t.success),$(".nav-tabs-custom").find("input, textarea, button, select").attr("disabled","disabled"),$("html,body").animate({scrollTop:0},700))}})}function clear_form_elements(t){t.find(":input").each(function(){switch(this.type){case"password":case"text":case"textarea":case"file":case"select-one":case"select-multiple":$(this).val("");break;case"checkbox":case"radio":this.checked=!1}})}function flash_message(t,e){$("#dynamic-flash").css("opacity","1"),$("#dynamic-flash").removeClass(),$("#dynamic-flash").addClass("alert"),$("#dynamic-flash").addClass(t),$("#dynamic-flash").html(e),setTimeout(function(){$("#dynamic-flash").css("opacity","0");
-},5e3)}function flash_success(t){flash_message("alert-success",t)}function flash_warning(t){flash_message("alert-warning",t)}function flash_danger(t){flash_message("alert-danger",t)}function disable_tab(t){console.log(t),t.attr("data-toggle",""),t.attr("href","#lessons"),console.log(t.parent()),t.parent().attr("class","disabled")}function enable_tab(t,e){t.attr("data-toggle","tab"),t.attr("href",e),t.parent().attr("class","")}function disable_lesson_related_tabs(){disable_tab($("#video-tab")),disable_tab($("#teacher-percentage-tab")),disable_tab($("#edit-lesson-tab")),disable_tab($("#material-tab"))}function enable_lesson_related_tabs(t){enable_tab($("#video-tab"),"#add-videos-"+t),enable_tab($("#teacher-percentage-tab"),"#add-teachers-"+t),enable_tab($("#edit-lesson-tab"),"#edit-lesson-"+t),enable_tab($("#material-tab"),"#add-material-"+t)}function create_chart_by_time(t,e,i,a){console.log("creating"),$.ajax({url:"/admin/courses/report",type:"POST",data:{period:e,type:i,specific:a},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(e){console.log(e);var i=[],a=[];$.each(e,function(t,e){i.push(t),a.push(e)});var s={labels:i,datasets:[{label:"Cursos vendidos",fillColor:"rgba(60,60,60,0.2)",strokeColor:"rgba(60,60,60,1)",pointColor:"rgba(60,60,60,1)",pointStrokeColor:"#fff",pointHighlightFill:"#fff",pointHighlightStroke:"rgba(60,60,60,1)",data:a}]};console.log(s);new Chart(t).Line(s,{bezierCurve:!0,responsive:!0})}})}function create_pie_chart(t,e){console.log("creating"),$.ajax({url:"/admin/courses/totalSales",type:"POST",data:{type:e},headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},cache:!1,success:function(e){console.log(e);var i=[],a="";$.each(e,function(t,e){r=Math.floor(200*Math.random())+50,console.log(r),g=Math.floor(200*Math.random())+50,console.log(g),b=Math.floor(200*Math.random())+50,console.log(b),a="rgb("+r+", "+g+", "+b+")",console.log(e),i.push({value:e,label:t,color:a})}),console.log("finishing"),console.log(i);var s=new Chart(t).Pie(i,{animateRotate:!0,legendTemplate:'<table class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><tr><td><i class="fa fa-square" style="color:<%=segments[i].fillColor%>; font-size: 3.0rem;" ></i>&nbsp;&nbsp;<%if(segments[i].label){%><%=segments[i].label%><%}%></td></tr><%}%></table>'});console.log(s.generateLegend()),$("#course-legend").html(s.generateLegend())}})}if(function(){for(var t,e=function(){},i=["assert","clear","count","debug","dir","dirxml","error","exception","group","groupCollapsed","groupEnd","info","log","markTimeline","profile","profileEnd","table","time","timeEnd","timeline","timelineEnd","timeStamp","trace","warn"],a=i.length,s=window.console=window.console||{};a--;)t=i[a],s[t]||(s[t]=e)}(),$(function(){function t(t){return er=/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2,3}/,!!er.exec(t)}function e(e){var i=!0;return $(".fa-warning").remove(),$(".p-error").remove(),$(".span-error").remove(),e.find("input").each(function(e,a){"text"==$(this).attr("type")&&void 0==$(this).attr("data-not-required")&&(""==$(this).val()?(i=!1,$(this).css("background-color","rgba(249, 3, 3, 0.37)"),$(this).parent().find("label").after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>'),$(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>')):$(this).css("background-color","white")),"password"==$(this).attr("type")&&void 0==$(this).attr("data-not-required")&&(""==$(this).val()?(i=!1,$(this).css("background-color","rgba(249, 3, 3, 0.37)"),$(this).parent().find("label").after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>'),$(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>')):$(this).css("background-color","white")),"checkbox"==$(this).attr("type")&&void 0==$(this).attr("data-not-required")&&($(this).is(":checked")?$(this).parent().parent().find(".span-error").remove():($(this).parent().after('<span class="span-error" style="color: red; margin-left: 2%;">Campo Obrigatório</span>'),$(this).parent().after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>'),i=!1)),"email"==$(this).attr("type")&&(""==$(this).val()?(i=!1,$(this).css("background-color","rgba(249, 3, 3, 0.37)"),$(this).parent().find("label").after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>'),$(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>')):t($(this).val())?$(this).css("background-color","white"):(i=!1,$(this).css("background-color","rgba(249, 3, 3, 0.37)"),$(this).parent().find("label").after('&nbsp;<i data-toggle="tooltip" title="E-mail Inválido" class="fa fa-warning" style="color: red"></i>'),$(this).after('<p class="p-error" style="color: red;">E-mail Inválido</p>')))}),i}function i(t){if(t.loading)return t.text;var e='<div class="clearfix">'+t.name+"</div>";return e}function a(t){return t.name}$(".register_on_cart").submit(function(t){var e=!0;return $(".fa-warning").remove(),$(".p-error").remove(),$(".span-error").remove(),$(this).find("input").each(function(t,i){"text"!=$(this).attr("type")&&"email"!=$(this).attr("type")||void 0!=$(this).attr("data-not-required")||(""==$(this).val()?(e=!1,$(this).css("background-color","rgba(249, 3, 3, 0.37)"),$(this).parent().find("label").after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>'),$(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>')):$(this).css("background-color","initial")),"password"==$(this).attr("type")&&void 0==$(this).attr("data-not-required")&&(""==$(this).val()?(e=!1,$(this).css("background-color","rgba(249, 3, 3, 0.37)"),$(this).parent().find("label").after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>'),$(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>')):$(this).css("background-color","initial")),"checkbox"==$(this).attr("type")&&void 0==$(this).attr("data-not-required")&&($(this).is(":checked")?$(this).parent().parent().find(".span-error").remove():($(this).parent().after('<span class="span-error" style="color: red; margin-left: 2%;">Campo Obrigatório</span>'),$(this).parent().after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>'),e=!1))}),e}),$("#email_register").on("focusout",function(){""!=$(this).val()&&$.ajax({method:"POST",url:"/carrinho/criar-tentativa-de-registro-no-carrinho",dataType:"JSON",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:{email:$(this).val()},success:function(t){}})});var s=1;$("#subscribe_oab_e_etica").on("submit",function(t){var i=e($(this));return 1==i&&1==s&&(s=2,$("#loading").css({display:"block"}),$.ajax({method:"POST",dataType:"Json",url:"/subscribe-ebook-oab-e-etica",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:$(this).serialize(),success:function(t){"success"==t?(s=1,$("#loading").css({display:"none"}),window.location.href="/etica-oab/enviado"):($("#loading").css({display:"none"}),html='<div id="alert" style="display: none; color: white; background-color: #red !important; border-radius: 3px; padding: 15px; border: 1px solid transparent" class="form-group col-xs-12 col-sm-12 col-md-12">',html+="Erro ao enviar e-book!",html+="</div>",$(html).insertAfter("#subscribe_oab_e_etica"),$("#alert").fadeIn("slow"),$("#email").val(""),$("#name").val(""),setTimeout(function(){$("#alert").fadeOut("slow"),$("#alert").remove()},2e3))}})),!1}),$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip()}),$(".colorpicker-box").length&&$(".colorpicker-box").colorpicker(),$.isFunction($.fn.select2)&&$(".select2").select2(),$.isFunction($.fn.datepicker)&&$(".datepicker").datepicker({format:"dd/mm/yyyy"}),$.isFunction($.fn.wysihtml5)&&($("#comments-content").length||$(".textarea").wysihtml5({toolbar:{html:!0},parserRules:{tags:{strong:{},em:{},table:{check_attributes:{width:"any",style:"any",colspan:"any"}},td:{check_attributes:{width:"any",style:"any",colspan:"any"}},tr:{check_attributes:{width:"any",style:"any",colspan:"any"}},th:{check_attributes:{width:"any",style:"any",colspan:"any"}},img:{check_attributes:{src:"src"}}}}})),setRandom(),$(".title-has-slug").blur(function(){var t=convertToSlug(this.value);$(".slug-from-title").val(t)}),$.isFunction($.fn.select2)&&$(".selectCity").select2({ajax:{url:"/admin/cities/select/",dataType:"json",delay:250,data:function(t){return{term:t.term,page:t.page}},processResults:function(t,e){return{results:t.results}},cache:!1},escapeMarkup:function(t){return t},minimumInputLength:3,templateResult:i,templateSelection:a}),$.isFunction($.fn.select2)&&($(".tags-select").select2({tags:!0,minimumInputLength:3,ajax:{type:"POST",url:"/admin/tags/select",dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return{term:t.term}},processResults:function(t){return{results:t}}}}),createSelect("courses"),createSelect("students"),createSelect("users","/admin/access/users/select"),$("#course-data").length>0&&createSelect("lessons","/admin/lessons/select",void 0,$("#course-data").data("course-id"))),$(".zip").on("blur",function(t){findAddressBrazil($("#zip"),$("#city_id"),$("#city"),$("#state"),$("#address"),$("#neighborhood"))}),$("#update_zip").click(function(t){findAddressBrazil($("#billZip"),$("#billCityCode"),$("#billCity"),$("#billState"),$("#billAddress"),$("#billDistrict"))}),$(".zip").parent().parent().one("mouseover",function(){findAddressBrazil($("#zip"),$("#city_id"),$("#city"),$("#state"),$("#address"),$("#neighborhood"))}),$(".testCoupon").on("click",function(t){if(""!=$("#coupon_code").val())return alert("Confirme o cupom de descontos informado antes de finalizar a compra. Para isso, clique em Ok."),!1}),$("#module-table").length&&createModuleTable(),$(".cel").inputmask("(99) 999999999"),$(".personal_id").inputmask("999.999.999-99"),$("#personal_id").inputmask("999.999.999-99"),$(".company_id").inputmask("99.999.999/9999-99"),$(".birthdate").inputmask("99/99/9999"),$("#birthdate").inputmask("99/99/9999"),$(".datemask").inputmask("99/99/9999"),$(".zip").inputmask("99.999-999"),$("#update_zip").on("click",function(){$(".zip").focus()});var o=0;$(".grade").focus(function(){0==o&&($(".grade").inputmask({mask:"[9][9][9].99",numericInput:!0}),o=1)}),$(".grade").click(function(){0==o&&($(".grade").inputmask({mask:"[9][9][9].99",numericInput:!0}),o=1)}),$(".money").maskMoney({thousands:".",decimal:",",affixesStay:!1,allowZero:!0}),$("[data-method]").append(function(){var t;t=void 0!=$(this).attr("data-method")||""!=$(this).attr("data-method")?$(this).attr("data-method"):"POST";var e=$(this).attr("data-id"),i=$(this).attr("data-alert"),a=$(this).attr("data-message"),s=null;switch(i){case"delete-order":s="delete_order";break;case"send_email":s="send_email";break;case"released_for_certification":s="released_for_certification";break;default:s="delete_item"}return"\n<form action='"+$(this).attr("href")+"' method='"+t+"' data-id='"+e+"' data-message='"+a+"' name='"+s+"' style='display:none'>\n   <input type='hidden' name='_method' value='"+$(this).attr("data-method")+"'>\n   <input type='hidden' name='_token' value='"+$('meta[name="_token"]').attr("content")+"'>\n</form>\n"}).removeAttr("href").attr("style","cursor:pointer;").attr("onclick",'$(this).find("form").submit();'),$("form[name=delete_item]").submit(function(){return confirm("Tem certeza que deseja excluir esse item?")}),$("form[name=delete_order]").submit(function(){if(console.log("Enviando para Google Analytcs Order:"+$(this).attr("data-id")),void 0!=$(this).attr("data-message")){if(!confirm($(this).attr("data-message")))return!1;$.ajax({url:"/admin/orders/"+$(this).attr("data-id"),method:"GET"}).done(function(t){var e=t[1],i=t[0];ga("create","UA-78805304-1","auto",{name:"myTracker"}),ga("myTracker.require","ecommerce"),ga("myTracker.ecommerce:addTransaction",i);for(var a in e)ga("myTracker.ecommerce:addItem",e[a]);"localhost"!=window.location.hostname?(ga("myTracker.ecommerce:send"),console.log("Removed of Google Analitcs")):console.log("Not Removed of Google Analitcs because is LocalHost")})}}),$("form[name=send_email]").submit(function(){return void 0!=$(this).attr("data-message")?confirm($(this).attr("data-message")):confirm("Tem certeza que deseja enviar a mensagem para o(s) aluno(s)?")}),$("form[name=released_for_certification]").submit(function(){return void 0!=$(this).attr("data-message")?confirm($(this).attr("data-message")):confirm("Tem certeza que deseja enviar a mensagem para o(s) aluno(s)?")}),$('[data-toggle="tooltip"]').tooltip(),$('[data-toggle="popover"]').popover(),$("body").on("click",function(t){$('[data-toggle="popover"]').each(function(){$(this).is(t.target)||0!==$(this).has(t.target).length||0!==$(".popover").has(t.target).length||$(this).popover("hide")})})}),"undefined"==typeof jQuery)throw new Error("AdminLTE requires jQuery");if($.AdminLTE={},$.AdminLTE.options={navbarMenuSlimscroll:!0,navbarMenuSlimscrollWidth:"3px",navbarMenuHeight:"200px",sidebarToggleSelector:"[data-toggle='offcanvas']",sidebarPushMenu:!0,sidebarSlimScroll:!0,enableBoxRefresh:!0,enableBSToppltip:!0,BSTooltipSelector:"[data-toggle='tooltip']",enableFastclick:!0,enableBoxWidget:!0,boxWidgetOptions:{boxWidgetIcons:{collapse:"fa fa-minus",open:"fa fa-plus",remove:"fa fa-times"},boxWidgetSelectors:{remove:'[data-widget="remove"]',collapse:'[data-widget="collapse"]'}},directChat:{enable:!0,contactToggleSelector:'[data-widget="chat-pane-toggle"]'},colors:{lightBlue:"#3c8dbc",red:"#f56954",green:"#00a65a",aqua:"#00c0ef",yellow:"#f39c12",blue:"#0073b7",navy:"#001F3F",teal:"#39CCCC",olive:"#3D9970",lime:"#01FF70",orange:"#FF851B",fuchsia:"#F012BE",purple:"#8E24AA",maroon:"#D81B60",black:"#222222",gray:"#d2d6de"},screenSizes:{xs:480,sm:768,md:992,lg:1200}},$(function(){var t=$.AdminLTE.options;_init(),$.AdminLTE.layout.activate(),$.AdminLTE.tree(".sidebar"),t.navbarMenuSlimscroll&&"undefined"!=typeof $.fn.slimscroll&&$(".navbar .menu").slimscroll({height:"200px",alwaysVisible:!1,size:"3px"}).css("width","100%"),t.sidebarPushMenu&&$.AdminLTE.pushMenu(t.sidebarToggleSelector),t.enableBSToppltip&&$(t.BSTooltipSelector).tooltip(),t.enableBoxWidget&&$.AdminLTE.boxWidget.activate(),t.enableFastclick&&"undefined"!=typeof FastClick&&FastClick.attach(document.body),t.directChat.enable&&$(t.directChat.contactToggleSelector).click(function(){var t=$(this).parents(".direct-chat").first();t.toggleClass("direct-chat-contacts-open")}),$('.btn-group[data-toggle="btn-toggle"]').each(function(){var t=$(this);$(this).find(".btn").click(function(e){t.find(".btn.active").removeClass("active"),$(this).addClass("active"),e.preventDefault()})})}),function(t){t.fn.boxRefresh=function(e){function i(t){t.append(o),s.onLoadStart.call(t)}function a(t){t.find(o).remove(),s.onLoadDone.call(t)}var s=t.extend({trigger:".refresh-btn",source:"",onLoadStart:function(t){},onLoadDone:function(t){}},e),o=t('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');return this.each(function(){if(""===s.source)return void(console&&console.log("Please specify a source first - boxRefresh()"));var e=t(this),o=e.find(s.trigger).first();o.click(function(t){t.preventDefault(),i(e),e.find(".box-body").load(s.source,function(){a(e)})})})}}(jQuery),function(t){t.fn.todolist=function(e){var i=t.extend({onCheck:function(t){},onUncheck:function(t){}},e);return this.each(function(){"undefined"!=typeof t.fn.iCheck?(t("input",this).on("ifChecked",function(e){var a=t(this).parents("li").first();a.toggleClass("done"),i.onCheck.call(a)}),t("input",this).on("ifUnchecked",function(e){var a=t(this).parents("li").first();a.toggleClass("done"),i.onUncheck.call(a)})):t("input",this).on("change",function(e){var a=t(this).parents("li").first();a.toggleClass("done"),i.onCheck.call(a)})})}}(jQuery),$(document).ready(function(){add_edit_course_questions()}),$("#course").length>0&&(add_course_teachers(),add_course_material(),$("#dynamic-flash").css("transition","opacity 3s ease-in-out"),$("#dynamic-flash").css("-moz-transition","opacity 3s ease-in-out"),$("#dynamic-flash").css("-webkit-transition","opacity 3s ease-in-out"),$("#dynamic-flash").css("-o-transition","opacity 3s ease-in-out")),$(function(){$(document).on("mouseover","#btnGenerationPDF",function(){"#"==$(this).attr("href")||$(".tooltip").hide()}),$("#name").on("keyup",function(t){t.preventDefault(),$("#btnGenerationPDF").css({"background-color":"#babfc2","border-color":"#babfc2"}).attr("href","#")}),$("#code").on("keyup",function(t){t.preventDefault(),$("#btnGenerationPDF").css({"background-color":"#babfc2","border-color":"#babfc2"}).attr("href","#")}),$("#start_date").on("keyup",function(t){t.preventDefault(),$("#btnGenerationPDF").css({"background-color":"#babfc2","border-color":"#babfc2"}).attr("href","#")}),$("#due_date").on("keyup",function(t){t.preventDefault(),$("#btnGenerationPDF").css({"background-color":"#babfc2","border-color":"#babfc2"}).attr("href","#")}),$(".students-select").select2({minimumInputLength:3,ajax:{type:"POST",url:"/admin/students/select",dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return{term:t.term}},processResults:function(t){return{results:t}}}}).on("change",function(t){t.preventDefault(),$("#btnGenerationPDF").css({"background-color":"#babfc2","border-color":"#babfc2"}).attr("href","#")}),$(".courses-select").select2({minimumInputLength:3,ajax:{type:"POST",url:"/admin/courses/select",dataType:"json",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},data:function(t){return{term:t.term}},processResults:function(t){return{results:t}}}}).on("change",function(t){t.preventDefault(),$("#btnGenerationPDF").css({"background-color":"#babfc2","border-color":"#babfc2"}).attr("href","#")}),$(".textarea-description").wysihtml5({events:{change:function(){$("#btnGenerationPDF").css({"background-color":"#babfc2","border-color":"#babfc2"}).attr("href","#")}},toolbar:{html:!0},parserRules:{tags:{strong:{},em:{},table:{check_attributes:{width:"any",style:"any",colspan:"any"}},td:{check_attributes:{width:"any",style:"any",colspan:"any"}},tr:{check_attributes:{width:"any",style:"any",colspan:"any"}},th:{check_attributes:{width:"any",style:"any",colspan:"any"}},img:{check_attributes:{src:"src"}}}}})}),$(document).ready(function(){var t;$(".myworkshoptutors tr").on("click",function(){$("#name-user").val($(this).children()[0].innerText),$("#name-workshop").val($(this).children()[2].innerText),$("#modalAddTutor").modal("toggle"),t=$(this).attr("data-workshop"),$("#workshop").val(t),$("#enrollment").val($(this).attr("data-enrollment")),$("#modalAddTutor").on("shown.bs.modal",function(){createSelect("tutor",void 0,$("#modalAddTutor")),createSelect("criteria",void 0,$("#modalAddTutor"),t),createSelect("activity",void 0,$("#modalAddTutor"),t)})}),$("#group-form").submit(function(t){t.preventDefault(),$.ajax({method:"POST",url:"/admin/myworkshoptutors/store",dataType:"Json",data:$(this).serialize(),headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},success:function(t){1==t?(flash_success("Tutor associado ao aluno com sucesso."),setTimeout(function(){window.location.reload()},2e3)):flash_warning("Erro ao associador tutor ao aluno. Tente novamente")}})})}),function(){"use strict";var t=this,e=t.Chart,i=function(t){this.canvas=t.canvas,this.ctx=t;var e=function(t,e){return t["offset"+e]?t["offset"+e]:document.defaultView.getComputedStyle(t).getPropertyValue(e)},i=this.width=e(t.canvas,"Width"),s=this.height=e(t.canvas,"Height");t.canvas.width=i,t.canvas.height=s;var i=this.width=t.canvas.width,s=this.height=t.canvas.height;return this.aspectRatio=this.width/this.height,a.retinaScale(this),this};i.defaults={global:{animation:!0,animationSteps:60,animationEasing:"easeOutQuart",showScale:!0,scaleOverride:!1,scaleSteps:null,scaleStepWidth:null,scaleStartValue:null,scaleLineColor:"rgba(0,0,0,.1)",scaleLineWidth:1,scaleShowLabels:!0,scaleLabel:"<%=value%>",scaleIntegersOnly:!0,scaleBeginAtZero:!1,scaleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",scaleFontSize:12,scaleFontStyle:"normal",scaleFontColor:"#666",responsive:!1,maintainAspectRatio:!0,showTooltips:!0,customTooltips:!1,tooltipEvents:["mousemove","touchstart","touchmove","mouseout"],tooltipFillColor:"rgba(0,0,0,0.8)",tooltipFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipFontSize:14,tooltipFontStyle:"normal",tooltipFontColor:"#fff",tooltipTitleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipTitleFontSize:14,tooltipTitleFontStyle:"bold",tooltipTitleFontColor:"#fff",tooltipYPadding:6,tooltipXPadding:6,tooltipCaretSize:8,tooltipCornerRadius:6,tooltipXOffset:10,tooltipTemplate:"<%if (label){%><%=label%>: <%}%><%= value %>",multiTooltipTemplate:"<%= value %>",multiTooltipKeyBackground:"#fff",onAnimationProgress:function(){},onAnimationComplete:function(){}}},i.types={};var a=i.helpers={},s=a.each=function(t,e,i){var a=Array.prototype.slice.call(arguments,3);if(t)if(t.length===+t.length){var s;for(s=0;s<t.length;s++)e.apply(i,[t[s],s].concat(a))}else for(var o in t)e.apply(i,[t[o],o].concat(a))},o=a.clone=function(t){var e={};return s(t,function(i,a){t.hasOwnProperty(a)&&(e[a]=i)}),e},n=a.extend=function(t){return s(Array.prototype.slice.call(arguments,1),function(e){s(e,function(i,a){e.hasOwnProperty(a)&&(t[a]=i)})}),t},r=a.merge=function(){var t=Array.prototype.slice.call(arguments,0);return t.unshift({}),n.apply(null,t)},l=a.indexOf=function(t,e){if(Array.prototype.indexOf)return t.indexOf(e);for(var i=0;i<t.length;i++)if(t[i]===e)return i;return-1},c=(a.where=function(t,e){var i=[];return a.each(t,function(t){e(t)&&i.push(t)}),i},a.findNextWhere=function(t,e,i){i||(i=-1);for(var a=i+1;a<t.length;a++){var s=t[a];if(e(s))return s}},a.findPreviousWhere=function(t,e,i){i||(i=t.length);for(var a=i-1;a>=0;a--){var s=t[a];if(e(s))return s}},a.inherits=function(t){var e=this,i=t&&t.hasOwnProperty("constructor")?t.constructor:function(){return e.apply(this,arguments)},a=function(){this.constructor=i};return a.prototype=e.prototype,i.prototype=new a,i.extend=c,t&&n(i.prototype,t),i.__super__=e.prototype,i}),h=a.noop=function(){},d=a.uid=function(){var t=0;return function(){return"chart-"+t++}}(),u=a.warn=function(t){window.console&&"function"==typeof window.console.warn&&console.warn(t)},f=a.amd="function"==typeof define&&define.amd,p=a.isNumber=function(t){return!isNaN(parseFloat(t))&&isFinite(t)},m=a.max=function(t){return Math.max.apply(Math,t)},g=a.min=function(t){return Math.min.apply(Math,t)},v=(a.cap=function(t,e,i){if(p(e)){if(t>e)return e}else if(p(i)&&i>t)return i;return t},a.getDecimalPlaces=function(t){return t%1!==0&&p(t)?t.toString().split(".")[1].length:0}),b=a.radians=function(t){return t*(Math.PI/180)},$=(a.getAngleFromPoint=function(t,e){var i=e.x-t.x,a=e.y-t.y,s=Math.sqrt(i*i+a*a),o=2*Math.PI+Math.atan2(a,i);return 0>i&&0>a&&(o+=2*Math.PI),{angle:o,distance:s}},a.aliasPixel=function(t){return t%2===0?0:.5}),y=(a.splineCurve=function(t,e,i,a){var s=Math.sqrt(Math.pow(e.x-t.x,2)+Math.pow(e.y-t.y,2)),o=Math.sqrt(Math.pow(i.x-e.x,2)+Math.pow(i.y-e.y,2)),n=a*s/(s+o),r=a*o/(s+o);return{inner:{x:e.x-n*(i.x-t.x),y:e.y-n*(i.y-t.y)},outer:{x:e.x+r*(i.x-t.x),y:e.y+r*(i.y-t.y)}}},a.calculateOrderOfMagnitude=function(t){return Math.floor(Math.log(t)/Math.LN10)}),x=(a.calculateScaleRange=function(t,e,i,a,s){var o=2,n=Math.floor(e/(1.5*i)),r=o>=n,l=m(t),c=g(t);l===c&&(l+=.5,c>=.5&&!a?c-=.5:l+=.5);for(var h=Math.abs(l-c),d=y(h),u=Math.ceil(l/(1*Math.pow(10,d)))*Math.pow(10,d),f=a?0:Math.floor(c/(1*Math.pow(10,d)))*Math.pow(10,d),p=u-f,v=Math.pow(10,d),b=Math.round(p/v);(b>n||n>2*b)&&!r;)if(b>n)v*=2,b=Math.round(p/v),b%1!==0&&(r=!0);else if(s&&d>=0){if(v/2%1!==0)break;v/=2,b=Math.round(p/v)}else v/=2,b=Math.round(p/v);return r&&(b=o,v=p/b),{steps:b,stepValue:v,min:f,max:f+b*v}},a.template=function(t,e){function i(t,e){var i=/\W/.test(t)?new Function("obj","var p=[],print=function(){p.push.apply(p,arguments);};with(obj){p.push('"+t.replace(/[\r\t\n]/g," ").split("<%").join("\t").replace(/((^|%>)[^\t]*)'/g,"$1\r").replace(/\t=(.*?)%>/g,"',$1,'").split("\t").join("');").split("%>").join("p.push('").split("\r").join("\\'")+"');}return p.join('');"):a[t]=a[t];return e?i(e):i}if(t instanceof Function)return t(e);var a={};return i(t,e)}),S=(a.generateLabels=function(t,e,i,a){var o=new Array(e);return labelTemplateString&&s(o,function(e,s){o[s]=x(t,{value:i+a*(s+1)})}),o},a.easingEffects={linear:function(t){return t},easeInQuad:function(t){return t*t},easeOutQuad:function(t){return-1*t*(t-2)},easeInOutQuad:function(t){return(t/=.5)<1?.5*t*t:-.5*(--t*(t-2)-1)},easeInCubic:function(t){return t*t*t},easeOutCubic:function(t){return 1*((t=t/1-1)*t*t+1)},easeInOutCubic:function(t){return(t/=.5)<1?.5*t*t*t:.5*((t-=2)*t*t+2)},easeInQuart:function(t){return t*t*t*t},easeOutQuart:function(t){return-1*((t=t/1-1)*t*t*t-1)},easeInOutQuart:function(t){return(t/=.5)<1?.5*t*t*t*t:-.5*((t-=2)*t*t*t-2)},easeInQuint:function(t){return 1*(t/=1)*t*t*t*t},easeOutQuint:function(t){return 1*((t=t/1-1)*t*t*t*t+1)},easeInOutQuint:function(t){return(t/=.5)<1?.5*t*t*t*t*t:.5*((t-=2)*t*t*t*t+2)},easeInSine:function(t){return-1*Math.cos(t/1*(Math.PI/2))+1},easeOutSine:function(t){return 1*Math.sin(t/1*(Math.PI/2))},easeInOutSine:function(t){return-.5*(Math.cos(Math.PI*t/1)-1)},easeInExpo:function(t){return 0===t?1:1*Math.pow(2,10*(t/1-1))},easeOutExpo:function(t){return 1===t?1:1*(-Math.pow(2,-10*t/1)+1)},easeInOutExpo:function(t){return 0===t?0:1===t?1:(t/=.5)<1?.5*Math.pow(2,10*(t-1)):.5*(-Math.pow(2,-10*--t)+2)},easeInCirc:function(t){return t>=1?t:-1*(Math.sqrt(1-(t/=1)*t)-1)},easeOutCirc:function(t){return 1*Math.sqrt(1-(t=t/1-1)*t)},easeInOutCirc:function(t){return(t/=.5)<1?-.5*(Math.sqrt(1-t*t)-1):.5*(Math.sqrt(1-(t-=2)*t)+1)},easeInElastic:function(t){var e=1.70158,i=0,a=1;return 0===t?0:1==(t/=1)?1:(i||(i=.3),a<Math.abs(1)?(a=1,e=i/4):e=i/(2*Math.PI)*Math.asin(1/a),-(a*Math.pow(2,10*(t-=1))*Math.sin(2*(1*t-e)*Math.PI/i)))},easeOutElastic:function(t){var e=1.70158,i=0,a=1;return 0===t?0:1==(t/=1)?1:(i||(i=.3),a<Math.abs(1)?(a=1,e=i/4):e=i/(2*Math.PI)*Math.asin(1/a),a*Math.pow(2,-10*t)*Math.sin(2*(1*t-e)*Math.PI/i)+1)},easeInOutElastic:function(t){var e=1.70158,i=0,a=1;return 0===t?0:2==(t/=.5)?1:(i||(i=.3*1.5),a<Math.abs(1)?(a=1,e=i/4):e=i/(2*Math.PI)*Math.asin(1/a),1>t?-.5*a*Math.pow(2,10*(t-=1))*Math.sin(2*(1*t-e)*Math.PI/i):a*Math.pow(2,-10*(t-=1))*Math.sin(2*(1*t-e)*Math.PI/i)*.5+1)},easeInBack:function(t){var e=1.70158;return 1*(t/=1)*t*((e+1)*t-e)},easeOutBack:function(t){var e=1.70158;return 1*((t=t/1-1)*t*((e+1)*t+e)+1)},easeInOutBack:function(t){var e=1.70158;return(t/=.5)<1?.5*t*t*(((e*=1.525)+1)*t-e):.5*((t-=2)*t*(((e*=1.525)+1)*t+e)+2)},easeInBounce:function(t){return 1-S.easeOutBounce(1-t)},easeOutBounce:function(t){return(t/=1)<1/2.75?7.5625*t*t:2/2.75>t?1*(7.5625*(t-=1.5/2.75)*t+.75):2.5/2.75>t?1*(7.5625*(t-=2.25/2.75)*t+.9375):1*(7.5625*(t-=2.625/2.75)*t+.984375)},easeInOutBounce:function(t){return.5>t?.5*S.easeInBounce(2*t):.5*S.easeOutBounce(2*t-1)+.5}}),w=a.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(t){return window.setTimeout(t,1e3/60)}}(),C=a.cancelAnimFrame=function(){return window.cancelAnimationFrame||window.webkitCancelAnimationFrame||window.mozCancelAnimationFrame||window.oCancelAnimationFrame||window.msCancelAnimationFrame||function(t){return window.clearTimeout(t,1e3/60)}}(),_=(a.animationLoop=function(t,e,i,a,s,o){var n=0,r=S[i]||S.linear,l=function(){n++;var i=n/e,c=r(i);t.call(o,c,i,n),a.call(o,c,i),e>n?o.animationFrame=w(l):s.apply(o)};w(l)},a.getRelativePosition=function(t){var e,i,a=t.originalEvent||t,s=t.currentTarget||t.srcElement,o=s.getBoundingClientRect();return a.touches?(e=a.touches[0].clientX-o.left,i=a.touches[0].clientY-o.top):(e=a.clientX-o.left,i=a.clientY-o.top),{x:e,y:i}},a.addEvent=function(t,e,i){t.addEventListener?t.addEventListener(e,i):t.attachEvent?t.attachEvent("on"+e,i):t["on"+e]=i}),k=a.removeEvent=function(t,e,i){t.removeEventListener?t.removeEventListener(e,i,!1):t.detachEvent?t.detachEvent("on"+e,i):t["on"+e]=h},T=(a.bindEvents=function(t,e,i){t.events||(t.events={}),s(e,function(e){t.events[e]=function(){i.apply(t,arguments)},_(t.chart.canvas,e,t.events[e])})},a.unbindEvents=function(t,e){s(e,function(e,i){k(t.chart.canvas,i,e)})}),P=a.getMaximumWidth=function(t){var e=t.parentNode;return e.clientWidth},L=a.getMaximumHeight=function(t){var e=t.parentNode;return e.clientHeight},F=(a.getMaximumSize=a.getMaximumWidth,a.retinaScale=function(t){var e=t.ctx,i=t.canvas.width,a=t.canvas.height;window.devicePixelRatio&&(e.canvas.style.width=i+"px",e.canvas.style.height=a+"px",e.canvas.height=a*window.devicePixelRatio,e.canvas.width=i*window.devicePixelRatio,e.scale(window.devicePixelRatio,window.devicePixelRatio))}),R=a.clear=function(t){t.ctx.clearRect(0,0,t.width,t.height)},O=a.fontString=function(t,e,i){return e+" "+t+"px "+i},A=a.longestText=function(t,e,i){t.font=e;var a=0;return s(i,function(e){var i=t.measureText(e).width;a=i>a?i:a}),a},E=a.drawRoundedRectangle=function(t,e,i,a,s,o){t.beginPath(),t.moveTo(e+o,i),t.lineTo(e+a-o,i),t.quadraticCurveTo(e+a,i,e+a,i+o),t.lineTo(e+a,i+s-o),t.quadraticCurveTo(e+a,i+s,e+a-o,i+s),t.lineTo(e+o,i+s),t.quadraticCurveTo(e,i+s,e,i+s-o),t.lineTo(e,i+o),t.quadraticCurveTo(e,i,e+o,i),t.closePath()};i.instances={},i.Type=function(t,e,a){this.options=e,this.chart=a,this.id=d(),i.instances[this.id]=this,e.responsive&&this.resize(),this.initialize.call(this,t)},n(i.Type.prototype,{initialize:function(){return this},clear:function(){return R(this.chart),this},stop:function(){return C(this.animationFrame),this},resize:function(t){this.stop();var e=this.chart.canvas,i=P(this.chart.canvas),a=this.options.maintainAspectRatio?i/this.chart.aspectRatio:L(this.chart.canvas);return e.width=this.chart.width=i,e.height=this.chart.height=a,F(this.chart),"function"==typeof t&&t.apply(this,Array.prototype.slice.call(arguments,1)),this},reflow:h,render:function(t){return t&&this.reflow(),this.options.animation&&!t?a.animationLoop(this.draw,this.options.animationSteps,this.options.animationEasing,this.options.onAnimationProgress,this.options.onAnimationComplete,this):(this.draw(),this.options.onAnimationComplete.call(this)),this},generateLegend:function(){return x(this.options.legendTemplate,this)},destroy:function(){this.clear(),T(this,this.events);var t=this.chart.canvas;t.width=this.chart.width,t.height=this.chart.height,t.style.removeProperty?(t.style.removeProperty("width"),t.style.removeProperty("height")):(t.style.removeAttribute("width"),t.style.removeAttribute("height")),delete i.instances[this.id]},showTooltip:function(t,e){"undefined"==typeof this.activeElements&&(this.activeElements=[]);var o=function(t){var e=!1;return t.length!==this.activeElements.length?e=!0:(s(t,function(t,i){t!==this.activeElements[i]&&(e=!0)},this),e)}.call(this,t);if(o||e){if(this.activeElements=t,this.draw(),this.options.customTooltips&&this.options.customTooltips(!1),t.length>0)if(this.datasets&&this.datasets.length>1){for(var n,r,c=this.datasets.length-1;c>=0&&(n=this.datasets[c].points||this.datasets[c].bars||this.datasets[c].segments,r=l(n,t[0]),-1===r);c--);var h=[],d=[],u=function(){var t,e,i,s,o,n=[],l=[],c=[];return a.each(this.datasets,function(e){t=e.points||e.bars||e.segments,t[r]&&t[r].hasValue()&&n.push(t[r])}),a.each(n,function(t){l.push(t.x),c.push(t.y),h.push(a.template(this.options.multiTooltipTemplate,t)),d.push({fill:t._saved.fillColor||t.fillColor,
-stroke:t._saved.strokeColor||t.strokeColor})},this),o=g(c),i=m(c),s=g(l),e=m(l),{x:s>this.chart.width/2?s:e,y:(o+i)/2}}.call(this,r);new i.MultiTooltip({x:u.x,y:u.y,xPadding:this.options.tooltipXPadding,yPadding:this.options.tooltipYPadding,xOffset:this.options.tooltipXOffset,fillColor:this.options.tooltipFillColor,textColor:this.options.tooltipFontColor,fontFamily:this.options.tooltipFontFamily,fontStyle:this.options.tooltipFontStyle,fontSize:this.options.tooltipFontSize,titleTextColor:this.options.tooltipTitleFontColor,titleFontFamily:this.options.tooltipTitleFontFamily,titleFontStyle:this.options.tooltipTitleFontStyle,titleFontSize:this.options.tooltipTitleFontSize,cornerRadius:this.options.tooltipCornerRadius,labels:h,legendColors:d,legendColorBackground:this.options.multiTooltipKeyBackground,title:t[0].label,chart:this.chart,ctx:this.chart.ctx,custom:this.options.customTooltips}).draw()}else s(t,function(t){var e=t.tooltipPosition();new i.Tooltip({x:Math.round(e.x),y:Math.round(e.y),xPadding:this.options.tooltipXPadding,yPadding:this.options.tooltipYPadding,fillColor:this.options.tooltipFillColor,textColor:this.options.tooltipFontColor,fontFamily:this.options.tooltipFontFamily,fontStyle:this.options.tooltipFontStyle,fontSize:this.options.tooltipFontSize,caretHeight:this.options.tooltipCaretSize,cornerRadius:this.options.tooltipCornerRadius,text:x(this.options.tooltipTemplate,t),chart:this.chart,custom:this.options.customTooltips}).draw()},this);return this}},toBase64Image:function(){return this.chart.canvas.toDataURL.apply(this.chart.canvas,arguments)}}),i.Type.extend=function(t){var e=this,a=function(){return e.apply(this,arguments)};if(a.prototype=o(e.prototype),n(a.prototype,t),a.extend=i.Type.extend,t.name||e.prototype.name){var s=t.name||e.prototype.name,l=i.defaults[e.prototype.name]?o(i.defaults[e.prototype.name]):{};i.defaults[s]=n(l,t.defaults),i.types[s]=a,i.prototype[s]=function(t,e){var o=r(i.defaults.global,i.defaults[s],e||{});return new a(t,o,this)}}else u("Name not provided for this chart, so it hasn't been registered");return e},i.Element=function(t){n(this,t),this.initialize.apply(this,arguments),this.save()},n(i.Element.prototype,{initialize:function(){},restore:function(t){return t?s(t,function(t){this[t]=this._saved[t]},this):n(this,this._saved),this},save:function(){return this._saved=o(this),delete this._saved._saved,this},update:function(t){return s(t,function(t,e){this._saved[e]=this[e],this[e]=t},this),this},transition:function(t,e){return s(t,function(t,i){this[i]=(t-this._saved[i])*e+this._saved[i]},this),this},tooltipPosition:function(){return{x:this.x,y:this.y}},hasValue:function(){return p(this.value)}}),i.Element.extend=c,i.Point=i.Element.extend({display:!0,inRange:function(t,e){var i=this.hitDetectionRadius+this.radius;return Math.pow(t-this.x,2)+Math.pow(e-this.y,2)<Math.pow(i,2)},draw:function(){if(this.display){var t=this.ctx;t.beginPath(),t.arc(this.x,this.y,this.radius,0,2*Math.PI),t.closePath(),t.strokeStyle=this.strokeColor,t.lineWidth=this.strokeWidth,t.fillStyle=this.fillColor,t.fill(),t.stroke()}}}),i.Arc=i.Element.extend({inRange:function(t,e){var i=a.getAngleFromPoint(this,{x:t,y:e}),s=i.angle>=this.startAngle&&i.angle<=this.endAngle,o=i.distance>=this.innerRadius&&i.distance<=this.outerRadius;return s&&o},tooltipPosition:function(){var t=this.startAngle+(this.endAngle-this.startAngle)/2,e=(this.outerRadius-this.innerRadius)/2+this.innerRadius;return{x:this.x+Math.cos(t)*e,y:this.y+Math.sin(t)*e}},draw:function(t){var e=this.ctx;e.beginPath(),e.arc(this.x,this.y,this.outerRadius,this.startAngle,this.endAngle),e.arc(this.x,this.y,this.innerRadius,this.endAngle,this.startAngle,!0),e.closePath(),e.strokeStyle=this.strokeColor,e.lineWidth=this.strokeWidth,e.fillStyle=this.fillColor,e.fill(),e.lineJoin="bevel",this.showStroke&&e.stroke()}}),i.Rectangle=i.Element.extend({draw:function(){var t=this.ctx,e=this.width/2,i=this.x-e,a=this.x+e,s=this.base-(this.base-this.y),o=this.strokeWidth/2;this.showStroke&&(i+=o,a-=o,s+=o),t.beginPath(),t.fillStyle=this.fillColor,t.strokeStyle=this.strokeColor,t.lineWidth=this.strokeWidth,t.moveTo(i,this.base),t.lineTo(i,s),t.lineTo(a,s),t.lineTo(a,this.base),t.fill(),this.showStroke&&t.stroke()},height:function(){return this.base-this.y},inRange:function(t,e){return t>=this.x-this.width/2&&t<=this.x+this.width/2&&e>=this.y&&e<=this.base}}),i.Tooltip=i.Element.extend({draw:function(){var t=this.chart.ctx;t.font=O(this.fontSize,this.fontStyle,this.fontFamily),this.xAlign="center",this.yAlign="above";var e=this.caretPadding=2,i=t.measureText(this.text).width+2*this.xPadding,a=this.fontSize+2*this.yPadding,s=a+this.caretHeight+e;this.x+i/2>this.chart.width?this.xAlign="left":this.x-i/2<0&&(this.xAlign="right"),this.y-s<0&&(this.yAlign="below");var o=this.x-i/2,n=this.y-s;if(t.fillStyle=this.fillColor,this.custom)this.custom(this);else{switch(this.yAlign){case"above":t.beginPath(),t.moveTo(this.x,this.y-e),t.lineTo(this.x+this.caretHeight,this.y-(e+this.caretHeight)),t.lineTo(this.x-this.caretHeight,this.y-(e+this.caretHeight)),t.closePath(),t.fill();break;case"below":n=this.y+e+this.caretHeight,t.beginPath(),t.moveTo(this.x,this.y+e),t.lineTo(this.x+this.caretHeight,this.y+e+this.caretHeight),t.lineTo(this.x-this.caretHeight,this.y+e+this.caretHeight),t.closePath(),t.fill()}switch(this.xAlign){case"left":o=this.x-i+(this.cornerRadius+this.caretHeight);break;case"right":o=this.x-(this.cornerRadius+this.caretHeight)}E(t,o,n,i,a,this.cornerRadius),t.fill(),t.fillStyle=this.textColor,t.textAlign="center",t.textBaseline="middle",t.fillText(this.text,o+i/2,n+a/2)}}}),i.MultiTooltip=i.Element.extend({initialize:function(){this.font=O(this.fontSize,this.fontStyle,this.fontFamily),this.titleFont=O(this.titleFontSize,this.titleFontStyle,this.titleFontFamily),this.height=this.labels.length*this.fontSize+(this.labels.length-1)*(this.fontSize/2)+2*this.yPadding+1.5*this.titleFontSize,this.ctx.font=this.titleFont;var t=this.ctx.measureText(this.title).width,e=A(this.ctx,this.font,this.labels)+this.fontSize+3,i=m([e,t]);this.width=i+2*this.xPadding;var a=this.height/2;this.y-a<0?this.y=a:this.y+a>this.chart.height&&(this.y=this.chart.height-a),this.x>this.chart.width/2?this.x-=this.xOffset+this.width:this.x+=this.xOffset},getLineHeight:function(t){var e=this.y-this.height/2+this.yPadding,i=t-1;return 0===t?e+this.titleFontSize/2:e+(1.5*this.fontSize*i+this.fontSize/2)+1.5*this.titleFontSize},draw:function(){if(this.custom)this.custom(this);else{E(this.ctx,this.x,this.y-this.height/2,this.width,this.height,this.cornerRadius);var t=this.ctx;t.fillStyle=this.fillColor,t.fill(),t.closePath(),t.textAlign="left",t.textBaseline="middle",t.fillStyle=this.titleTextColor,t.font=this.titleFont,t.fillText(this.title,this.x+this.xPadding,this.getLineHeight(0)),t.font=this.font,a.each(this.labels,function(e,i){t.fillStyle=this.textColor,t.fillText(e,this.x+this.xPadding+this.fontSize+3,this.getLineHeight(i+1)),t.fillStyle=this.legendColorBackground,t.fillRect(this.x+this.xPadding,this.getLineHeight(i+1)-this.fontSize/2,this.fontSize,this.fontSize),t.fillStyle=this.legendColors[i].fill,t.fillRect(this.x+this.xPadding,this.getLineHeight(i+1)-this.fontSize/2,this.fontSize,this.fontSize)},this)}}}),i.Scale=i.Element.extend({initialize:function(){this.fit()},buildYLabels:function(){this.yLabels=[];for(var t=v(this.stepValue),e=0;e<=this.steps;e++)this.yLabels.push(x(this.templateString,{value:(this.min+e*this.stepValue).toFixed(t)}));this.yLabelWidth=this.display&&this.showLabels?A(this.ctx,this.font,this.yLabels):0},addXLabel:function(t){this.xLabels.push(t),this.valuesCount++,this.fit()},removeXLabel:function(){this.xLabels.shift(),this.valuesCount--,this.fit()},fit:function(){this.startPoint=this.display?this.fontSize:0,this.endPoint=this.display?this.height-1.5*this.fontSize-5:this.height,this.startPoint+=this.padding,this.endPoint-=this.padding;var t,e=this.endPoint-this.startPoint;for(this.calculateYRange(e),this.buildYLabels(),this.calculateXLabelRotation();e>this.endPoint-this.startPoint;)e=this.endPoint-this.startPoint,t=this.yLabelWidth,this.calculateYRange(e),this.buildYLabels(),t<this.yLabelWidth&&this.calculateXLabelRotation()},calculateXLabelRotation:function(){this.ctx.font=this.font;var t,e,i=this.ctx.measureText(this.xLabels[0]).width,a=this.ctx.measureText(this.xLabels[this.xLabels.length-1]).width;if(this.xScalePaddingRight=a/2+3,this.xScalePaddingLeft=i/2>this.yLabelWidth+10?i/2:this.yLabelWidth+10,this.xLabelRotation=0,this.display){var s,o=A(this.ctx,this.font,this.xLabels);this.xLabelWidth=o;for(var n=Math.floor(this.calculateX(1)-this.calculateX(0))-6;this.xLabelWidth>n&&0===this.xLabelRotation||this.xLabelWidth>n&&this.xLabelRotation<=90&&this.xLabelRotation>0;)s=Math.cos(b(this.xLabelRotation)),t=s*i,e=s*a,t+this.fontSize/2>this.yLabelWidth+8&&(this.xScalePaddingLeft=t+this.fontSize/2),this.xScalePaddingRight=this.fontSize/2,this.xLabelRotation++,this.xLabelWidth=s*o;this.xLabelRotation>0&&(this.endPoint-=Math.sin(b(this.xLabelRotation))*o+3)}else this.xLabelWidth=0,this.xScalePaddingRight=this.padding,this.xScalePaddingLeft=this.padding},calculateYRange:h,drawingArea:function(){return this.startPoint-this.endPoint},calculateY:function(t){var e=this.drawingArea()/(this.min-this.max);return this.endPoint-e*(t-this.min)},calculateX:function(t){var e=(this.xLabelRotation>0,this.width-(this.xScalePaddingLeft+this.xScalePaddingRight)),i=e/Math.max(this.valuesCount-(this.offsetGridLines?0:1),1),a=i*t+this.xScalePaddingLeft;return this.offsetGridLines&&(a+=i/2),Math.round(a)},update:function(t){a.extend(this,t),this.fit()},draw:function(){var t=this.ctx,e=(this.endPoint-this.startPoint)/this.steps,i=Math.round(this.xScalePaddingLeft);this.display&&(t.fillStyle=this.textColor,t.font=this.font,s(this.yLabels,function(s,o){var n=this.endPoint-e*o,r=Math.round(n),l=this.showHorizontalLines;t.textAlign="right",t.textBaseline="middle",this.showLabels&&t.fillText(s,i-10,n),0!==o||l||(l=!0),l&&t.beginPath(),o>0?(t.lineWidth=this.gridLineWidth,t.strokeStyle=this.gridLineColor):(t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor),r+=a.aliasPixel(t.lineWidth),l&&(t.moveTo(i,r),t.lineTo(this.width,r),t.stroke(),t.closePath()),t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor,t.beginPath(),t.moveTo(i-5,r),t.lineTo(i,r),t.stroke(),t.closePath()},this),s(this.xLabels,function(e,i){var a=this.calculateX(i)+$(this.lineWidth),s=this.calculateX(i-(this.offsetGridLines?.5:0))+$(this.lineWidth),o=this.xLabelRotation>0,n=this.showVerticalLines;0!==i||n||(n=!0),n&&t.beginPath(),i>0?(t.lineWidth=this.gridLineWidth,t.strokeStyle=this.gridLineColor):(t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor),n&&(t.moveTo(s,this.endPoint),t.lineTo(s,this.startPoint-3),t.stroke(),t.closePath()),t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor,t.beginPath(),t.moveTo(s,this.endPoint),t.lineTo(s,this.endPoint+5),t.stroke(),t.closePath(),t.save(),t.translate(a,o?this.endPoint+12:this.endPoint+8),t.rotate(-1*b(this.xLabelRotation)),t.font=this.font,t.textAlign=o?"right":"center",t.textBaseline=o?"middle":"top",t.fillText(e,0,0),t.restore()},this))}}),i.RadialScale=i.Element.extend({initialize:function(){this.size=g([this.height,this.width]),this.drawingArea=this.display?this.size/2-(this.fontSize/2+this.backdropPaddingY):this.size/2},calculateCenterOffset:function(t){var e=this.drawingArea/(this.max-this.min);return(t-this.min)*e},update:function(){this.lineArc?this.drawingArea=this.display?this.size/2-(this.fontSize/2+this.backdropPaddingY):this.size/2:this.setScaleSize(),this.buildYLabels()},buildYLabels:function(){this.yLabels=[];for(var t=v(this.stepValue),e=0;e<=this.steps;e++)this.yLabels.push(x(this.templateString,{value:(this.min+e*this.stepValue).toFixed(t)}))},getCircumference:function(){return 2*Math.PI/this.valuesCount},setScaleSize:function(){var t,e,i,a,s,o,n,r,l,c,h,d,u=g([this.height/2-this.pointLabelFontSize-5,this.width/2]),f=this.width,m=0;for(this.ctx.font=O(this.pointLabelFontSize,this.pointLabelFontStyle,this.pointLabelFontFamily),e=0;e<this.valuesCount;e++)t=this.getPointPosition(e,u),i=this.ctx.measureText(x(this.templateString,{value:this.labels[e]})).width+5,0===e||e===this.valuesCount/2?(a=i/2,t.x+a>f&&(f=t.x+a,s=e),t.x-a<m&&(m=t.x-a,n=e)):e<this.valuesCount/2?t.x+i>f&&(f=t.x+i,s=e):e>this.valuesCount/2&&t.x-i<m&&(m=t.x-i,n=e);l=m,c=Math.ceil(f-this.width),o=this.getIndexAngle(s),r=this.getIndexAngle(n),h=c/Math.sin(o+Math.PI/2),d=l/Math.sin(r+Math.PI/2),h=p(h)?h:0,d=p(d)?d:0,this.drawingArea=u-(d+h)/2,this.setCenterPoint(d,h)},setCenterPoint:function(t,e){var i=this.width-e-this.drawingArea,a=t+this.drawingArea;this.xCenter=(a+i)/2,this.yCenter=this.height/2},getIndexAngle:function(t){var e=2*Math.PI/this.valuesCount;return t*e-Math.PI/2},getPointPosition:function(t,e){var i=this.getIndexAngle(t);return{x:Math.cos(i)*e+this.xCenter,y:Math.sin(i)*e+this.yCenter}},draw:function(){if(this.display){var t=this.ctx;if(s(this.yLabels,function(e,i){if(i>0){var a,s=i*(this.drawingArea/this.steps),o=this.yCenter-s;if(this.lineWidth>0)if(t.strokeStyle=this.lineColor,t.lineWidth=this.lineWidth,this.lineArc)t.beginPath(),t.arc(this.xCenter,this.yCenter,s,0,2*Math.PI),t.closePath(),t.stroke();else{t.beginPath();for(var n=0;n<this.valuesCount;n++)a=this.getPointPosition(n,this.calculateCenterOffset(this.min+i*this.stepValue)),0===n?t.moveTo(a.x,a.y):t.lineTo(a.x,a.y);t.closePath(),t.stroke()}if(this.showLabels){if(t.font=O(this.fontSize,this.fontStyle,this.fontFamily),this.showLabelBackdrop){var r=t.measureText(e).width;t.fillStyle=this.backdropColor,t.fillRect(this.xCenter-r/2-this.backdropPaddingX,o-this.fontSize/2-this.backdropPaddingY,r+2*this.backdropPaddingX,this.fontSize+2*this.backdropPaddingY)}t.textAlign="center",t.textBaseline="middle",t.fillStyle=this.fontColor,t.fillText(e,this.xCenter,o)}}},this),!this.lineArc){t.lineWidth=this.angleLineWidth,t.strokeStyle=this.angleLineColor;for(var e=this.valuesCount-1;e>=0;e--){if(this.angleLineWidth>0){var i=this.getPointPosition(e,this.calculateCenterOffset(this.max));t.beginPath(),t.moveTo(this.xCenter,this.yCenter),t.lineTo(i.x,i.y),t.stroke(),t.closePath()}var a=this.getPointPosition(e,this.calculateCenterOffset(this.max)+5);t.font=O(this.pointLabelFontSize,this.pointLabelFontStyle,this.pointLabelFontFamily),t.fillStyle=this.pointLabelFontColor;var o=this.labels.length,n=this.labels.length/2,r=n/2,l=r>e||e>o-r,c=e===r||e===o-r;t.textAlign=0===e?"center":e===n?"center":n>e?"left":"right",t.textBaseline=c?"middle":l?"bottom":"top",t.fillText(this.labels[e],a.x,a.y)}}}}}),a.addEvent(window,"resize",function(){var t;return function(){clearTimeout(t),t=setTimeout(function(){s(i.instances,function(t){t.options.responsive&&t.resize(t.render,!0)})},50)}}()),f?define(function(){return i}):"object"==typeof module&&module.exports&&(module.exports=i),t.Chart=i,i.noConflict=function(){return t.Chart=e,i}}.call(this),function(){"use strict";var t=this,e=t.Chart,i=e.helpers,a={scaleBeginAtZero:!0,scaleShowGridLines:!0,scaleGridLineColor:"rgba(0,0,0,.05)",scaleGridLineWidth:1,scaleShowHorizontalLines:!0,scaleShowVerticalLines:!0,barShowStroke:!0,barStrokeWidth:2,barValueSpacing:5,barDatasetSpacing:1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'};e.Type.extend({name:"Bar",defaults:a,initialize:function(t){var a=this.options;this.ScaleClass=e.Scale.extend({offsetGridLines:!0,calculateBarX:function(t,e,i){var s=this.calculateBaseWidth(),o=this.calculateX(i)-s/2,n=this.calculateBarWidth(t);return o+n*e+e*a.barDatasetSpacing+n/2},calculateBaseWidth:function(){return this.calculateX(1)-this.calculateX(0)-2*a.barValueSpacing},calculateBarWidth:function(t){var e=this.calculateBaseWidth()-(t-1)*a.barDatasetSpacing;return e/t}}),this.datasets=[],this.options.showTooltips&&i.bindEvents(this,this.options.tooltipEvents,function(t){var e="mouseout"!==t.type?this.getBarsAtEvent(t):[];this.eachBars(function(t){t.restore(["fillColor","strokeColor"])}),i.each(e,function(t){t.fillColor=t.highlightFill,t.strokeColor=t.highlightStroke}),this.showTooltip(e)}),this.BarClass=e.Rectangle.extend({strokeWidth:this.options.barStrokeWidth,showStroke:this.options.barShowStroke,ctx:this.chart.ctx}),i.each(t.datasets,function(e){var a={label:e.label||null,fillColor:e.fillColor,strokeColor:e.strokeColor,bars:[]};this.datasets.push(a),i.each(e.data,function(i,s){a.bars.push(new this.BarClass({value:i,label:t.labels[s],datasetLabel:e.label,strokeColor:e.strokeColor,fillColor:e.fillColor,highlightFill:e.highlightFill||e.fillColor,highlightStroke:e.highlightStroke||e.strokeColor}))},this)},this),this.buildScale(t.labels),this.BarClass.prototype.base=this.scale.endPoint,this.eachBars(function(t,e,a){i.extend(t,{width:this.scale.calculateBarWidth(this.datasets.length),x:this.scale.calculateBarX(this.datasets.length,a,e),y:this.scale.endPoint}),t.save()},this),this.render()},update:function(){this.scale.update(),i.each(this.activeElements,function(t){t.restore(["fillColor","strokeColor"])}),this.eachBars(function(t){t.save()}),this.render()},eachBars:function(t){i.each(this.datasets,function(e,a){i.each(e.bars,t,this,a)},this)},getBarsAtEvent:function(t){for(var e,a=[],s=i.getRelativePosition(t),o=function(t){a.push(t.bars[e])},n=0;n<this.datasets.length;n++)for(e=0;e<this.datasets[n].bars.length;e++)if(this.datasets[n].bars[e].inRange(s.x,s.y))return i.each(this.datasets,o),a;return a},buildScale:function(t){var e=this,a=function(){var t=[];return e.eachBars(function(e){t.push(e.value)}),t},s={templateString:this.options.scaleLabel,height:this.chart.height,width:this.chart.width,ctx:this.chart.ctx,textColor:this.options.scaleFontColor,fontSize:this.options.scaleFontSize,fontStyle:this.options.scaleFontStyle,fontFamily:this.options.scaleFontFamily,valuesCount:t.length,beginAtZero:this.options.scaleBeginAtZero,integersOnly:this.options.scaleIntegersOnly,calculateYRange:function(t){var e=i.calculateScaleRange(a(),t,this.fontSize,this.beginAtZero,this.integersOnly);i.extend(this,e)},xLabels:t,font:i.fontString(this.options.scaleFontSize,this.options.scaleFontStyle,this.options.scaleFontFamily),lineWidth:this.options.scaleLineWidth,lineColor:this.options.scaleLineColor,showHorizontalLines:this.options.scaleShowHorizontalLines,showVerticalLines:this.options.scaleShowVerticalLines,gridLineWidth:this.options.scaleShowGridLines?this.options.scaleGridLineWidth:0,gridLineColor:this.options.scaleShowGridLines?this.options.scaleGridLineColor:"rgba(0,0,0,0)",padding:this.options.showScale?0:this.options.barShowStroke?this.options.barStrokeWidth:0,showLabels:this.options.scaleShowLabels,display:this.options.showScale};this.options.scaleOverride&&i.extend(s,{calculateYRange:i.noop,steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}),this.scale=new this.ScaleClass(s)},addData:function(t,e){i.each(t,function(t,i){this.datasets[i].bars.push(new this.BarClass({value:t,label:e,x:this.scale.calculateBarX(this.datasets.length,i,this.scale.valuesCount+1),y:this.scale.endPoint,width:this.scale.calculateBarWidth(this.datasets.length),base:this.scale.endPoint,strokeColor:this.datasets[i].strokeColor,fillColor:this.datasets[i].fillColor}))},this),this.scale.addXLabel(e),this.update()},removeData:function(){this.scale.removeXLabel(),i.each(this.datasets,function(t){t.bars.shift()},this),this.update()},reflow:function(){i.extend(this.BarClass.prototype,{y:this.scale.endPoint,base:this.scale.endPoint});var t=i.extend({height:this.chart.height,width:this.chart.width});this.scale.update(t)},draw:function(t){var e=t||1;this.clear(),this.chart.ctx,this.scale.draw(e),i.each(this.datasets,function(t,a){i.each(t.bars,function(t,i){t.hasValue()&&(t.base=this.scale.endPoint,t.transition({x:this.scale.calculateBarX(this.datasets.length,a,i),y:this.scale.calculateY(t.value),width:this.scale.calculateBarWidth(this.datasets.length)},e).draw())},this)},this)}})}.call(this),function(){"use strict";var t=this,e=t.Chart,i=e.helpers,a={segmentShowStroke:!0,segmentStrokeColor:"#fff",segmentStrokeWidth:2,percentageInnerCutout:50,animationSteps:100,animationEasing:"easeOutBounce",animateRotate:!0,animateScale:!1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'};e.Type.extend({name:"Doughnut",defaults:a,initialize:function(t){this.segments=[],this.outerRadius=(i.min([this.chart.width,this.chart.height])-this.options.segmentStrokeWidth/2)/2,this.SegmentArc=e.Arc.extend({ctx:this.chart.ctx,x:this.chart.width/2,y:this.chart.height/2}),this.options.showTooltips&&i.bindEvents(this,this.options.tooltipEvents,function(t){var e="mouseout"!==t.type?this.getSegmentsAtEvent(t):[];i.each(this.segments,function(t){t.restore(["fillColor"])}),i.each(e,function(t){t.fillColor=t.highlightColor}),this.showTooltip(e)}),this.calculateTotal(t),i.each(t,function(t,e){this.addData(t,e,!0)},this),this.render()},getSegmentsAtEvent:function(t){var e=[],a=i.getRelativePosition(t);return i.each(this.segments,function(t){t.inRange(a.x,a.y)&&e.push(t)},this),e},addData:function(t,e,i){var a=e||this.segments.length;this.segments.splice(a,0,new this.SegmentArc({value:t.value,outerRadius:this.options.animateScale?0:this.outerRadius,innerRadius:this.options.animateScale?0:this.outerRadius/100*this.options.percentageInnerCutout,fillColor:t.color,highlightColor:t.highlight||t.color,showStroke:this.options.segmentShowStroke,strokeWidth:this.options.segmentStrokeWidth,strokeColor:this.options.segmentStrokeColor,startAngle:1.5*Math.PI,circumference:this.options.animateRotate?0:this.calculateCircumference(t.value),label:t.label})),i||(this.reflow(),this.update())},calculateCircumference:function(t){return 2*Math.PI*(Math.abs(t)/this.total)},calculateTotal:function(t){this.total=0,i.each(t,function(t){this.total+=Math.abs(t.value)},this)},update:function(){this.calculateTotal(this.segments),i.each(this.activeElements,function(t){t.restore(["fillColor"])}),i.each(this.segments,function(t){t.save()}),this.render()},removeData:function(t){var e=i.isNumber(t)?t:this.segments.length-1;this.segments.splice(e,1),this.reflow(),this.update()},reflow:function(){i.extend(this.SegmentArc.prototype,{x:this.chart.width/2,y:this.chart.height/2}),this.outerRadius=(i.min([this.chart.width,this.chart.height])-this.options.segmentStrokeWidth/2)/2,i.each(this.segments,function(t){t.update({outerRadius:this.outerRadius,innerRadius:this.outerRadius/100*this.options.percentageInnerCutout})},this)},draw:function(t){var e=t?t:1;this.clear(),i.each(this.segments,function(t,i){t.transition({circumference:this.calculateCircumference(t.value),outerRadius:this.outerRadius,innerRadius:this.outerRadius/100*this.options.percentageInnerCutout},e),t.endAngle=t.startAngle+t.circumference,t.draw(),0===i&&(t.startAngle=1.5*Math.PI),i<this.segments.length-1&&(this.segments[i+1].startAngle=t.endAngle)},this)}}),e.types.Doughnut.extend({name:"Pie",defaults:i.merge(a,{percentageInnerCutout:0})})}.call(this),function(){"use strict";var t=this,e=t.Chart,i=e.helpers,a={scaleShowGridLines:!0,scaleGridLineColor:"rgba(0,0,0,.05)",scaleGridLineWidth:1,scaleShowHorizontalLines:!0,scaleShowVerticalLines:!0,bezierCurve:!0,bezierCurveTension:.4,pointDot:!0,pointDotRadius:4,pointDotStrokeWidth:1,pointHitDetectionRadius:20,datasetStroke:!0,datasetStrokeWidth:2,datasetFill:!0,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'};e.Type.extend({name:"Line",defaults:a,initialize:function(t){this.PointClass=e.Point.extend({strokeWidth:this.options.pointDotStrokeWidth,radius:this.options.pointDotRadius,display:this.options.pointDot,hitDetectionRadius:this.options.pointHitDetectionRadius,ctx:this.chart.ctx,inRange:function(t){return Math.pow(t-this.x,2)<Math.pow(this.radius+this.hitDetectionRadius,2)}}),this.datasets=[],this.options.showTooltips&&i.bindEvents(this,this.options.tooltipEvents,function(t){var e="mouseout"!==t.type?this.getPointsAtEvent(t):[];this.eachPoints(function(t){t.restore(["fillColor","strokeColor"])}),i.each(e,function(t){t.fillColor=t.highlightFill,t.strokeColor=t.highlightStroke}),this.showTooltip(e)}),i.each(t.datasets,function(e){var a={label:e.label||null,fillColor:e.fillColor,strokeColor:e.strokeColor,pointColor:e.pointColor,pointStrokeColor:e.pointStrokeColor,points:[]};this.datasets.push(a),i.each(e.data,function(i,s){a.points.push(new this.PointClass({value:i,label:t.labels[s],datasetLabel:e.label,strokeColor:e.pointStrokeColor,fillColor:e.pointColor,highlightFill:e.pointHighlightFill||e.pointColor,highlightStroke:e.pointHighlightStroke||e.pointStrokeColor}))},this),this.buildScale(t.labels),this.eachPoints(function(t,e){i.extend(t,{x:this.scale.calculateX(e),y:this.scale.endPoint}),t.save()},this)},this),this.render()},update:function(){this.scale.update(),i.each(this.activeElements,function(t){t.restore(["fillColor","strokeColor"])}),this.eachPoints(function(t){t.save()}),this.render()},eachPoints:function(t){i.each(this.datasets,function(e){i.each(e.points,t,this)},this)},getPointsAtEvent:function(t){var e=[],a=i.getRelativePosition(t);return i.each(this.datasets,function(t){i.each(t.points,function(t){t.inRange(a.x,a.y)&&e.push(t)})},this),e},buildScale:function(t){var a=this,s=function(){var t=[];return a.eachPoints(function(e){t.push(e.value)}),t},o={templateString:this.options.scaleLabel,height:this.chart.height,width:this.chart.width,ctx:this.chart.ctx,textColor:this.options.scaleFontColor,fontSize:this.options.scaleFontSize,fontStyle:this.options.scaleFontStyle,fontFamily:this.options.scaleFontFamily,valuesCount:t.length,beginAtZero:this.options.scaleBeginAtZero,integersOnly:this.options.scaleIntegersOnly,calculateYRange:function(t){var e=i.calculateScaleRange(s(),t,this.fontSize,this.beginAtZero,this.integersOnly);i.extend(this,e)},xLabels:t,font:i.fontString(this.options.scaleFontSize,this.options.scaleFontStyle,this.options.scaleFontFamily),lineWidth:this.options.scaleLineWidth,lineColor:this.options.scaleLineColor,showHorizontalLines:this.options.scaleShowHorizontalLines,showVerticalLines:this.options.scaleShowVerticalLines,gridLineWidth:this.options.scaleShowGridLines?this.options.scaleGridLineWidth:0,gridLineColor:this.options.scaleShowGridLines?this.options.scaleGridLineColor:"rgba(0,0,0,0)",padding:this.options.showScale?0:this.options.pointDotRadius+this.options.pointDotStrokeWidth,showLabels:this.options.scaleShowLabels,display:this.options.showScale};this.options.scaleOverride&&i.extend(o,{calculateYRange:i.noop,steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}),this.scale=new e.Scale(o)},addData:function(t,e){i.each(t,function(t,i){this.datasets[i].points.push(new this.PointClass({value:t,label:e,x:this.scale.calculateX(this.scale.valuesCount+1),y:this.scale.endPoint,strokeColor:this.datasets[i].pointStrokeColor,fillColor:this.datasets[i].pointColor}))},this),this.scale.addXLabel(e),this.update()},removeData:function(){this.scale.removeXLabel(),i.each(this.datasets,function(t){t.points.shift()},this),this.update()},reflow:function(){var t=i.extend({height:this.chart.height,width:this.chart.width});this.scale.update(t)},draw:function(t){var e=t||1;this.clear();var a=this.chart.ctx,s=function(t){return null!==t.value},o=function(t,e,a){return i.findNextWhere(e,s,a)||t},n=function(t,e,a){return i.findPreviousWhere(e,s,a)||t};this.scale.draw(e),i.each(this.datasets,function(t){var r=i.where(t.points,s);i.each(t.points,function(t,i){t.hasValue()&&t.transition({y:this.scale.calculateY(t.value),x:this.scale.calculateX(i)},e)},this),this.options.bezierCurve&&i.each(r,function(t,e){var a=e>0&&e<r.length-1?this.options.bezierCurveTension:0;t.controlPoints=i.splineCurve(n(t,r,e),t,o(t,r,e),a),t.controlPoints.outer.y>this.scale.endPoint?t.controlPoints.outer.y=this.scale.endPoint:t.controlPoints.outer.y<this.scale.startPoint&&(t.controlPoints.outer.y=this.scale.startPoint),t.controlPoints.inner.y>this.scale.endPoint?t.controlPoints.inner.y=this.scale.endPoint:t.controlPoints.inner.y<this.scale.startPoint&&(t.controlPoints.inner.y=this.scale.startPoint)},this),a.lineWidth=this.options.datasetStrokeWidth,a.strokeStyle=t.strokeColor,a.beginPath(),i.each(r,function(t,e){if(0===e)a.moveTo(t.x,t.y);else if(this.options.bezierCurve){var i=n(t,r,e);a.bezierCurveTo(i.controlPoints.outer.x,i.controlPoints.outer.y,t.controlPoints.inner.x,t.controlPoints.inner.y,t.x,t.y)}else a.lineTo(t.x,t.y)},this),a.stroke(),this.options.datasetFill&&r.length>0&&(a.lineTo(r[r.length-1].x,this.scale.endPoint),a.lineTo(r[0].x,this.scale.endPoint),a.fillStyle=t.fillColor,a.closePath(),a.fill()),i.each(r,function(t){t.draw()})},this)}})}.call(this),function(){"use strict";var t=this,e=t.Chart,i=e.helpers,a={scaleShowLabelBackdrop:!0,scaleBackdropColor:"rgba(255,255,255,0.75)",scaleBeginAtZero:!0,scaleBackdropPaddingY:2,scaleBackdropPaddingX:2,scaleShowLine:!0,segmentShowStroke:!0,segmentStrokeColor:"#fff",segmentStrokeWidth:2,animationSteps:100,animationEasing:"easeOutBounce",animateRotate:!0,animateScale:!1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'};e.Type.extend({name:"PolarArea",defaults:a,initialize:function(t){this.segments=[],this.SegmentArc=e.Arc.extend({showStroke:this.options.segmentShowStroke,strokeWidth:this.options.segmentStrokeWidth,strokeColor:this.options.segmentStrokeColor,ctx:this.chart.ctx,innerRadius:0,x:this.chart.width/2,y:this.chart.height/2}),this.scale=new e.RadialScale({display:this.options.showScale,fontStyle:this.options.scaleFontStyle,fontSize:this.options.scaleFontSize,fontFamily:this.options.scaleFontFamily,fontColor:this.options.scaleFontColor,showLabels:this.options.scaleShowLabels,showLabelBackdrop:this.options.scaleShowLabelBackdrop,backdropColor:this.options.scaleBackdropColor,backdropPaddingY:this.options.scaleBackdropPaddingY,backdropPaddingX:this.options.scaleBackdropPaddingX,lineWidth:this.options.scaleShowLine?this.options.scaleLineWidth:0,lineColor:this.options.scaleLineColor,lineArc:!0,width:this.chart.width,height:this.chart.height,xCenter:this.chart.width/2,yCenter:this.chart.height/2,ctx:this.chart.ctx,templateString:this.options.scaleLabel,valuesCount:t.length}),this.updateScaleRange(t),this.scale.update(),i.each(t,function(t,e){this.addData(t,e,!0)},this),this.options.showTooltips&&i.bindEvents(this,this.options.tooltipEvents,function(t){var e="mouseout"!==t.type?this.getSegmentsAtEvent(t):[];i.each(this.segments,function(t){t.restore(["fillColor"])}),i.each(e,function(t){t.fillColor=t.highlightColor}),this.showTooltip(e)}),this.render()},getSegmentsAtEvent:function(t){var e=[],a=i.getRelativePosition(t);return i.each(this.segments,function(t){t.inRange(a.x,a.y)&&e.push(t)},this),e},addData:function(t,e,i){var a=e||this.segments.length;this.segments.splice(a,0,new this.SegmentArc({fillColor:t.color,highlightColor:t.highlight||t.color,label:t.label,value:t.value,outerRadius:this.options.animateScale?0:this.scale.calculateCenterOffset(t.value),circumference:this.options.animateRotate?0:this.scale.getCircumference(),
-startAngle:1.5*Math.PI})),i||(this.reflow(),this.update())},removeData:function(t){var e=i.isNumber(t)?t:this.segments.length-1;this.segments.splice(e,1),this.reflow(),this.update()},calculateTotal:function(t){this.total=0,i.each(t,function(t){this.total+=t.value},this),this.scale.valuesCount=this.segments.length},updateScaleRange:function(t){var e=[];i.each(t,function(t){e.push(t.value)});var a=this.options.scaleOverride?{steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}:i.calculateScaleRange(e,i.min([this.chart.width,this.chart.height])/2,this.options.scaleFontSize,this.options.scaleBeginAtZero,this.options.scaleIntegersOnly);i.extend(this.scale,a,{size:i.min([this.chart.width,this.chart.height]),xCenter:this.chart.width/2,yCenter:this.chart.height/2})},update:function(){this.calculateTotal(this.segments),i.each(this.segments,function(t){t.save()}),this.reflow(),this.render()},reflow:function(){i.extend(this.SegmentArc.prototype,{x:this.chart.width/2,y:this.chart.height/2}),this.updateScaleRange(this.segments),this.scale.update(),i.extend(this.scale,{xCenter:this.chart.width/2,yCenter:this.chart.height/2}),i.each(this.segments,function(t){t.update({outerRadius:this.scale.calculateCenterOffset(t.value)})},this)},draw:function(t){var e=t||1;this.clear(),i.each(this.segments,function(t,i){t.transition({circumference:this.scale.getCircumference(),outerRadius:this.scale.calculateCenterOffset(t.value)},e),t.endAngle=t.startAngle+t.circumference,0===i&&(t.startAngle=1.5*Math.PI),i<this.segments.length-1&&(this.segments[i+1].startAngle=t.endAngle),t.draw()},this),this.scale.draw()}})}.call(this),function(){"use strict";var t=this,e=t.Chart,i=e.helpers;e.Type.extend({name:"Radar",defaults:{scaleShowLine:!0,angleShowLineOut:!0,scaleShowLabels:!1,scaleBeginAtZero:!0,angleLineColor:"rgba(0,0,0,.1)",angleLineWidth:1,pointLabelFontFamily:"'Arial'",pointLabelFontStyle:"normal",pointLabelFontSize:10,pointLabelFontColor:"#666",pointDot:!0,pointDotRadius:3,pointDotStrokeWidth:1,pointHitDetectionRadius:20,datasetStroke:!0,datasetStrokeWidth:2,datasetFill:!0,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'},initialize:function(t){this.PointClass=e.Point.extend({strokeWidth:this.options.pointDotStrokeWidth,radius:this.options.pointDotRadius,display:this.options.pointDot,hitDetectionRadius:this.options.pointHitDetectionRadius,ctx:this.chart.ctx}),this.datasets=[],this.buildScale(t),this.options.showTooltips&&i.bindEvents(this,this.options.tooltipEvents,function(t){var e="mouseout"!==t.type?this.getPointsAtEvent(t):[];this.eachPoints(function(t){t.restore(["fillColor","strokeColor"])}),i.each(e,function(t){t.fillColor=t.highlightFill,t.strokeColor=t.highlightStroke}),this.showTooltip(e)}),i.each(t.datasets,function(e){var a={label:e.label||null,fillColor:e.fillColor,strokeColor:e.strokeColor,pointColor:e.pointColor,pointStrokeColor:e.pointStrokeColor,points:[]};this.datasets.push(a),i.each(e.data,function(i,s){var o;this.scale.animation||(o=this.scale.getPointPosition(s,this.scale.calculateCenterOffset(i))),a.points.push(new this.PointClass({value:i,label:t.labels[s],datasetLabel:e.label,x:this.options.animation?this.scale.xCenter:o.x,y:this.options.animation?this.scale.yCenter:o.y,strokeColor:e.pointStrokeColor,fillColor:e.pointColor,highlightFill:e.pointHighlightFill||e.pointColor,highlightStroke:e.pointHighlightStroke||e.pointStrokeColor}))},this)},this),this.render()},eachPoints:function(t){i.each(this.datasets,function(e){i.each(e.points,t,this)},this)},getPointsAtEvent:function(t){var e=i.getRelativePosition(t),a=i.getAngleFromPoint({x:this.scale.xCenter,y:this.scale.yCenter},e),s=2*Math.PI/this.scale.valuesCount,o=Math.round((a.angle-1.5*Math.PI)/s),n=[];return(o>=this.scale.valuesCount||0>o)&&(o=0),a.distance<=this.scale.drawingArea&&i.each(this.datasets,function(t){n.push(t.points[o])}),n},buildScale:function(t){this.scale=new e.RadialScale({display:this.options.showScale,fontStyle:this.options.scaleFontStyle,fontSize:this.options.scaleFontSize,fontFamily:this.options.scaleFontFamily,fontColor:this.options.scaleFontColor,showLabels:this.options.scaleShowLabels,showLabelBackdrop:this.options.scaleShowLabelBackdrop,backdropColor:this.options.scaleBackdropColor,backdropPaddingY:this.options.scaleBackdropPaddingY,backdropPaddingX:this.options.scaleBackdropPaddingX,lineWidth:this.options.scaleShowLine?this.options.scaleLineWidth:0,lineColor:this.options.scaleLineColor,angleLineColor:this.options.angleLineColor,angleLineWidth:this.options.angleShowLineOut?this.options.angleLineWidth:0,pointLabelFontColor:this.options.pointLabelFontColor,pointLabelFontSize:this.options.pointLabelFontSize,pointLabelFontFamily:this.options.pointLabelFontFamily,pointLabelFontStyle:this.options.pointLabelFontStyle,height:this.chart.height,width:this.chart.width,xCenter:this.chart.width/2,yCenter:this.chart.height/2,ctx:this.chart.ctx,templateString:this.options.scaleLabel,labels:t.labels,valuesCount:t.datasets[0].data.length}),this.scale.setScaleSize(),this.updateScaleRange(t.datasets),this.scale.buildYLabels()},updateScaleRange:function(t){var e=function(){var e=[];return i.each(t,function(t){t.data?e=e.concat(t.data):i.each(t.points,function(t){e.push(t.value)})}),e}(),a=this.options.scaleOverride?{steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}:i.calculateScaleRange(e,i.min([this.chart.width,this.chart.height])/2,this.options.scaleFontSize,this.options.scaleBeginAtZero,this.options.scaleIntegersOnly);i.extend(this.scale,a)},addData:function(t,e){this.scale.valuesCount++,i.each(t,function(t,i){var a=this.scale.getPointPosition(this.scale.valuesCount,this.scale.calculateCenterOffset(t));this.datasets[i].points.push(new this.PointClass({value:t,label:e,x:a.x,y:a.y,strokeColor:this.datasets[i].pointStrokeColor,fillColor:this.datasets[i].pointColor}))},this),this.scale.labels.push(e),this.reflow(),this.update()},removeData:function(){this.scale.valuesCount--,this.scale.labels.shift(),i.each(this.datasets,function(t){t.points.shift()},this),this.reflow(),this.update()},update:function(){this.eachPoints(function(t){t.save()}),this.reflow(),this.render()},reflow:function(){i.extend(this.scale,{width:this.chart.width,height:this.chart.height,size:i.min([this.chart.width,this.chart.height]),xCenter:this.chart.width/2,yCenter:this.chart.height/2}),this.updateScaleRange(this.datasets),this.scale.setScaleSize(),this.scale.buildYLabels()},draw:function(t){var e=t||1,a=this.chart.ctx;this.clear(),this.scale.draw(),i.each(this.datasets,function(t){i.each(t.points,function(t,i){t.hasValue()&&t.transition(this.scale.getPointPosition(i,this.scale.calculateCenterOffset(t.value)),e)},this),a.lineWidth=this.options.datasetStrokeWidth,a.strokeStyle=t.strokeColor,a.beginPath(),i.each(t.points,function(t,e){0===e?a.moveTo(t.x,t.y):a.lineTo(t.x,t.y)},this),a.closePath(),a.stroke(),a.fillStyle=t.fillColor,a.fill(),i.each(t.points,function(t){t.hasValue()&&t.draw()})},this)}})}.call(this),Chart.defaults.global={animation:!0,animationSteps:60,animationEasing:"easeOutQuart",showScale:!0,scaleOverride:!1,scaleSteps:null,scaleStepWidth:null,scaleStartValue:null,scaleLineColor:"rgba(0,0,0,.1)",scaleLineWidth:1,scaleShowLabels:!0,scaleLabel:"<%=value%>",scaleIntegersOnly:!0,scaleBeginAtZero:!1,scaleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",scaleFontSize:12,scaleFontStyle:"normal",scaleFontColor:"#666",responsive:!0,maintainAspectRatio:!0,showTooltips:!0,customTooltips:!1,tooltipEvents:["mousemove","touchstart","touchmove"],tooltipFillColor:"rgba(0,0,0,0.8)",tooltipFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipFontSize:14,tooltipFontStyle:"normal",tooltipFontColor:"#fff",tooltipTitleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipTitleFontSize:14,tooltipTitleFontStyle:"bold",tooltipTitleFontColor:"#fff",tooltipYPadding:6,tooltipXPadding:6,tooltipCaretSize:8,tooltipCornerRadius:6,tooltipXOffset:10,tooltipTemplate:"<%if (label){%><%=label%>: <%}%><%= value %>",multiTooltipTemplate:"<%= value %>",onAnimationProgress:function(){},onAnimationComplete:function(){}},void 0!=document.getElementById("course-graph")){var ctx=document.getElementById("course-graph").getContext("2d"),sales_ctx=document.getElementById("sales-graph").getContext("2d");ctx.canvas.width=50,ctx.canvas.height=50,sales_ctx.canvas.height=100,create_chart_by_time(sales_ctx,"annual","courses",0),create_pie_chart(ctx,"courses")}$(function(){var t=null;$(".table #btn-edit-tutor-activity").on("click",function(e){e.preventDefault(),createSelect("tutor","myworkshopevaluations/tutor/select",$("#modalEditTutorActivity")),$("#modalEditTutorActivity").modal("toggle"),t=$(this).parent().parent()[0].children[8].getAttribute("id"),$("#name-user").val($(this).parent().parent()[0].children[0].innerText),$("#description-workshop").val($(this).parent().parent()[0].children[2].innerText)}),$("#editTutorActivity").submit(function(e){e.preventDefault(),console.log($(this).serialize()),$.ajax({method:"POST",url:"/admin/myworkshopevaluations/updateTutor/"+t,dataType:"Json",data:$(this).serialize(),headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},success:function(t){1==t?(flash_success("Tutor da atividade alterado com sucesso."),setTimeout(function(){window.location.reload()},1500)):flash_warning("Erro ao alterar tutor da atividade. Tente novamente.")}})})}),$(document).ready(function(){$(".content-preview").on("click",function(t){t.preventDefault(),$("#vimeoPreviewModal").modal("toggle")})}),$(function(){var t=null;$(".table #btn-webinars-users").on("click",function(e){e.preventDefault(),t=$(this).attr("data-id");$("#modalUsersCourse").modal("toggle");$.ajax({method:"GET",dataType:"Json",url:"/admin/webinars/users_course?id="+t,headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},success:function(t){if(0==t)$("#modalUsersCourse .modal-body").html("<h2>Nenhum aluno matriculado neste Curso.</h2>");else{var e='<table id="users-course" class="table table-striped table-bordered table-hover">';e+="<thead>",e+="<th>",e+="E-mail",e+="</th>",e+="</thead>",e+="<tbody>";for(var i=0;i<t.length;i++)e+="<tr>",e+="<td>",e+=""+t[i].student_email+",",e+="</td>",e+="</tr>";e+="</tbody>",e+="</table>",$("#modalUsersCourse .modal-body").html(e)}}})})});
+function findAddressBrazil(zipInput, idCityInput, cityInput, stateInput, addressInput, neighborhoodInput) {
+
+    if (zipInput.val() == "42.700-000") {
+        //Cidade de Lauro de Freitas
+        idCityInput.val('-');
+        cityInput.val('Lauro de Freitas');
+        stateInput.val('BA');
+        addressInput.val('CENTRO');
+        neighborhoodInput.val('CENTRO');
+
+    } else {
+
+        var request = $.ajax({
+            url: "https://viacep.com.br/ws/" + zipInput.val().replace(/\D/g, '') + "/json/",
+            method: "POST",
+            dataType: "jsonp"
+        });
+
+        request.done(function (msg) {
+            idCityInput.val(msg.ibge);
+            cityInput.val(msg.localidade);
+            stateInput.val(msg.uf);
+            addressInput.val(msg.logradouro);
+            neighborhoodInput.val(msg.bairro);
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            cityInput.val('Falha na busca da cidade');
+        });
+
+    }
+
+}
+
+function returnAddressBrazil(zip) {
+    var request = $.ajax({
+        url: "https://viacep.com.br/ws/" + zip + "/json/",
+        method: "POST",
+        dataType: "jsonp"
+    });
+
+
+    var indexedAddress;
+
+    request.done(function (msg) {
+        indexedAddress["cityCode"] = msg.ibge;
+        indexedAddress["cityName"] = msg.localidade;
+        indexedAddress["state"] = msg.uf;
+        indexedAddress["address"] = logradouro;
+        indexedAddress["neighborhood"] = msg.bairro;
+    });
+
+}
+
+
+//TODO: Terminar essa função
+function image_url(entity, id, photo, size, alternate)
+{
+
+    if (size == undefined) {
+        size = '';
+    } else {
+        size = '_size' + size;
+    }
+
+    if (alternate == undefined) {
+        alternate = "generic.png";
+    }
+
+    if (photo == undefined || photo == "")
+        return "/img/system/" + alternate;
+    var splitted = photo.split('.');
+    photo = '/uploads/' + entity + '/' + id + '/' + splitted[0] + size + '.' + splitted[1];
+
+
+    return photo;
+    /*
+     $.ajax({
+     url: photo,
+     error: function(){
+     return "/img/system/" + alternate;
+     },
+     success: function(){
+     console.log(photo);
+     return photo;
+     }
+     
+     
+     }); */
+}
+
+
+function insertion_sort(list) {
+    var size = list.length;
+
+    for (var i = 1; i < size; i++) {
+        var pivot = list[i];
+        var j = i;
+        while (j > 0 && list[j - 1] > pivot) {
+            list[j] = list[j - 1];
+            j = j - 1;
+        }
+        list[j] = pivot;
+    }
+    return list;
+}
+
+
+function php_to_javascript_date(php_date) {
+    var match = php_date.match(/^(\d+)-(\d+)-(\d+) (\d+)\:(\d+)\:(\d+)$/);
+    var date = new Date(match[1], match[2] - 1, match[3], match[4], match[5], match[6]);
+
+    return date;
+}
+
+function mark_as_read() {
+    $(".notification-menu .content").on('click', function () {
+        $.ajax({
+            url: "/exam/get-next-question",
+            type: "POST",
+            data: {
+                'question': next,
+                'from-result': from_result
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+            }
+        });
+    });
+}
+// Avoid `console` errors in browsers that lack a console.
+(function () {
+    var method;
+    var noop = function () {
+    };
+    var methods = [
+        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+        'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
+
+// Place any jQuery/helper plugins in here.
+$(function () {
+
+    function is_email(email){
+        er = /^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2,3}/; 
+        if(!er.exec(email)){
+            return false;
+        }
+        return true;
+    }
+
+    //Escuta o botão de submit do formulário de cadastro de usuários no carrinho
+    //Verifica se o usuário informou os campos obrigatórios
+    $('.register_on_cart').submit(function(e){
+        
+        //Variável que retornará se tudo ocorreu bem
+        var is_valid = true;
+        //Removendo todos os ícones de alerta
+        $(".fa-warning").remove();
+        //Removendo todos os p mensagem de campo obrigatório
+        $('.p-error').remove();
+        //Removendo todas os spans com a mensagem de campo obrigatório
+        $('.span-error').remove();
+       
+        //Faz loop em todos os inputs do formulário
+        $(this).find('input').each(function(key, val){
+            //Se o input for do tipo text ou email
+            if(($(this).attr('type') == 'text' || $(this).attr('type') == 'email') && $(this).attr('data-not-required') == undefined){
+                //Verifico se está vazio
+                if($(this).val() == "" ){
+                    is_valid = false;
+                    $(this).css('background-color', 'rgba(249, 3, 3, 0.37)');
+                    $(this).parent().find('label').after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>');
+                    $(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>');
+                }else{
+                    $(this).css('background-color', 'initial');
+                }
+            }
+            //Se o input for do tipo password
+            if($(this).attr('type') == 'password' && $(this).attr('data-not-required') == undefined){
+                //Verifico se está vazio
+                if($(this).val() == ""){
+                    is_valid = false;
+                    $(this).css('background-color', 'rgba(249, 3, 3, 0.37)');
+                    $(this).parent().find('label').after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>');
+                    $(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>');
+                }else{
+                    $(this).css('background-color', 'initial');
+                }
+            }
+            //Se o input for do tipo checkbox
+            if($(this).attr('type') == 'checkbox' && $(this).attr('data-not-required') == undefined){
+                //Verifico se está selecionado
+                if(!$(this).is(':checked')){
+                    $(this).parent().after('<span class="span-error" style="color: red; margin-left: 2%;">Campo Obrigatório</span>');
+                    $(this).parent().after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>');
+                    is_valid = false;
+                }else{
+                    $(this).parent().parent().find('.span-error').remove();
+                }
+            }
+        });
+        //Se deu tudo certo, retorna true, se não, retorna false
+        return is_valid;
+    });
+
+    //Escuta o botão de e-mail da url carrinho/autenticacao, e insere um registro
+    //Criar log das tentativas de cadastro a partir do carrinho
+    $('#email_register').on('focusout', function(){
+        if($(this).val() != ""){
+            $.ajax({
+                method: 'POST',
+                url: '/carrinho/criar-tentativa-de-registro-no-carrinho',
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                data: {
+                    email: $(this).val()
+                },
+                success: function(data){
+                }
+            });
+        }
+    });
+
+    /**
+     * Função para validação de formulário
+     * @param form
+     *      
+     **/
+    function validateForm(form){
+        //Variável que retornará se tudo ocorreu bem
+        var is_valid = true;
+        //Removendo todos os ícones de alerta
+        $(".fa-warning").remove();
+        //Removendo todos os p mensagem de campo obrigatório
+        $('.p-error').remove();
+        //Removendo todas os spans com a mensagem de campo obrigatório
+        $('.span-error').remove();
+       
+        //Faz loop em todos os inputs do formulário
+        form.find('input').each(function(key, val){
+            //Se o input for do tipo text ou email
+            if($(this).attr('type') == 'text' && $(this).attr('data-not-required') == undefined){
+                //Verifico se está vazio
+                if($(this).val() == "" ){
+                    is_valid = false;
+                    $(this).css('background-color', 'rgba(249, 3, 3, 0.37)');
+                    $(this).parent().find('label').after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>');
+                    $(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>');
+                }else{
+                    $(this).css('background-color', 'white');
+                }
+            }
+            //Se o input for do tipo password
+            if($(this).attr('type') == 'password' && $(this).attr('data-not-required') == undefined){
+                //Verifico se está vazio
+                if($(this).val() == ""){
+                    is_valid = false;
+                    $(this).css('background-color', 'rgba(249, 3, 3, 0.37)');
+                    $(this).parent().find('label').after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>');
+                    $(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>');
+                }else{
+                    $(this).css('background-color', 'white');
+                }
+            }
+            //Se o input for do tipo checkbox
+            if($(this).attr('type') == 'checkbox' && $(this).attr('data-not-required') == undefined){
+                //Verifico se está selecionado
+                if(!$(this).is(':checked')){
+                    $(this).parent().after('<span class="span-error" style="color: red; margin-left: 2%;">Campo Obrigatório</span>');
+                    $(this).parent().after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>');
+                    is_valid = false;
+                }else{
+                    $(this).parent().parent().find('.span-error').remove();
+                }
+            }
+            //Se o input for do tipo email
+            if($(this).attr('type') == 'email'){
+                //Verifico se está vazio
+                if($(this).val() == ""){
+                    is_valid = false;
+                    $(this).css('background-color', 'rgba(249, 3, 3, 0.37)');
+                    $(this).parent().find('label').after('&nbsp;<i data-toggle="tooltip" title="Campo obrigatório" class="fa fa-warning" style="color: red"></i>');
+                    $(this).after('<p class="p-error" style="color: red;">Campo Obrigatório</p>');
+                }
+                //Verifico se o email é valido
+                else if(!is_email($(this).val())){
+                    is_valid = false;
+                    $(this).css('background-color', 'rgba(249, 3, 3, 0.37)');
+                    $(this).parent().find('label').after('&nbsp;<i data-toggle="tooltip" title="E-mail Inválido" class="fa fa-warning" style="color: red"></i>');
+                    $(this).after('<p class="p-error" style="color: red;">E-mail Inválido</p>');
+                }else{
+                    $(this).css('background-color', 'white');
+                }
+            }
+        });
+
+        return is_valid;
+    }
+
+    //Variável que irá controlar os clicks do usuário
+    var click = 1;
+    //Escuta o botão de inscrição de usuários na campanha Quero Aula + E-book
+    $('#subscribe_oab_e_etica').on('submit', function(e){
+        
+        //Validando formulário
+        var is_valid = validateForm($(this));
+        
+        //Se o formulário foi validado com sucesso
+        if(is_valid == true){
+            if(click == 1){
+                click = 2;
+                $('#loading').css({
+                    'display': 'block'
+                });
+                $.ajax({
+                    method: 'POST',
+                    dataType: 'Json',
+                    url: '/subscribe-ebook-oab-e-etica',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    data: $(this).serialize(),
+                    success: function(data){
+                        if(data == 'success'){
+                            click = 1;
+                            $('#loading').css({
+                                'display': 'none'
+                            });
+
+                            window.location.href = '/etica-oab/enviado';
+                            /*html = '<div id="alert" style="display: none; color: white; background-color: #00a65a !important; border-radius: 3px; padding: 15px; border: 1px solid transparent" class="form-group col-xs-12 col-sm-12 col-md-12">';
+                            html += 'E-book enviado com sucesso!';
+                            html += '</div>';
+                            $(html).insertAfter('#subscribe_oab_e_etica');
+                            $('#alert').fadeIn('slow');
+                            $('#email').val("");
+                            $('#name').val("");
+                            setTimeout(function(){
+                                $('#alert').fadeOut('slow');
+                                $('#alert').remove();
+                            }, 2000);*/
+                        }else{
+                            $('#loading').css({
+                                'display': 'none'
+                            });
+                            html = '<div id="alert" style="display: none; color: white; background-color: #red !important; border-radius: 3px; padding: 15px; border: 1px solid transparent" class="form-group col-xs-12 col-sm-12 col-md-12">';
+                            html += 'Erro ao enviar e-book!';
+                            html += '</div>';
+                            $(html).insertAfter('#subscribe_oab_e_etica');
+                            $('#alert').fadeIn('slow');
+                            $('#email').val("");
+                            $('#name').val("");
+                            setTimeout(function(){ 
+                                $('#alert').fadeOut('slow');
+                                $('#alert').remove();
+                            }, 2000);
+                        }
+                    }
+                });
+            }
+        }
+        return false;
+    });
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+    if ($(".colorpicker-box").length)
+        $(".colorpicker-box").colorpicker();
+    if ($.isFunction($.fn.select2)) {
+        $(".select2").select2();
+    }
+    if ($.isFunction($.fn.datepicker)) {
+        $(".datepicker").datepicker({format: 'dd/mm/yyyy'});
+    }
+
+    if ($.isFunction($.fn.wysihtml5)) {
+        if (!$("#comments-content").length) {
+
+            $(".textarea").wysihtml5({
+                toolbar: {
+                    html: true,
+                },
+                parserRules: {
+                    tags: {
+                        strong: {},
+                        em: {},
+                        table: {
+                            check_attributes: {
+                                width: "any",
+                                style: "any",
+                                colspan: "any",
+                            }
+                        },
+                        td: {
+                            check_attributes: {
+                                width: "any",
+                                style: "any",
+                                colspan: "any",
+                            }
+                        },
+                        tr: {
+                            check_attributes: {
+                                width: "any",
+                                style: "any",
+                                colspan: "any",
+                            }
+                        },
+                        th: {
+                            check_attributes: {
+                                width: "any",
+                                style: "any",
+                                colspan: "any",
+                            }
+                        },
+                        img: {
+                            check_attributes: {
+                                src: "src",
+                            }
+                        }
+                    },
+                },
+            });
+        }
+    }
+
+
+    setRandom();
+
+    $(".title-has-slug").blur(function () {
+        var slug = convertToSlug(this.value);
+        $(".slug-from-title").val(slug);
+    });
+    if ($.isFunction($.fn.select2)) {
+        $(".selectCity").select2({
+            ajax: {
+                url: "/admin/cities/select/",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        term: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data.results
+                    };
+                },
+                cache: false
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 3,
+            templateResult: formatRepo,
+            templateSelection: formatRepoSelection
+        });
+    }
+    function formatRepo(repo) {
+        if (repo.loading)
+            return repo.text;
+        var markup = '<div class="clearfix">' + repo.name + '</div>';
+        return markup;
+    }
+
+    function formatRepoSelection(repo) {
+        return repo.name;
+    }
+
+
+
+
+
+    if ($.isFunction($.fn.select2)) {
+        $('.tags-select').select2({
+            tags: true,
+            minimumInputLength: 3,
+            ajax: {
+                type: 'POST',
+                url: '/admin/tags/select',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                data: function (params) {
+                    return {
+                        term: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {results: data};
+                }
+            }
+        });
+
+        createSelect('courses');
+        createSelect('students');
+        createSelect('users', '/admin/access/users/select');
+        if ($("#course-data").length > 0)
+            createSelect('lessons', '/admin/lessons/select', undefined, $("#course-data").data('course-id'));
+    }
+
+
+
+    $(".zip").on('blur', function (e) {
+        findAddressBrazil($("#zip"), $("#city_id"), $("#city"), $("#state"), $("#address"), $("#neighborhood"));
+    });
+
+    $('#update_zip').click(function(e){
+        findAddressBrazil($("#billZip"),$("#billCityCode"),$("#billCity"),$("#billState"),$("#billAddress"),$("#billDistrict"));
+    });
+
+    $(".zip").parent().parent().one('mouseover', function () {
+        findAddressBrazil($("#zip"), $("#city_id"), $("#city"), $("#state"), $("#address"), $("#neighborhood"));
+    });
+
+
+    $(".testCoupon").on('click', function (e) {
+        if ($("#coupon_code").val() != '') {
+            alert('Confirme o cupom de descontos informado antes de finalizar a compra. Para isso, clique em Ok.');
+            return false;
+        }
+    });
+
+    // Relativo a tabs
+    //-----------------------------------------------------------------------------------------------------
+
+
+
+    if ($("#module-table").length)
+        createModuleTable();
+
+    /*
+     Allows you to add data-method="METHOD to links to automatically inject a form with the method on click
+     Example: <a href="{{route('customers.destroy', $customer->id)}}" data-method="delete" name="delete_item">Delete</a>
+     Injects a form with that's fired on click of the link with a DELETE request.
+     Good because you don't have to dirty your HTML with delete forms everywhere.
+     */
+
+    $(".cel").inputmask("(99) 999999999");
+    $(".personal_id").inputmask("999.999.999-99");
+
+    $('#personal_id').inputmask('999.999.999-99');
+    $(".company_id").inputmask("99.999.999/9999-99");
+    $(".birthdate").inputmask("99/99/9999");
+    $("#birthdate").inputmask("99/99/9999");
+    $(".datemask").inputmask("99/99/9999");
+    $(".zip").inputmask("99.999-999");
+
+    $('#update_zip').on('click', function(){
+        $(".zip").focus();
+    });
+
+    var mask = 0;
+    $('.grade').focus(function () {
+        if (mask == 0) {
+            $('.grade').inputmask({mask: '[9][9][9].99', numericInput: true});
+            mask = 1;
+        }
+    });
+
+    $('.grade').click(function () {
+        if (mask == 0) {
+            $('.grade').inputmask({mask: '[9][9][9].99', numericInput: true});
+            mask = 1;
+        }
+    });
+
+
+    $(".money").maskMoney({thousands: '.', decimal: ',', affixesStay: false, allowZero: true});
+    //$(".time").maskMoney({thousands:'',decimal:',',affixesStay: false, allowZero: true});
+
+    $('[data-method]').append(function ()
+    {
+        var method;
+        if($(this).attr('data-method') != undefined || $(this).attr('data-method') != ""){
+            method = $(this).attr('data-method');
+        }else{
+            method = "POST";
+        }
+        //id do order
+        var orderid = $(this).attr('data-id');
+        var typeAlert = $(this).attr('data-alert');
+        var message = $(this).attr('data-message');
+        var name = null;
+        switch (typeAlert) {
+            case 'delete-order':
+                name = "delete_order";
+                break;
+            case 'send_email':
+                name = "send_email";
+                break;
+            case 'released_for_certification':
+                name = "released_for_certification";
+                break;
+            default:
+                name = "delete_item";
+                break;
+        }
+        return "\n" +
+                "<form action='" + $(this).attr('href') + "' method='"+method+"' data-id='" + orderid + "' data-message='" + message + "' name='" + name + "' style='display:none'>\n" +
+                "   <input type='hidden' name='_method' value='" + $(this).attr('data-method') + "'>\n" +
+                "   <input type='hidden' name='_token' value='" + $('meta[name="_token"]').attr('content') + "'>\n" +
+                "</form>\n"
+    })
+            .removeAttr('href')
+            .attr('style', 'cursor:pointer;')
+            .attr('onclick', '$(this).find("form").submit();');
+
+    /*
+     Generic are you sure dialog
+     */
+    $('form[name=delete_item]').submit(function () {
+        return confirm("Tem certeza que deseja excluir esse item?");
+    });
+
+    /**
+     * Todo fomulário que contém o nome
+     */
+    //Formulário para exclusao de pedidos
+    $('form[name=delete_order]')
+            .submit(function () {
+
+                console.log('Enviando para Google Analytcs' + ' Order:' + $(this).attr('data-id'));
+
+                //Se o atributo data-message ele exibe a messagem de data-message
+                if ($(this).attr('data-message') != undefined) {
+
+                    //Se o usuario confirmar a exclusão o pedido será retirado do google analitcs
+                    if (confirm($(this).attr('data-message'))) {
+                        //Pesquisando dados do pedido para exclusão do google analitcs
+                        $.ajax({
+                            url: "/admin/orders/" + $(this).attr('data-id'),
+                            method: 'GET'
+                        }).done(function (data) {
+
+                            //Recuperando informaçoes do pedido e itens
+                            var items = data[1];
+                            var transaction = data[0];
+                            ga('create', 'UA-78805304-1', 'auto', {'name': 'myTracker'});
+                            ga('myTracker.require', 'ecommerce');
+                            ga('myTracker.ecommerce:addTransaction', transaction);
+
+                            for (var i in items) {
+                                ga('myTracker.ecommerce:addItem', items[i]);
+                            }
+
+                            //Nao remove do google analitcs se estiver sendo executado em Localhost
+                            if (window.location.hostname != 'localhost') {
+                                ga('myTracker.ecommerce:send');
+                                console.log('Removed of Google Analitcs');
+                            } else {
+                                console.log('Not Removed of Google Analitcs because is LocalHost');
+                            }
+
+                        });
+                    } else {
+                        return false;
+                    }
+                }
+            });
+    /*
+     Generic are you sure dialog
+     */
+    $('form[name=send_email]').submit(function () {
+        if ($(this).attr('data-message') != undefined) {
+            return confirm($(this).attr('data-message'));
+        }
+        return confirm("Tem certeza que deseja enviar a mensagem para o(s) aluno(s)?");
+    });
+    
+    /*
+     Generic are you sure dialog
+     */
+    $('form[name=released_for_certification]').submit(function () {
+        if ($(this).attr('data-message') != undefined) {
+            return confirm($(this).attr('data-message'));
+        }
+        return confirm("Tem certeza que deseja enviar a mensagem para o(s) aluno(s)?");
+    });
+
+    /*
+     Bind all bootstrap tooltips
+     */
+    $("[data-toggle=\"tooltip\"]").tooltip();
+    $("[data-toggle=\"popover\"]").popover();
+    //This closes the popover when its clicked away from
+    $('body').on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+    });
+});
+
+function convertToSlug(str)
+{
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
+    str = str.toLowerCase();
+
+    // remove accents, swap ñ for n, etc
+    var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+    var to = "aaaaaeeeeeiiiiooooouuuunc------";
+    for (var i = 0, l = from.length; i < l; i++) {
+        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+            .replace(/\s+/g, '-') // collapse whitespace and replace by -
+            .replace(/-+/g, '-'); // collapse dashes
+
+    return str;
+}
+
+//Função geradoras de select2. O primeiro parâmetro pode ser tanto um nome quanto um seletor do campo no qual aplicará o jquery.
+//Caso um nome seja passado em selector, ele assumirá que o campo alvo possui a classe  nome-select
+//Opcionalmente, uma rota pode ser passada
+function createSelect(selector, route, modal, other_parameter) {
+
+    var target_route;
+    if (route == undefined) {
+        target_route = '/admin/' + selector + '/select';
+    } else {
+        target_route = route;
+    }
+
+    var param = other_parameter;
+    var $select_selector;
+
+    if (selector instanceof jQuery) {
+        $select_selector = selector;
+
+    } else {
+        $select_selector = $('.' + selector + '-select');
+    }
+    if (modal == undefined) {
+        $select_selector.select2({
+            minimumInputLength: 3,
+            ajax: {
+                type: 'POST',
+                url: target_route,
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                data: function (params) {
+                    if (param != undefined) {
+                        return{
+                            term: params.term,
+                            other: param,
+                        }
+                    }
+                    return {
+                        term: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {results: data};
+                }
+            }
+        });
+    } else {
+        $select_selector.select2({
+            minimumInputLength: 3,
+            dropdownParent: modal,
+            ajax: {
+                type: 'POST',
+                url: target_route,
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                data: function (params) {
+                    if (param != undefined) {
+                        return{
+                            term: params.term,
+                            other: param,
+                        }
+                    }
+                    return {
+                        term: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {results: data};
+                }
+            }
+        });
+    }
+}
+
+
+
+function generateUUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+    return uuid;
+}
+;
+
+
+function setRandom() {
+    $('#random_code').on('click', function () {
+        $('[name="code"]').val(generateUUID());
+    });
+}
+
+
+/*! AdminLTE app.js
+ * ================
+ * Main JS application file for AdminLTE v2. This file
+ * should be included in all pages. It controls some layout
+ * options and implements exclusive AdminLTE plugins.
+ *
+ * @Author  Almsaeed Studio
+ * @Support <http://www.almsaeedstudio.com>
+ * @Email   <support@almsaeedstudio.com>
+ * @version 2.0.5
+ * @license MIT <http://opensource.org/licenses/MIT>
+ */
+
+'use strict';
+
+//Make sure jQuery has been loaded before app.js
+if (typeof jQuery === "undefined") {
+    throw new Error("AdminLTE requires jQuery");
+}
+
+/* AdminLTE
+ *
+ * @type Object
+ * @description $.AdminLTE is the main object for the template's app.
+ *              It's used for implementing functions and options related
+ *              to the template. Keeping everything wrapped in an object
+ *              prevents conflict with other plugins and is a better
+ *              way to organize our code.
+ */
+$.AdminLTE = {};
+
+/* --------------------
+ * - AdminLTE Options -
+ * --------------------
+ * Modify these options to suit your implementation
+ */
+$.AdminLTE.options = {
+    //Add slimscroll to navbar menus
+    //This requires you to load the slimscroll plugin
+    //in every page before app.js
+    navbarMenuSlimscroll: true,
+    navbarMenuSlimscrollWidth: "3px", //The width of the scroll bar
+    navbarMenuHeight: "200px", //The height of the inner menu
+    //Sidebar push menu toggle button selector
+    sidebarToggleSelector: "[data-toggle='offcanvas']",
+    //Activate sidebar push menu
+    sidebarPushMenu: true,
+    //Activate sidebar slimscroll if the fixed layout is set (requires SlimScroll Plugin)
+    sidebarSlimScroll: true,
+    //BoxRefresh Plugin
+    enableBoxRefresh: true,
+    //Bootstrap.js tooltip
+    enableBSToppltip: true,
+    BSTooltipSelector: "[data-toggle='tooltip']",
+    //Enable Fast Click. Fastclick.js creates a more
+    //native touch experience with touch devices. If you
+    //choose to enable the plugin, make sure you load the script
+    //before AdminLTE's app.js
+    enableFastclick: true,
+    //Box Widget Plugin. Enable this plugin
+    //to allow boxes to be collapsed and/or removed
+    enableBoxWidget: true,
+    //Box Widget plugin options
+    boxWidgetOptions: {
+        boxWidgetIcons: {
+            //The icon that triggers the collapse event
+            collapse: 'fa fa-minus',
+            //The icon that trigger the opening event
+            open: 'fa fa-plus',
+            //The icon that triggers the removing event
+            remove: 'fa fa-times'
+        },
+        boxWidgetSelectors: {
+            //Remove button selector
+            remove: '[data-widget="remove"]',
+            //Collapse button selector
+            collapse: '[data-widget="collapse"]'
+        }
+    },
+    //Direct Chat plugin options
+    directChat: {
+        //Enable direct chat by default
+        enable: true,
+        //The button to open and close the chat contacts pane
+        contactToggleSelector: '[data-widget="chat-pane-toggle"]'
+    },
+    //Define the set of colors to use globally around the website
+    colors: {
+        lightBlue: "#3c8dbc",
+        red: "#f56954",
+        green: "#00a65a",
+        aqua: "#00c0ef",
+        yellow: "#f39c12",
+        blue: "#0073b7",
+        navy: "#001F3F",
+        teal: "#39CCCC",
+        olive: "#3D9970",
+        lime: "#01FF70",
+        orange: "#FF851B",
+        fuchsia: "#F012BE",
+        purple: "#8E24AA",
+        maroon: "#D81B60",
+        black: "#222222",
+        gray: "#d2d6de"
+    },
+    //The standard screen sizes that bootstrap uses.
+    //If you change these in the variables.less file, change
+    //them here too.
+    screenSizes: {
+        xs: 480,
+        sm: 768,
+        md: 992,
+        lg: 1200
+    }
+};
+
+/* ------------------
+ * - Implementation -
+ * ------------------
+ * The next block of code implements AdminLTE's
+ * functions and plugins as specified by the
+ * options above.
+ */
+$(function () {
+    //Easy access to options
+    var o = $.AdminLTE.options;
+
+    //Set up the object
+    _init();
+
+    //Activate the layout maker
+    $.AdminLTE.layout.activate();
+
+    //Enable sidebar tree view controls
+    $.AdminLTE.tree('.sidebar');
+
+    //Add slimscroll to navbar dropdown
+    if (o.navbarMenuSlimscroll && typeof $.fn.slimscroll != 'undefined') {
+        $(".navbar .menu").slimscroll({
+            height: "200px",
+            alwaysVisible: false,
+            size: "3px"
+        }).css("width", "100%");
+    }
+
+    //Activate sidebar push menu
+    if (o.sidebarPushMenu) {
+        $.AdminLTE.pushMenu(o.sidebarToggleSelector);
+    }
+
+    //Activate Bootstrap tooltip
+    if (o.enableBSToppltip) {
+        $(o.BSTooltipSelector).tooltip();
+    }
+
+    //Activate box widget
+    if (o.enableBoxWidget) {
+        $.AdminLTE.boxWidget.activate();
+    }
+
+    //Activate fast click
+    if (o.enableFastclick && typeof FastClick != 'undefined') {
+        FastClick.attach(document.body);
+    }
+
+    //Activate direct chat widget
+    if (o.directChat.enable) {
+        $(o.directChat.contactToggleSelector).click(function () {
+            var box = $(this).parents('.direct-chat').first();
+            box.toggleClass('direct-chat-contacts-open');
+        });
+    }
+
+    /*
+     * INITIALIZE BUTTON TOGGLE
+     * ------------------------
+     */
+    $('.btn-group[data-toggle="btn-toggle"]').each(function () {
+        var group = $(this);
+        $(this).find(".btn").click(function (e) {
+            group.find(".btn.active").removeClass("active");
+            $(this).addClass("active");
+            e.preventDefault();
+        });
+
+    });
+});
+
+/* ----------------------------------
+ * - Initialize the AdminLTE Object -
+ * ----------------------------------
+ * All AdminLTE functions are implemented below.
+ */
+function _init() {
+
+    /* Layout
+     * ======
+     * Fixes the layout height in case min-height fails.
+     *
+     * @type Object
+     * @usage $.AdminLTE.layout.activate()
+     *        $.AdminLTE.layout.fix()
+     *        $.AdminLTE.layout.fixSidebar()
+     */
+    $.AdminLTE.layout = {
+        activate: function () {
+            var _this = this;
+            _this.fix();
+            _this.fixSidebar();
+            $(window, ".wrapper").resize(function () {
+                _this.fix();
+                _this.fixSidebar();
+            });
+        },
+        fix: function () {
+            //Get window height and the wrapper height
+            var neg = $('.main-header').outerHeight() + $('.main-footer').outerHeight();
+            var window_height = $(window).height();
+            var sidebar_height = $(".sidebar").height();
+            //Set the min-height of the content and sidebar based on the
+            //the height of the document.
+            if ($("body").hasClass("fixed")) {
+                $(".content-wrapper, .right-side").css('min-height', window_height - $('.main-footer').outerHeight());
+            } else {
+                if (window_height >= sidebar_height) {
+                    $(".content-wrapper, .right-side").css('min-height', window_height - neg);
+                } else {
+                    $(".content-wrapper, .right-side").css('min-height', sidebar_height);
+                }
+            }
+        },
+        fixSidebar: function () {
+            //Make sure the body tag has the .fixed class
+            if (!$("body").hasClass("fixed")) {
+                if (typeof $.fn.slimScroll != 'undefined') {
+                    $(".sidebar").slimScroll({destroy: true}).height("auto");
+                }
+                return;
+            } else if (typeof $.fn.slimScroll == 'undefined' && console) {
+                console.error("Error: the fixed layout requires the slimscroll plugin!");
+            }
+            //Enable slimscroll for fixed layout
+            if ($.AdminLTE.options.sidebarSlimScroll) {
+                if (typeof $.fn.slimScroll != 'undefined') {
+                    //Distroy if it exists
+                    $(".sidebar").slimScroll({destroy: true}).height("auto");
+                    //Add slimscroll
+                    $(".sidebar").slimscroll({
+                        height: ($(window).height() - $(".main-header").height()) + "px",
+                        color: "rgba(0,0,0,0.2)",
+                        size: "3px"
+                    });
+                }
+            }
+        }
+    };
+
+    /* PushMenu()
+     * ==========
+     * Adds the push menu functionality to the sidebar.
+     *
+     * @type Function
+     * @usage: $.AdminLTE.pushMenu("[data-toggle='offcanvas']")
+     */
+    $.AdminLTE.pushMenu = function (toggleBtn) {
+        //Get the screen sizes
+        var screenSizes = this.options.screenSizes;
+
+        //Enable sidebar toggle
+        $(toggleBtn).click(function (e) {
+            e.preventDefault();
+
+            //Enable sidebar push menu
+            if ($(window).width() > (screenSizes.sm - 1)) {
+                $("body").toggleClass('sidebar-collapse');
+            }
+            //Handle sidebar push menu for small screens
+            else {
+                if ($("body").hasClass('sidebar-open')) {
+                    $("body").removeClass('sidebar-open');
+                    $("body").removeClass('sidebar-collapse')
+                } else {
+                    $("body").addClass('sidebar-open');
+                }
+            }
+        });
+
+        $(".content-wrapper").click(function () {
+            //Enable hide menu when clicking on the content-wrapper on small screens
+            if ($(window).width() <= (screenSizes.sm - 1) && $("body").hasClass("sidebar-open")) {
+                $("body").removeClass('sidebar-open');
+            }
+        });
+
+    };
+
+    /* Tree()
+     * ======
+     * Converts the sidebar into a multilevel
+     * tree view menu.
+     *
+     * @type Function
+     * @Usage: $.AdminLTE.tree('.sidebar')
+     */
+    $.AdminLTE.tree = function (menu) {
+        var _this = this;
+
+        $("li a", $(menu)).click(function (e) {
+            //Get the clicked link and the next element
+            var $this = $(this);
+            var checkElement = $this.next();
+
+            //Check if the next element is a menu and is visible
+            if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
+                //Close the menu
+                checkElement.slideUp('normal', function () {
+                    checkElement.removeClass('menu-open');
+                    //Fix the layout in case the sidebar stretches over the height of the window
+                    //_this.layout.fix();
+                });
+                checkElement.parent("li").removeClass("active");
+            }
+            //If the menu is not visible
+            else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
+                //Get the parent menu
+                var parent = $this.parents('ul').first();
+                //Close all open menus within the parent
+                var ul = parent.find('ul:visible').slideUp('normal');
+                //Remove the menu-open class from the parent
+                ul.removeClass('menu-open');
+                //Get the parent li
+                var parent_li = $this.parent("li");
+
+                //Open the target menu and add the menu-open class
+                checkElement.slideDown('normal', function () {
+                    //Add the class active to the parent li
+                    checkElement.addClass('menu-open');
+                    parent.find('li.active').removeClass('active');
+                    parent_li.addClass('active');
+                    //Fix the layout in case the sidebar stretches over the height of the window
+                    _this.layout.fix();
+                });
+            }
+            //if this isn't a link, prevent the page from being redirected
+            if (checkElement.is('.treeview-menu')) {
+                e.preventDefault();
+            }
+        });
+    };
+
+    /* BoxWidget
+     * =========
+     * BoxWidget is plugin to handle collapsing and
+     * removing boxes from the screen.
+     *
+     * @type Object
+     * @usage $.AdminLTE.boxWidget.activate()
+     *        Set all of your option in the main $.AdminLTE.options object
+     */
+    $.AdminLTE.boxWidget = {
+        activate: function () {
+            var o = $.AdminLTE.options;
+            var _this = this;
+            //Listen for collapse event triggers
+            $(o.boxWidgetOptions.boxWidgetSelectors.collapse).click(function (e) {
+                e.preventDefault();
+                _this.collapse($(this));
+            });
+
+            //Listen for remove event triggers
+            $(o.boxWidgetOptions.boxWidgetSelectors.remove).click(function (e) {
+                e.preventDefault();
+                _this.remove($(this));
+            });
+        },
+        collapse: function (element) {
+            //Find the box parent
+            var box = element.parents(".box").first();
+            //Find the body and the footer
+            var bf = box.find(".box-body, .box-footer");
+            if (!box.hasClass("collapsed-box")) {
+                //Convert minus into plus
+                element.children(".fa-minus").removeClass("fa-minus").addClass("fa-plus");
+                bf.slideUp(300, function () {
+                    box.addClass("collapsed-box");
+                });
+            } else {
+                //Convert plus into minus
+                element.children(".fa-plus").removeClass("fa-plus").addClass("fa-minus");
+                bf.slideDown(300, function () {
+                    box.removeClass("collapsed-box");
+                });
+            }
+        },
+        remove: function (element) {
+            //Find the box parent
+            var box = element.parents(".box").first();
+            box.slideUp();
+        },
+        options: $.AdminLTE.options.boxWidgetOptions
+    };
+}
+
+/* ------------------
+ * - Custom Plugins -
+ * ------------------
+ * All custom plugins are defined below.
+ */
+
+/*
+ * BOX REFRESH BUTTON
+ * ------------------
+ * This is a custom plugin to use with the compenet BOX. It allows you to add
+ * a refresh button to the box. It converts the box's state to a loading state.
+ *
+ * @type plugin
+ * @usage $("#box-widget").boxRefresh( options );
+ */
+(function ($) {
+
+    $.fn.boxRefresh = function (options) {
+
+        // Render options
+        var settings = $.extend({
+            //Refressh button selector
+            trigger: ".refresh-btn",
+            //File source to be loaded (e.g: ajax/src.php)
+            source: "",
+            //Callbacks
+            onLoadStart: function (box) {
+            }, //Right after the button has been clicked
+            onLoadDone: function (box) {
+            } //When the source has been loaded
+
+        }, options);
+
+        //The overlay
+        var overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
+
+        return this.each(function () {
+            //if a source is specified
+            if (settings.source === "") {
+                if (console) {
+                    console.log("Please specify a source first - boxRefresh()");
+                }
+                return;
+            }
+            //the box
+            var box = $(this);
+            //the button
+            var rBtn = box.find(settings.trigger).first();
+
+            //On trigger click
+            rBtn.click(function (e) {
+                e.preventDefault();
+                //Add loading overlay
+                start(box);
+
+                //Perform ajax call
+                box.find(".box-body").load(settings.source, function () {
+                    done(box);
+                });
+            });
+        });
+
+        function start(box) {
+            //Add overlay and loading img
+            box.append(overlay);
+
+            settings.onLoadStart.call(box);
+        }
+
+        function done(box) {
+            //Remove overlay and loading img
+            box.find(overlay).remove();
+
+            settings.onLoadDone.call(box);
+        }
+
+    };
+
+})(jQuery);
+
+/*
+ * TODO LIST CUSTOM PLUGIN
+ * -----------------------
+ * This plugin depends on iCheck plugin for checkbox and radio inputs
+ *
+ * @type plugin
+ * @usage $("#todo-widget").todolist( options );
+ */
+(function ($) {
+
+    $.fn.todolist = function (options) {
+        // Render options
+        var settings = $.extend({
+            //When the user checks the input
+            onCheck: function (ele) {
+            },
+            //When the user unchecks the input
+            onUncheck: function (ele) {
+            }
+        }, options);
+
+        return this.each(function () {
+
+            if (typeof $.fn.iCheck != 'undefined') {
+                $('input', this).on('ifChecked', function (event) {
+                    var ele = $(this).parents("li").first();
+                    ele.toggleClass("done");
+                    settings.onCheck.call(ele);
+                });
+
+                $('input', this).on('ifUnchecked', function (event) {
+                    var ele = $(this).parents("li").first();
+                    ele.toggleClass("done");
+                    settings.onUncheck.call(ele);
+                });
+            } else {
+                $('input', this).on('change', function (event) {
+                    var ele = $(this).parents("li").first();
+                    ele.toggleClass("done");
+                    settings.onCheck.call(ele);
+                });
+            }
+        });
+    };
+}(jQuery));
+
+function modalGroupQuestionChangeSequence( group_question_id) {
+    $("#group_question_id").val(group_question_id);
+    $("#modalGroupQuestionChangeSequence").modal('toggle');
+}
+
+
+
+$(document).ready(function () {
+
+    function deleteAggregatedExamToCourse(course_id, exam_id) {
+        console.log('click ok');
+
+        $.ajax({
+            type: "DELETE",
+            url: '/admin/courses/remove-aggregate-course/' + course_id + '/' + exam_id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+                //Recuperando a lista de Exams associados e atualizando a view
+                getExamsAggregatedInCourse(course_id);
+            }
+        });
+    }
+
+    add_edit_course_questions();
+});
+if ($("#course").length > 0) {
+    add_course_teachers();
+    add_course_material();
+    $("#dynamic-flash").css("transition", "opacity 3s ease-in-out");
+    $("#dynamic-flash").css("-moz-transition", "opacity 3s ease-in-out");
+    $("#dynamic-flash").css("-webkit-transition", "opacity 3s ease-in-out");
+    $("#dynamic-flash").css("-o-transition", "opacity 3s ease-in-out");
+}
+
+
+
+function add_course_material() {
+    $("#add-course-material").on('click', function () {
+
+        $("#course-material-form").show();
+    });
+    remove_course_material();
+    save_course_material();
+}
+
+function add_course_teachers() {
+
+    $(".remove-course-teacher").click(function () {
+
+        $(this).parent().parent().css("display", "none");
+        $.ajax({
+            type: "POST",
+            url: "/admin/courses/remove-course-teacher",
+            data: {
+                "course": $("#course_id").val(),
+                "teacher": $(this).parent().parent().find(".course-teachers-select").val()
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+                console.log($(this).parent().parent());
+                $(this).parent().parent().remove();
+                flash_success("Professor excluído com sucesso!");
+            }
+
+        });
+    });
+    $("#calculate-percentage-teacher").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/admin/courses/totalizeTeachers",
+            data: {
+                "course": $("#course_id").val()
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+                $("#course-teachers").html(data);
+                //$('#add-videos-' + lesson_id).html(data);
+                //$('#add-videos-'+ selectedLesson).html(data);
+                flash_success("Totalização concluida");
+            }
+
+        });
+    });
+    $("#save-course-teachers").click(function () {
+        var teachers_map = {};
+        var total_percentage = 0;
+        $("[name |='course-teacher-name']").each(function (index) {
+            var teacher_id = $(this).val();
+            var teacher_percentage = $(this).parent().parent().find(".course-teacher-percentage").val();
+            teacher_percentage = teacher_percentage.replace(',', '.');
+            total_percentage += +teacher_percentage;
+            teachers_map[teacher_id] = teacher_percentage;
+        });
+        if (total_percentage > 100) {
+            flash_danger("Soma das porcentagens superior a 100%");
+            return;
+        }
+
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/courses/updatecourseteachers",
+            data: {"teachers": teachers_map,
+                "course": $("#course_id").val()
+
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+                //$('#add-videos-' + lesson_id).html(data);
+                //$('#add-videos-'+ selectedLesson).html(data);
+                flash_success("Professores salvos com sucesso");
+            }
+
+        });
+    });
+    $(".add-course-teacher").off("click").on("click", function () {
+        var newFormTeachers;
+        var sizeDivsTeachers;
+        var newFieldTeachers;
+        var i = 0;
+        // newFormTeachers = $(this).closest('.form-teachers').clone(true);
+
+
+        newFormTeachers = $('.form-course-teachers').last().clone(true);
+        console.log(newFormTeachers);
+        $('.form-course-teachers').last().after(newFormTeachers);
+        sizeDivsTeachers = $('#course-teachers-fields').children.length + i;
+        newFieldTeachers = $('.form-course-teachers').last();
+        $('[name|="course-teacher-name"]').last().attr('name', 'course-teacher-name-' + sizeDivsTeachers);
+        $('[name|="course-teacher-name"]').last().attr('id', 'course-teacher-name-' + sizeDivsTeachers);
+        newFieldTeachers.attr('name', 'course-teachers-name-' + sizeDivsTeachers);
+        newFieldTeachers.val('');
+        $("label[for=name]").last().text('Professor ' + sizeDivsTeachers);
+        i++;
+    });
+}
+
+function add_module_edit() {
+    $(".edit-module").click(function () {
+
+        if (!$(this).parent().hasClass("selected")) {
+            $(this).parent().click();
+        }
+        var target_id = $(this).data("target-id");
+        var checkExist = setInterval(function () {
+
+
+            if ($("#lessons").data("selected-module") == target_id) {
+                $("#lessons-tab").click();
+                clearInterval(checkExist);
+            }
+        }, 100);
+    });
+}
+
+function createModuleTable() {
+    $(".nav-tabs").on("click", "a", function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+            .on("click", "span", function () {
+                var anchor = $(this).siblings('a');
+                $(anchor.attr('href')).remove();
+                $(this).parent().remove();
+                $(".nav-tabs li").children('a').first().click();
+            });
+    var post = {};
+    post.name = $(this).closest('.form-input').children('.form-control').val();
+    var table = $('#module-table').DataTable({
+        "initComplete": function (settings, json) {
+            add_module_edit();
+            add_delete_module();
+        },
+        "processing": true,
+        "columnDefs": [
+            {"visible": false, "targets": [0, 2]}
+        ],
+        "ajax": {
+            "url": "/admin/courses/" + $("#course_id").val() + "/datatables",
+            "type": "POST",
+            "headers": {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+        },
+        "serverSide": true,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.9/i18n/Portuguese-Brasil.json'
+        },
+    });
+    $('.add-module').click(function (e) {
+        e.preventDefault();
+        var post = {};
+        //post.name = $(this).closest('.form-input').children('.form-control').val();
+        post.name = $(this).parent().find('input').val();
+        post.course_id = $("#course_id").val();
+        var parent_div = $(this).parent();
+        var newFormGroup = $(this).closest('.form-group').clone(true);
+        $('#fields .form-group').last().after(newFormGroup);
+        newField = $('#fields .form-control').last();
+        newField.attr('name', 'module-name');
+        newField.val('');
+        newField.focus();
+        $("label[for=name]").last().text('Nova disciplina');
+        $.ajax({
+            type: "POST",
+            url: '/admin/courses/modules',
+            data: {name: post.name,
+                course_id: post.course_id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+                try {
+                    var newRow = $.parseJSON(data);
+                    parent_div.remove();
+                    table.draw(false);
+                    add_module_edit();
+                    add_delete_module();
+                } catch (e) {
+                    if ("error" in data) {
+                        flash_danger(data["error"]);
+                    }
+                }
+            }
+        });
+    });
+
+    $('.event_aggregate-saap').click(function () {
+        var courseID = $('#aggregate-saap_li').attr('course-id');
+        getExamsAggregatedInCourse(courseID);
+    });
+
+    $('.aggregate-saap-to-course').click(function (e) {
+        e.preventDefault();
+        var post = {};
+        //post.name = $(this).closest('.form-input').children('.form-control').val();
+
+        post.course_id_bought = $("#course_id").val();
+        post.exam_id_extra = $("#exam_id option:selected").val();
+        post.exam_title = $("#exam_id option:selected").text();
+        $.ajax({
+            type: "POST",
+            url: '/admin/courses/aggregate-course',
+            data: {
+                course_id_bought: post.course_id_bought,
+                exam_id_extra: post.exam_id_extra,
+                exam_title: post.exam_title
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+                try {
+                    var btnExcluir = '<i class="delete-aggregation-exam-of-course fa fa-times" onClick="deleteAggregatedExamToCourse(' + post.course_id_bought + ',' + post.exam_id_extra + ')" style="color:red; cursor: pointer"></i>';
+                    $('#aggregated-saap-table tr:last').after('<tr><td>' + post.exam_title + '</td><td>' + btnExcluir + '</td></tr>');
+                } catch (e) {
+                    if ("error" in data) {
+                        flash_danger(data["error"]);
+                    }
+                }
+            }
+        });
+    });
+    function getExamsAggregatedInCourse(_course_id) {
+
+        $.ajax({
+            type: "GET",
+            url: '/admin/courses/aggregate-course/' + _course_id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+                var info = JSON.parse(data);
+                try {
+                    for (i = 0; i < info.length; i++) {
+                        var btnExcluir = '<i class="delete-aggregation-exam-of-course fa fa-times" onClick="deleteAggregatedExamToCourse(' + _course_id + ',' + info[i].id + ')" style="color:red; cursor: pointer"></i>';
+                        $('#aggregated-saap-table tr:last').after('<tr><td>' + info[i].title + '</td><td>' + btnExcluir + '</td></tr>');
+                    }
+                } catch (e) {
+                    if ("error" in data) {
+                        flash_danger(data["error"]);
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+    $("[name|='module-name']").on('keypress', function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $(this).parent().next('.add-module').click();
+        }
+
+    });
+    $("[name|='lesson-group']").children().on('keypress', function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $(this).next('.add-lesson').click();
+        }
+
+    });
+    var tableLessons;
+    var selectedModule;
+    $('#module-table tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+
+
+            $("#lessons-tab").not("[href='#lessons']").attr("data-toggle", "tab");
+            $("#lessons-tab").not("[href='#lessons']").attr("href", "#lessons");
+            $("#lessons-tab").not("[class='']").parent().attr("class", "");
+            table.$('tr.selected').removeClass('selected');
+            if (tableLessons != null) {
+                tableLessons.destroy();
+            }
+            $(this).addClass('selected');
+            $(".dynamic-tab").remove();
+            selectedModule = table.row(this).data()[0];
+            add_new_tab('edit-module', table.row(this).data()[1], "Edição ", "#edit-module");
+            //TODO: colocar conteúdo aqui
+
+            add_tab_content('/admin/courses/editmodule', {module_id: table.row(this).data()[0]}, 'edit-module', function () {
+                $("#save-module").off('click').on('click', function () {
+                    post_form(selectedModule, "edit-module", 'updatemodule');
+                    $("#module-table").DataTable().ajax.reload(function () {
+                        add_delete_module();
+                    });
+                    $("#module-table").on('draw.dt', function () {
+                        add_delete_module();
+                    });
+                });
+            });
+            tableLessons = $('#lessons-table').DataTable({
+                "processing": true,
+                "columnDefs": [
+                    {"visible": false, "targets": 0}
+                ],
+                "initComplete": function (settings, json) {
+                    console.log("selected" + selectedModule);
+                    add_delete_lesson();
+                    $("#lessons-table").on('draw.dt', function () {
+                        console.log('enter');
+                        add_delete_lesson();
+                        add_edit_questions();
+                    });
+                    add_edit_questions();
+                    $('.tags-select').select2({
+                        tags: true,
+                        minimumInputLength: 3,
+                        ajax: {
+                            type: 'POST',
+                            url: '/admin/tags/select',
+                            dataType: 'json',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            },
+                            data: function (params) {
+                                return {
+                                    term: params.term
+                                };
+                            },
+                            processResults: function (data) {
+                                return {results: data};
+                            }
+                        }
+                    });
+                },
+                "ajax": {
+                    "url": "/admin/courses/" + selectedModule + "/lessons",
+                    "type": "POST",
+                    "headers": {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                },
+                "serverSide": true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.10.9/i18n/Portuguese-Brasil.json'
+                }
+            });
+            update_sequence("lesson-sequence", selectedModule);
+            $("#lessons").data("selected-module", selectedModule);
+            $('#lessons-table tbody').dblclick(function
+                    () {
+                $(".nav-tabs li").children('a').last().click();
+            })
+
+
+
+
+
+
+        }
+    });
+    var selectedLesson;
+    $("#lessons-table").on('click', 'tr', function () {
+
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            tableLessons.$('tr.selected').removeClass('selected');
+            $(".dynamic-tab").remove();
+            $(this).addClass('selected');
+            selectedLesson = tableLessons.row(this).data()[0];
+            var nextTab = $('.nav-tabs li').size() + 1;
+            var lesson_name = tableLessons.row(this).data()[1];
+            if (lesson_name == null || lesson_name == '') {
+                lesson_name = tableLessons.row(this).data()[2];
+            }
+
+
+            add_new_tab('edit-lesson', lesson_name, "Edição ", "#edit-lesson");
+            add_tab_content('/admin/courses/editlessons', {lesson_id: tableLessons.row(this).data()[0]}, 'edit-lesson', function () {
+                $("#save-lesson").off('click').on('click', function () {
+                    post_form(selectedLesson, "edit-lesson", 'updatelesson');
+                    $("#lessons-table").DataTable().ajax.reload(function () {
+                        add_delete_lesson();
+                        add_edit_questions();
+                    });
+                    $("#lessons-table").on('draw.dt', function () {
+                        add_delete_lesson();
+                        add_edit_questions();
+                    });
+                });
+            });
+            nextTab++;
+            add_new_tab('video', lesson_name, 'Vídeos', "#add-videos");
+            add_tab_content('/admin/courses/editvideos', {lesson_id: tableLessons.row(this).data()[0]}, 'add-videos', function () {
+
+                save_videos(selectedLesson, $("#save-videos"));
+                $(".content-preview").click(function () {
+                    $("#vimeoPreviewModal").modal('toggle');
+                    var content = $(this).parent().parent().find(".content-url").val();
+                    if (content.startsWith('vimeo:')) {
+                        content = 'https://player.vimeo.com/video/' + content.substring(6);
+                    }
+
+                    $("#vimeo-preview").attr('src', content);
+                });
+            });
+            nextTab++;
+            add_teachers(selectedLesson, lesson_name);
+            nextTab++;
+            add_material(selectedLesson, lesson_name);
+        }
+    });
+    $('.add-lesson').click(function (e) {
+        e.preventDefault();
+        var module_id = selectedModule;
+        var name_input = $(this).parent().parent().find("[name|='lesson-name']").val();
+        var sequence_input = $(this).parent().parent().find("[name|='lesson-sequence']").val();
+        var duration_input = $(this).parent().parent().find("[name|='lesson-name']").val();
+        var parent_div = $(this).parent().parent();
+        $.ajax({
+            type: "POST",
+            url: '/admin/courses/addlessons',
+            data: {module_id: module_id,
+                title: name_input,
+                sequence: sequence_input,
+                duration: duration_input
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+
+                var new_div = parent_div.clone(true);
+                clear_form_elements(new_div);
+                var last_div = $(".lesson-fields").last();
+                console.log("[name='" + new_div.attr('name') + "']");
+                console.log(last_div.find("[name='lesson-sequence']").val());
+                console.log(last_div);
+                new_div.find("lesson-box [name|='lesson-sequence']").val(last_div.find("[name='lesson-sequence']").val());
+                last_div.after(new_div);
+                parent_div.remove();
+                var newRow = $.parseJSON(data);
+                tableLessons.draw(false);
+            }
+        });
+    });
+    $("#unblock-course").on('click', function () {
+        verify_unblock();
+    });
+    // create_new_field_dynamic($("[name|='module-name']"),'module','Atividade',2);
+}
+
+
+
+function add_new_tab(id, name, type, link) {
+    var tab_id = '#' + id + "-tab";
+    if ($(tab_id).length <= 0)
+        $('<li><a id="' + tab_id + '" href="' + link + '" class="dynamic-tab" data-toggle="tab">' + type + ' de ' + name + '</a></li>').appendTo('.nav-tabs');
+    else {
+        $(tab_id).attr("href", link);
+        $(tab_id).text(type + 'de ' + name);
+    }
+
+}
+
+function add_tab_content(url, parameter_data, id, callback) {
+    var content_id = "#" + id;
+    console.log('content_id:' + content_id);
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: parameter_data,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        cache: false,
+        success: function (data) {
+
+            if ($(content_id).length <= 0) {
+
+                var $appended = $('<div class="tab-pane" id="' + id + '">' + data + '</div>').appendTo('.tab-content');
+                remove_changed_attribute($appended.attr('id'));
+                change_watcher($appended.attr('id'));
+            } else {
+                $(content_id).html(data);
+                remove_changed_attribute(content_id);
+                change_watcher(content_id);
+            }
+
+            callback();
+        }
+    });
+}
+
+
+function add_delete_lesson() {
+    $(".delete-lesson").off('click').click(function () {
+
+        if (confirm("Tem certeza que deseja excluir esse item?")) {
+            $.ajax({
+                "type": "POST",
+                url: '/admin/courses/remove-lesson',
+                data: {lesson: $(this).data("target-id")
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                cache: false,
+                success: function (data) {
+                    $("#lessons-table").DataTable().ajax.reload(function () {
+
+                        add_delete_lesson();
+                        add_edit_questions();
+                    });
+                    $("#lessons-table").on('draw.dt', function () {
+                        add_delete_lesson();
+                        add_edit_questions();
+                    });
+                    if (data == 'true') {
+                        flash_success('Aula excluída com sucesso!')
+                    } else if (data == 'full') {
+                        flash_danger("Há alunos cursando essa aula.")
+                    } else {
+                        flash_danger("Não foi possível excluir a aula");
+                    }
+                }
+            });
+            // $("#module-table").
+
+        }
+    });
+}
+
+
+
+
+function add_course_edit_questions() {
+    $(".create-course-questions").click(function () {
+        $("courseGroupSubjectModal").find("*").addBack().off();
+        $.ajax({
+            url: "/admin/courses/create-group",
+            type: "POST",
+            data: {
+                'course': $(this).data('')
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+            }
+        });
+    });
+}
+
+
+
+
+function add_edit_questions() {
+    $(".create-questions").click(function () {
+
+        $("#groupSubjectModal").find("*").addBack().off();
+        $.ajax({
+            url: "/admin/courses/create-group",
+            type: "POST",
+            data: {
+                'lesson': $(this).data("target-id")
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+                $("#groupSubjectModal").html(data);
+                $("#groupSubjectModal").modal('toggle');
+                $("#groupSubjectModal").on('shown.bs.modal', function () {
+
+                    createSelect("subject", undefined, $("#groupSubjectModal"));
+                    add_save_relation_event();
+                    $("#add-subject").off('click').click(function () {
+                        $(".subject-select").select2("destroy").end();
+                        $(".subject-question-row").last().after($(".subject-question-row").first().clone());
+                        $(".subject-select").last().val("");
+                        createSelect("subject", undefined, $("#groupSubjectModal"));
+                        $(".delete-relation").find("*").addBack().off();
+                        $(".delete-relation").click(function () {
+                            $(this).parent().parent().remove();
+                        });
+                    });
+                    $(".delete-relation").click(function () {
+                        $(this).parent().parent().remove();
+                    });
+                });
+            }
+        });
+    });
+}
+
+
+
+function add_save_relation_event() {
+    $("#save-relation").click(function () {
+
+        $.ajax({
+            url: "/admin/courses/save-lesson-group",
+            type: "POST",
+            data: {
+                fields: $("#group-form").serialize(),
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+                $("#groupSubjectLabel").css('display', 'none');
+                $("#savedGroupLabel").css('display', 'block');
+                setTimeout(function () {
+                    $("#groupSubjectLabel").css('display', 'block');
+                    $("#savedGroupLabel").css('display', 'none');
+                }, 3000);
+            }
+        });
+    });
+}
+
+
+
+function add_edit_course_questions() {
+    createSelect("subject-course", undefined);
+    add_save_course_relation_event();
+    $("#add-course-subject").off('click').click(function () {
+        $(".subject-course-select").select2("destroy").end();
+        $(".subject-course-question-row").last().after($(".subject-course-question-row").first().clone());
+        $(".subject-course-select").last().val("");
+        $("[name='question_count[]']").last().val(0);
+        createSelect("subject-course", undefined);
+        $(".delete-course-relation").find("*").addBack().off();
+        $(".delete-course-relation").click(function () {
+            $(this).parent().parent().remove();
+        });
+    });
+    $(".delete-course-relation").click(function () {
+        $(this).parent().parent().remove();
+    });
+    $(".create-course-questions").click(function () {
+
+        $("#courseQuestionModal").find("*").addBack().off();
+    });
+}
+
+
+
+function add_save_course_relation_event() {
+    $("#save-course-relation").click(function () {
+        if ($("#course-group-duration").val() == "") {
+            flash_danger("É obrigatório informar a duração da avaliação!")
+        } else if (isNaN($("#course-group-duration").val())) {
+            flash_danger("Duração inválida! Informe um número válido no campo");
+        } else {
+
+            $(this).text('Salvando...');
+            if ($("#group-course-form").data("saved") == false) {
+                console.log($("#save-course-relation").data("target-id"));
+                $.ajax({
+                    url: "/admin/courses/create-course-group",
+                    type: "POST",
+                    data: {
+                        'course': $("#save-course-relation").data("target")
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    cache: false,
+                    success: function (data) {
+
+                        $.ajax({
+                            url: "/admin/courses/save-course-group",
+                            type: "POST",
+                            data: {
+                                fields: $("#group-course-form").serialize(),
+                                'course-group-id': data,
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            },
+                            cache: false,
+                            success: function (data) {
+                                $("#groupCourseSubjectLabel").css('display', 'none');
+                                $("#savedGroupCourseLabel").css('display', 'block');
+                                setTimeout(function () {
+                                    $("#groupCourseSubjectLabel").css('display', 'block');
+                                    $("#savedGroupCourseLabel").css('display', 'none');
+                                    flash_success('Grupo foi criado com sucesso!');
+                                    $("#save-course-relation").text('Salvar');
+                                }, 3000);
+                            }
+                        });
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: "/admin/courses/save-course-group",
+                    type: "POST",
+                    data: {
+                        fields: $("#group-course-form").serialize(),
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    cache: false,
+                    success: function (data) {
+                        $("#groupCourseSubjectLabel").css('display', 'none');
+                        $("#savedGroupCourseLabel").css('display', 'block');
+                        setTimeout(function () {
+                            $("#groupCourseSubjectLabel").css('display', 'block');
+                            $("#savedGroupCourseLabel").css('display', 'none');
+                            flash_success('Grupo foi atualizado com sucesso!');
+                            $("#save-course-relation").text('Salvar');
+                        }, 3000);
+                    }
+                });
+            }
+
+
+        }
+    });
+}
+
+
+
+
+function remove_material() {
+    $(".remove-material").on('click', function () {
+        var removed_item = $(this);
+        $.ajax({
+            type: "POST",
+            url: '/admin/courses/remove-material',
+            data: {content: $(this).data('content')
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+                $(removed_item).parent().remove();
+            }
+
+        });
+    });
+}
+
+
+
+function add_material(selectedLesson, lesson_name) {
+
+
+    add_new_tab('material', lesson_name, "Materiais ", "#add-material");
+    add_tab_content('/admin/courses/material', {lesson_id: selectedLesson}, 'add-material', function () {
+
+        $("#add-material").on('click', function () {
+
+            $("#material-form").show();
+        });
+        remove_material();
+        save_material();
+    });
+}
+
+
+
+function save_material() {
+
+
+    console.log('enter the submit');
+    $("#material-form").submit(function (event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: '/admin/courses/savematerial',
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                alert(data)
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+
+                var li;
+                if (result["extension"] == '.pdf') {
+                    li = '<li class="fa fa-file-pdf-o">';
+                } else if (result["extension"] == '.pps') {
+                    li = '<li class="fa fa-file-powerpoint-o" >';
+                } else if (result["extension"] == '.doc' || result["extension"] == '.docx') {
+                    li = '<li class="fa fa-file-word-o" >';
+                } else if (result["extension"] == '.png' || result["extension"] == '.jpg' || result["extension"] == 'jpeg') {
+                    li = '<li class= "fa fa-file-image-o" >';
+                } else {
+                    li = '<li class="fa fa-file" >';
+                }
+                li = li + '<a name="material-file"  data-id="' + result['id'] + '" data-url="' + result['url'] + '" href="/' + result['url'] + '">' + result['choosen'] + '</a> <a type="button" class="fa fa-times remove-material" data-content="' + result['id'] + '" style="color:red"></a></li>';
+                $("#content-files").append(li + "<br/>");
+                $("#material-name").val("");
+                remove_material();
+            }
+        });
+        return false;
+    });
+}
+
+function save_course_material() {
+    $("#course-material-form").submit(function (event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: '/admin/courses/savecoursematerial',
+            type: 'POST',
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+
+                var li;
+                if (result["extension"] == '.pdf') {
+                    li = '<li class="fa fa-file-pdf-o">';
+                } else if (result["extension"] == '.pps') {
+                    li = '<li class="fa fa-file-powerpoint-o" >';
+                } else if (result["extension"] == '.doc' || result["extension"] == '.docx') {
+                    li = '<li class="fa fa-file-word-o" >';
+                } else if (result["extension"] == '.png' || result["extension"] == '.jpg' || result["extension"] == 'jpeg') {
+                    li = '<li class= "fa fa-file-image-o" >';
+                } else {
+                    li = '<li class="fa fa-file" >';
+                }
+                li = li + '<a name="course-material-file"  data-id="' + result['id'] + '" data-url="' + result['url'] + '" href="/' + result['url'] + '">' + result['choosen'] + '</a> <a type="button" class="fa fa-times remove-material" data-content="' + result['id'] + '" style="color:red"></a></li>';
+                $("#course-content-files").append(li + "<br/>");
+                $("#course-material-name").val("");
+                remove_course_material();
+            }
+        });
+        return false;
+    });
+}
+
+function remove_course_material() {
+    $(".remove-course-material").on('click', function () {
+        var removed_item = $(this);
+        $.ajax({
+            type: "POST",
+            url: '/admin/courses/remove-course-material',
+            data: {'course-content': $(this).data('content')
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+                $(removed_item).parent().remove();
+            }
+
+        });
+    });
+}
+
+function add_teachers(selectedLesson, lesson_name) {
+
+
+    add_new_tab('teacher-percentage', lesson_name, "Professores ", "#add-teachers");
+    add_tab_content('/admin/courses/editteachers', {lesson_id: selectedLesson}, 'add-teachers', function () {
+
+        save_teachers(selectedLesson, $("#save-teachers"), $("[name|=teacher-name]"));
+        $('.teachers-select').select2({
+            width: 'resolve',
+            minimumInputLength: 3,
+            ajax: {
+                type: 'POST',
+                url: '/admin/teachers/select',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                data: function (params) {
+                    return {
+                        term: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {results: data};
+                }
+            }
+        });
+        $(".equal-divide").click(function () {
+            equal_percentage(sizeDivsTeachers, $("[name|='teacher-percentage']"));
+        });
+        $(".remove-lesson-teacher").click(function () {
+
+            $(this).parent().parent().css("display", "none");
+            $.ajax({
+                type: "POST",
+                url: "/admin/courses/remove-lesson-teacher",
+                data: {
+                    "lesson": selectedLesson,
+                    "teacher": $(this).parent().parent().find(".teachers-select").val()
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                cache: false,
+                success: function (data) {
+                    console.log($(this).parent().parent());
+                    $(this).parent().parent().remove();
+                    flash_success("Professor excluído com sucesso!");
+                }
+
+            });
+        });
+        var newFormTeachers;
+        var sizeDivsTeachers;
+        var newFieldTeachers;
+        var i = 0;
+        $(".add-teacher").off("click").on("click", function () {
+
+            // newFormTeachers = $(this).closest('.form-teachers').clone(true);
+
+            $('.teachers-select').last().select2("destroy");
+            newFormTeachers = $('.form-teachers').last().clone(true);
+            $('.teachers-select').last().select2({
+                width: 'resolve',
+                minimumInputLength: 3,
+                ajax: {
+                    type: 'POST',
+                    url: '/admin/teachers/select',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    data: function (params) {
+                        return {
+                            term: params.term
+                        };
+                    },
+                    processResults: function (data) {
+
+                        return {results: data};
+                    }
+                }
+            });
+            $('.form-teachers').last().after(newFormTeachers);
+            sizeDivsTeachers = $('#teachers-fields').children.length + i;
+            newFieldTeachers = $('.form-teachers').last();
+            $('[name|="teacher-name"]').last().attr('name', 'teacher-name-' + sizeDivsTeachers);
+            $('[name|="teacher-name"]').last().attr('id', 'teacher-name-' + sizeDivsTeachers);
+            newFieldTeachers.attr('name', 'teachers-name-' + sizeDivsTeachers);
+            newFieldTeachers.val('');
+            $("label[for=name]").last().text('Professor ' + sizeDivsTeachers);
+            i++;
+            $('.teachers-select').last().select2({
+                width: 'resolve',
+                minimumInputLength: 3,
+                ajax: {
+                    type: 'POST',
+                    url: '/admin/teachers/select',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    data: function (params) {
+                        return {
+                            term: params.term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {results: data};
+                    }
+                }
+            });
+        });
+    });
+}
+
+
+
+function create_new_field_dynamic(field, portuguese_name, english_name, initial) {
+    var newFormGroup;
+    var sizeDivs;
+    var newField;
+    var i = initial;
+    field.one('change', function () {
+
+        newFormGroup = $(this).closest('.form-group').clone(true);
+        i = i + 1;
+        $('#fields .form-group').last().after(newFormGroup);
+        sizeDivs = $('#fields').children.length + i;
+        newField = $('#fields .form-control').last();
+        newField.attr('name', english_name + '-name-' + sizeDivs);
+        newField.val('');
+        $("label[for=name]").last().text(portuguese_name + ' ' + sizeDivs);
+        create_new_field_dynamic(newField, 'module', 'Atividade', 2);
+    });
+}
+
+
+function create_new_tab(title, tab_id, table, route, type) {
+
+    $('<li><a href="#' + tab_id + '-' + id + '" class="dynamic-tab" data-toggle="tab">' + title + ' ' + name + '</a></li>').appendTo('.nav-tabs');
+}
+
+
+
+function create_new_tab_from_view(title, tab_id, table, route) {
+    var id = table.row(this).data()[0];
+    var name = table.row(this).data()[1];
+    $('<li><a href="#' + tab_id + '-' + id + '" class="dynamic-tab" data-toggle="tab">' + title + ' ' + name + '</a></li>').appendTo('.nav-tabs');
+    $.ajax({
+        type: "POST",
+        url: '/admin/courses/' + route,
+        data: {id: id
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        cache: false,
+        success: function (data) {
+            $('<div class="tab-pane" id=' + tab_id + '-' + id + '">' + data + '</div>').appendTo('.tab-content');
+        }
+    });
+}
+
+function create_new_table_tab(title, new_table_id, table, route) {
+    var id = table.row(this).data()[0];
+    var new_data_table;
+    new_data_table = $('#' + new_table_id).DataTable({
+        "processing": true,
+        "columnDefs": [
+            {"visible": false, "targets": 0}
+        ],
+        "ajax": {
+            "url": "/admin/courses/" + id + "/" + route,
+            "type": "POST",
+            "headers": {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+        },
+        "serverSide": true,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.9/i18n/Portuguese-Brasil.json'
+        }
+    });
+    return new_data_table;
+}
+
+function update_sequence(input_name, module_id) {
+
+
+    with_max_table_sequence(module_id, function (max) {
+        $("[name|='" + input_name + "'").each(function (index) {
+
+            $(this).val(+max + (+index + 1));
+        });
+    });
+}
+
+function save_teachers(lesson_id, button, teachers) {
+
+    button.on('click', function () {
+
+        var teachers_map = {};
+        var total_percentage = 0;
+        $("[name|='teacher-name']").each(function (index) {
+            var teacher_id = $(this).val();
+            var teacher_percentage = $(this).parent().parent().find("[name|='teacher-percentage']").val();
+            console.log($(this).parent().parent());
+            total_percentage += +teacher_percentage;
+            teachers_map[teacher_id] = teacher_percentage;
+        });
+        console.log($(this).parent().parent());
+        console.log(total_percentage);
+        if (total_percentage > 100) {
+            flash_danger("Soma das porcentagens superior a 100%");
+            return;
+        }
+
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/courses/updateteachers",
+            data: {"teachers": teachers_map,
+                "lesson_id": lesson_id
+
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+
+                //$('#add-videos-' + lesson_id).html(data);
+                //$('#add-videos-'+ selectedLesson).html(data);
+                flash_success("Professores salvos com sucesso");
+            }
+
+        });
+    });
+}
+
+
+function save_videos(lesson_id, button) {
+
+
+
+    button.off('click').on('click', function () {
+
+
+        console.log(lesson_id);
+        console.log($("[name='video[]']"));
+        var url_map = {};
+        $("[name='video[]']").each(function (index) {
+            var sequence = $(this).data("sequence");
+            url_map[Number(sequence)] = $(this).val();
+        });
+        console.log(url_map);
+        $.ajax({
+            type: "POST",
+            url: "/admin/courses/updatevideos",
+            data: {video: url_map,
+                lesson_id: lesson_id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+
+
+                $("#lessons-table").DataTable().ajax.reload(function () {
+
+                    add_delete_lesson();
+                    add_edit_questions();
+                });
+                $("#lessons-table").on('draw.dt', function () {
+                    add_delete_lesson();
+                    add_edit_questions();
+                });
+                //$('#add-videos-' + lesson_id).html(data);
+                //$('#add-videos-'+ selectedLesson).html(data);
+                flash_success("Vídeos salvos com sucesso");
+                remove_changed_attribute("add-videos-");
+            }
+
+        });
+    });
+}
+
+
+function save_module(module_id, button) {
+
+    button.off('click').on('click', function () {
+
+
+        $.ajax({
+            type: "POST",
+            url: '/admin/courses/updatemodule',
+            data: {module_id: module_id,
+                module: $("[id='edit-module']").serialize(),
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            success: function (data) {
+                if ("error" in data) {
+                    flash_danger(data["error"]);
+                } else {
+                    flash_success(data["success"]);
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status == 404) {
+                    flash_danger("Erro na comunicação com o servidor. Entre em contato com um administrador do sistema");
+                } else {
+                    flash_danger("O sistema encontrou um erro de código " + xhr.status + ". Entre em contato com o suporte técnico informando o código de erro");
+                }
+            }
+
+        });
+    });
+}
+
+function save_lesson(lesson_id) {
+
+}
+
+
+
+
+
+function post_form(id, form_id, route, method_with_data) {
+    $.ajax({
+        type: "POST",
+        url: '/admin/courses/' + route,
+        data: {
+            id: id,
+            form: $("[id='" + form_id + "']").serialize(),
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        cache: false,
+        success: function (data) {
+            if ("error" in data) {
+                flash_danger(data["error"]);
+            } else {
+                flash_success(data["success"]);
+            }
+            if (method_with_data !== undefined) {
+                method_with_data(data);
+            }
+
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function change_watcher(begin_with_id, event) {
+
+
+
+    $("[id^='" + begin_with_id + "'] .form-control").not("[data-changed='true']").off('input').on("input", function () {
+        $(this).attr("data-changed", "true");
+        //var actualTab =   $("[href='#" +  $("[id^='"+ begin_with_id +"']").attr('id') + "'  ]") ;
+        var actualTab = $("[href='#" + begin_with_id + "'");
+        if (actualTab.text().indexOf(" {modificado} ") == -1) {
+
+            actualTab.text(actualTab.text() + " {modificado} ");
+            if (event != undefined)
+                event();
+        }
+    });
+}
+
+
+
+function remove_changed_attribute(begin_with_id) {
+    $("[id^='" + begin_with_id + "'] .form-control [data-changed='true']").removeAttr("data-change");
+    //var actualTab =   $("[href='#" +  $("[id^='"+ begin_with_id +"']").attr('id') + "'  ]") ;
+
+    var actualTab = $("[href='#" + begin_with_id + "'");
+    if (actualTab.text().indexOf(" {modificado} ") != -1) {
+
+        actualTab.text(actualTab.text().replace(" {modificado} ", ""));
+    }
+
+}
+
+function is_changed(begin_with_id) {
+    var actualTab = $("[href='#" + begin_with_id + "'");
+    if (actualTab.text().indexOf(" {modificado} ") != -1) {
+        return false;
+    }
+    return true;
+}
+
+
+
+function change_context_watcher(begin_with_id) {
+
+}
+
+
+function equal_percentage(number, teacher_percentage) {
+    var percentage = 100 / number;
+    percentage = percentage.toFixed(2);
+    teacher_percentage.val(percentage);
+}
+
+
+
+function with_max_table_sequence(module_id, with_function) {
+    $.ajax({
+        "type": "POST",
+        url: '/admin/courses/maxsequence',
+        data: {id: module_id
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        cache: false,
+        success: function (data) {
+            with_function(data);
+        }
+    });
+}
+
+function add_delete_module() {
+
+    $(".delete-module").click(function () {
+
+        if (confirm("Tem certeza que deseja excluir esse item?")) {
+            $.ajax({
+                "type": "POST",
+                url: '/admin/courses/remove-module',
+                data: {module: $(this).data("target-id")
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                cache: false,
+                success: function (data) {
+                    $("#module-table").DataTable().ajax.reload(function () {
+                        add_module_edit();
+                        add_delete_module();
+                    });
+                    if (data == 'true') {
+                        flash_success('Disciplina excluída com sucesso!')
+                    } else if (data == 'full') {
+                        flash_danger("Há aulas associadas a essa disciplina.")
+                    } else {
+                        flash_danger("Não foi possível excluir a disciplina");
+                    }
+                }
+            });
+            // $("#module-table").
+
+        }
+    });
+    /*
+     $('[data-method]').append(function()
+     {
+     return "\n"+
+     "<form action='"+$(this).attr('href')+"' method='POST' name='delete_item' style='display:none'>\n"+
+     "   <input type='hidden' name='_method' value='"+$(this).attr('data-method')+"'>\n"+
+     "   <input type='hidden' name='_token' value='"+$('meta[name="_token"]').attr('content')+"'>\n"+
+     "</form>\n"
+     })
+     .removeAttr('href')
+     .attr('style','cursor:pointer;')
+     .attr('onclick','$(this).find("form").submit();');
+     */
+    /*
+     Generic are you sure dialog
+     */
+    /*
+     $('form[name=delete_item]').submit(function(){
+     return confirm("Tem certeza que deseja excluir esse item?");
+     });
+     */
+}
+
+function verify_unblock() {
+
+    var course_id = $("#course_id").val();
+    $.ajax({
+        type: "POST",
+        url: "/admin/courses/unblock",
+        data: {'course': course_id
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        cache: false,
+        success: function (data) {
+
+            if ("error" in data) {
+                flash_danger(data["error"]);
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 700);
+            } else {
+                flash_success(data["success"]);
+                $('.nav-tabs-custom').find('input, textarea, button, select').attr('disabled', 'disabled');
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 700);
+            }
+        }
+
+    });
+}
+
+function clear_form_elements(selector) {
+    selector.find(':input').each(function () {
+        switch (this.type) {
+            case 'password':
+            case 'text':
+            case 'textarea':
+            case 'file':
+            case 'select-one':
+            case 'select-multiple':
+                $(this).val('');
+                break;
+            case 'checkbox':
+            case 'radio':
+                this.checked = false;
+        }
+    });
+}
+
+
+
+
+function flash_message(type, message) {
+
+    $("#dynamic-flash").css("opacity", "1");
+    $("#dynamic-flash").removeClass();
+    $("#dynamic-flash").addClass("alert");
+    $("#dynamic-flash").addClass(type);
+    $("#dynamic-flash").html(message);
+    setTimeout(function () {
+        $("#dynamic-flash").css("opacity", "0");
+    }, 5000);
+}
+
+function flash_success(message) {
+    flash_message("alert-success", message);
+}
+
+function flash_warning(message) {
+    flash_message("alert-warning", message);
+}
+function flash_danger(message) {
+    flash_message("alert-danger", message);
+}
+
+function disable_tab(tab_selector) {
+
+    console.log(tab_selector);
+    tab_selector.attr("data-toggle", "");
+    tab_selector.attr("href", "#lessons");
+    console.log(tab_selector.parent());
+    tab_selector.parent().attr("class", "disabled");
+}
+
+function enable_tab(tab_selector, target) {
+    tab_selector.attr("data-toggle", "tab");
+    tab_selector.attr("href", target);
+    tab_selector.parent().attr("class", "");
+}
+
+
+function disable_lesson_related_tabs() {
+    disable_tab($("#video-tab"));
+    disable_tab($("#teacher-percentage-tab"));
+    disable_tab($("#edit-lesson-tab"));
+    disable_tab($("#material-tab"));
+}
+
+function enable_lesson_related_tabs(selectedLesson) {
+    enable_tab($("#video-tab"), "#add-videos-" + selectedLesson);
+    enable_tab($("#teacher-percentage-tab"), "#add-teachers-" + selectedLesson);
+    enable_tab($("#edit-lesson-tab"), "#edit-lesson-" + selectedLesson);
+    enable_tab($("#material-tab"), "#add-material-" + selectedLesson);
+}
+
+
+$(function () {
+    
+    //Escuta do botão gerar pdf
+	$(document).on('mouseover','#btnGenerationPDF', function(){
+		//Verificar se o botão de gerar pdf está ativo
+	    if($(this).attr('href') == '#'){
+    	}else{
+    		//Escondendo tooltip
+	    	$('.tooltip').hide();
+	    }
+	});
+
+	//Escuta Mudança de Estado do campo
+    $("#name").on("keyup", function (e) {
+    	e.preventDefault();
+    	//Trocar propiedade css do botão de gerar pdf e desativar o link
+        $('#btnGenerationPDF').css({
+        	'background-color': '#babfc2',
+        	'border-color': '#babfc2'
+        }).attr('href', '#');
+	});
+
+    //Escuta Mudança de Estado do campo
+	$("#code").on("keyup", function (e) {
+    	e.preventDefault();
+    	//Trocar propiedade css do botão de gerar pdf e desativar o link
+        $('#btnGenerationPDF').css({
+        	'background-color': '#babfc2',
+        	'border-color': '#babfc2'
+        }).attr('href', '#');
+	});
+
+	//Escuta Mudança de Estado do campo
+	$("#start_date").on("keyup", function (e) {
+    	e.preventDefault();
+    	//Trocar propiedade css do botão de gerar pdf e desativar o link
+        $('#btnGenerationPDF').css({
+        	'background-color': '#babfc2',
+        	'border-color': '#babfc2'
+        }).attr('href', '#');
+	});
+	
+	//Escuta Mudança de Estado do campo
+	$("#due_date").on("keyup", function (e) {
+    	e.preventDefault();
+    	//Trocar propiedade css do botão de gerar pdf e desativar o link
+        $('#btnGenerationPDF').css({
+        	'background-color': '#babfc2',
+        	'border-color': '#babfc2'
+        }).attr('href', '#');
+	});
+
+	//Escuta Mudança de Estado do campo
+	$(".students-select").select2({
+        minimumInputLength: 3,
+        ajax: {
+            type: 'POST',
+            url: '/admin/students/select',
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            data: function(params) {
+                return {
+                    term: params.term
+                };
+            },
+            processResults: function(data) {
+                return { results: data };
+            }
+        }
+    }).on("change", function (e) {
+        e.preventDefault();
+        //Trocar propiedade css do botão de gerar pdf e desativar o link
+        $('#btnGenerationPDF').css({
+            'background-color': '#babfc2',
+            'border-color': '#babfc2'
+        }).attr('href', '#');
+    });
+
+	//Escuta Mudança de Estado do campo
+	$(".courses-select").select2({
+        minimumInputLength: 3,
+        ajax: {
+            type: 'POST',
+            url: '/admin/courses/select',
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            data: function(params) {
+                return {
+                    term: params.term
+                };
+            },
+            processResults: function(data) {
+                return { results: data };
+            }
+        }
+    }).on("change", function (e) {
+        e.preventDefault();
+        //Trocar propiedade css do botão de gerar pdf e desativar o link
+        $('#btnGenerationPDF').css({
+            'background-color': '#babfc2',
+            'border-color': '#babfc2'
+        }).attr('href', '#');
+    });
+	
+    
+    $(".textarea-description").wysihtml5({
+        events: {
+            //Escuta Mudança de Estado do campo
+            change: function(){
+                //Trocar propiedade css do botão de gerar pdf e desativar o link
+                $('#btnGenerationPDF').css({
+                    'background-color': '#babfc2',
+                    'border-color': '#babfc2'
+                }).attr('href', '#');
+            }
+        },
+        toolbar:{
+            html: true,
+        },
+        parserRules: {
+            tags: {
+                strong: {},
+                em: {},
+                table: {
+                    check_attributes: {
+                        width: "any",
+                        style: "any",
+                        colspan: "any",
+                    }
+                },
+                td: {
+                    check_attributes: {
+                        width: "any",
+                        style: "any",
+                        colspan: "any",
+                    }
+                },
+                tr: {
+                    check_attributes: {
+                        width: "any",
+                        style: "any",
+                        colspan: "any",
+                    }
+                },
+                th: {
+                    check_attributes: {
+                        width: "any",
+                        style: "any",
+                        colspan: "any",
+                    }
+                },
+                img:{
+                    check_attributes: {
+                        src: "src",
+                    }
+                }
+            },
+        },
+    });
+});
+$(document).ready(function(){
+	
+	var workshop_id;
+
+	$('.myworkshoptutors tr').on('click', function(){
+
+		//Adicionando o nome do usuário ao text field
+		$('#name-user').val($(this).children()[0].innerText);
+		
+		//Adicionando o nome do workshop ao text field
+		$('#name-workshop').val($(this).children()[2].innerText);
+		
+		//Abrindo modal
+		$('#modalAddTutor').modal('toggle');
+		
+		//Pegando o id do workshop
+		workshop_id = $(this).attr('data-workshop');
+		
+		//Atribuindo ao input hidden o id do workshop
+		$('#workshop').val(workshop_id);
+
+		//Atribuindo ao input hidden o id da matrícula
+		$('#enrollment').val($(this).attr('data-enrollment'));
+
+		$("#modalAddTutor").on('shown.bs.modal',function(){
+			createSelect("tutor", undefined, $("#modalAddTutor"));
+			createSelect("criteria", undefined, $("#modalAddTutor"), workshop_id);
+			createSelect("activity", undefined, $("#modalAddTutor"), workshop_id);
+		});
+	});
+
+	$('#group-form').submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			method: 'POST',
+			url: '/admin/myworkshoptutors/store',
+			dataType: 'Json',
+			data: $(this).serialize(),
+			headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            success: function(data){
+            	if(data == true){
+            		flash_success('Tutor associado ao aluno com sucesso.');
+            		setTimeout(function(){
+				        window.location.reload();
+				    },2000);
+				}else{
+					flash_warning('Erro ao associador tutor ao aluno. Tente novamente');
+				}
+            }
+		});
+	});
+});
+/*!
+ * Chart.js
+ * http://chartjs.org/
+ * Version: 1.0.2
+ *
+ * Copyright 2015 Nick Downie
+ * Released under the MIT license
+ * https://github.com/nnnick/Chart.js/blob/master/LICENSE.md
+ */
+(function(){"use strict";var t=this,i=t.Chart,e=function(t){this.canvas=t.canvas,this.ctx=t;var i=function(t,i){return t["offset"+i]?t["offset"+i]:document.defaultView.getComputedStyle(t).getPropertyValue(i)},e=this.width=i(t.canvas,"Width"),n=this.height=i(t.canvas,"Height");t.canvas.width=e,t.canvas.height=n;var e=this.width=t.canvas.width,n=this.height=t.canvas.height;return this.aspectRatio=this.width/this.height,s.retinaScale(this),this};e.defaults={global:{animation:!0,animationSteps:60,animationEasing:"easeOutQuart",showScale:!0,scaleOverride:!1,scaleSteps:null,scaleStepWidth:null,scaleStartValue:null,scaleLineColor:"rgba(0,0,0,.1)",scaleLineWidth:1,scaleShowLabels:!0,scaleLabel:"<%=value%>",scaleIntegersOnly:!0,scaleBeginAtZero:!1,scaleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",scaleFontSize:12,scaleFontStyle:"normal",scaleFontColor:"#666",responsive:!1,maintainAspectRatio:!0,showTooltips:!0,customTooltips:!1,tooltipEvents:["mousemove","touchstart","touchmove","mouseout"],tooltipFillColor:"rgba(0,0,0,0.8)",tooltipFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipFontSize:14,tooltipFontStyle:"normal",tooltipFontColor:"#fff",tooltipTitleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipTitleFontSize:14,tooltipTitleFontStyle:"bold",tooltipTitleFontColor:"#fff",tooltipYPadding:6,tooltipXPadding:6,tooltipCaretSize:8,tooltipCornerRadius:6,tooltipXOffset:10,tooltipTemplate:"<%if (label){%><%=label%>: <%}%><%= value %>",multiTooltipTemplate:"<%= value %>",multiTooltipKeyBackground:"#fff",onAnimationProgress:function(){},onAnimationComplete:function(){}}},e.types={};var s=e.helpers={},n=s.each=function(t,i,e){var s=Array.prototype.slice.call(arguments,3);if(t)if(t.length===+t.length){var n;for(n=0;n<t.length;n++)i.apply(e,[t[n],n].concat(s))}else for(var o in t)i.apply(e,[t[o],o].concat(s))},o=s.clone=function(t){var i={};return n(t,function(e,s){t.hasOwnProperty(s)&&(i[s]=e)}),i},a=s.extend=function(t){return n(Array.prototype.slice.call(arguments,1),function(i){n(i,function(e,s){i.hasOwnProperty(s)&&(t[s]=e)})}),t},h=s.merge=function(){var t=Array.prototype.slice.call(arguments,0);return t.unshift({}),a.apply(null,t)},l=s.indexOf=function(t,i){if(Array.prototype.indexOf)return t.indexOf(i);for(var e=0;e<t.length;e++)if(t[e]===i)return e;return-1},r=(s.where=function(t,i){var e=[];return s.each(t,function(t){i(t)&&e.push(t)}),e},s.findNextWhere=function(t,i,e){e||(e=-1);for(var s=e+1;s<t.length;s++){var n=t[s];if(i(n))return n}},s.findPreviousWhere=function(t,i,e){e||(e=t.length);for(var s=e-1;s>=0;s--){var n=t[s];if(i(n))return n}},s.inherits=function(t){var i=this,e=t&&t.hasOwnProperty("constructor")?t.constructor:function(){return i.apply(this,arguments)},s=function(){this.constructor=e};return s.prototype=i.prototype,e.prototype=new s,e.extend=r,t&&a(e.prototype,t),e.__super__=i.prototype,e}),c=s.noop=function(){},u=s.uid=function(){var t=0;return function(){return"chart-"+t++}}(),d=s.warn=function(t){window.console&&"function"==typeof window.console.warn&&console.warn(t)},p=s.amd="function"==typeof define&&define.amd,f=s.isNumber=function(t){return!isNaN(parseFloat(t))&&isFinite(t)},g=s.max=function(t){return Math.max.apply(Math,t)},m=s.min=function(t){return Math.min.apply(Math,t)},v=(s.cap=function(t,i,e){if(f(i)){if(t>i)return i}else if(f(e)&&e>t)return e;return t},s.getDecimalPlaces=function(t){return t%1!==0&&f(t)?t.toString().split(".")[1].length:0}),S=s.radians=function(t){return t*(Math.PI/180)},x=(s.getAngleFromPoint=function(t,i){var e=i.x-t.x,s=i.y-t.y,n=Math.sqrt(e*e+s*s),o=2*Math.PI+Math.atan2(s,e);return 0>e&&0>s&&(o+=2*Math.PI),{angle:o,distance:n}},s.aliasPixel=function(t){return t%2===0?0:.5}),y=(s.splineCurve=function(t,i,e,s){var n=Math.sqrt(Math.pow(i.x-t.x,2)+Math.pow(i.y-t.y,2)),o=Math.sqrt(Math.pow(e.x-i.x,2)+Math.pow(e.y-i.y,2)),a=s*n/(n+o),h=s*o/(n+o);return{inner:{x:i.x-a*(e.x-t.x),y:i.y-a*(e.y-t.y)},outer:{x:i.x+h*(e.x-t.x),y:i.y+h*(e.y-t.y)}}},s.calculateOrderOfMagnitude=function(t){return Math.floor(Math.log(t)/Math.LN10)}),C=(s.calculateScaleRange=function(t,i,e,s,n){var o=2,a=Math.floor(i/(1.5*e)),h=o>=a,l=g(t),r=m(t);l===r&&(l+=.5,r>=.5&&!s?r-=.5:l+=.5);for(var c=Math.abs(l-r),u=y(c),d=Math.ceil(l/(1*Math.pow(10,u)))*Math.pow(10,u),p=s?0:Math.floor(r/(1*Math.pow(10,u)))*Math.pow(10,u),f=d-p,v=Math.pow(10,u),S=Math.round(f/v);(S>a||a>2*S)&&!h;)if(S>a)v*=2,S=Math.round(f/v),S%1!==0&&(h=!0);else if(n&&u>=0){if(v/2%1!==0)break;v/=2,S=Math.round(f/v)}else v/=2,S=Math.round(f/v);return h&&(S=o,v=f/S),{steps:S,stepValue:v,min:p,max:p+S*v}},s.template=function(t,i){function e(t,i){var e=/\W/.test(t)?new Function("obj","var p=[],print=function(){p.push.apply(p,arguments);};with(obj){p.push('"+t.replace(/[\r\t\n]/g," ").split("<%").join("	").replace(/((^|%>)[^\t]*)'/g,"$1\r").replace(/\t=(.*?)%>/g,"',$1,'").split("	").join("');").split("%>").join("p.push('").split("\r").join("\\'")+"');}return p.join('');"):s[t]=s[t];return i?e(i):e}if(t instanceof Function)return t(i);var s={};return e(t,i)}),w=(s.generateLabels=function(t,i,e,s){var o=new Array(i);return labelTemplateString&&n(o,function(i,n){o[n]=C(t,{value:e+s*(n+1)})}),o},s.easingEffects={linear:function(t){return t},easeInQuad:function(t){return t*t},easeOutQuad:function(t){return-1*t*(t-2)},easeInOutQuad:function(t){return(t/=.5)<1?.5*t*t:-0.5*(--t*(t-2)-1)},easeInCubic:function(t){return t*t*t},easeOutCubic:function(t){return 1*((t=t/1-1)*t*t+1)},easeInOutCubic:function(t){return(t/=.5)<1?.5*t*t*t:.5*((t-=2)*t*t+2)},easeInQuart:function(t){return t*t*t*t},easeOutQuart:function(t){return-1*((t=t/1-1)*t*t*t-1)},easeInOutQuart:function(t){return(t/=.5)<1?.5*t*t*t*t:-0.5*((t-=2)*t*t*t-2)},easeInQuint:function(t){return 1*(t/=1)*t*t*t*t},easeOutQuint:function(t){return 1*((t=t/1-1)*t*t*t*t+1)},easeInOutQuint:function(t){return(t/=.5)<1?.5*t*t*t*t*t:.5*((t-=2)*t*t*t*t+2)},easeInSine:function(t){return-1*Math.cos(t/1*(Math.PI/2))+1},easeOutSine:function(t){return 1*Math.sin(t/1*(Math.PI/2))},easeInOutSine:function(t){return-0.5*(Math.cos(Math.PI*t/1)-1)},easeInExpo:function(t){return 0===t?1:1*Math.pow(2,10*(t/1-1))},easeOutExpo:function(t){return 1===t?1:1*(-Math.pow(2,-10*t/1)+1)},easeInOutExpo:function(t){return 0===t?0:1===t?1:(t/=.5)<1?.5*Math.pow(2,10*(t-1)):.5*(-Math.pow(2,-10*--t)+2)},easeInCirc:function(t){return t>=1?t:-1*(Math.sqrt(1-(t/=1)*t)-1)},easeOutCirc:function(t){return 1*Math.sqrt(1-(t=t/1-1)*t)},easeInOutCirc:function(t){return(t/=.5)<1?-0.5*(Math.sqrt(1-t*t)-1):.5*(Math.sqrt(1-(t-=2)*t)+1)},easeInElastic:function(t){var i=1.70158,e=0,s=1;return 0===t?0:1==(t/=1)?1:(e||(e=.3),s<Math.abs(1)?(s=1,i=e/4):i=e/(2*Math.PI)*Math.asin(1/s),-(s*Math.pow(2,10*(t-=1))*Math.sin(2*(1*t-i)*Math.PI/e)))},easeOutElastic:function(t){var i=1.70158,e=0,s=1;return 0===t?0:1==(t/=1)?1:(e||(e=.3),s<Math.abs(1)?(s=1,i=e/4):i=e/(2*Math.PI)*Math.asin(1/s),s*Math.pow(2,-10*t)*Math.sin(2*(1*t-i)*Math.PI/e)+1)},easeInOutElastic:function(t){var i=1.70158,e=0,s=1;return 0===t?0:2==(t/=.5)?1:(e||(e=.3*1.5),s<Math.abs(1)?(s=1,i=e/4):i=e/(2*Math.PI)*Math.asin(1/s),1>t?-.5*s*Math.pow(2,10*(t-=1))*Math.sin(2*(1*t-i)*Math.PI/e):s*Math.pow(2,-10*(t-=1))*Math.sin(2*(1*t-i)*Math.PI/e)*.5+1)},easeInBack:function(t){var i=1.70158;return 1*(t/=1)*t*((i+1)*t-i)},easeOutBack:function(t){var i=1.70158;return 1*((t=t/1-1)*t*((i+1)*t+i)+1)},easeInOutBack:function(t){var i=1.70158;return(t/=.5)<1?.5*t*t*(((i*=1.525)+1)*t-i):.5*((t-=2)*t*(((i*=1.525)+1)*t+i)+2)},easeInBounce:function(t){return 1-w.easeOutBounce(1-t)},easeOutBounce:function(t){return(t/=1)<1/2.75?7.5625*t*t:2/2.75>t?1*(7.5625*(t-=1.5/2.75)*t+.75):2.5/2.75>t?1*(7.5625*(t-=2.25/2.75)*t+.9375):1*(7.5625*(t-=2.625/2.75)*t+.984375)},easeInOutBounce:function(t){return.5>t?.5*w.easeInBounce(2*t):.5*w.easeOutBounce(2*t-1)+.5}}),b=s.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(t){return window.setTimeout(t,1e3/60)}}(),P=s.cancelAnimFrame=function(){return window.cancelAnimationFrame||window.webkitCancelAnimationFrame||window.mozCancelAnimationFrame||window.oCancelAnimationFrame||window.msCancelAnimationFrame||function(t){return window.clearTimeout(t,1e3/60)}}(),L=(s.animationLoop=function(t,i,e,s,n,o){var a=0,h=w[e]||w.linear,l=function(){a++;var e=a/i,r=h(e);t.call(o,r,e,a),s.call(o,r,e),i>a?o.animationFrame=b(l):n.apply(o)};b(l)},s.getRelativePosition=function(t){var i,e,s=t.originalEvent||t,n=t.currentTarget||t.srcElement,o=n.getBoundingClientRect();return s.touches?(i=s.touches[0].clientX-o.left,e=s.touches[0].clientY-o.top):(i=s.clientX-o.left,e=s.clientY-o.top),{x:i,y:e}},s.addEvent=function(t,i,e){t.addEventListener?t.addEventListener(i,e):t.attachEvent?t.attachEvent("on"+i,e):t["on"+i]=e}),k=s.removeEvent=function(t,i,e){t.removeEventListener?t.removeEventListener(i,e,!1):t.detachEvent?t.detachEvent("on"+i,e):t["on"+i]=c},F=(s.bindEvents=function(t,i,e){t.events||(t.events={}),n(i,function(i){t.events[i]=function(){e.apply(t,arguments)},L(t.chart.canvas,i,t.events[i])})},s.unbindEvents=function(t,i){n(i,function(i,e){k(t.chart.canvas,e,i)})}),R=s.getMaximumWidth=function(t){var i=t.parentNode;return i.clientWidth},T=s.getMaximumHeight=function(t){var i=t.parentNode;return i.clientHeight},A=(s.getMaximumSize=s.getMaximumWidth,s.retinaScale=function(t){var i=t.ctx,e=t.canvas.width,s=t.canvas.height;window.devicePixelRatio&&(i.canvas.style.width=e+"px",i.canvas.style.height=s+"px",i.canvas.height=s*window.devicePixelRatio,i.canvas.width=e*window.devicePixelRatio,i.scale(window.devicePixelRatio,window.devicePixelRatio))}),M=s.clear=function(t){t.ctx.clearRect(0,0,t.width,t.height)},W=s.fontString=function(t,i,e){return i+" "+t+"px "+e},z=s.longestText=function(t,i,e){t.font=i;var s=0;return n(e,function(i){var e=t.measureText(i).width;s=e>s?e:s}),s},B=s.drawRoundedRectangle=function(t,i,e,s,n,o){t.beginPath(),t.moveTo(i+o,e),t.lineTo(i+s-o,e),t.quadraticCurveTo(i+s,e,i+s,e+o),t.lineTo(i+s,e+n-o),t.quadraticCurveTo(i+s,e+n,i+s-o,e+n),t.lineTo(i+o,e+n),t.quadraticCurveTo(i,e+n,i,e+n-o),t.lineTo(i,e+o),t.quadraticCurveTo(i,e,i+o,e),t.closePath()};e.instances={},e.Type=function(t,i,s){this.options=i,this.chart=s,this.id=u(),e.instances[this.id]=this,i.responsive&&this.resize(),this.initialize.call(this,t)},a(e.Type.prototype,{initialize:function(){return this},clear:function(){return M(this.chart),this},stop:function(){return P(this.animationFrame),this},resize:function(t){this.stop();var i=this.chart.canvas,e=R(this.chart.canvas),s=this.options.maintainAspectRatio?e/this.chart.aspectRatio:T(this.chart.canvas);return i.width=this.chart.width=e,i.height=this.chart.height=s,A(this.chart),"function"==typeof t&&t.apply(this,Array.prototype.slice.call(arguments,1)),this},reflow:c,render:function(t){return t&&this.reflow(),this.options.animation&&!t?s.animationLoop(this.draw,this.options.animationSteps,this.options.animationEasing,this.options.onAnimationProgress,this.options.onAnimationComplete,this):(this.draw(),this.options.onAnimationComplete.call(this)),this},generateLegend:function(){return C(this.options.legendTemplate,this)},destroy:function(){this.clear(),F(this,this.events);var t=this.chart.canvas;t.width=this.chart.width,t.height=this.chart.height,t.style.removeProperty?(t.style.removeProperty("width"),t.style.removeProperty("height")):(t.style.removeAttribute("width"),t.style.removeAttribute("height")),delete e.instances[this.id]},showTooltip:function(t,i){"undefined"==typeof this.activeElements&&(this.activeElements=[]);var o=function(t){var i=!1;return t.length!==this.activeElements.length?i=!0:(n(t,function(t,e){t!==this.activeElements[e]&&(i=!0)},this),i)}.call(this,t);if(o||i){if(this.activeElements=t,this.draw(),this.options.customTooltips&&this.options.customTooltips(!1),t.length>0)if(this.datasets&&this.datasets.length>1){for(var a,h,r=this.datasets.length-1;r>=0&&(a=this.datasets[r].points||this.datasets[r].bars||this.datasets[r].segments,h=l(a,t[0]),-1===h);r--);var c=[],u=[],d=function(){var t,i,e,n,o,a=[],l=[],r=[];return s.each(this.datasets,function(i){t=i.points||i.bars||i.segments,t[h]&&t[h].hasValue()&&a.push(t[h])}),s.each(a,function(t){l.push(t.x),r.push(t.y),c.push(s.template(this.options.multiTooltipTemplate,t)),u.push({fill:t._saved.fillColor||t.fillColor,stroke:t._saved.strokeColor||t.strokeColor})},this),o=m(r),e=g(r),n=m(l),i=g(l),{x:n>this.chart.width/2?n:i,y:(o+e)/2}}.call(this,h);new e.MultiTooltip({x:d.x,y:d.y,xPadding:this.options.tooltipXPadding,yPadding:this.options.tooltipYPadding,xOffset:this.options.tooltipXOffset,fillColor:this.options.tooltipFillColor,textColor:this.options.tooltipFontColor,fontFamily:this.options.tooltipFontFamily,fontStyle:this.options.tooltipFontStyle,fontSize:this.options.tooltipFontSize,titleTextColor:this.options.tooltipTitleFontColor,titleFontFamily:this.options.tooltipTitleFontFamily,titleFontStyle:this.options.tooltipTitleFontStyle,titleFontSize:this.options.tooltipTitleFontSize,cornerRadius:this.options.tooltipCornerRadius,labels:c,legendColors:u,legendColorBackground:this.options.multiTooltipKeyBackground,title:t[0].label,chart:this.chart,ctx:this.chart.ctx,custom:this.options.customTooltips}).draw()}else n(t,function(t){var i=t.tooltipPosition();new e.Tooltip({x:Math.round(i.x),y:Math.round(i.y),xPadding:this.options.tooltipXPadding,yPadding:this.options.tooltipYPadding,fillColor:this.options.tooltipFillColor,textColor:this.options.tooltipFontColor,fontFamily:this.options.tooltipFontFamily,fontStyle:this.options.tooltipFontStyle,fontSize:this.options.tooltipFontSize,caretHeight:this.options.tooltipCaretSize,cornerRadius:this.options.tooltipCornerRadius,text:C(this.options.tooltipTemplate,t),chart:this.chart,custom:this.options.customTooltips}).draw()},this);return this}},toBase64Image:function(){return this.chart.canvas.toDataURL.apply(this.chart.canvas,arguments)}}),e.Type.extend=function(t){var i=this,s=function(){return i.apply(this,arguments)};if(s.prototype=o(i.prototype),a(s.prototype,t),s.extend=e.Type.extend,t.name||i.prototype.name){var n=t.name||i.prototype.name,l=e.defaults[i.prototype.name]?o(e.defaults[i.prototype.name]):{};e.defaults[n]=a(l,t.defaults),e.types[n]=s,e.prototype[n]=function(t,i){var o=h(e.defaults.global,e.defaults[n],i||{});return new s(t,o,this)}}else d("Name not provided for this chart, so it hasn't been registered");return i},e.Element=function(t){a(this,t),this.initialize.apply(this,arguments),this.save()},a(e.Element.prototype,{initialize:function(){},restore:function(t){return t?n(t,function(t){this[t]=this._saved[t]},this):a(this,this._saved),this},save:function(){return this._saved=o(this),delete this._saved._saved,this},update:function(t){return n(t,function(t,i){this._saved[i]=this[i],this[i]=t},this),this},transition:function(t,i){return n(t,function(t,e){this[e]=(t-this._saved[e])*i+this._saved[e]},this),this},tooltipPosition:function(){return{x:this.x,y:this.y}},hasValue:function(){return f(this.value)}}),e.Element.extend=r,e.Point=e.Element.extend({display:!0,inRange:function(t,i){var e=this.hitDetectionRadius+this.radius;return Math.pow(t-this.x,2)+Math.pow(i-this.y,2)<Math.pow(e,2)},draw:function(){if(this.display){var t=this.ctx;t.beginPath(),t.arc(this.x,this.y,this.radius,0,2*Math.PI),t.closePath(),t.strokeStyle=this.strokeColor,t.lineWidth=this.strokeWidth,t.fillStyle=this.fillColor,t.fill(),t.stroke()}}}),e.Arc=e.Element.extend({inRange:function(t,i){var e=s.getAngleFromPoint(this,{x:t,y:i}),n=e.angle>=this.startAngle&&e.angle<=this.endAngle,o=e.distance>=this.innerRadius&&e.distance<=this.outerRadius;return n&&o},tooltipPosition:function(){var t=this.startAngle+(this.endAngle-this.startAngle)/2,i=(this.outerRadius-this.innerRadius)/2+this.innerRadius;return{x:this.x+Math.cos(t)*i,y:this.y+Math.sin(t)*i}},draw:function(t){var i=this.ctx;i.beginPath(),i.arc(this.x,this.y,this.outerRadius,this.startAngle,this.endAngle),i.arc(this.x,this.y,this.innerRadius,this.endAngle,this.startAngle,!0),i.closePath(),i.strokeStyle=this.strokeColor,i.lineWidth=this.strokeWidth,i.fillStyle=this.fillColor,i.fill(),i.lineJoin="bevel",this.showStroke&&i.stroke()}}),e.Rectangle=e.Element.extend({draw:function(){var t=this.ctx,i=this.width/2,e=this.x-i,s=this.x+i,n=this.base-(this.base-this.y),o=this.strokeWidth/2;this.showStroke&&(e+=o,s-=o,n+=o),t.beginPath(),t.fillStyle=this.fillColor,t.strokeStyle=this.strokeColor,t.lineWidth=this.strokeWidth,t.moveTo(e,this.base),t.lineTo(e,n),t.lineTo(s,n),t.lineTo(s,this.base),t.fill(),this.showStroke&&t.stroke()},height:function(){return this.base-this.y},inRange:function(t,i){return t>=this.x-this.width/2&&t<=this.x+this.width/2&&i>=this.y&&i<=this.base}}),e.Tooltip=e.Element.extend({draw:function(){var t=this.chart.ctx;t.font=W(this.fontSize,this.fontStyle,this.fontFamily),this.xAlign="center",this.yAlign="above";var i=this.caretPadding=2,e=t.measureText(this.text).width+2*this.xPadding,s=this.fontSize+2*this.yPadding,n=s+this.caretHeight+i;this.x+e/2>this.chart.width?this.xAlign="left":this.x-e/2<0&&(this.xAlign="right"),this.y-n<0&&(this.yAlign="below");var o=this.x-e/2,a=this.y-n;if(t.fillStyle=this.fillColor,this.custom)this.custom(this);else{switch(this.yAlign){case"above":t.beginPath(),t.moveTo(this.x,this.y-i),t.lineTo(this.x+this.caretHeight,this.y-(i+this.caretHeight)),t.lineTo(this.x-this.caretHeight,this.y-(i+this.caretHeight)),t.closePath(),t.fill();break;case"below":a=this.y+i+this.caretHeight,t.beginPath(),t.moveTo(this.x,this.y+i),t.lineTo(this.x+this.caretHeight,this.y+i+this.caretHeight),t.lineTo(this.x-this.caretHeight,this.y+i+this.caretHeight),t.closePath(),t.fill()}switch(this.xAlign){case"left":o=this.x-e+(this.cornerRadius+this.caretHeight);break;case"right":o=this.x-(this.cornerRadius+this.caretHeight)}B(t,o,a,e,s,this.cornerRadius),t.fill(),t.fillStyle=this.textColor,t.textAlign="center",t.textBaseline="middle",t.fillText(this.text,o+e/2,a+s/2)}}}),e.MultiTooltip=e.Element.extend({initialize:function(){this.font=W(this.fontSize,this.fontStyle,this.fontFamily),this.titleFont=W(this.titleFontSize,this.titleFontStyle,this.titleFontFamily),this.height=this.labels.length*this.fontSize+(this.labels.length-1)*(this.fontSize/2)+2*this.yPadding+1.5*this.titleFontSize,this.ctx.font=this.titleFont;var t=this.ctx.measureText(this.title).width,i=z(this.ctx,this.font,this.labels)+this.fontSize+3,e=g([i,t]);this.width=e+2*this.xPadding;var s=this.height/2;this.y-s<0?this.y=s:this.y+s>this.chart.height&&(this.y=this.chart.height-s),this.x>this.chart.width/2?this.x-=this.xOffset+this.width:this.x+=this.xOffset},getLineHeight:function(t){var i=this.y-this.height/2+this.yPadding,e=t-1;return 0===t?i+this.titleFontSize/2:i+(1.5*this.fontSize*e+this.fontSize/2)+1.5*this.titleFontSize},draw:function(){if(this.custom)this.custom(this);else{B(this.ctx,this.x,this.y-this.height/2,this.width,this.height,this.cornerRadius);var t=this.ctx;t.fillStyle=this.fillColor,t.fill(),t.closePath(),t.textAlign="left",t.textBaseline="middle",t.fillStyle=this.titleTextColor,t.font=this.titleFont,t.fillText(this.title,this.x+this.xPadding,this.getLineHeight(0)),t.font=this.font,s.each(this.labels,function(i,e){t.fillStyle=this.textColor,t.fillText(i,this.x+this.xPadding+this.fontSize+3,this.getLineHeight(e+1)),t.fillStyle=this.legendColorBackground,t.fillRect(this.x+this.xPadding,this.getLineHeight(e+1)-this.fontSize/2,this.fontSize,this.fontSize),t.fillStyle=this.legendColors[e].fill,t.fillRect(this.x+this.xPadding,this.getLineHeight(e+1)-this.fontSize/2,this.fontSize,this.fontSize)},this)}}}),e.Scale=e.Element.extend({initialize:function(){this.fit()},buildYLabels:function(){this.yLabels=[];for(var t=v(this.stepValue),i=0;i<=this.steps;i++)this.yLabels.push(C(this.templateString,{value:(this.min+i*this.stepValue).toFixed(t)}));this.yLabelWidth=this.display&&this.showLabels?z(this.ctx,this.font,this.yLabels):0},addXLabel:function(t){this.xLabels.push(t),this.valuesCount++,this.fit()},removeXLabel:function(){this.xLabels.shift(),this.valuesCount--,this.fit()},fit:function(){this.startPoint=this.display?this.fontSize:0,this.endPoint=this.display?this.height-1.5*this.fontSize-5:this.height,this.startPoint+=this.padding,this.endPoint-=this.padding;var t,i=this.endPoint-this.startPoint;for(this.calculateYRange(i),this.buildYLabels(),this.calculateXLabelRotation();i>this.endPoint-this.startPoint;)i=this.endPoint-this.startPoint,t=this.yLabelWidth,this.calculateYRange(i),this.buildYLabels(),t<this.yLabelWidth&&this.calculateXLabelRotation()},calculateXLabelRotation:function(){this.ctx.font=this.font;var t,i,e=this.ctx.measureText(this.xLabels[0]).width,s=this.ctx.measureText(this.xLabels[this.xLabels.length-1]).width;if(this.xScalePaddingRight=s/2+3,this.xScalePaddingLeft=e/2>this.yLabelWidth+10?e/2:this.yLabelWidth+10,this.xLabelRotation=0,this.display){var n,o=z(this.ctx,this.font,this.xLabels);this.xLabelWidth=o;for(var a=Math.floor(this.calculateX(1)-this.calculateX(0))-6;this.xLabelWidth>a&&0===this.xLabelRotation||this.xLabelWidth>a&&this.xLabelRotation<=90&&this.xLabelRotation>0;)n=Math.cos(S(this.xLabelRotation)),t=n*e,i=n*s,t+this.fontSize/2>this.yLabelWidth+8&&(this.xScalePaddingLeft=t+this.fontSize/2),this.xScalePaddingRight=this.fontSize/2,this.xLabelRotation++,this.xLabelWidth=n*o;this.xLabelRotation>0&&(this.endPoint-=Math.sin(S(this.xLabelRotation))*o+3)}else this.xLabelWidth=0,this.xScalePaddingRight=this.padding,this.xScalePaddingLeft=this.padding},calculateYRange:c,drawingArea:function(){return this.startPoint-this.endPoint},calculateY:function(t){var i=this.drawingArea()/(this.min-this.max);return this.endPoint-i*(t-this.min)},calculateX:function(t){var i=(this.xLabelRotation>0,this.width-(this.xScalePaddingLeft+this.xScalePaddingRight)),e=i/Math.max(this.valuesCount-(this.offsetGridLines?0:1),1),s=e*t+this.xScalePaddingLeft;return this.offsetGridLines&&(s+=e/2),Math.round(s)},update:function(t){s.extend(this,t),this.fit()},draw:function(){var t=this.ctx,i=(this.endPoint-this.startPoint)/this.steps,e=Math.round(this.xScalePaddingLeft);this.display&&(t.fillStyle=this.textColor,t.font=this.font,n(this.yLabels,function(n,o){var a=this.endPoint-i*o,h=Math.round(a),l=this.showHorizontalLines;t.textAlign="right",t.textBaseline="middle",this.showLabels&&t.fillText(n,e-10,a),0!==o||l||(l=!0),l&&t.beginPath(),o>0?(t.lineWidth=this.gridLineWidth,t.strokeStyle=this.gridLineColor):(t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor),h+=s.aliasPixel(t.lineWidth),l&&(t.moveTo(e,h),t.lineTo(this.width,h),t.stroke(),t.closePath()),t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor,t.beginPath(),t.moveTo(e-5,h),t.lineTo(e,h),t.stroke(),t.closePath()},this),n(this.xLabels,function(i,e){var s=this.calculateX(e)+x(this.lineWidth),n=this.calculateX(e-(this.offsetGridLines?.5:0))+x(this.lineWidth),o=this.xLabelRotation>0,a=this.showVerticalLines;0!==e||a||(a=!0),a&&t.beginPath(),e>0?(t.lineWidth=this.gridLineWidth,t.strokeStyle=this.gridLineColor):(t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor),a&&(t.moveTo(n,this.endPoint),t.lineTo(n,this.startPoint-3),t.stroke(),t.closePath()),t.lineWidth=this.lineWidth,t.strokeStyle=this.lineColor,t.beginPath(),t.moveTo(n,this.endPoint),t.lineTo(n,this.endPoint+5),t.stroke(),t.closePath(),t.save(),t.translate(s,o?this.endPoint+12:this.endPoint+8),t.rotate(-1*S(this.xLabelRotation)),t.font=this.font,t.textAlign=o?"right":"center",t.textBaseline=o?"middle":"top",t.fillText(i,0,0),t.restore()},this))}}),e.RadialScale=e.Element.extend({initialize:function(){this.size=m([this.height,this.width]),this.drawingArea=this.display?this.size/2-(this.fontSize/2+this.backdropPaddingY):this.size/2},calculateCenterOffset:function(t){var i=this.drawingArea/(this.max-this.min);return(t-this.min)*i},update:function(){this.lineArc?this.drawingArea=this.display?this.size/2-(this.fontSize/2+this.backdropPaddingY):this.size/2:this.setScaleSize(),this.buildYLabels()},buildYLabels:function(){this.yLabels=[];for(var t=v(this.stepValue),i=0;i<=this.steps;i++)this.yLabels.push(C(this.templateString,{value:(this.min+i*this.stepValue).toFixed(t)}))},getCircumference:function(){return 2*Math.PI/this.valuesCount},setScaleSize:function(){var t,i,e,s,n,o,a,h,l,r,c,u,d=m([this.height/2-this.pointLabelFontSize-5,this.width/2]),p=this.width,g=0;for(this.ctx.font=W(this.pointLabelFontSize,this.pointLabelFontStyle,this.pointLabelFontFamily),i=0;i<this.valuesCount;i++)t=this.getPointPosition(i,d),e=this.ctx.measureText(C(this.templateString,{value:this.labels[i]})).width+5,0===i||i===this.valuesCount/2?(s=e/2,t.x+s>p&&(p=t.x+s,n=i),t.x-s<g&&(g=t.x-s,a=i)):i<this.valuesCount/2?t.x+e>p&&(p=t.x+e,n=i):i>this.valuesCount/2&&t.x-e<g&&(g=t.x-e,a=i);l=g,r=Math.ceil(p-this.width),o=this.getIndexAngle(n),h=this.getIndexAngle(a),c=r/Math.sin(o+Math.PI/2),u=l/Math.sin(h+Math.PI/2),c=f(c)?c:0,u=f(u)?u:0,this.drawingArea=d-(u+c)/2,this.setCenterPoint(u,c)},setCenterPoint:function(t,i){var e=this.width-i-this.drawingArea,s=t+this.drawingArea;this.xCenter=(s+e)/2,this.yCenter=this.height/2},getIndexAngle:function(t){var i=2*Math.PI/this.valuesCount;return t*i-Math.PI/2},getPointPosition:function(t,i){var e=this.getIndexAngle(t);return{x:Math.cos(e)*i+this.xCenter,y:Math.sin(e)*i+this.yCenter}},draw:function(){if(this.display){var t=this.ctx;if(n(this.yLabels,function(i,e){if(e>0){var s,n=e*(this.drawingArea/this.steps),o=this.yCenter-n;if(this.lineWidth>0)if(t.strokeStyle=this.lineColor,t.lineWidth=this.lineWidth,this.lineArc)t.beginPath(),t.arc(this.xCenter,this.yCenter,n,0,2*Math.PI),t.closePath(),t.stroke();else{t.beginPath();for(var a=0;a<this.valuesCount;a++)s=this.getPointPosition(a,this.calculateCenterOffset(this.min+e*this.stepValue)),0===a?t.moveTo(s.x,s.y):t.lineTo(s.x,s.y);t.closePath(),t.stroke()}if(this.showLabels){if(t.font=W(this.fontSize,this.fontStyle,this.fontFamily),this.showLabelBackdrop){var h=t.measureText(i).width;t.fillStyle=this.backdropColor,t.fillRect(this.xCenter-h/2-this.backdropPaddingX,o-this.fontSize/2-this.backdropPaddingY,h+2*this.backdropPaddingX,this.fontSize+2*this.backdropPaddingY)}t.textAlign="center",t.textBaseline="middle",t.fillStyle=this.fontColor,t.fillText(i,this.xCenter,o)}}},this),!this.lineArc){t.lineWidth=this.angleLineWidth,t.strokeStyle=this.angleLineColor;for(var i=this.valuesCount-1;i>=0;i--){if(this.angleLineWidth>0){var e=this.getPointPosition(i,this.calculateCenterOffset(this.max));t.beginPath(),t.moveTo(this.xCenter,this.yCenter),t.lineTo(e.x,e.y),t.stroke(),t.closePath()}var s=this.getPointPosition(i,this.calculateCenterOffset(this.max)+5);t.font=W(this.pointLabelFontSize,this.pointLabelFontStyle,this.pointLabelFontFamily),t.fillStyle=this.pointLabelFontColor;var o=this.labels.length,a=this.labels.length/2,h=a/2,l=h>i||i>o-h,r=i===h||i===o-h;t.textAlign=0===i?"center":i===a?"center":a>i?"left":"right",t.textBaseline=r?"middle":l?"bottom":"top",t.fillText(this.labels[i],s.x,s.y)}}}}}),s.addEvent(window,"resize",function(){var t;return function(){clearTimeout(t),t=setTimeout(function(){n(e.instances,function(t){t.options.responsive&&t.resize(t.render,!0)})},50)}}()),p?define(function(){return e}):"object"==typeof module&&module.exports&&(module.exports=e),t.Chart=e,e.noConflict=function(){return t.Chart=i,e}}).call(this),function(){"use strict";var t=this,i=t.Chart,e=i.helpers,s={scaleBeginAtZero:!0,scaleShowGridLines:!0,scaleGridLineColor:"rgba(0,0,0,.05)",scaleGridLineWidth:1,scaleShowHorizontalLines:!0,scaleShowVerticalLines:!0,barShowStroke:!0,barStrokeWidth:2,barValueSpacing:5,barDatasetSpacing:1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'};i.Type.extend({name:"Bar",defaults:s,initialize:function(t){var s=this.options;this.ScaleClass=i.Scale.extend({offsetGridLines:!0,calculateBarX:function(t,i,e){var n=this.calculateBaseWidth(),o=this.calculateX(e)-n/2,a=this.calculateBarWidth(t);return o+a*i+i*s.barDatasetSpacing+a/2},calculateBaseWidth:function(){return this.calculateX(1)-this.calculateX(0)-2*s.barValueSpacing},calculateBarWidth:function(t){var i=this.calculateBaseWidth()-(t-1)*s.barDatasetSpacing;return i/t}}),this.datasets=[],this.options.showTooltips&&e.bindEvents(this,this.options.tooltipEvents,function(t){var i="mouseout"!==t.type?this.getBarsAtEvent(t):[];this.eachBars(function(t){t.restore(["fillColor","strokeColor"])}),e.each(i,function(t){t.fillColor=t.highlightFill,t.strokeColor=t.highlightStroke}),this.showTooltip(i)}),this.BarClass=i.Rectangle.extend({strokeWidth:this.options.barStrokeWidth,showStroke:this.options.barShowStroke,ctx:this.chart.ctx}),e.each(t.datasets,function(i){var s={label:i.label||null,fillColor:i.fillColor,strokeColor:i.strokeColor,bars:[]};this.datasets.push(s),e.each(i.data,function(e,n){s.bars.push(new this.BarClass({value:e,label:t.labels[n],datasetLabel:i.label,strokeColor:i.strokeColor,fillColor:i.fillColor,highlightFill:i.highlightFill||i.fillColor,highlightStroke:i.highlightStroke||i.strokeColor}))},this)},this),this.buildScale(t.labels),this.BarClass.prototype.base=this.scale.endPoint,this.eachBars(function(t,i,s){e.extend(t,{width:this.scale.calculateBarWidth(this.datasets.length),x:this.scale.calculateBarX(this.datasets.length,s,i),y:this.scale.endPoint}),t.save()},this),this.render()},update:function(){this.scale.update(),e.each(this.activeElements,function(t){t.restore(["fillColor","strokeColor"])}),this.eachBars(function(t){t.save()}),this.render()},eachBars:function(t){e.each(this.datasets,function(i,s){e.each(i.bars,t,this,s)},this)},getBarsAtEvent:function(t){for(var i,s=[],n=e.getRelativePosition(t),o=function(t){s.push(t.bars[i])},a=0;a<this.datasets.length;a++)for(i=0;i<this.datasets[a].bars.length;i++)if(this.datasets[a].bars[i].inRange(n.x,n.y))return e.each(this.datasets,o),s;return s},buildScale:function(t){var i=this,s=function(){var t=[];return i.eachBars(function(i){t.push(i.value)}),t},n={templateString:this.options.scaleLabel,height:this.chart.height,width:this.chart.width,ctx:this.chart.ctx,textColor:this.options.scaleFontColor,fontSize:this.options.scaleFontSize,fontStyle:this.options.scaleFontStyle,fontFamily:this.options.scaleFontFamily,valuesCount:t.length,beginAtZero:this.options.scaleBeginAtZero,integersOnly:this.options.scaleIntegersOnly,calculateYRange:function(t){var i=e.calculateScaleRange(s(),t,this.fontSize,this.beginAtZero,this.integersOnly);e.extend(this,i)},xLabels:t,font:e.fontString(this.options.scaleFontSize,this.options.scaleFontStyle,this.options.scaleFontFamily),lineWidth:this.options.scaleLineWidth,lineColor:this.options.scaleLineColor,showHorizontalLines:this.options.scaleShowHorizontalLines,showVerticalLines:this.options.scaleShowVerticalLines,gridLineWidth:this.options.scaleShowGridLines?this.options.scaleGridLineWidth:0,gridLineColor:this.options.scaleShowGridLines?this.options.scaleGridLineColor:"rgba(0,0,0,0)",padding:this.options.showScale?0:this.options.barShowStroke?this.options.barStrokeWidth:0,showLabels:this.options.scaleShowLabels,display:this.options.showScale};this.options.scaleOverride&&e.extend(n,{calculateYRange:e.noop,steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}),this.scale=new this.ScaleClass(n)},addData:function(t,i){e.each(t,function(t,e){this.datasets[e].bars.push(new this.BarClass({value:t,label:i,x:this.scale.calculateBarX(this.datasets.length,e,this.scale.valuesCount+1),y:this.scale.endPoint,width:this.scale.calculateBarWidth(this.datasets.length),base:this.scale.endPoint,strokeColor:this.datasets[e].strokeColor,fillColor:this.datasets[e].fillColor}))
+},this),this.scale.addXLabel(i),this.update()},removeData:function(){this.scale.removeXLabel(),e.each(this.datasets,function(t){t.bars.shift()},this),this.update()},reflow:function(){e.extend(this.BarClass.prototype,{y:this.scale.endPoint,base:this.scale.endPoint});var t=e.extend({height:this.chart.height,width:this.chart.width});this.scale.update(t)},draw:function(t){var i=t||1;this.clear();this.chart.ctx;this.scale.draw(i),e.each(this.datasets,function(t,s){e.each(t.bars,function(t,e){t.hasValue()&&(t.base=this.scale.endPoint,t.transition({x:this.scale.calculateBarX(this.datasets.length,s,e),y:this.scale.calculateY(t.value),width:this.scale.calculateBarWidth(this.datasets.length)},i).draw())},this)},this)}})}.call(this),function(){"use strict";var t=this,i=t.Chart,e=i.helpers,s={segmentShowStroke:!0,segmentStrokeColor:"#fff",segmentStrokeWidth:2,percentageInnerCutout:50,animationSteps:100,animationEasing:"easeOutBounce",animateRotate:!0,animateScale:!1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'};i.Type.extend({name:"Doughnut",defaults:s,initialize:function(t){this.segments=[],this.outerRadius=(e.min([this.chart.width,this.chart.height])-this.options.segmentStrokeWidth/2)/2,this.SegmentArc=i.Arc.extend({ctx:this.chart.ctx,x:this.chart.width/2,y:this.chart.height/2}),this.options.showTooltips&&e.bindEvents(this,this.options.tooltipEvents,function(t){var i="mouseout"!==t.type?this.getSegmentsAtEvent(t):[];e.each(this.segments,function(t){t.restore(["fillColor"])}),e.each(i,function(t){t.fillColor=t.highlightColor}),this.showTooltip(i)}),this.calculateTotal(t),e.each(t,function(t,i){this.addData(t,i,!0)},this),this.render()},getSegmentsAtEvent:function(t){var i=[],s=e.getRelativePosition(t);return e.each(this.segments,function(t){t.inRange(s.x,s.y)&&i.push(t)},this),i},addData:function(t,i,e){var s=i||this.segments.length;this.segments.splice(s,0,new this.SegmentArc({value:t.value,outerRadius:this.options.animateScale?0:this.outerRadius,innerRadius:this.options.animateScale?0:this.outerRadius/100*this.options.percentageInnerCutout,fillColor:t.color,highlightColor:t.highlight||t.color,showStroke:this.options.segmentShowStroke,strokeWidth:this.options.segmentStrokeWidth,strokeColor:this.options.segmentStrokeColor,startAngle:1.5*Math.PI,circumference:this.options.animateRotate?0:this.calculateCircumference(t.value),label:t.label})),e||(this.reflow(),this.update())},calculateCircumference:function(t){return 2*Math.PI*(Math.abs(t)/this.total)},calculateTotal:function(t){this.total=0,e.each(t,function(t){this.total+=Math.abs(t.value)},this)},update:function(){this.calculateTotal(this.segments),e.each(this.activeElements,function(t){t.restore(["fillColor"])}),e.each(this.segments,function(t){t.save()}),this.render()},removeData:function(t){var i=e.isNumber(t)?t:this.segments.length-1;this.segments.splice(i,1),this.reflow(),this.update()},reflow:function(){e.extend(this.SegmentArc.prototype,{x:this.chart.width/2,y:this.chart.height/2}),this.outerRadius=(e.min([this.chart.width,this.chart.height])-this.options.segmentStrokeWidth/2)/2,e.each(this.segments,function(t){t.update({outerRadius:this.outerRadius,innerRadius:this.outerRadius/100*this.options.percentageInnerCutout})},this)},draw:function(t){var i=t?t:1;this.clear(),e.each(this.segments,function(t,e){t.transition({circumference:this.calculateCircumference(t.value),outerRadius:this.outerRadius,innerRadius:this.outerRadius/100*this.options.percentageInnerCutout},i),t.endAngle=t.startAngle+t.circumference,t.draw(),0===e&&(t.startAngle=1.5*Math.PI),e<this.segments.length-1&&(this.segments[e+1].startAngle=t.endAngle)},this)}}),i.types.Doughnut.extend({name:"Pie",defaults:e.merge(s,{percentageInnerCutout:0})})}.call(this),function(){"use strict";var t=this,i=t.Chart,e=i.helpers,s={scaleShowGridLines:!0,scaleGridLineColor:"rgba(0,0,0,.05)",scaleGridLineWidth:1,scaleShowHorizontalLines:!0,scaleShowVerticalLines:!0,bezierCurve:!0,bezierCurveTension:.4,pointDot:!0,pointDotRadius:4,pointDotStrokeWidth:1,pointHitDetectionRadius:20,datasetStroke:!0,datasetStrokeWidth:2,datasetFill:!0,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'};i.Type.extend({name:"Line",defaults:s,initialize:function(t){this.PointClass=i.Point.extend({strokeWidth:this.options.pointDotStrokeWidth,radius:this.options.pointDotRadius,display:this.options.pointDot,hitDetectionRadius:this.options.pointHitDetectionRadius,ctx:this.chart.ctx,inRange:function(t){return Math.pow(t-this.x,2)<Math.pow(this.radius+this.hitDetectionRadius,2)}}),this.datasets=[],this.options.showTooltips&&e.bindEvents(this,this.options.tooltipEvents,function(t){var i="mouseout"!==t.type?this.getPointsAtEvent(t):[];this.eachPoints(function(t){t.restore(["fillColor","strokeColor"])}),e.each(i,function(t){t.fillColor=t.highlightFill,t.strokeColor=t.highlightStroke}),this.showTooltip(i)}),e.each(t.datasets,function(i){var s={label:i.label||null,fillColor:i.fillColor,strokeColor:i.strokeColor,pointColor:i.pointColor,pointStrokeColor:i.pointStrokeColor,points:[]};this.datasets.push(s),e.each(i.data,function(e,n){s.points.push(new this.PointClass({value:e,label:t.labels[n],datasetLabel:i.label,strokeColor:i.pointStrokeColor,fillColor:i.pointColor,highlightFill:i.pointHighlightFill||i.pointColor,highlightStroke:i.pointHighlightStroke||i.pointStrokeColor}))},this),this.buildScale(t.labels),this.eachPoints(function(t,i){e.extend(t,{x:this.scale.calculateX(i),y:this.scale.endPoint}),t.save()},this)},this),this.render()},update:function(){this.scale.update(),e.each(this.activeElements,function(t){t.restore(["fillColor","strokeColor"])}),this.eachPoints(function(t){t.save()}),this.render()},eachPoints:function(t){e.each(this.datasets,function(i){e.each(i.points,t,this)},this)},getPointsAtEvent:function(t){var i=[],s=e.getRelativePosition(t);return e.each(this.datasets,function(t){e.each(t.points,function(t){t.inRange(s.x,s.y)&&i.push(t)})},this),i},buildScale:function(t){var s=this,n=function(){var t=[];return s.eachPoints(function(i){t.push(i.value)}),t},o={templateString:this.options.scaleLabel,height:this.chart.height,width:this.chart.width,ctx:this.chart.ctx,textColor:this.options.scaleFontColor,fontSize:this.options.scaleFontSize,fontStyle:this.options.scaleFontStyle,fontFamily:this.options.scaleFontFamily,valuesCount:t.length,beginAtZero:this.options.scaleBeginAtZero,integersOnly:this.options.scaleIntegersOnly,calculateYRange:function(t){var i=e.calculateScaleRange(n(),t,this.fontSize,this.beginAtZero,this.integersOnly);e.extend(this,i)},xLabels:t,font:e.fontString(this.options.scaleFontSize,this.options.scaleFontStyle,this.options.scaleFontFamily),lineWidth:this.options.scaleLineWidth,lineColor:this.options.scaleLineColor,showHorizontalLines:this.options.scaleShowHorizontalLines,showVerticalLines:this.options.scaleShowVerticalLines,gridLineWidth:this.options.scaleShowGridLines?this.options.scaleGridLineWidth:0,gridLineColor:this.options.scaleShowGridLines?this.options.scaleGridLineColor:"rgba(0,0,0,0)",padding:this.options.showScale?0:this.options.pointDotRadius+this.options.pointDotStrokeWidth,showLabels:this.options.scaleShowLabels,display:this.options.showScale};this.options.scaleOverride&&e.extend(o,{calculateYRange:e.noop,steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}),this.scale=new i.Scale(o)},addData:function(t,i){e.each(t,function(t,e){this.datasets[e].points.push(new this.PointClass({value:t,label:i,x:this.scale.calculateX(this.scale.valuesCount+1),y:this.scale.endPoint,strokeColor:this.datasets[e].pointStrokeColor,fillColor:this.datasets[e].pointColor}))},this),this.scale.addXLabel(i),this.update()},removeData:function(){this.scale.removeXLabel(),e.each(this.datasets,function(t){t.points.shift()},this),this.update()},reflow:function(){var t=e.extend({height:this.chart.height,width:this.chart.width});this.scale.update(t)},draw:function(t){var i=t||1;this.clear();var s=this.chart.ctx,n=function(t){return null!==t.value},o=function(t,i,s){return e.findNextWhere(i,n,s)||t},a=function(t,i,s){return e.findPreviousWhere(i,n,s)||t};this.scale.draw(i),e.each(this.datasets,function(t){var h=e.where(t.points,n);e.each(t.points,function(t,e){t.hasValue()&&t.transition({y:this.scale.calculateY(t.value),x:this.scale.calculateX(e)},i)},this),this.options.bezierCurve&&e.each(h,function(t,i){var s=i>0&&i<h.length-1?this.options.bezierCurveTension:0;t.controlPoints=e.splineCurve(a(t,h,i),t,o(t,h,i),s),t.controlPoints.outer.y>this.scale.endPoint?t.controlPoints.outer.y=this.scale.endPoint:t.controlPoints.outer.y<this.scale.startPoint&&(t.controlPoints.outer.y=this.scale.startPoint),t.controlPoints.inner.y>this.scale.endPoint?t.controlPoints.inner.y=this.scale.endPoint:t.controlPoints.inner.y<this.scale.startPoint&&(t.controlPoints.inner.y=this.scale.startPoint)},this),s.lineWidth=this.options.datasetStrokeWidth,s.strokeStyle=t.strokeColor,s.beginPath(),e.each(h,function(t,i){if(0===i)s.moveTo(t.x,t.y);else if(this.options.bezierCurve){var e=a(t,h,i);s.bezierCurveTo(e.controlPoints.outer.x,e.controlPoints.outer.y,t.controlPoints.inner.x,t.controlPoints.inner.y,t.x,t.y)}else s.lineTo(t.x,t.y)},this),s.stroke(),this.options.datasetFill&&h.length>0&&(s.lineTo(h[h.length-1].x,this.scale.endPoint),s.lineTo(h[0].x,this.scale.endPoint),s.fillStyle=t.fillColor,s.closePath(),s.fill()),e.each(h,function(t){t.draw()})},this)}})}.call(this),function(){"use strict";var t=this,i=t.Chart,e=i.helpers,s={scaleShowLabelBackdrop:!0,scaleBackdropColor:"rgba(255,255,255,0.75)",scaleBeginAtZero:!0,scaleBackdropPaddingY:2,scaleBackdropPaddingX:2,scaleShowLine:!0,segmentShowStroke:!0,segmentStrokeColor:"#fff",segmentStrokeWidth:2,animationSteps:100,animationEasing:"easeOutBounce",animateRotate:!0,animateScale:!1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'};i.Type.extend({name:"PolarArea",defaults:s,initialize:function(t){this.segments=[],this.SegmentArc=i.Arc.extend({showStroke:this.options.segmentShowStroke,strokeWidth:this.options.segmentStrokeWidth,strokeColor:this.options.segmentStrokeColor,ctx:this.chart.ctx,innerRadius:0,x:this.chart.width/2,y:this.chart.height/2}),this.scale=new i.RadialScale({display:this.options.showScale,fontStyle:this.options.scaleFontStyle,fontSize:this.options.scaleFontSize,fontFamily:this.options.scaleFontFamily,fontColor:this.options.scaleFontColor,showLabels:this.options.scaleShowLabels,showLabelBackdrop:this.options.scaleShowLabelBackdrop,backdropColor:this.options.scaleBackdropColor,backdropPaddingY:this.options.scaleBackdropPaddingY,backdropPaddingX:this.options.scaleBackdropPaddingX,lineWidth:this.options.scaleShowLine?this.options.scaleLineWidth:0,lineColor:this.options.scaleLineColor,lineArc:!0,width:this.chart.width,height:this.chart.height,xCenter:this.chart.width/2,yCenter:this.chart.height/2,ctx:this.chart.ctx,templateString:this.options.scaleLabel,valuesCount:t.length}),this.updateScaleRange(t),this.scale.update(),e.each(t,function(t,i){this.addData(t,i,!0)},this),this.options.showTooltips&&e.bindEvents(this,this.options.tooltipEvents,function(t){var i="mouseout"!==t.type?this.getSegmentsAtEvent(t):[];e.each(this.segments,function(t){t.restore(["fillColor"])}),e.each(i,function(t){t.fillColor=t.highlightColor}),this.showTooltip(i)}),this.render()},getSegmentsAtEvent:function(t){var i=[],s=e.getRelativePosition(t);return e.each(this.segments,function(t){t.inRange(s.x,s.y)&&i.push(t)},this),i},addData:function(t,i,e){var s=i||this.segments.length;this.segments.splice(s,0,new this.SegmentArc({fillColor:t.color,highlightColor:t.highlight||t.color,label:t.label,value:t.value,outerRadius:this.options.animateScale?0:this.scale.calculateCenterOffset(t.value),circumference:this.options.animateRotate?0:this.scale.getCircumference(),startAngle:1.5*Math.PI})),e||(this.reflow(),this.update())},removeData:function(t){var i=e.isNumber(t)?t:this.segments.length-1;this.segments.splice(i,1),this.reflow(),this.update()},calculateTotal:function(t){this.total=0,e.each(t,function(t){this.total+=t.value},this),this.scale.valuesCount=this.segments.length},updateScaleRange:function(t){var i=[];e.each(t,function(t){i.push(t.value)});var s=this.options.scaleOverride?{steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}:e.calculateScaleRange(i,e.min([this.chart.width,this.chart.height])/2,this.options.scaleFontSize,this.options.scaleBeginAtZero,this.options.scaleIntegersOnly);e.extend(this.scale,s,{size:e.min([this.chart.width,this.chart.height]),xCenter:this.chart.width/2,yCenter:this.chart.height/2})},update:function(){this.calculateTotal(this.segments),e.each(this.segments,function(t){t.save()}),this.reflow(),this.render()},reflow:function(){e.extend(this.SegmentArc.prototype,{x:this.chart.width/2,y:this.chart.height/2}),this.updateScaleRange(this.segments),this.scale.update(),e.extend(this.scale,{xCenter:this.chart.width/2,yCenter:this.chart.height/2}),e.each(this.segments,function(t){t.update({outerRadius:this.scale.calculateCenterOffset(t.value)})},this)},draw:function(t){var i=t||1;this.clear(),e.each(this.segments,function(t,e){t.transition({circumference:this.scale.getCircumference(),outerRadius:this.scale.calculateCenterOffset(t.value)},i),t.endAngle=t.startAngle+t.circumference,0===e&&(t.startAngle=1.5*Math.PI),e<this.segments.length-1&&(this.segments[e+1].startAngle=t.endAngle),t.draw()},this),this.scale.draw()}})}.call(this),function(){"use strict";var t=this,i=t.Chart,e=i.helpers;i.Type.extend({name:"Radar",defaults:{scaleShowLine:!0,angleShowLineOut:!0,scaleShowLabels:!1,scaleBeginAtZero:!0,angleLineColor:"rgba(0,0,0,.1)",angleLineWidth:1,pointLabelFontFamily:"'Arial'",pointLabelFontStyle:"normal",pointLabelFontSize:10,pointLabelFontColor:"#666",pointDot:!0,pointDotRadius:3,pointDotStrokeWidth:1,pointHitDetectionRadius:20,datasetStroke:!0,datasetStrokeWidth:2,datasetFill:!0,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'},initialize:function(t){this.PointClass=i.Point.extend({strokeWidth:this.options.pointDotStrokeWidth,radius:this.options.pointDotRadius,display:this.options.pointDot,hitDetectionRadius:this.options.pointHitDetectionRadius,ctx:this.chart.ctx}),this.datasets=[],this.buildScale(t),this.options.showTooltips&&e.bindEvents(this,this.options.tooltipEvents,function(t){var i="mouseout"!==t.type?this.getPointsAtEvent(t):[];this.eachPoints(function(t){t.restore(["fillColor","strokeColor"])}),e.each(i,function(t){t.fillColor=t.highlightFill,t.strokeColor=t.highlightStroke}),this.showTooltip(i)}),e.each(t.datasets,function(i){var s={label:i.label||null,fillColor:i.fillColor,strokeColor:i.strokeColor,pointColor:i.pointColor,pointStrokeColor:i.pointStrokeColor,points:[]};this.datasets.push(s),e.each(i.data,function(e,n){var o;this.scale.animation||(o=this.scale.getPointPosition(n,this.scale.calculateCenterOffset(e))),s.points.push(new this.PointClass({value:e,label:t.labels[n],datasetLabel:i.label,x:this.options.animation?this.scale.xCenter:o.x,y:this.options.animation?this.scale.yCenter:o.y,strokeColor:i.pointStrokeColor,fillColor:i.pointColor,highlightFill:i.pointHighlightFill||i.pointColor,highlightStroke:i.pointHighlightStroke||i.pointStrokeColor}))},this)},this),this.render()},eachPoints:function(t){e.each(this.datasets,function(i){e.each(i.points,t,this)},this)},getPointsAtEvent:function(t){var i=e.getRelativePosition(t),s=e.getAngleFromPoint({x:this.scale.xCenter,y:this.scale.yCenter},i),n=2*Math.PI/this.scale.valuesCount,o=Math.round((s.angle-1.5*Math.PI)/n),a=[];return(o>=this.scale.valuesCount||0>o)&&(o=0),s.distance<=this.scale.drawingArea&&e.each(this.datasets,function(t){a.push(t.points[o])}),a},buildScale:function(t){this.scale=new i.RadialScale({display:this.options.showScale,fontStyle:this.options.scaleFontStyle,fontSize:this.options.scaleFontSize,fontFamily:this.options.scaleFontFamily,fontColor:this.options.scaleFontColor,showLabels:this.options.scaleShowLabels,showLabelBackdrop:this.options.scaleShowLabelBackdrop,backdropColor:this.options.scaleBackdropColor,backdropPaddingY:this.options.scaleBackdropPaddingY,backdropPaddingX:this.options.scaleBackdropPaddingX,lineWidth:this.options.scaleShowLine?this.options.scaleLineWidth:0,lineColor:this.options.scaleLineColor,angleLineColor:this.options.angleLineColor,angleLineWidth:this.options.angleShowLineOut?this.options.angleLineWidth:0,pointLabelFontColor:this.options.pointLabelFontColor,pointLabelFontSize:this.options.pointLabelFontSize,pointLabelFontFamily:this.options.pointLabelFontFamily,pointLabelFontStyle:this.options.pointLabelFontStyle,height:this.chart.height,width:this.chart.width,xCenter:this.chart.width/2,yCenter:this.chart.height/2,ctx:this.chart.ctx,templateString:this.options.scaleLabel,labels:t.labels,valuesCount:t.datasets[0].data.length}),this.scale.setScaleSize(),this.updateScaleRange(t.datasets),this.scale.buildYLabels()},updateScaleRange:function(t){var i=function(){var i=[];return e.each(t,function(t){t.data?i=i.concat(t.data):e.each(t.points,function(t){i.push(t.value)})}),i}(),s=this.options.scaleOverride?{steps:this.options.scaleSteps,stepValue:this.options.scaleStepWidth,min:this.options.scaleStartValue,max:this.options.scaleStartValue+this.options.scaleSteps*this.options.scaleStepWidth}:e.calculateScaleRange(i,e.min([this.chart.width,this.chart.height])/2,this.options.scaleFontSize,this.options.scaleBeginAtZero,this.options.scaleIntegersOnly);e.extend(this.scale,s)},addData:function(t,i){this.scale.valuesCount++,e.each(t,function(t,e){var s=this.scale.getPointPosition(this.scale.valuesCount,this.scale.calculateCenterOffset(t));this.datasets[e].points.push(new this.PointClass({value:t,label:i,x:s.x,y:s.y,strokeColor:this.datasets[e].pointStrokeColor,fillColor:this.datasets[e].pointColor}))},this),this.scale.labels.push(i),this.reflow(),this.update()},removeData:function(){this.scale.valuesCount--,this.scale.labels.shift(),e.each(this.datasets,function(t){t.points.shift()},this),this.reflow(),this.update()},update:function(){this.eachPoints(function(t){t.save()}),this.reflow(),this.render()},reflow:function(){e.extend(this.scale,{width:this.chart.width,height:this.chart.height,size:e.min([this.chart.width,this.chart.height]),xCenter:this.chart.width/2,yCenter:this.chart.height/2}),this.updateScaleRange(this.datasets),this.scale.setScaleSize(),this.scale.buildYLabels()},draw:function(t){var i=t||1,s=this.chart.ctx;this.clear(),this.scale.draw(),e.each(this.datasets,function(t){e.each(t.points,function(t,e){t.hasValue()&&t.transition(this.scale.getPointPosition(e,this.scale.calculateCenterOffset(t.value)),i)},this),s.lineWidth=this.options.datasetStrokeWidth,s.strokeStyle=t.strokeColor,s.beginPath(),e.each(t.points,function(t,i){0===i?s.moveTo(t.x,t.y):s.lineTo(t.x,t.y)},this),s.closePath(),s.stroke(),s.fillStyle=t.fillColor,s.fill(),e.each(t.points,function(t){t.hasValue()&&t.draw()})},this)}})}.call(this);
+Chart.defaults.global = {
+    // Boolean - Whether to animate the chart
+    animation: true,
+
+    // Number - Number of animation steps
+    animationSteps: 60,
+
+    // String - Animation easing effect
+    // Possible effects are:
+    // [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
+    //  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
+    //  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
+    //  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
+    //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
+    //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
+    //  easeOutElastic, easeInCubic]
+    animationEasing: "easeOutQuart",
+
+    // Boolean - If we should show the scale at all
+    showScale: true,
+
+    // Boolean - If we want to override with a hard coded scale
+    scaleOverride: false,
+
+    // ** Required if scaleOverride is true **
+    // Number - The number of steps in a hard coded scale
+    scaleSteps: null,
+    // Number - The value jump in the hard coded scale
+    scaleStepWidth: null,
+    // Number - The scale starting value
+    scaleStartValue: null,
+
+    // String - Colour of the scale line
+    scaleLineColor: "rgba(0,0,0,.1)",
+
+    // Number - Pixel width of the scale line
+    scaleLineWidth: 1,
+
+    // Boolean - Whether to show labels on the scale
+    scaleShowLabels: true,
+
+    // Interpolated JS string - can access value
+    scaleLabel: "<%=value%>",
+
+    // Boolean - Whether the scale should stick to integers, not floats even if drawing space is there
+    scaleIntegersOnly: true,
+
+    // Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+    scaleBeginAtZero: false,
+
+    // String - Scale label font declaration for the scale label
+    scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+    // Number - Scale label font size in pixels
+    scaleFontSize: 12,
+
+    // String - Scale label font weight style
+    scaleFontStyle: "normal",
+
+    // String - Scale label font colour
+    scaleFontColor: "#666",
+
+    // Boolean - whether or not the chart should be responsive and resize when the browser does.
+    responsive: true,
+
+    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    maintainAspectRatio: true,
+
+    // Boolean - Determines whether to draw tooltips on the canvas or not
+    showTooltips: true,
+
+    // Function - Determines whether to execute the customTooltips function instead of drawing the built in tooltips (See [Advanced - External Tooltips](#advanced-usage-custom-tooltips))
+    customTooltips: false,
+
+    // Array - Array of string names to attach tooltip events
+    tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+
+    // String - Tooltip background colour
+    tooltipFillColor: "rgba(0,0,0,0.8)",
+
+    // String - Tooltip label font declaration for the scale label
+    tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+    // Number - Tooltip label font size in pixels
+    tooltipFontSize: 14,
+
+    // String - Tooltip font weight style
+    tooltipFontStyle: "normal",
+
+    // String - Tooltip label font colour
+    tooltipFontColor: "#fff",
+
+    // String - Tooltip title font declaration for the scale label
+    tooltipTitleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+    // Number - Tooltip title font size in pixels
+    tooltipTitleFontSize: 14,
+
+    // String - Tooltip title font weight style
+    tooltipTitleFontStyle: "bold",
+
+    // String - Tooltip title font colour
+    tooltipTitleFontColor: "#fff",
+
+    // Number - pixel width of padding around tooltip text
+    tooltipYPadding: 6,
+
+    // Number - pixel width of padding around tooltip text
+    tooltipXPadding: 6,
+
+    // Number - Size of the caret on the tooltip
+    tooltipCaretSize: 8,
+
+    // Number - Pixel radius of the tooltip border
+    tooltipCornerRadius: 6,
+
+    // Number - Pixel offset from point x to tooltip edge
+    tooltipXOffset: 10,
+
+    // String - Template string for single tooltips
+    tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
+
+    // String - Template string for multiple tooltips
+    multiTooltipTemplate: "<%= value %>",
+
+
+    // Function - Will fire on animation progression.
+    onAnimationProgress: function(){},
+
+    // Function - Will fire on animation completion.
+    onAnimationComplete: function(){}
+}
+
+if(document.getElementById("course-graph") != undefined) {
+    var ctx = document.getElementById("course-graph").getContext("2d");
+    var sales_ctx = document.getElementById("sales-graph").getContext("2d");
+
+    ctx.canvas.width = 50;
+    ctx.canvas.height = 50;
+    //sales_ctx.canvas.width = 300;
+    sales_ctx.canvas.height = 100;
+
+    create_chart_by_time(sales_ctx, 'annual', 'courses', 0)
+    create_pie_chart(ctx, 'courses');
+
+}
+function create_chart_by_time(selector, period, type, specific){
+    console.log('creating');
+    $.ajax({
+    url: "/admin/courses/report",
+        type: "POST",
+        data: {
+            period: period,
+            type: type,
+            specific: specific,
+    },
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    },
+    cache: false,
+
+        success: function(data){
+            console.log(data);
+            var data_keys = [];
+            var data_values = [];
+
+            $.each(data,function(key,value){
+                data_keys.push(key);
+                data_values.push(value);
+            });
+
+
+
+
+            var values = {
+                labels: data_keys,
+                datasets: [
+                    {
+                        label: 'Cursos vendidos',
+                        fillColor: "rgba(60,60,60,0.2)",
+                        strokeColor: "rgba(60,60,60,1)",
+                        pointColor: "rgba(60,60,60,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(60,60,60,1)",
+                        data: data_values
+                    }]
+            };
+            console.log(values);
+
+
+            var time_line_chart = new Chart(selector).Line(values,{
+                bezierCurve: true,
+                responsive: true
+            });
+
+        }
+    });
+
+
+
+
+
+
+}
+
+
+function create_pie_chart(selector, type){
+    console.log('creating');
+    $.ajax({
+        url: "/admin/courses/totalSales",
+        type: "POST",
+        data: {
+            type: type
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        cache: false,
+
+        success: function(data){
+            console.log(data);
+            var total_data = [];
+            var color = '';
+
+
+            $.each(data,function(key,value){
+
+                r = Math.floor(Math.random() * 200) + 50;
+                console.log(r);
+                g = Math.floor(Math.random() * 200) + 50;
+                console.log(g);
+                b = Math.floor(Math.random() * 200) + 50;
+                console.log(b);
+                color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+                //data_keys.push(key);
+                //data_values.push(value);
+                console.log(value);
+                total_data.push({
+                    value: value,
+                    label: key,
+                    color: color
+                });
+            });
+
+            console.log('finishing');
+            console.log(total_data);
+
+
+            //console.log(values);
+
+
+            var time_line_chart = new Chart(selector).Pie(total_data,{
+
+                animateRotate : true,
+                legendTemplate:   "<table class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><tr><td><i class=\"fa fa-square\" style=\"color:<%=segments[i].fillColor%>; font-size: 3.0rem;\" ></i>&nbsp;&nbsp;<%if(segments[i].label){%><%=segments[i].label%><%}%></td></tr><%}%></table>"
+            });
+
+            console.log(time_line_chart.generateLegend())
+            $("#course-legend").html(time_line_chart.generateLegend());
+
+        }
+    });
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+$(function(){
+
+	var id = null;
+
+	$('.table #btn-edit-tutor-activity').on('click', function(e){
+		e.preventDefault();
+
+		createSelect("tutor", 'myworkshopevaluations/tutor/select', $("#modalEditTutorActivity"));
+
+		$('#modalEditTutorActivity').modal('toggle');
+
+		id = $(this).parent().parent()[0].children[8].getAttribute('id');
+
+		//Adicionando o nome do usuário ao text field
+		$('#name-user').val($(this).parent().parent()[0].children[0].innerText);
+
+		//Adicionando descrição e atividade do workshop ao text field
+		$('#description-workshop').val($(this).parent().parent()[0].children[2].innerText);
+
+	});
+
+	$('#editTutorActivity').submit(function(e){
+		e.preventDefault();
+		console.log($(this).serialize());
+		$.ajax({
+			method: 'POST',
+			url: '/admin/myworkshopevaluations/updateTutor/'+id,
+			dataType: 'Json',
+			data: $(this).serialize(),
+			headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            success: function(data){
+            	if(data == true){
+            		flash_success('Tutor da atividade alterado com sucesso.');
+            		setTimeout(function(){
+				        window.location.reload();
+				    },1500);
+				}else{
+					flash_warning('Erro ao alterar tutor da atividade. Tente novamente.');
+				}
+            }
+		});
+	});
+
+});
+$(document).ready(function(){
+	$('.content-preview').on('click', function(e){
+		e.preventDefault();
+		$('#vimeoPreviewModal').modal('toggle');
+	});
+});
+$(function(){
+
+	var id = null;
+
+
+	$('.table #btn-webinars-users').on('click', function(e){
+		e.preventDefault();
+
+		id = $(this).attr('data-id');
+
+		var modal = $('#modalUsersCourse').modal('toggle');
+
+		$.ajax({
+			method: 'GET',
+			dataType: 'Json',
+			url: '/admin/webinars/users_course?id='+id,
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+			},
+			success: function(data){
+				if(data == false){
+					$('#modalUsersCourse .modal-body').html("<h2>Nenhum aluno matriculado neste Curso.</h2>");
+				}else {
+					var html = '<table id="users-course" class="table table-striped table-bordered table-hover">';
+							html += '<thead>';
+								html += '<th>';
+									html += 'E-mail';
+								html += '</th>';
+							html += '</thead>';
+
+							html += '<tbody>';
+								for (var i = 0; i < data.length; i++) {
+									html += "<tr>";
+										html += "<td>";
+											html += '' + data[i].student_email + ',';
+										html += "</td>";
+									html += "</tr>";
+								}
+							html += '</tbody>';
+					html += '</table>';
+					$('#modalUsersCourse .modal-body').html(html);
+				}
+			}
+		});
+
+	});
+});
+//# sourceMappingURL=backend.js.map

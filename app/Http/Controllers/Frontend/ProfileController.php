@@ -126,6 +126,7 @@ class ProfileController extends Controller {
         auth()->user()->last_data_update = Carbon::now();
         auth()->user()->save();
 
+
         return redirect()->route('frontend.dashboard');
     }
 

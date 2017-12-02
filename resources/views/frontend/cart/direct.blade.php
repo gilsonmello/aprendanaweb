@@ -6,11 +6,6 @@ Pagamento | {{app_name()}}
 
 @section('content')
 
-
-
-
-
-
 <section id="main-content" class="cart-page">
 
     <div class="container">
@@ -313,7 +308,13 @@ Pagamento | {{app_name()}}
 
 @section('after-scripts-end')
 
-<script src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <?php $environment = config('laravelpagseguro.use-sandbox'); ?>
+
+    @if($environment == 'local')
+        <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    @else
+        <script src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    @endif
 
 
 <script src="../js/pagseguro-setup.js"></script>
@@ -326,38 +327,6 @@ $(document).ready(function () {
 });
 </script>
 
-
-
-<script type="text/javascript">
-</script>
-
-
-
-
-<script>
-    !function (f, b, e, v, n, t, s) {
-        if (f.fbq)
-            return;
-        n = f.fbq = function () {
-            n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-        };
-        if (!f._fbq)
-            f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = '2.0';
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s)
-    }(window,
-            document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-    fbq('track', "InitiateCheckout");
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=973245029429675&ev=PageView&noscript=1"/></noscript>
 
 @stop
 

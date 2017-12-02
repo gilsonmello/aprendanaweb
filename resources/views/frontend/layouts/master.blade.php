@@ -1,33 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js mh-one-sb" lang="pt-BR" prefix="og: http://ogp.me/ns#">
     <head>
-        <!-- Google Analytics -->
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        </script>
-        <!-- End Google Analytics -->
-
-    <div id="fb-root"></div>
-    <script>(function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id))
-                return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
 
     <meta charset="UTF-8">
 
@@ -42,24 +15,8 @@
     {{--
             <meta name="description" content="O Brasil Jurídico é uma instituição de ensino que oferece aos seus alunos um conteúdo online de excelência para concursos, Exame da OAB e extensão."> --}}
 
-    <meta name="author" content="@yield('author', 'Brasil Jurídico')">
+
     <meta name="robots" content="follow,noodp"/>
-    <link rel="canonical" href="http://198.50.234.157/~brasilju/"/>
-
-    <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:description"
-          content="O site Brasil Jurídico possui curso preparatório para concursos jurídicos e Exame da OAB, cursos de atualização e pós-graduações em Direito."/>
-    <meta name="twitter:title" content="@yield('title', app_name())"/>
-    <meta name="twitter:image"
-          content="http://198.50.234.157/~brasilju/wp-content/uploads/2016/11/~brasilju_logo_brasil_juridico_cursos_online.png"/>
-
-    <meta property="og:url" content="@yield('og-url')"/>
-    <meta property="og:type" content="@yield('og-type')" />
-    <meta property="og:title" content="@yield('og-title')" />
-    <meta property="og:description" content="@yield('og-description')" />
-    <meta property="og:image" content="@yield('og-img')" />
-
-    @yield('meta')
 
 
     @yield('before-styles-end')
@@ -77,35 +34,6 @@
     <!-- Icons-->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
-
-    <!-- Facebook Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq)
-                return;
-            n = f.fbq = function () {
-                n.callMethod ?
-                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq)
-                f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window,
-                document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1576695232624762');
-        fbq('track', "PageView");
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=1576695232624762&ev=PageView&noscript=1"/></noscript>
-    <!-- End Facebook Pixel Code -->
 </head>
 
 <body>
@@ -123,22 +51,16 @@
     {{--@include('frontend.includes.nav')--}}
 
     <!-- div principal -->
-    @if(session('compliance.cart') === TRUE)
-    @include('frontend.includes.compliance.header')
-    @else
     @include('frontend.includes.header')
-    @endif
+
 
 
     <div id="main">
         @include('includes.partials.messages')
         @yield('content')
 
-        @if(session('compliance.cart') === TRUE)
-        @include('frontend.includes.compliance.footer')
-        @else
         @include('frontend.includes.footer')
-        @endif
+
     </div>
     <!-- ./div principal -->
 
@@ -169,15 +91,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 })();
 </script> --}}
 
-    <script>
-            (function (h, e, a, t, m, p) {
-                m = e.createElement(a);
-                m.async = !0;
-                m.src = t;
-                p = e.getElementsByTagName(a)[0];
-                p.parentNode.insertBefore(m, p);
-            })(window, document, 'script', 'https://u.heatmap.it/log.js');
-    </script>
 
 </body>
 

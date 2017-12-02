@@ -391,6 +391,7 @@ Route::group(['namespace' => 'Backend'], function () {
  * Namespaces indicate folder structure
  */
 Route::group(['namespace' => 'Frontend', 'middleware' => ['origin_external', 'track_cart', 'mailing_register']], function () {
+
     require(__DIR__ . "/Routes/Frontend/PublicSector.php");
     require(__DIR__ . "/Routes/Frontend/Compliance.php");
     require(__DIR__ . "/Routes/Frontend/Frontend.php");
@@ -405,7 +406,6 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['origin_external', 'tr
     });
 
 
-
     // Catch all names in root and check if is a course
     Route::get('{section?}/{slug}/{tag?}', [
         'as' => 'course-section',
@@ -413,9 +413,9 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['origin_external', 'tr
     ])->where('slug', '([A-Za-z0-9\-\(\)\.\–]+)');
 
     /* COMENTADO PORQUE ESTAVA GERANDO DEFEITOS EM ÁREAS INTERNAS DO SISTEMA POR JEFERSON 31/01/2017 */
-//        // Catch all names in root and check if is a course
-//    Route::get('{section?}', [
-//        'as' => 'course-section_only',
-//        'uses' => 'FrontendController@getCourseOrSection'
-//    ])->where('slug', '([A-Za-z0-9\-\(\)\.\–]+)');
+    // Catch all names in root and check if is a course
+    Route::get('{section?}', [
+        'as' => 'course-section_only',
+        'uses' => 'FrontendController@getCourseOrSection'
+    ])->where('slug', '([A-Za-z0-9\-\(\)\.\–]+)');
 });

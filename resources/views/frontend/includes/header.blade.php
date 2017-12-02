@@ -1,5 +1,4 @@
 <header id="navigation">
-
     <div class="navbar" role="banner">
         <div class="container">
             <a class="secondary-logo" href="{!! route('home') !!}">
@@ -16,9 +15,9 @@
                         <div id="topbar-right">
                             <ul class="nav navbar-nav">
                                 <li><a href="{{ route('contactus.index') }}" style="color: #1E376D;"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
-                                <li><a href="https://www.facebook.com/BrasilJuridicoCursos" target="_blank" style="color: #1E376D;"><i class="fa fa-facebook"></i> Facebook</a></li>
-                                <li><a href="https://www.instagram.com/brasiljuridico/" target="_blank" style="color: #1E376D;"><i class="fa fa-instagram"></i> Instagram</a></li>
-                                <li><a href="https://www.youtube.com/channel/UC3FD5PHIbVPvVjYDAfpq_Mw" target="_blank" style="color: #1E376D;"><i class="fa fa-youtube-play"></i> YouTube</a></li>
+                                <li><a href="#" target="_blank" style="color: #1E376D;"><i class="fa fa-facebook"></i> Facebook</a></li>
+                                <li><a href="#" target="_blank" style="color: #1E376D;"><i class="fa fa-instagram"></i> Instagram</a></li>
+                                <li><a href="#" target="_blank" style="color: #1E376D;"><i class="fa fa-youtube-play"></i> YouTube</a></li>
                             </ul>
 
                             <div id="cart"><a href="{{ route("cart.items") }}" style="text-transform: uppercase; color: #1E376D;"><i class="fa fa-shopping-cart "></i> </a><span class="badge">{{ Cart::count() }}</span></div>
@@ -101,26 +100,14 @@
         <div id="menubar" class="container">    
             <nav id="mainmenu" class="navbar-left collapse navbar-collapse"> 
                 <ul class="nav navbar-nav">
-                    <li class="politics dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" style="color: #1E376D;">O BRJ</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('brasil-juridico') }}" style="color: #1E376D;">INSTITUCIONAL</a></li>
-                            <li><a href="{{ route('teachers') }}" style="color: #1E376D;">PROFESSORES ASSOCIADOS</a></li>
-                            <li><a href="{{ route('termos-de-uso') }}" style="color: #1E376D;">TERMOS DE USO</a></li>
-                            <li><a href="{{ route('contactus.index') }}" style="color: #1E376D;">FALE CONOSCO</a></li>
-                            {{--<li><a href="{{ route('faqs') }}">FAQ</a></li>--}}
-                </ul>
-                </li>
-                <li class="politics dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" style="color: #1E376D;">MÉTODO BRJ</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('frontend.methodology-oab') }}" style="color: #1E376D;">PARA OAB</a></li>
-                        {{-- <li><a href="{{ route('frontend.methodology-concursos') }}" style="color: #1E376D;">PARA CONCURSOS</a></li> --}}
-                </ul>
-                </li>
 
-                @foreach(App\Section::all()->reject(function($item){ return $item->active == 0; })->sortBy('sequence')->take(5) as $section)
-                @if($subsections_filtered = $section->subsections->reject(function($item){ return $item->courses(0)->get()->isEmpty() && $item->packages(0)->get()->isEmpty(); })->sortBy('name'))@endif
+                @foreach(App\Section::all()->reject(function($item){
+                    return $item->active == 0; })->sortBy('sequence')->take(5) as $section)
 
-                @if(!$subsections_filtered->isEmpty() && $subsections_filtered->count() > 1)
+                        @if($subsections_filtered = $section->subsections->reject(function($item){ return $item->courses(0)->get()->isEmpty() && $item->packages(0)->get()->isEmpty(); })->sortBy('name'))@endif
+
+                @if(!$subsections_filtered->isEmpty() && $subsections_filtered->count() >= 1)
+
                 <li class="menu-item dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" style="text-transform: uppercase;  color: #1E376D;">{!! strtoupper(($section->menu_name != null && $section->menu_name != "") ? $section->menu_name : $section->name) !!}</a>
                     <ul class="dropdown-menu">
@@ -140,16 +127,10 @@
 
                 <li class="menu-item dropdown" ><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"  style="color: #1E376D;">+INFORMAÇÃO</a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('tv-videos') }}"  style="color: #1E376D;">TEMAS EM DESTAQUE</a></li>
                         <li><a href="{{ route('news') }}"  style="color: #1E376D;">NOTÍCIAS</a></li>
                         <li><a href="{{ route('articles') }}"  style="color: #1E376D;">ARTIGOS</a></li>
                     </ul>
                 </li>
-
-                <li class="menu-item">
-                    <a href="{{url('/gestaopublica')}}" style="color: #1E376D;">GESTÃO PÚBLICA</a>
-                </li>
-
 
                 <a href="{{ route("cart.items") }}" class="btn btn-default btn-inverse btn-block btn-lg3 hidden-lg hidden-md"><i class="fa fa-shopping-cart"></i> CARRINHO</a>
                 <a href="/dashboard/" class="btn btn-default btn-inverse btn-block btn-lg3 hidden-lg hidden-md"><i class="fa fa-user"></i> ÁREA DO ALUNO</a>

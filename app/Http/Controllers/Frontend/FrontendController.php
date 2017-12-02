@@ -53,6 +53,7 @@ class FrontendController extends Controller {
      */
     public function index() {
 
+
         setlocale(LC_ALL, 'ptb', 'pt_BR', 'portuguese-brazil', 'bra', 'brazil', 'pt_BR.utf-8', 'pt_BR.iso-8859-1', 'br');
 
         $teachers = $this->users->teachersfeatured()->shuffle()->take(6);
@@ -71,7 +72,8 @@ class FrontendController extends Controller {
         $coursesCategorySet = Collect([]);
         //$coursesFirstCategory = $this->courses->getBySectionName('Combinadas e Isoladas',8)->shuffle()->take(3)->sortBy('featured');
         // $coursesSecondCategory = $this->courses->getBySectionName('Novo CPC',8)->shuffle()->take(3)->sortBy('featured');
-        $coursesFirstCategory = $this->getRandomCoursesWithFeaturedFirst('Concursos');
+        $coursesFirstCategory = $this->getRandomCoursesWithFeaturedFirst('Cursos de Programação');
+
         $coursesSecondCategory = $this->getRandomCoursesWithFeaturedFirst('Aperfeiçoamento e Extensão');
         $coursesThirdCategory = $this->getRandomCoursesWithFeaturedFirst('Exame OAB');
 
@@ -111,23 +113,25 @@ class FrontendController extends Controller {
 
     /**
      * @param null $slug
+     * @param null $section
      * @return $this
      */
-    public function getCourseOrSection(Request $request, $section = null, $slug = null, $active_tag = "") {
+    public function getCourseOrSection(Request $request, $sectionSlug = null, $slug = null, $active_tag = "") {
+
+        $section = $this->sections->findBySlug($sectionSlug);
 
         /**
          * If found section
          */
-        if (isset($this->sections)) {
+        if (is_null($section)) {
             $section = $this->sections->findBySlug($slug);
-        } else {
-            $section = [];
         }
 
 
         if ($active_tag == "") {
             $active_tag = $request['tag'];
         }
+
 
         if (count($section) > 0) {
 
@@ -140,7 +144,6 @@ class FrontendController extends Controller {
             }
 
             if (count($courses) != 0) {
-
                 $tags = Collect([]);
 
                 if ($section->show_tag_cloud == true) {
@@ -167,11 +170,12 @@ class FrontendController extends Controller {
                     return $key;
                 });
 
+
                 //A paginação entra aqui, de forma separada.
                 return view('frontend.courses.index')
                                 ->withCourses($courses_query->paginate(20))
                                 ->withSections($this->sections->getAllSections())
-                                ->withSectioSlug($section->slug)
+                                ->withSectionSlug($section->slug)
                                 ->withTitle($section->name)
                                 ->withColor($section->color)
                                 ->withTags($tags)->withSlug($slug)
@@ -465,7 +469,6 @@ class FrontendController extends Controller {
      * @return type
      */
     public function course($subsection = null, $id) {
-
 
         $course = $this->courses->findBySlug($id);
 

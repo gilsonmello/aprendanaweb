@@ -74,7 +74,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3 "  >
+                            <div class="col-md-3 " >
                                 <button type="submit" class="btn btn-primary btn-block"  style="background-color: #4d71af;"><i class="fa fa-search"></i></button>
                             </div>
                         </form>

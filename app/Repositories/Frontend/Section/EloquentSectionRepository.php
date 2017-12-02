@@ -10,8 +10,9 @@ use App\Exceptions\GeneralException;
 class EloquentSectionRepository implements SectionContract {
 
 
-//	public function __construct() {
-//	}
+	public function __construct() {
+
+	}
 
 	/**
 	 * @param $id

@@ -1,7 +1,6 @@
 /**
  * Created by ambiente on 05/07/16.
  */
-
 PagSeguroDirectPayment.setSessionId($("[name='pedido_id']").val());
 function setSenderHash() {
     var form = document.querySelector('#pay');
@@ -138,6 +137,7 @@ function setInstallmentAmount() {
         maxInstallmentNoInterest: 10,
         brand: brand,
         success: function (data) {
+
             //var installment = document.querySelector('#installments option:checked').value;
             var installments = JSON.parse(JSON.stringify(data))['installments'];
             var max_installments = document.getElementById('max_installments').value;
@@ -166,6 +166,11 @@ function setInstallmentAmount() {
                 var amount = installments[brand][installment - 1]['installmentAmount'];
                 document.querySelector("input[name=installmentAmount]").value = amount;
             }
+        },
+        error: function(data){
+        },
+        complete: function(data){
+
         }
     });
 }

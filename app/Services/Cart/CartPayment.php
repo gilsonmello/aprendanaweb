@@ -103,15 +103,9 @@ trait CartPayment {
 
         $pagseguro_data = array();
 
-
-
-        $pagseguro_data['email'] = 'adriana@brasiljuridico.com.br';
+        $pagseguro_data['email'] = config('laravelpagseguro.credentials.email');
         $pagseguro_data['token'] = config('laravelpagseguro.credentials.token');
 
-        if (session('compliance.cart') === TRUE) {
-            $pagseguro_data['email'] = 'compliancenet@brasiljuridico.com.br';
-            $pagseguro_data['token'] = config('laravelpagseguro.compliance.credentials.token');
-        }
         $pagseguro_data['senderHash'] = $request['senderHash'];
 
         $pagseguro_data['reference'] = $this->orderInSession;

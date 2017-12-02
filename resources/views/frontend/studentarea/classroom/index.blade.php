@@ -51,7 +51,7 @@
                 <div class="panel-body panel-body-nopadding">
                     <div id="exceeded"></div>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe width="100%" class="embed-responsive-item" name="lesson-content" data-content="{{ $content->id }}" data-lesson="{{ $content->lesson->id }}" data-enrollment="{{ $enrollment->id }}" data-url='{{ $content->url }}' height="400" src="" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="100%" class="embed-responsive-item" name="lesson-content" data-content="{{ $content->id }}" data-lesson="{{ $content->lesson->id }}" data-enrollment="{{ $enrollment->id }}" data-url='{{ $content->url }}' height="400" src="{{ $content->url }}" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="panel-footer panel-footer-btn-group panel-footer-class">

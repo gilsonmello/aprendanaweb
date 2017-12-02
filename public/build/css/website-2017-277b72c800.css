@@ -1,0 +1,571 @@
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  min-height: 100%;
+  background-color: #FAFAFA;
+}
+
+body {
+  color: #1E376D;
+  min-height: 100%;
+  margin: 0;
+  background-color: #FFF;
+}
+
+*:focus {
+  outline: none;
+}
+
+.brj-form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #808080;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #B3B3B3;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 62.5%;
+}
+
+input {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+}
+
+.btn-brj {
+  display: inline-block;
+  width: auto;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 2px;
+  background: #1E376D;
+  height: 40px;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: .1rem;
+  transition: all .3s ease;
+  color: white;
+  font-family: 'Roboto', serif;
+  font-size: 14px;
+  line-height: 40px;
+  font-weight: 200;
+  display: inline-block;
+  padding: 0 16px;
+}
+
+.btn-brj i {
+  font-size: 16px;
+  line-height: 40px;
+  margin-right: 4px;
+}
+
+.btn-brj,
+.btn-brj i {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.btn-brj.btn-brj-primary {
+  background-color: #3877FF;
+}
+
+.btn-brj.btn-brj-outline {
+  color: #3877FF;
+  background-color: transparent;
+  border: 1px solid #3877FF;
+  border-radius: 1px;
+}
+
+.brj-topbar {
+  background-color: white;
+}
+
+.brj-topbar-link {
+  margin-left: 24px;
+}
+
+.brj-topbar-link,
+.brj-topbar-link-label,
+.brj-topbar-link i {
+  display: inline-block;
+  line-height: 24px;
+  vertical-align: middle;
+}
+
+.brj-topbar-link-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.brj-topbar-link i {
+  font-size: 16px;
+  margin-right: 2px;
+}
+
+.brj-topbar-main {
+  border-bottom: 1px solid #E6E6E6;
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+}
+
+.brj-topbar-main-logo {
+  height: 40px;
+}
+
+.brj-topbar-main-search {
+  margin-top: 10px;
+  height: 40px;
+}
+
+.brj-topbar-main-col-logo {
+  padding-left: 0;
+}
+
+.brj-topbar-main-col-options {
+  padding-right: 0;
+}
+
+.brj-topbar-main button {
+  margin-left: 24px;
+}
+
+.brj-topbar-menu {
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.brj-topbar-menu .brj-topbar-link:first-child {
+  margin-left: 0;
+}
+
+.brj-topbar-menu-right {
+  float: right;
+}
+
+.brj-topbar-menu-right a {
+  font-size: 12px;
+  color: #1E376D;
+  text-decoration: none;
+  margin-left: 16px;
+}
+
+.brj-footer {
+  background-color: #1E376D;
+  color: white;
+  padding-top: 34px;
+  padding-bottom: 96px;
+}
+
+.brj-footer-title {
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.brj-footer a {
+  display: block;
+}
+
+.brj-footer a,
+.brj-footer a:hover,
+.brj-footer a:focus,
+.brj-footer a:active {
+  text-decoration: none;
+  color: white;
+  font-weight: 200;
+  margin-bottom: 8px;
+}
+
+.brj-footer-newsletter-text {
+  font-weight: 200;
+  margin-bottom: 8px;
+}
+
+.brj-footer-newsletter-btn {
+  margin-top: 8px;
+}
+
+.brj-course-card {
+  margin-bottom: 16px;
+  width: 100%;
+  min-height: 320px;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+  border: 1px solid #E6E6E6;
+}
+
+.brj-course-card-cover {
+  width: 100%;
+  height: 128px;
+  background-position: center;
+  background-image: url(https://www.brasiljuridico.com.br/uploads/banners/32/direito_medico_YzDX.jpg);
+  background-size: cover;
+}
+
+.brj-course-card-content {
+  padding: 16px;
+}
+
+.brj-course-card-content .title {
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #1E376D;
+  font-size: 16px;
+}
+
+.brj-course-card-content .description {
+  color: #808080;
+  line-height: 18px;
+  font-weight: 300;
+}
+
+.brj-course-card-content .price {
+  margin-top: 16px;
+  color: #676767;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19px;
+}
+
+.brj-course-card-content .price .old-price {
+  color: #B3B3B3;
+  text-decoration: line-through;
+}
+
+.brj-course-card-content .teachers h4 {
+  color: #808080;
+  font-size: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #E6E6E6;
+  margin-top: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.brj-course-card-content .teachers .teacher {
+  width: 100%;
+  /* two teachers */
+  float: left;
+}
+
+.brj-course-card-content .teachers .teacher:first-child:nth-last-child(2),
+.brj-course-card-content .teachers .teacher:first-child:nth-last-child(2) ~ .teacher {
+  width: 50%;
+}
+
+.brj-course-card-content .teachers .teacher-image {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  float: left;
+}
+
+.brj-course-card-content .teachers .teacher-name {
+  padding-right: 16px;
+  display: inline-block;
+  max-width: calc(100% - 24px - 8px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  line-height: 24px;
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.brj-new-card {
+  margin-bottom: 16px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+  border: 1px solid #E6E6E6;
+}
+
+.brj-new-card-cover {
+  width: 100%;
+  height: 184px;
+  background-position: center;
+  background-image: url(https://www.brasiljuridico.com.br/uploads/news/423/fausto_de_sanctis_o_crime_prospera_onde_a_regulacao_e_frouxa_5MIx_size400.jpeg);
+  background-size: cover;
+}
+
+.brj-new-card-content {
+  padding: 16px;
+}
+
+.brj-new-card-content .title {
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 4px;
+  color: #333333;
+  font-size: 20px;
+}
+
+.brj-new-card-content .date {
+  color: #808080;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.brj-new-card-content .description {
+  color: #333;
+  line-height: 18px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.brj-top-news .brj-new-card {
+  border: none;
+  border-bottom: 1px solid #E6E6E6;
+  box-shadow: none;
+}
+
+.brj-top-news .brj-new-card:last-child {
+  border-bottom: none;
+}
+
+.brj-top-news .brj-new-card-cover {
+  display: none;
+}
+
+.brj-top-news .brj-new-card-content {
+  padding: 0;
+  padding-bottom: 16px;
+}
+
+.brj-home-hero {
+  width: 100%;
+  height: 400px;
+  background-color: #F4F6F5;
+  padding: 80px;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 50%;
+}
+
+.brj-home-hero h1 {
+  color: #333333;
+}
+
+.brj-home-hero p {
+  color: #808080;
+  font-weight: 200;
+}
+
+.brj-home-hero .btn-brj-primary {
+  margin-right: 24px;
+}
+
+.brj-home-courses-content {
+  background-color: #FAFAFA;
+  padding-bottom: 48px;
+}
+
+.brj-home-header {
+  margin-top: 56px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E6E6E6;
+  height: 44px;
+}
+
+.brj-home-header-mark {
+  float: left;
+  height: 32px;
+  width: 2px;
+  background-color: #6E9BFB;
+  margin-right: 24px;
+}
+
+.brj-home-header-mark.mark-blue {
+  background-color: #6E9BFB;
+}
+
+.brj-home-header-mark.mark-orange {
+  background-color: #FF5722;
+}
+
+.brj-home-header-title {
+  float: left;
+  color: #333333;
+  line-height: 32px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.brj-home-header-paginator {
+  line-height: 32px;
+  vertical-align: middle;
+  float: right;
+  color: #666666;
+}
+
+.brj-home-header-paginator a,
+.brj-home-header-paginator a:hover,
+.brj-home-header-paginator a:active,
+.brj-home-header-paginator a:focus {
+  color: #666666;
+  text-decoration: none;
+  font-size: 10px;
+}
+
+.brj-home-header-paginator-view-all {
+  margin-right: 18px;
+}
+
+.brj-home-header-paginator-previous,
+.brj-home-header-paginator-previous--disabled,
+.brj-home-header-paginator-next,
+.brj-home-header-paginator-next--disabled {
+  display: inline-block;
+  line-height: 24px;
+  vertical-align: middle;
+}
+
+.brj-home-header-paginator-previous i,
+.brj-home-header-paginator-previous--disabled i,
+.brj-home-header-paginator-next i,
+.brj-home-header-paginator-next--disabled i {
+  font-size: 32px;
+}
+
+.brj-home-header-paginator-previous--disabled,
+.brj-home-header-paginator-next--disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.brj-home-top-news-header {
+  margin-top: 56px;
+  margin-bottom: 24px;
+  line-height: 43px;
+  border-bottom: 1px solid #E6E6E6;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.brj-home-catchphrase {
+  max-width: 600px;
+}
+
+.brj-home-catchphrase-content {
+  background-color: #FAFAFA;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.brj-home-catchphrase-title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.brj-home-catchphrase-text {
+  margin-left: 26px;
+  font-size: 24px;
+  font-weight: 300;
+  color: #333333;
+  line-height: 32px;
+}
+
+.brj-home-catchphrase-meet-teachers {
+  margin-left: 26px;
+  margin-top: 16px;
+}
+
+.brj-home-catchphrase-meet-teachers a,
+.brj-home-catchphrase-meet-teachers a:hover,
+.brj-home-catchphrase-meet-teachers a:active,
+.brj-home-catchphrase-meet-teachers a:focus {
+  color: #6E9BFB;
+  font-size: 12px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.brj-home-catchphrase-meet-teachers i {
+  font-size: 16px;
+  display: inline-block;
+  line-height: 24px;
+  vertical-align: middle;
+}
+
+.brj-home-catchphrase-teachers {
+  width: 100%;
+  height: 144px;
+  background-image: url(/public/img/teachers.png);
+}
+
+.brj-home-catchphrase-quote {
+  position: absolute;
+  right: 24px;
+  top: 20px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 4px 16px 0 rgba(0, 0, 0, 0.26);
+  border-radius: 2px;
+  width: 500px;
+  background-color: white;
+  height: 224px;
+  padding: 24px;
+}
+
+.brj-home-catchphrase-quote-image {
+  float: left;
+  width: 96px;
+  text-align: center;
+}
+
+.brj-home-catchphrase-quote-image img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.brj-home-catchphrase-quote-content {
+  float: right;
+  width: calc(100% - 96px);
+  color: #808080;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 200;
+}
+
+.brj-home-catchphrase-quote-content-author-name {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 24px;
+}
+
+.brj-home-payment-methods {
+  background: white;
+  width: 100%;
+  height: 128px;
+}
+
+.brj-home-catchphrase-content .container {
+  position: relative;
+}

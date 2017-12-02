@@ -126,7 +126,12 @@ class EloquentEnrollmentRepository implements EnrollmentContract {
 
     public function getAllStudentEnrollmentsInLastHours($student_id, $hours) {
         //return Enrollment::where('student_id', $student_id)->where('date_begin','>',Carbon::now()->addHours( $hours * -1))->where('date_end','>=',Carbon::now()->addMinute( -2 ))->where('date_begin','<',Carbon::now())->where('is_active',1)->orderBy('date_begin', 'desc')->get();
-        return Enrollment::where('student_id', $student_id)->where('date_begin', '>', Carbon::now()->addHours($hours * -1))->where('date_end', '>=', Carbon::now()->addMinute(-2))->where('is_active', 1)->orderBy('date_begin', 'desc')->get();
+        return Enrollment::where('student_id', $student_id)
+            ->where('date_begin', '>', Carbon::now()->addHours($hours * -1))
+            ->where('date_end', '>=', Carbon::now()->addMinute(-2))
+            ->where('is_active', 1)
+            ->orderBy('date_begin', 'desc')
+            ->get();
     }
 
     public function associatedExams($course_id, $student_id) {

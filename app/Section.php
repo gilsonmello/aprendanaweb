@@ -35,11 +35,10 @@ class Section extends Model {
         }
 
         if($limit > 0){
-        return Course::where('is_active', 1)->where('activation_date', '<=', Carbon::now())->whereHas('subsection', function($query) use ($section_id){
-            $query->where('section_id', $section_id);
-        })->orderBy("featured", $order)->orderBy("activation_date", $order)->paginate($limit);
+            return Course::where('is_active', 1)->where('activation_date', '<=', Carbon::now())->whereHas('subsection', function($query) use ($section_id){
+                $query->where('section_id', $section_id);
+            })->orderBy("featured", $order)->orderBy("activation_date", $order)->paginate($limit);
         }else{
-            
             return Course::where('is_active', 1)->where('activation_date', '<=', Carbon::now())->whereHas('subsection', function($query) use ($section_id){
                 $query->where('section_id', $section_id);
             })->orderBy("featured", $order)->orderBy("activation_date", $order);

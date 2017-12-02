@@ -686,6 +686,7 @@ if (!function_exists('get_first_content')) {
             $modules = $enrollment->course->modules->reject(function($item) {
                 return $item->lessons === null || $item->lessons->isEmpty();
             });
+
             $first_module = $modules->sortBy('sequence')->first();
             if ($first_module->sequence == null || $first_module->sequence == 0) {
                 $first_module = $modules->sortBy('id')->first();
@@ -695,6 +696,7 @@ if (!function_exists('get_first_content')) {
             }
 
             $first_lesson = $first_module->lessons->sortBy('sequence')->first();
+
 
             if ($first_lesson->sequence == null || $first_lesson->sequence == 0) {
                 $first_lesson = $first_module->lessons->sortBy('id')->first();

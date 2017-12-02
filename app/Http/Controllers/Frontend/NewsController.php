@@ -31,8 +31,8 @@ class NewsController extends Controller {
         $featured_news = $this->news->getFeaturedNews()->take(3);
         $except_ids = $featured_news->pluck('id');
 
-        $news = $this->news->getNewsPaginated(10, 'activation_date', 'desc', $except_ids);
-
+        //$news = $this->news->getNewsPaginated(10, 'activation_date', 'desc', $except_ids);
+        $news = $this->news->getNewsPaginated(10, 'activation_date', 'desc');
 
 
         return view('frontend.news.index')

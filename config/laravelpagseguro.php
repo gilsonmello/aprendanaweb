@@ -1,10 +1,11 @@
 <?php
 
-$sandbox = false;
-if ($sandbox) {
-    $token = 'ED3A2A5992A34665ADA207E55DE33778';
+$sandbox = 'local';
+
+if ($sandbox == 'local') {
+    $token = 'D8D26B27742B44AD8D975407CF524275';
 } else {
-    $token = 'AC117FA621704A2A80576871DE2F0AE3';
+    $token = 'B5DB3AEDAD9849938E6C0C0DCB37CCCB';
 }
 
 return [
@@ -14,7 +15,7 @@ return [
      * Coloque abaixo as informações do seu cadastro no PagSeguro
      */
     'credentials' => [//INFORME AS CREDENCIAIS PADRÕES DE SUA LOJA, MAS PORDERÁ SER ALTERADA EM RUNTIME
-        'email' => 'adriana@brasiljuridico.com.br',
+        'email' => 'aprendawebunidom@gmail.com',
         'token' => $token,
     ],
     /*
@@ -69,16 +70,5 @@ return [
         'transactions-notifications' => '/v3/transactions/notifications',
         'transactions-history' => '/v2/transactions',
         'transactions-abandoned' => '/v2/transactions/abandoned',
-    ],
-    'compliance' => [
-        'credentials' => [//INFORME AS CREDENCIAIS PADRÕES DE SUA LOJA, MAS PORDERÁ SER ALTERADA EM RUNTIME
-            'email' => 'compliancenet@brasiljuridico.com.br',
-            'token' => 'F0E29A82C84C431C92C63B0C70322703',
-        ],
-        'routes' => [
-            'redirect' => [
-                'route-name' => 'compliance.cart.conclusion', // Criar uma rota com este nome
-            ],
-        ],
     ]
 ];

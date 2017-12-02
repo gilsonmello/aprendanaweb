@@ -14,8 +14,7 @@
     </div>
     <div class="footer-bottom">
         <div class="container text-center">
-            <p>Brasil Jurídico &copy; 2016 - Ensino de Alta Performance - Cursos e Ferramentas Online</p>
-            <p style="text-transform: lowercase;">BRASIL JURÍDICO CURSOS JURÍDICOS LTDA 20.599.298/0001-05</p>
+            <p>Aprenda na Web &copy; {{ date('Y') }} - Cursos e Ferramentas Online</p>
             <p>Avenida Professor Magalhães Neto, n° 1752, Edifício Lena Empresarial, salas 303/308</p>
             <p>Pituba, CEP 41.810-012, Salvador - BA - Telefone 71 3342-1659</p>
         </div>

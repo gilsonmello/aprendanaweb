@@ -205,9 +205,7 @@ class CartController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function payment() {
-
         $items = $this->cart->getFullCart();
-
         if (!isset(auth()->user()->id)) {
             if ($items->total > 0) {
                 return redirect()->route('cart.auth');
@@ -748,30 +746,32 @@ class CartController extends Controller {
             'email' => config('laravelpagseguro.credentials.email'),
             'token' => config('laravelpagseguro.credentials.token')
         );
-        //Se o usuário veio do compliance
-        if (session('compliance.cart') === TRUE) {
-            $credentials = array(
-                'email' => config('laravelpagseguro.compliance.credentials.email'),
-                'token' => config('laravelpagseguro.compliance.credentials.token')
-            );
-        }
+
         $data = '';
         foreach ($credentials as $key => $value) {
             $data .= $key . '=' . $value . '&';
         }
 
+        $environment = config('laravelpagseguro.use-sandbox');
+
+        $host = ($environment == 'local') ? config('laravelpagseguro.host.sandbox') : config('laravelpagseguro.host.production');
+
+
         $data = rtrim($data, '&');
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://ws.pagseguro.uol.com.br/v2/sessions/');
+        curl_setopt($ch, CURLOPT_URL, $host.'/v2/sessions');
         curl_setopt($ch, CURLOPT_POST, count($credentials));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
         if (app()->environment() == 'production') {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         } else {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         }
+
         $result = curl_exec($ch);
+
 
         if (FALSE === $result)
             throw new GeneralException(curl_error($ch) . curl_errno($ch));
@@ -880,7 +880,15 @@ class CartController extends Controller {
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://ws.pagseguro.uol.com.br/v2/transactions/');
+        $environment = config('laravelpagseguro.use-sandbox');
+
+        $host = ($environment == 'local') ? config('laravelpagseguro.host.sandbox') : config('laravelpagseguro.host.production');
+
+        $checkout['senderEmail'] = ($environment == 'local') ?
+            explode('@', $checkout['senderEmail'])[0].'@sandbox.pagseguro.com.br' :
+            $checkout['senderEmail'];
+
+        curl_setopt($ch, CURLOPT_URL, $host.'/v2/transactions/');
         curl_setopt($ch, CURLOPT_HTTPHEADER, [ 'application/x-www-form-urlencoded; charset=ISO-8859-1']);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($checkout));
@@ -894,6 +902,7 @@ class CartController extends Controller {
         }
 
         $result = curl_exec($ch);
+
         if ($result == 'Unauthorized' || $result == 'Forbidden') {
             throw new GeneralException($result . ': Módulo de Compras em manutenção. Tente novamente dentro de alguns minutos');
         }
@@ -920,7 +929,6 @@ class CartController extends Controller {
             Log::info('Cart.ERROR_TREATMENT');
             return $this->errorHandling($result['error']);
         } else {
-
             Log::info('Cart.PaymentSuccess');
             if (isset($result['status'])) {
                 if ($request['method'] == 'creditCard')
