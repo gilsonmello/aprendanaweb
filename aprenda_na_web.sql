@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 20-Set-2017 às 19:46
--- Versão do servidor: 5.7.19
--- PHP Version: 5.6.31
+-- Host: localhost
+-- Generation Time: Dec 02, 2017 at 07:30 PM
+-- Server version: 5.7.19-0ubuntu0.16.04.1
+-- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,11 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `acesso_externo_x_pedido`
+-- Table structure for table `acesso_externo_x_pedido`
 --
 
-DROP TABLE IF EXISTS `acesso_externo_x_pedido`;
-CREATE TABLE IF NOT EXISTS `acesso_externo_x_pedido` (
+CREATE TABLE `acesso_externo_x_pedido` (
   `order_id` int(10) UNSIGNED DEFAULT NULL,
   `source` varchar(100) DEFAULT NULL,
   `date_confirmation` datetime DEFAULT NULL,
@@ -42,31 +39,28 @@ CREATE TABLE IF NOT EXISTS `acesso_externo_x_pedido` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `advertising_partners`
+-- Table structure for table `advertising_partners`
 --
 
-DROP TABLE IF EXISTS `advertising_partners`;
-CREATE TABLE IF NOT EXISTS `advertising_partners` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `advertising_partners` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `contact` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `source` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `analysis`
+-- Table structure for table `analysis`
 --
 
-DROP TABLE IF EXISTS `analysis`;
-CREATE TABLE IF NOT EXISTS `analysis` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `analysis` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `intro_text` text COLLATE utf8_unicode_ci,
   `intro_page` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -75,21 +69,17 @@ CREATE TABLE IF NOT EXISTS `analysis` (
   `analysis_exam_group_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_analysis_subject_id` (`subject_id`),
-  KEY `fk_analysis_analysis_exam_group_id` (`analysis_exam_group_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `analysis_exams`
+-- Table structure for table `analysis_exams`
 --
 
-DROP TABLE IF EXISTS `analysis_exams`;
-CREATE TABLE IF NOT EXISTS `analysis_exams` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `analysis_exams` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `acronym` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '0',
@@ -100,136 +90,110 @@ CREATE TABLE IF NOT EXISTS `analysis_exams` (
   `institution_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_analysis_exams_source_id` (`source_id`),
-  KEY `fk_analysis_exams_office_id` (`office_id`),
-  KEY `fk_analysis_exams_institution_id` (`institution_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `analysis_exams_groups`
+-- Table structure for table `analysis_exams_groups`
 --
 
-DROP TABLE IF EXISTS `analysis_exams_groups`;
-CREATE TABLE IF NOT EXISTS `analysis_exams_groups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `analysis_exams_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
   `analysis_exam_group_id` int(10) UNSIGNED NOT NULL,
   `analysis_exam_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_analysis_exams_groups_analysis_exam_group_id` (`analysis_exam_group_id`),
-  KEY `fk_analysis_exams_groups_analysis_exam_id` (`analysis_exam_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `analysis_exam_groups`
+-- Table structure for table `analysis_exam_groups`
 --
 
-DROP TABLE IF EXISTS `analysis_exam_groups`;
-CREATE TABLE IF NOT EXISTS `analysis_exam_groups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `analysis_exam_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `analysis_exam_subjects`
+-- Table structure for table `analysis_exam_subjects`
 --
 
-DROP TABLE IF EXISTS `analysis_exam_subjects`;
-CREATE TABLE IF NOT EXISTS `analysis_exam_subjects` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `analysis_exam_subjects` (
+  `id` int(10) UNSIGNED NOT NULL,
   `analysis_exam_id` int(10) UNSIGNED NOT NULL,
   `subject_id` int(10) UNSIGNED NOT NULL,
   `count` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_analysis_exam_subjects_analysis_exam_id` (`analysis_exam_id`),
-  KEY `fk_analysis_exam_subjects_subject_id` (`subject_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `analysis_subjects`
+-- Table structure for table `analysis_subjects`
 --
 
-DROP TABLE IF EXISTS `analysis_subjects`;
-CREATE TABLE IF NOT EXISTS `analysis_subjects` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `analysis_subjects` (
+  `id` int(10) UNSIGNED NOT NULL,
   `subject_id` int(10) UNSIGNED NOT NULL,
   `analysis_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_analysis_subjects_subject_id` (`subject_id`),
-  KEY `fk_analysis_subjects_analysis_id` (`analysis_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `answers`
+-- Table structure for table `answers`
 --
 
-DROP TABLE IF EXISTS `answers`;
-CREATE TABLE IF NOT EXISTS `answers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `answers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `choice` text COLLATE utf8_unicode_ci NOT NULL,
   `is_right` tinyint(1) NOT NULL,
   `question_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `answers_question_id_foreign` (`question_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `answers_executions`
+-- Table structure for table `answers_executions`
 --
 
-DROP TABLE IF EXISTS `answers_executions`;
-CREATE TABLE IF NOT EXISTS `answers_executions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `answers_executions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `question_execution_id` int(10) UNSIGNED NOT NULL,
   `answer_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `is_right` tinyint(1) NOT NULL,
-  `answers_chosen` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `answers_executions_question_execution_id_foreign` (`question_execution_id`),
-  KEY `answers_executions_answer_id_foreign` (`answer_id`)
+  `answers_chosen` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `articles`
+-- Table structure for table `articles`
 --
 
-DROP TABLE IF EXISTS `articles`;
-CREATE TABLE IF NOT EXISTS `articles` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `articles` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `content` longtext COLLATE utf8_unicode_ci,
@@ -243,33 +207,29 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `status` char(1) COLLATE utf8_unicode_ci NOT NULL,
-  `hits` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `hits` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `article_user`
+-- Table structure for table `article_user`
 --
 
-DROP TABLE IF EXISTS `article_user`;
-CREATE TABLE IF NOT EXISTS `article_user` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `article_user` (
+  `id` int(10) UNSIGNED NOT NULL,
   `article_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ask_the_teacher`
+-- Table structure for table `ask_the_teacher`
 --
 
-DROP TABLE IF EXISTS `ask_the_teacher`;
-CREATE TABLE IF NOT EXISTS `ask_the_teacher` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ask_the_teacher` (
+  `id` int(10) UNSIGNED NOT NULL,
   `question_id` int(10) UNSIGNED DEFAULT NULL,
   `lesson_id` int(10) UNSIGNED DEFAULT NULL,
   `user_student_id` int(10) UNSIGNED NOT NULL,
@@ -281,46 +241,39 @@ CREATE TABLE IF NOT EXISTS `ask_the_teacher` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `workshop_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `workshop_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ask_the_teacher_history`
+-- Table structure for table `ask_the_teacher_history`
 --
 
-DROP TABLE IF EXISTS `ask_the_teacher_history`;
-CREATE TABLE IF NOT EXISTS `ask_the_teacher_history` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ask_the_teacher_history` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_teacher_pre_id` int(10) UNSIGNED NOT NULL,
   `user_teacher_pos_id` int(10) UNSIGNED NOT NULL,
   `date_change` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `assigned_roles`
+-- Table structure for table `assigned_roles`
 --
 
-DROP TABLE IF EXISTS `assigned_roles`;
-CREATE TABLE IF NOT EXISTS `assigned_roles` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `assigned_roles` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `assigned_roles_user_id_foreign` (`user_id`),
-  KEY `assigned_roles_role_id_foreign` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16767 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `role_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `assigned_roles`
+-- Dumping data for table `assigned_roles`
 --
 
 INSERT INTO `assigned_roles` (`id`, `user_id`, `role_id`) VALUES
@@ -1396,7 +1349,6 @@ INSERT INTO `assigned_roles` (`id`, `user_id`, `role_id`) VALUES
 (8926, 8926, 3),
 (8927, 8927, 3),
 (8928, 8928, 3),
-(8929, 8929, 3),
 (8930, 8930, 3),
 (8931, 8931, 3),
 (8932, 8932, 3),
@@ -3523,9 +3475,9 @@ INSERT INTO `assigned_roles` (`id`, `user_id`, `role_id`) VALUES
 (11255, 11234, 3),
 (11256, 11235, 3),
 (11257, 11236, 3),
-(11258, 11237, 3);
+(11258, 11237, 3),
+(11259, 11238, 3);
 INSERT INTO `assigned_roles` (`id`, `user_id`, `role_id`) VALUES
-(11259, 11238, 3),
 (11260, 11239, 3),
 (11261, 11240, 3),
 (11262, 11241, 3),
@@ -6464,9 +6416,9 @@ INSERT INTO `assigned_roles` (`id`, `user_id`, `role_id`) VALUES
 (14271, 14170, 2),
 (14273, 14172, 3),
 (14274, 14173, 3),
-(14275, 14174, 3);
+(14275, 14174, 3),
+(14276, 14175, 3);
 INSERT INTO `assigned_roles` (`id`, `user_id`, `role_id`) VALUES
-(14276, 14175, 3),
 (14277, 14176, 3),
 (14278, 14177, 3),
 (14279, 14178, 3),
@@ -8756,35 +8708,33 @@ INSERT INTO `assigned_roles` (`id`, `user_id`, `role_id`) VALUES
 (16763, 16360, 3),
 (16764, 16361, 3),
 (16765, 16362, 3),
-(16766, 16363, 3);
+(16766, 16363, 3),
+(16767, 8929, 2),
+(16768, 8929, 3);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `attempt_to_register_on_the_cart`
+-- Table structure for table `attempt_to_register_on_the_cart`
 --
 
-DROP TABLE IF EXISTS `attempt_to_register_on_the_cart`;
-CREATE TABLE IF NOT EXISTS `attempt_to_register_on_the_cart` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `attempt_to_register_on_the_cart` (
+  `id` int(10) UNSIGNED NOT NULL,
   `order_id` int(10) UNSIGNED DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_order_id` (`order_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `banners`
+-- Table structure for table `banners`
 --
 
-DROP TABLE IF EXISTS `banners`;
-CREATE TABLE IF NOT EXISTS `banners` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `banners` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `img` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -8795,21 +8745,17 @@ CREATE TABLE IF NOT EXISTS `banners` (
   `package_id` int(10) UNSIGNED DEFAULT NULL,
   `is_active` int(11) NOT NULL DEFAULT '0',
   `order` int(11) NOT NULL,
-  `carousel` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_banners_course_id` (`course_id`),
-  KEY `fk_banners_package_id` (`package_id`)
+  `carousel` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `books`
+-- Table structure for table `books`
 --
 
-DROP TABLE IF EXISTS `books`;
-CREATE TABLE IF NOT EXISTS `books` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `books` (
+  `id` int(10) UNSIGNED NOT NULL,
   `product_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `subject` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -8824,48 +8770,40 @@ CREATE TABLE IF NOT EXISTS `books` (
   `stuff` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_books_products_id` (`product_id`),
-  KEY `fk_books_user_id` (`user_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `campaigns`
+-- Table structure for table `campaigns`
 --
 
-DROP TABLE IF EXISTS `campaigns`;
-CREATE TABLE IF NOT EXISTS `campaigns` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `campaigns` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cities`
+-- Table structure for table `cities`
 --
 
-DROP TABLE IF EXISTS `cities`;
-CREATE TABLE IF NOT EXISTS `cities` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cities` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `state_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_cities_1` (`state_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5300109 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `cities`
+-- Dumping data for table `cities`
 --
 
 INSERT INTO `cities` (`id`, `name`, `state_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -14446,12 +14384,11 @@ INSERT INTO `cities` (`id`, `name`, `state_id`, `created_at`, `updated_at`, `del
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `configs`
+-- Table structure for table `configs`
 --
 
-DROP TABLE IF EXISTS `configs`;
-CREATE TABLE IF NOT EXISTS `configs` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `configs` (
+  `id` int(10) UNSIGNED NOT NULL,
   `email_contact_us` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pagseguro_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pagseguro_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -14475,13 +14412,11 @@ CREATE TABLE IF NOT EXISTS `configs` (
   `payment_fee` double NOT NULL,
   `percentage_certificate` double DEFAULT NULL,
   `ip` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cart_recovery` decimal(7,4) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_configs_1` (`user_changed_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `cart_recovery` decimal(7,4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `configs`
+-- Dumping data for table `configs`
 --
 
 INSERT INTO `configs` (`id`, `email_contact_us`, `pagseguro_token`, `pagseguro_email`, `facebook`, `twitter`, `youtube`, `instagram`, `smtp`, `smtp_user`, `smtp_password`, `smtp_port`, `percentage_count_video_view`, `video_views`, `percetage_share_teachers`, `operational_cost`, `user_changed_id`, `created_at`, `updated_at`, `deleted_at`, `taxes`, `payment_fee`, `percentage_certificate`, `ip`, `cart_recovery`) VALUES
@@ -14490,12 +14425,11 @@ INSERT INTO `configs` (`id`, `email_contact_us`, `pagseguro_token`, `pagseguro_e
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `contents`
+-- Table structure for table `contents`
 --
 
-DROP TABLE IF EXISTS `contents`;
-CREATE TABLE IF NOT EXISTS `contents` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contents` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `url` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -14505,20 +14439,27 @@ CREATE TABLE IF NOT EXISTS `contents` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `lesson_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_contents_lesson_id` (`lesson_id`)
+  `lesson_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `contents`
+--
+
+INSERT INTO `contents` (`id`, `title`, `description`, `url`, `is_video`, `is_free`, `sequence`, `created_at`, `updated_at`, `deleted_at`, `lesson_id`) VALUES
+(1, '', NULL, 'https://www.youtube.com/embed/bIXDystGxj0', 1, 0, '1', '2017-12-02 18:40:43', '2017-12-02 18:43:20', NULL, 1),
+(2, '', NULL, 'https://www.youtube.com/embed/ZBKxhnqX-Q0', 1, 0, '2', '2017-12-02 18:40:43', '2017-12-02 18:43:20', NULL, 1),
+(3, '', NULL, 'https://www.youtube.com/embed/v_ZCtgwbS3o', 1, 0, '3', '2017-12-02 18:40:43', '2017-12-02 18:47:25', NULL, 1),
+(4, '', NULL, 'https://www.youtube.com/embed/bIXDystGxj0', 1, 0, '4', '2017-12-02 18:40:43', '2017-12-02 18:47:25', NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `content_comments`
+-- Table structure for table `content_comments`
 --
 
-DROP TABLE IF EXISTS `content_comments`;
-CREATE TABLE IF NOT EXISTS `content_comments` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `content_comments` (
+  `id` int(10) UNSIGNED NOT NULL,
   `date` datetime NOT NULL,
   `comment` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `likes` int(11) NOT NULL,
@@ -14528,19 +14469,17 @@ CREATE TABLE IF NOT EXISTS `content_comments` (
   `moderator_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `content_notes`
+-- Table structure for table `content_notes`
 --
 
-DROP TABLE IF EXISTS `content_notes`;
-CREATE TABLE IF NOT EXISTS `content_notes` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `content_notes` (
+  `id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
   `content_id` int(10) UNSIGNED NOT NULL,
   `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -14548,51 +14487,41 @@ CREATE TABLE IF NOT EXISTS `content_notes` (
   `note` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_content_notes_1` (`content_id`),
-  KEY `fk_content_notes_2` (`student_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `coordinators_courses`
+-- Table structure for table `coordinators_courses`
 --
 
-DROP TABLE IF EXISTS `coordinators_courses`;
-CREATE TABLE IF NOT EXISTS `coordinators_courses` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `coordinators_courses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `course_id` int(10) UNSIGNED NOT NULL,
   `coordinator_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_coordinators_courses_course_id` (`course_id`),
-  KEY `fk_coordinators_courses_coordinator_id` (`coordinator_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `countries`
+-- Table structure for table `countries`
 --
 
-DROP TABLE IF EXISTS `countries`;
-CREATE TABLE IF NOT EXISTS `countries` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `countries` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `short` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `countries_short_unique` (`short`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `countries`
+-- Dumping data for table `countries`
 --
 
 INSERT INTO `countries` (`id`, `name`, `short`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -14601,12 +14530,11 @@ INSERT INTO `countries` (`id`, `name`, `short`, `created_at`, `updated_at`, `del
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `coupons`
+-- Table structure for table `coupons`
 --
 
-DROP TABLE IF EXISTS `coupons`;
-CREATE TABLE IF NOT EXISTS `coupons` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `coupons` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
@@ -14627,71 +14555,53 @@ CREATE TABLE IF NOT EXISTS `coupons` (
   `name_student` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ip_request` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `recover_action` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_id_representative` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `coupons_partner_id_foreign` (`partner_id`),
-  KEY `coupons_advertisingpartner_id_foreign` (`advertisingpartner_id`),
-  KEY `fk_coupons_user_id_created_by` (`user_id_created_by`),
-  KEY `fk_coupons_user_id_representative` (`user_id_representative`)
+  `user_id_representative` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `coupon_course`
+-- Table structure for table `coupon_course`
 --
 
-DROP TABLE IF EXISTS `coupon_course`;
-CREATE TABLE IF NOT EXISTS `coupon_course` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `coupon_course` (
+  `id` int(10) UNSIGNED NOT NULL,
   `coupon_id` int(10) UNSIGNED NOT NULL,
-  `course_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `coupon_course_coupon_id_foreign` (`coupon_id`),
-  KEY `coupon_course_course_id_foreign` (`course_id`)
+  `course_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `coupon_module`
+-- Table structure for table `coupon_module`
 --
 
-DROP TABLE IF EXISTS `coupon_module`;
-CREATE TABLE IF NOT EXISTS `coupon_module` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `coupon_module` (
+  `id` int(10) UNSIGNED NOT NULL,
   `coupon_id` int(10) UNSIGNED NOT NULL,
-  `module_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `coupon_module_coupon_id_foreign` (`coupon_id`),
-  KEY `coupon_module_module_id_foreign` (`module_id`)
+  `module_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `coupon_user`
+-- Table structure for table `coupon_user`
 --
 
-DROP TABLE IF EXISTS `coupon_user`;
-CREATE TABLE IF NOT EXISTS `coupon_user` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `coupon_user` (
+  `id` int(10) UNSIGNED NOT NULL,
   `coupon_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `coupon_user_coupon_id_foreign` (`coupon_id`),
-  KEY `coupon_user_user_id_foreign` (`user_id`)
+  `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `courses`
+-- Table structure for table `courses`
 --
 
-DROP TABLE IF EXISTS `courses`;
-CREATE TABLE IF NOT EXISTS `courses` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `subsection_id` int(10) UNSIGNED DEFAULT NULL,
   `user_admin_id` int(10) UNSIGNED DEFAULT NULL,
   `title` text COLLATE utf8_unicode_ci,
@@ -14755,122 +14665,103 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `target_public` longtext COLLATE utf8_unicode_ci,
   `demonstrative_lesson` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `notice` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `differentials` longtext COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `fk_courses_1_idx` (`subsection_id`),
-  KEY `fk_courses_2` (`user_admin_id`),
-  KEY `fk_exam_course_id` (`exam_id`),
-  KEY `fk_courses_is_active` (`is_active`),
-  KEY `fk_courses_activation_date` (`activation_date`),
-  KEY `fk_courses_featured` (`featured`)
+  `differentials` longtext COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `subsection_id`, `user_admin_id`, `title`, `description`, `course_content`, `slug`, `tags`, `video_ad_url`, `activation_date`, `price`, `discount_price`, `featured_img`, `is_active`, `teachers_percentage`, `created_at`, `updated_at`, `deleted_at`, `average_grade`, `orders_count`, `special_offer`, `access_time`, `workload`, `featured`, `start_special_price`, `end_special_price`, `special_price`, `max_view`, `classroom_img`, `percentage_certificate`, `short_description`, `analysis`, `methodology`, `payment`, `workload_presential`, `show_files`, `show_alert`, `show_calendar`, `generate_certificate`, `online_for_presential`, `testimonials`, `time_per_content`, `exam_id`, `exam_duration`, `max_installments`, `times_executed`, `average_exam_grade`, `minimum_percentage`, `welcome_message`, `custom_workshop_title`, `indication_count`, `beginOfCourse`, `ask_the_teacher`, `meta_description`, `meta_title`, `certification`, `certification_template`, `certification_individual_auth`, `certification_individual_text`, `custom_exam_title`, `combo`, `target_public`, `demonstrative_lesson`, `notice`, `differentials`) VALUES
+(1, 1, 123, 'Curso de Java', '<p>Este é nosso curso de java</p>', '<p>Este é nosso curso de java<br></p>', 'curso-de-java', 'java;Java', '', '2017-12-02 00:00:00', '50.00', '50.00', NULL, 1, '35.00', '2017-12-02 15:28:33', '2017-12-02 18:27:15', NULL, NULL, 1, '0', 100000, '0.00', 0, '2017-12-02 00:00:00', '2017-12-02 00:00:00', '0.00', 2, NULL, NULL, '', '', '<p>Este é nosso curso de java<br></p>', '', '0.00', 0, 0, 0, 0, 0, '', '', NULL, NULL, 0, 0, 0, 0, '', NULL, 0, NULL, 1, NULL, NULL, '', '', 0, '', NULL, 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `courses_aggregated_courses`
+-- Table structure for table `courses_aggregated_courses`
 --
 
-DROP TABLE IF EXISTS `courses_aggregated_courses`;
-CREATE TABLE IF NOT EXISTS `courses_aggregated_courses` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses_aggregated_courses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `course_id_bought` int(10) UNSIGNED DEFAULT NULL,
   `course_id_extra` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `courses_aggregated_courses_course_id_bought_foreign` (`course_id_bought`),
-  KEY `courses_aggregated_courses_course_id_extra_foreign` (`course_id_extra`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `courses_aggregated_exams`
+-- Table structure for table `courses_aggregated_exams`
 --
 
-DROP TABLE IF EXISTS `courses_aggregated_exams`;
-CREATE TABLE IF NOT EXISTS `courses_aggregated_exams` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses_aggregated_exams` (
+  `id` int(10) UNSIGNED NOT NULL,
   `course_id_bought` int(10) UNSIGNED DEFAULT NULL,
   `exam_id_extra` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `date_begin` datetime DEFAULT NULL,
-  `days_begin` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `courses_aggregated_exams_course_id_bought_foreign` (`course_id_bought`),
-  KEY `courses_aggregated_exams_exam_id_extra_foreign` (`exam_id_extra`)
+  `days_begin` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `courses_alerts`
+-- Table structure for table `courses_alerts`
 --
 
-DROP TABLE IF EXISTS `courses_alerts`;
-CREATE TABLE IF NOT EXISTS `courses_alerts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses_alerts` (
+  `id` int(10) UNSIGNED NOT NULL,
   `date` datetime DEFAULT NULL,
   `description` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_courses_alerts_course_id` (`course_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `courses_calendars`
+-- Table structure for table `courses_calendars`
 --
 
-DROP TABLE IF EXISTS `courses_calendars`;
-CREATE TABLE IF NOT EXISTS `courses_calendars` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses_calendars` (
+  `id` int(10) UNSIGNED NOT NULL,
   `date` datetime DEFAULT NULL,
   `description` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_courses_calendars_course_id` (`course_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `course_books`
+-- Table structure for table `course_books`
 --
 
-DROP TABLE IF EXISTS `course_books`;
-CREATE TABLE IF NOT EXISTS `course_books` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `course_books` (
+  `id` int(10) UNSIGNED NOT NULL,
   `books_products_id` int(10) UNSIGNED NOT NULL,
   `courses_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_book_products_course_books_id` (`books_products_id`),
-  KEY `fk_books_courses_id` (`courses_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `course_contents`
+-- Table structure for table `course_contents`
 --
 
-DROP TABLE IF EXISTS `course_contents`;
-CREATE TABLE IF NOT EXISTS `course_contents` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `course_contents` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `url` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
@@ -14879,70 +14770,66 @@ CREATE TABLE IF NOT EXISTS `course_contents` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `course_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_course_course_contents_id` (`course_id`)
+  `course_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `course_teachers`
+-- Table structure for table `course_teachers`
 --
 
-DROP TABLE IF EXISTS `course_teachers`;
-CREATE TABLE IF NOT EXISTS `course_teachers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `course_teachers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `course_id` int(10) UNSIGNED NOT NULL,
   `teacher_id` int(10) UNSIGNED NOT NULL,
   `percentage` decimal(5,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_course_teachers_1` (`course_id`),
-  KEY `fk_course_teachers_2` (`teacher_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `course_teachers`
+--
+
+INSERT INTO `course_teachers` (`id`, `course_id`, `teacher_id`, `percentage`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 8929, '100.00', '2017-12-02 15:30:03', '2017-12-02 15:30:03', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `criteria`
+-- Table structure for table `criteria`
 --
 
-DROP TABLE IF EXISTS `criteria`;
-CREATE TABLE IF NOT EXISTS `criteria` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `criteria` (
+  `id` int(10) UNSIGNED NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `weight` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`)
+  `weight` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `domain`
+-- Table structure for table `domain`
 --
 
-DROP TABLE IF EXISTS `domain`;
-CREATE TABLE IF NOT EXISTS `domain` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `domain` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `enrollments`
+-- Table structure for table `enrollments`
 --
 
-DROP TABLE IF EXISTS `enrollments`;
-CREATE TABLE IF NOT EXISTS `enrollments` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `enrollments` (
+  `id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
   `module_id` int(10) UNSIGNED DEFAULT NULL,
@@ -14965,49 +14852,39 @@ CREATE TABLE IF NOT EXISTS `enrollments` (
   `course_enrollment_id` int(10) UNSIGNED DEFAULT NULL,
   `welcome_viewed` tinyint(1) NOT NULL DEFAULT '0',
   `certification_individual_date` datetime DEFAULT NULL,
-  `certification_individual_user_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_enrollments_course_id` (`course_id`),
-  KEY `fk_enrollments_module_id` (`module_id`),
-  KEY `fk_enrollments_lesson_id` (`lesson_id`),
-  KEY `fk_enrollments_student_id` (`student_id`),
-  KEY `fk_enrollments_order_id` (`order_id`),
-  KEY `enrollments_exam_id_foreign` (`exam_id`),
-  KEY `fk_enrollments_partner_id` (`partner_id`),
-  KEY `enrollments_is_active` (`is_active`),
-  KEY `fk_enrollments_user_id_created_by` (`user_id_created_by`),
-  KEY `fk_course_enrollment_enrollment_id` (`course_enrollment_id`),
-  KEY `fk_certification_individual_user_id` (`certification_individual_user_id`),
-  KEY `fk_enrollments_date_begin` (`date_begin`),
-  KEY `fk_enrollments_date_end` (`date_end`)
+  `certification_individual_user_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `enrollments`
+--
+
+INSERT INTO `enrollments` (`id`, `student_id`, `course_id`, `module_id`, `lesson_id`, `date_begin`, `date_end`, `is_active`, `is_paid`, `created_at`, `updated_at`, `deleted_at`, `order_id`, `rating`, `exam_id`, `exam_max_tries`, `studentgroup_id`, `partner_id`, `test`, `user_id_created_by`, `course_enrollment_id`, `welcome_viewed`, `certification_individual_date`, `certification_individual_user_id`) VALUES
+(1, 123, 1, NULL, NULL, '2017-12-02 17:54:36', '2018-12-02 17:54:36', 1, 1, '2017-12-02 17:54:36', '2017-12-02 17:54:36', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `error_logs`
+-- Table structure for table `error_logs`
 --
 
-DROP TABLE IF EXISTS `error_logs`;
-CREATE TABLE IF NOT EXISTS `error_logs` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `error_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
   `error_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `user_agent` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `enrollment` int(10) UNSIGNED DEFAULT NULL,
-  `content` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `content` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `exams`
+-- Table structure for table `exams`
 --
 
-DROP TABLE IF EXISTS `exams`;
-CREATE TABLE IF NOT EXISTS `exams` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `exams` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -15043,79 +14920,62 @@ CREATE TABLE IF NOT EXISTS `exams` (
   `num_votes` bigint(20) NOT NULL DEFAULT '0',
   `video_time` smallint(6) DEFAULT NULL,
   `max_explanation_views` smallint(5) UNSIGNED NOT NULL DEFAULT '2',
-  `result_level` smallint(6) NOT NULL DEFAULT '2',
-  PRIMARY KEY (`id`),
-  KEY `exams_course_id_foreign` (`course_id`),
-  KEY `exams_subsection_id_foreign` (`subsection_id`),
-  KEY `fk_exam_teacher_message_id` (`teacher_message_id`)
+  `result_level` smallint(6) NOT NULL DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `exams_books`
+-- Table structure for table `exams_books`
 --
 
-DROP TABLE IF EXISTS `exams_books`;
-CREATE TABLE IF NOT EXISTS `exams_books` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `exams_books` (
+  `id` int(10) UNSIGNED NOT NULL,
   `books_products_id` int(10) UNSIGNED NOT NULL,
   `exams_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_book_products_exams_books_id` (`books_products_id`),
-  KEY `fk_books_exams_id` (`exams_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `exams_courses`
+-- Table structure for table `exams_courses`
 --
 
-DROP TABLE IF EXISTS `exams_courses`;
-CREATE TABLE IF NOT EXISTS `exams_courses` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `exams_courses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `exam_id` int(10) UNSIGNED DEFAULT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `exams_courses_exam_id_foreign` (`exam_id`),
-  KEY `exams_courses_course_id_foreign` (`course_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `exam_packages`
+-- Table structure for table `exam_packages`
 --
 
-DROP TABLE IF EXISTS `exam_packages`;
-CREATE TABLE IF NOT EXISTS `exam_packages` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `exam_packages` (
+  `id` int(10) UNSIGNED NOT NULL,
   `package_id` int(10) UNSIGNED NOT NULL,
   `exam_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `exam_packages_package_id_foreign` (`package_id`),
-  KEY `exam_packages_exam_id_foreign` (`exam_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `executions`
+-- Table structure for table `executions`
 --
 
-DROP TABLE IF EXISTS `executions`;
-CREATE TABLE IF NOT EXISTS `executions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `executions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `exam_id` int(10) UNSIGNED DEFAULT NULL,
   `enrollment_id` int(10) UNSIGNED NOT NULL,
   `attempt` int(11) NOT NULL,
@@ -15132,70 +14992,57 @@ CREATE TABLE IF NOT EXISTS `executions` (
   `rating` int(11) NOT NULL DEFAULT '0',
   `comment` text COLLATE utf8_unicode_ci,
   `lesson_id` int(10) UNSIGNED DEFAULT NULL,
-  `course_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `executions_enrollment_id_foreign` (`enrollment_id`),
-  KEY `exam_id` (`exam_id`),
-  KEY `executions_last_question_execution_id_foreign` (`last_question_execution_id`),
-  KEY `fk_lesson_executions` (`lesson_id`),
-  KEY `fk_course_executions` (`course_id`)
+  `course_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `exportar_cometarios_pesquisa`
+-- Table structure for table `exportar_cometarios_pesquisa`
 --
 
-DROP TABLE IF EXISTS `exportar_cometarios_pesquisa`;
-CREATE TABLE IF NOT EXISTS `exportar_cometarios_pesquisa` (
+CREATE TABLE `exportar_cometarios_pesquisa` (
   `Name_exp_1` mediumtext
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `faqcategory`
+-- Table structure for table `faqcategory`
 --
 
-DROP TABLE IF EXISTS `faqcategory`;
-CREATE TABLE IF NOT EXISTS `faqcategory` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `faqcategory` (
+  `id` int(10) UNSIGNED NOT NULL,
   `description` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `faqs`
+-- Table structure for table `faqs`
 --
 
-DROP TABLE IF EXISTS `faqs`;
-CREATE TABLE IF NOT EXISTS `faqs` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `faqs` (
+  `id` int(10) UNSIGNED NOT NULL,
   `question` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `answer` text COLLATE utf8_unicode_ci,
   `category_faq_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_faqs_1` (`category_faq_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `groups`
+-- Table structure for table `groups`
 --
 
-DROP TABLE IF EXISTS `groups`;
-CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `groups` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `answer_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `is_random` tinyint(1) NOT NULL,
@@ -15206,111 +15053,92 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `partial_result` tinyint(1) DEFAULT NULL,
   `lesson_id` int(10) UNSIGNED DEFAULT NULL,
-  `course_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `groups_exam_id_foreign` (`exam_id`),
-  KEY `fk_groups_lesson` (`lesson_id`),
-  KEY `fk_groups_lcourse` (`course_id`)
+  `course_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `group_question`
+-- Table structure for table `group_question`
 --
 
-DROP TABLE IF EXISTS `group_question`;
-CREATE TABLE IF NOT EXISTS `group_question` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_question` (
+  `id` int(10) UNSIGNED NOT NULL,
   `question_id` int(10) UNSIGNED DEFAULT NULL,
   `group_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `sequence` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `group_question_question_id_foreign` (`question_id`),
-  KEY `group_question_group_id_foreign` (`group_id`),
-  KEY `group_question_sequence` (`sequence`)
+  `sequence` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `group_subject`
+-- Table structure for table `group_subject`
 --
 
-DROP TABLE IF EXISTS `group_subject`;
-CREATE TABLE IF NOT EXISTS `group_subject` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_subject` (
+  `id` int(10) UNSIGNED NOT NULL,
   `group_id` int(10) UNSIGNED NOT NULL,
   `subject_id` int(10) UNSIGNED NOT NULL,
   `questions_count` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `source_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_source_group_subject_id` (`source_id`)
+  `source_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `inscricoes_temas_essenciais`
+-- Table structure for table `inscricoes_temas_essenciais`
 --
 
-DROP TABLE IF EXISTS `inscricoes_temas_essenciais`;
-CREATE TABLE IF NOT EXISTS `inscricoes_temas_essenciais` (
+CREATE TABLE `inscricoes_temas_essenciais` (
   `count(``enrollments``.``id``)` bigint(21) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `institutions`
+-- Table structure for table `institutions`
 --
 
-DROP TABLE IF EXISTS `institutions`;
-CREATE TABLE IF NOT EXISTS `institutions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `institutions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `abbreviation` varchar(15) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  `abbreviation` varchar(15) COLLATE utf8_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `jobs`
+-- Table structure for table `jobs`
 --
 
-DROP TABLE IF EXISTS `jobs`;
-CREATE TABLE IF NOT EXISTS `jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `queue` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8_unicode_ci NOT NULL,
   `attempts` tinyint(3) UNSIGNED NOT NULL,
   `reserved` tinyint(3) UNSIGNED NOT NULL,
   `reserved_at` int(10) UNSIGNED DEFAULT NULL,
   `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `jobs_queue_reserved_reserved_at_index` (`queue`,`reserved`,`reserved_at`)
+  `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lessons`
+-- Table structure for table `lessons`
 --
 
-DROP TABLE IF EXISTS `lessons`;
-CREATE TABLE IF NOT EXISTS `lessons` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lessons` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
@@ -15329,64 +15157,67 @@ CREATE TABLE IF NOT EXISTS `lessons` (
   `module_id` int(10) UNSIGNED DEFAULT NULL,
   `presential` tinyint(1) NOT NULL DEFAULT '0',
   `exam_id` int(10) UNSIGNED DEFAULT NULL,
-  `max_explanations_views` int(10) UNSIGNED NOT NULL DEFAULT '2',
-  PRIMARY KEY (`id`),
-  KEY `fk_lesson_module_id` (`module_id`),
-  KEY `fk_exam_lesson_id` (`exam_id`)
+  `max_explanations_views` int(10) UNSIGNED NOT NULL DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `lessons`
+--
+
+INSERT INTO `lessons` (`id`, `title`, `description`, `price`, `is_active`, `tags`, `sequence`, `featured_img`, `duration`, `activation_date`, `discount_price`, `subsection_id`, `video_ad_url`, `created_at`, `updated_at`, `deleted_at`, `module_id`, `presential`, `exam_id`, `max_explanations_views`) VALUES
+(1, 'Aula 1', 'Aula 1', '0.00', 1, NULL, 1, NULL, '10:00:00', '2017-12-02 00:00:00', '0.00', 1, '', '2017-12-02 15:30:48', '2017-12-02 15:31:23', NULL, 1, 0, NULL, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lesson_teachers`
+-- Table structure for table `lesson_teachers`
 --
 
-DROP TABLE IF EXISTS `lesson_teachers`;
-CREATE TABLE IF NOT EXISTS `lesson_teachers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lesson_teachers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `lesson_id` int(10) UNSIGNED NOT NULL,
   `teacher_id` int(10) UNSIGNED NOT NULL,
   `percentage` decimal(5,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_lesson_teachers_1` (`lesson_id`),
-  KEY `fk_lesson_teachers_2` (`teacher_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `lesson_teachers`
+--
+
+INSERT INTO `lesson_teachers` (`id`, `lesson_id`, `teacher_id`, `percentage`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 8929, '100.00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `mailing_register`
+-- Table structure for table `mailing_register`
 --
 
-DROP TABLE IF EXISTS `mailing_register`;
-CREATE TABLE IF NOT EXISTS `mailing_register` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mailing_register` (
+  `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `campaign_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mailing_register_email_campaign_id_unique` (`email`,`campaign_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `migrations`
+-- Table structure for table `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
+CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
@@ -15749,12 +15580,11 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `modules`
+-- Table structure for table `modules`
 --
 
-DROP TABLE IF EXISTS `modules`;
-CREATE TABLE IF NOT EXISTS `modules` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `modules` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` decimal(8,2) DEFAULT NULL,
@@ -15774,39 +15604,39 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `access_time` int(10) UNSIGNED DEFAULT NULL,
   `workload` int(10) UNSIGNED DEFAULT NULL,
   `presential` tinyint(1) NOT NULL DEFAULT '0',
-  `complementary` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `fk_module_course_id` (`course_id`)
+  `complementary` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `modules`
+--
+
+INSERT INTO `modules` (`id`, `name`, `description`, `price`, `subsection_id`, `video_ad_url`, `sequence`, `is_active`, `tags`, `is_sold_separately`, `activation_date`, `discount_price`, `featured_img`, `created_at`, `updated_at`, `deleted_at`, `course_id`, `access_time`, `workload`, `presential`, `complementary`) VALUES
+(1, 'Disciplina 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '2017-12-02 15:30:26', '2017-12-02 15:30:26', NULL, 1, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `module_teachers`
+-- Table structure for table `module_teachers`
 --
 
-DROP TABLE IF EXISTS `module_teachers`;
-CREATE TABLE IF NOT EXISTS `module_teachers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `module_teachers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `module_id` int(10) UNSIGNED NOT NULL,
   `teacher_id` int(10) UNSIGNED NOT NULL,
   `percentage` decimal(5,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_module_teachers_1` (`module_id`),
-  KEY `fk_module_teachers_2` (`teacher_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `monitorar_alunos_na_sala_ultimo_dia`
+-- Table structure for table `monitorar_alunos_na_sala_ultimo_dia`
 --
 
-DROP TABLE IF EXISTS `monitorar_alunos_na_sala_ultimo_dia`;
-CREATE TABLE IF NOT EXISTS `monitorar_alunos_na_sala_ultimo_dia` (
+CREATE TABLE `monitorar_alunos_na_sala_ultimo_dia` (
   `name` varchar(255) DEFAULT NULL,
   `cel` varchar(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -15814,11 +15644,10 @@ CREATE TABLE IF NOT EXISTS `monitorar_alunos_na_sala_ultimo_dia` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `monitorar_execucoes_de_saaps`
+-- Table structure for table `monitorar_execucoes_de_saaps`
 --
 
-DROP TABLE IF EXISTS `monitorar_execucoes_de_saaps`;
-CREATE TABLE IF NOT EXISTS `monitorar_execucoes_de_saaps` (
+CREATE TABLE `monitorar_execucoes_de_saaps` (
   `name` varchar(255) DEFAULT NULL,
   `cel` varchar(20) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -15833,11 +15662,10 @@ CREATE TABLE IF NOT EXISTS `monitorar_execucoes_de_saaps` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `monitorar_vendas_7_dias`
+-- Table structure for table `monitorar_vendas_7_dias`
 --
 
-DROP TABLE IF EXISTS `monitorar_vendas_7_dias`;
-CREATE TABLE IF NOT EXISTS `monitorar_vendas_7_dias` (
+CREATE TABLE `monitorar_vendas_7_dias` (
   `cliente` varchar(255) DEFAULT NULL,
   `celular` varchar(20) DEFAULT NULL,
   `pedido` int(11) UNSIGNED DEFAULT NULL,
@@ -15853,11 +15681,10 @@ CREATE TABLE IF NOT EXISTS `monitorar_vendas_7_dias` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `monitorar_views_do_dia`
+-- Table structure for table `monitorar_views_do_dia`
 --
 
-DROP TABLE IF EXISTS `monitorar_views_do_dia`;
-CREATE TABLE IF NOT EXISTS `monitorar_views_do_dia` (
+CREATE TABLE `monitorar_views_do_dia` (
   `id` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `percent` int(10) UNSIGNED DEFAULT NULL,
@@ -15873,12 +15700,11 @@ CREATE TABLE IF NOT EXISTS `monitorar_views_do_dia` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `my_workshop_activities`
+-- Table structure for table `my_workshop_activities`
 --
 
-DROP TABLE IF EXISTS `my_workshop_activities`;
-CREATE TABLE IF NOT EXISTS `my_workshop_activities` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `my_workshop_activities` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_id` int(10) UNSIGNED DEFAULT NULL,
   `activity_id` int(10) UNSIGNED DEFAULT NULL,
   `enrollment_id` int(10) UNSIGNED DEFAULT NULL,
@@ -15888,43 +15714,34 @@ CREATE TABLE IF NOT EXISTS `my_workshop_activities` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `time_spent` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_my_workshop_activities_workshop` (`workshop_id`),
-  KEY `fk_my_workshop_activities_activity` (`activity_id`),
-  KEY `fk_my_workshop_activities_enrollment_id` (`enrollment_id`)
+  `time_spent` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `my_workshop_activities_time`
+-- Table structure for table `my_workshop_activities_time`
 --
 
-DROP TABLE IF EXISTS `my_workshop_activities_time`;
-CREATE TABLE IF NOT EXISTS `my_workshop_activities_time` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `my_workshop_activities_time` (
+  `id` int(10) UNSIGNED NOT NULL,
   `activity_id` int(10) UNSIGNED NOT NULL,
   `enrollment_id` int(10) UNSIGNED NOT NULL,
   `time_spent` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `time_left` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_activity_workshop_time_id` (`activity_id`),
-  KEY `fk_enrollment_workshop_time_id` (`enrollment_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `my_workshop_evaluations`
+-- Table structure for table `my_workshop_evaluations`
 --
 
-DROP TABLE IF EXISTS `my_workshop_evaluations`;
-CREATE TABLE IF NOT EXISTS `my_workshop_evaluations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `my_workshop_evaluations` (
+  `id` int(10) UNSIGNED NOT NULL,
   `my_activity_id` int(10) UNSIGNED DEFAULT NULL,
   `tutor_id` int(10) UNSIGNED DEFAULT NULL,
   `criteria_id` int(10) UNSIGNED DEFAULT NULL,
@@ -15936,22 +15753,17 @@ CREATE TABLE IF NOT EXISTS `my_workshop_evaluations` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `date_begin` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_my_workshop_evaluations_my_activity` (`my_activity_id`),
-  KEY `fk_my_workshop_evaluations_tutor` (`tutor_id`),
-  KEY `fk_my_workshop_evaluations_criteria` (`criteria_id`)
+  `date_begin` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `my_workshop_tutors`
+-- Table structure for table `my_workshop_tutors`
 --
 
-DROP TABLE IF EXISTS `my_workshop_tutors`;
-CREATE TABLE IF NOT EXISTS `my_workshop_tutors` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `my_workshop_tutors` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_id` int(10) UNSIGNED DEFAULT NULL,
   `criteria_id` int(10) UNSIGNED DEFAULT NULL,
   `tutor_id` int(10) UNSIGNED DEFAULT NULL,
@@ -15960,24 +15772,17 @@ CREATE TABLE IF NOT EXISTS `my_workshop_tutors` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `activity_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_my_workshop_tutors_workshop` (`workshop_id`),
-  KEY `fk_my_workshop_tutors_criteria` (`criteria_id`),
-  KEY `fk_my_workshop_tutors_tutor` (`tutor_id`),
-  KEY `fk_my_workshop_tutors_activity_id` (`activity_id`),
-  KEY `fk_my_workshop_tutors_enrollment_id` (`enrollment_id`)
+  `activity_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `news`
+-- Table structure for table `news`
 --
 
-DROP TABLE IF EXISTS `news`;
-CREATE TABLE IF NOT EXISTS `news` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `news` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `content` text COLLATE utf8_unicode_ci,
@@ -15993,123 +15798,112 @@ CREATE TABLE IF NOT EXISTS `news` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `featured` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `domain_id` int(10) UNSIGNED DEFAULT NULL,
-  `institution_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_news_domain_id` (`domain_id`)
+  `institution_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `date`, `content`, `tags`, `link`, `img`, `activation_date`, `slug`, `video`, `hits`, `created_at`, `updated_at`, `deleted_at`, `featured`, `domain_id`, `institution_id`) VALUES
+(1, 'Notícia 1', '2017-12-02 00:00:00', '<p>Notícia 1<br></p>', 'noticia', NULL, NULL, '2017-12-02 00:00:00', 'noticia-1', '', 5, '2017-12-02 19:10:23', '2017-12-02 19:24:21', NULL, '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `newsletters`
+-- Table structure for table `newsletters`
 --
 
-DROP TABLE IF EXISTS `newsletters`;
-CREATE TABLE IF NOT EXISTS `newsletters` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `newsletters` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `campaign_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `newsletters_email_unique` (`email`)
+  `campaign_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `notification_message`
+-- Table structure for table `notification_message`
 --
 
-DROP TABLE IF EXISTS `notification_message`;
-CREATE TABLE IF NOT EXISTS `notification_message` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `notification_message` (
+  `id` int(10) UNSIGNED NOT NULL,
   `message` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `route` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `icon` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `notification_user`
+-- Table structure for table `notification_user`
 --
 
-DROP TABLE IF EXISTS `notification_user`;
-CREATE TABLE IF NOT EXISTS `notification_user` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `notification_user` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `notification_message_id` int(10) UNSIGNED NOT NULL,
   `is_read` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `notification_user_user_id_foreign` (`user_id`),
-  KEY `fk_notification_message_id` (`notification_message_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `num_alunos_sala_aula_ultima_semana`
+-- Table structure for table `num_alunos_sala_aula_ultima_semana`
 --
 
-DROP TABLE IF EXISTS `num_alunos_sala_aula_ultima_semana`;
-CREATE TABLE IF NOT EXISTS `num_alunos_sala_aula_ultima_semana` (
+CREATE TABLE `num_alunos_sala_aula_ultima_semana` (
   `count(*)` bigint(21) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `occupations`
+-- Table structure for table `occupations`
 --
 
-DROP TABLE IF EXISTS `occupations`;
-CREATE TABLE IF NOT EXISTS `occupations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `occupations` (
+  `id` int(10) UNSIGNED NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `offices`
+-- Table structure for table `offices`
 --
 
-DROP TABLE IF EXISTS `offices`;
-CREATE TABLE IF NOT EXISTS `offices` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `offices` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `institution_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `offices_institution_id_foreign` (`institution_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `orders`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED DEFAULT NULL,
   `coupon_id` int(10) UNSIGNED DEFAULT NULL,
   `status_id` int(10) UNSIGNED NOT NULL,
@@ -16123,23 +15917,26 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `partner_id` int(10) UNSIGNED DEFAULT NULL,
   `recover_action` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `transaction_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_orders_student_id` (`student_id`),
-  KEY `fk_orders_coupon_id` (`coupon_id`),
-  KEY `fk_orders_status_id` (`status_id`),
-  KEY `fk_orders_partner_id` (`partner_id`)
+  `transaction_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `student_id`, `coupon_id`, `status_id`, `date_registration`, `date_confirmation`, `date_cancel`, `price`, `discount_price`, `created_at`, `updated_at`, `deleted_at`, `partner_id`, `recover_action`, `transaction_id`) VALUES
+(1, 123, NULL, 4, '2017-12-02 14:54:35', '2017-12-02 14:54:36', NULL, '0.00', '0.00', '2017-12-02 17:54:35', '2017-12-02 17:54:36', NULL, NULL, 0, 0),
+(2, NULL, NULL, 1, '2017-12-02 15:17:36', NULL, NULL, '50.00', '50.00', '2017-12-02 18:17:36', '2017-12-02 19:24:29', '2017-12-02 19:24:29', NULL, 0, 0),
+(3, 8929, NULL, 1, '2017-12-02 16:37:09', NULL, NULL, '50.00', '50.00', '2017-12-02 19:37:09', '2017-12-02 19:45:48', NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `order_courses`
+-- Table structure for table `order_courses`
 --
 
-DROP TABLE IF EXISTS `order_courses`;
-CREATE TABLE IF NOT EXISTS `order_courses` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_courses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `order_id` int(10) UNSIGNED NOT NULL,
   `course_id` int(10) UNSIGNED NOT NULL,
   `original_price` decimal(8,2) DEFAULT NULL,
@@ -16150,64 +15947,60 @@ CREATE TABLE IF NOT EXISTS `order_courses` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `document_external_payment` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `justification_external_payment` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_id_external_payment` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_order_courses_order_id` (`order_id`),
-  KEY `fk_order_courses_course_id` (`course_id`),
-  KEY `fk_order_courses_user_id_external_payment` (`user_id_external_payment`)
+  `user_id_external_payment` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order_courses`
+--
+
+INSERT INTO `order_courses` (`id`, `order_id`, `course_id`, `original_price`, `price`, `discount_price`, `created_at`, `updated_at`, `deleted_at`, `document_external_payment`, `justification_external_payment`, `user_id_external_payment`) VALUES
+(1, 1, 1, '50.00', '0.00', '0.00', '2017-12-02 17:54:35', '2017-12-02 17:54:35', NULL, NULL, NULL, NULL),
+(2, 2, 1, '50.00', '50.00', '50.00', '2017-12-02 18:17:36', '2017-12-02 19:24:29', '2017-12-02 19:24:29', NULL, NULL, NULL),
+(3, 3, 1, '50.00', '50.00', '50.00', '2017-12-02 19:37:10', '2017-12-02 19:37:10', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `order_lessons`
+-- Table structure for table `order_lessons`
 --
 
-DROP TABLE IF EXISTS `order_lessons`;
-CREATE TABLE IF NOT EXISTS `order_lessons` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_lessons` (
+  `id` int(10) UNSIGNED NOT NULL,
   `order_id` int(10) UNSIGNED NOT NULL,
   `lesson_id` int(10) UNSIGNED NOT NULL,
   `price` decimal(8,2) DEFAULT NULL,
   `discount_price` decimal(8,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_order_lessons_order_id` (`order_id`),
-  KEY `fk_order_lessons_lesson_id` (`lesson_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `order_modules`
+-- Table structure for table `order_modules`
 --
 
-DROP TABLE IF EXISTS `order_modules`;
-CREATE TABLE IF NOT EXISTS `order_modules` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_modules` (
+  `id` int(10) UNSIGNED NOT NULL,
   `order_id` int(10) UNSIGNED NOT NULL,
   `module_id` int(10) UNSIGNED NOT NULL,
   `price` decimal(8,2) DEFAULT NULL,
   `discount_price` decimal(8,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_order_modules_order_id` (`order_id`),
-  KEY `fk_order_modules_module_id` (`module_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `order_packages`
+-- Table structure for table `order_packages`
 --
 
-DROP TABLE IF EXISTS `order_packages`;
-CREATE TABLE IF NOT EXISTS `order_packages` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_packages` (
+  `id` int(10) UNSIGNED NOT NULL,
   `order_id` int(10) UNSIGNED NOT NULL,
   `package_id` int(10) UNSIGNED NOT NULL,
   `original_price` decimal(8,2) DEFAULT NULL,
@@ -16215,37 +16008,31 @@ CREATE TABLE IF NOT EXISTS `order_packages` (
   `discount_price` decimal(8,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_order_packages_order_id` (`order_id`),
-  KEY `fk_order_packages_package_id` (`package_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `order_status`
+-- Table structure for table `order_status`
 --
 
-DROP TABLE IF EXISTS `order_status`;
-CREATE TABLE IF NOT EXISTS `order_status` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_status` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `origin_external`
+-- Table structure for table `origin_external`
 --
 
-DROP TABLE IF EXISTS `origin_external`;
-CREATE TABLE IF NOT EXISTS `origin_external` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `origin_external` (
+  `id` int(10) UNSIGNED NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `source` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `medium` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -16253,19 +16040,17 @@ CREATE TABLE IF NOT EXISTS `origin_external` (
   `order_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `packages`
+-- Table structure for table `packages`
 --
 
-DROP TABLE IF EXISTS `packages`;
-CREATE TABLE IF NOT EXISTS `packages` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `packages` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(4000) COLLATE utf8_unicode_ci NOT NULL,
   `video_ad_url` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -16289,40 +16074,33 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `indication_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `max_installments` int(11) DEFAULT NULL,
   `meta_description` text COLLATE utf8_unicode_ci,
-  `meta_title` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `packages_subsection_id_foreign` (`subsection_id`)
+  `meta_title` text COLLATE utf8_unicode_ci
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `package_teachers`
+-- Table structure for table `package_teachers`
 --
 
-DROP TABLE IF EXISTS `package_teachers`;
-CREATE TABLE IF NOT EXISTS `package_teachers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `package_teachers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `package_id` int(10) UNSIGNED NOT NULL,
   `teacher_id` int(10) UNSIGNED NOT NULL,
   `percentage` decimal(5,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_package_teachers_1` (`package_id`),
-  KEY `fk_package_teachers_2` (`teacher_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `partnerorders`
+-- Table structure for table `partnerorders`
 --
 
-DROP TABLE IF EXISTS `partnerorders`;
-CREATE TABLE IF NOT EXISTS `partnerorders` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `partnerorders` (
+  `id` int(10) UNSIGNED NOT NULL,
   `html_email` text COLLATE utf8_unicode_ci,
   `html_subscribe` text COLLATE utf8_unicode_ci,
   `total_enrollments` int(11) NOT NULL,
@@ -16336,21 +16114,17 @@ CREATE TABLE IF NOT EXISTS `partnerorders` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT '1',
-  `value` decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_partnerorders_partner_id` (`partner_id`),
-  KEY `fk_partnerorders_course_id` (`course_id`)
+  `value` decimal(9,2) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `partnerorder_payments`
+-- Table structure for table `partnerorder_payments`
 --
 
-DROP TABLE IF EXISTS `partnerorder_payments`;
-CREATE TABLE IF NOT EXISTS `partnerorder_payments` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `partnerorder_payments` (
+  `id` int(10) UNSIGNED NOT NULL,
   `due_date` date NOT NULL,
   `paid_date` date DEFAULT NULL,
   `value` decimal(9,2) NOT NULL,
@@ -16361,21 +16135,17 @@ CREATE TABLE IF NOT EXISTS `partnerorder_payments` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `processed` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `fk_partnerorder_payments_user_id_create` (`user_id_create`),
-  KEY `fk_partnerorder_payments_user_id_paid` (`user_id_paid`)
+  `processed` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `partners`
+-- Table structure for table `partners`
 --
 
-DROP TABLE IF EXISTS `partners`;
-CREATE TABLE IF NOT EXISTS `partners` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `partners` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `contact` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -16385,46 +16155,38 @@ CREATE TABLE IF NOT EXISTS `partners` (
   `logo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `days_subscribe` int(11) NOT NULL DEFAULT '10',
   `video_quality` smallint(6) NOT NULL DEFAULT '0',
-  `percentage_discount` double(8,2) NOT NULL DEFAULT '0.00',
-  PRIMARY KEY (`id`)
+  `percentage_discount` double(8,2) NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `partner_managers`
+-- Table structure for table `partner_managers`
 --
 
-DROP TABLE IF EXISTS `partner_managers`;
-CREATE TABLE IF NOT EXISTS `partner_managers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `partner_managers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `partner_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_partner_managers_partners_id` (`partner_id`),
-  KEY `fk_partner_managers_users_id` (`user_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `password_resets`
+-- Table structure for table `password_resets`
 --
 
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE IF NOT EXISTS `password_resets` (
+CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  KEY `password_resets_email_index` (`email`),
-  KEY `password_resets_token_index` (`token`)
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `password_resets`
+-- Dumping data for table `password_resets`
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -16819,23 +16581,20 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `permissions`
+-- Table structure for table `permissions`
 --
 
-DROP TABLE IF EXISTS `permissions`;
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `permissions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `display_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `system` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permissions_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `permissions`
+-- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`, `display_name`, `system`, `created_at`, `updated_at`) VALUES
@@ -16902,21 +16661,17 @@ INSERT INTO `permissions` (`id`, `name`, `display_name`, `system`, `created_at`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `permission_role`
+-- Table structure for table `permission_role`
 --
 
-DROP TABLE IF EXISTS `permission_role`;
-CREATE TABLE IF NOT EXISTS `permission_role` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `permission_role` (
+  `id` int(10) UNSIGNED NOT NULL,
   `permission_id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `permission_role_permission_id_foreign` (`permission_id`),
-  KEY `permission_role_role_id_foreign` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `role_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `permission_role`
+-- Dumping data for table `permission_role`
 --
 
 INSERT INTO `permission_role` (`id`, `permission_id`, `role_id`) VALUES
@@ -17054,28 +16809,23 @@ INSERT INTO `permission_role` (`id`, `permission_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `permission_user`
+-- Table structure for table `permission_user`
 --
 
-DROP TABLE IF EXISTS `permission_user`;
-CREATE TABLE IF NOT EXISTS `permission_user` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `permission_user` (
+  `id` int(10) UNSIGNED NOT NULL,
   `permission_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `permission_user_permission_id_foreign` (`permission_id`),
-  KEY `permission_user_user_id_foreign` (`user_id`)
+  `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `preenrollments`
+-- Table structure for table `preenrollments`
 --
 
-DROP TABLE IF EXISTS `preenrollments`;
-CREATE TABLE IF NOT EXISTS `preenrollments` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `preenrollments` (
+  `id` int(10) UNSIGNED NOT NULL,
   `date_email` datetime DEFAULT NULL,
   `date_deadline` datetime DEFAULT NULL,
   `date_activation` datetime DEFAULT NULL,
@@ -17089,25 +16839,17 @@ CREATE TABLE IF NOT EXISTS `preenrollments` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `enrollment_id` int(10) UNSIGNED DEFAULT NULL,
   `subscribe_key` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `partner_number` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_preenrollments_partner_id` (`partner_id`),
-  KEY `fk_preenrollments_course_id` (`course_id`),
-  KEY `fk_preenrollments_student_id` (`student_id`),
-  KEY `fk_preenrollments_studentgroup_id` (`studentgroup_id`),
-  KEY `fk_preenrollments_partnerorder_id` (`partnerorder_id`),
-  KEY `fk_preenrollments_enrollment_id` (`enrollment_id`)
+  `partner_number` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `products`
+-- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
   `tags` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `commission` decimal(8,2) NOT NULL,
@@ -17121,38 +16863,32 @@ CREATE TABLE IF NOT EXISTS `products` (
   `supplier_id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `img` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_products_suppliers_id` (`supplier_id`)
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `products_url`
+-- Table structure for table `products_url`
 --
 
-DROP TABLE IF EXISTS `products_url`;
-CREATE TABLE IF NOT EXISTS `products_url` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `products_url` (
+  `id` int(10) UNSIGNED NOT NULL,
   `products_id` int(10) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_products_url_products_id` (`products_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `questions`
+-- Table structure for table `questions`
 --
 
-DROP TABLE IF EXISTS `questions`;
-CREATE TABLE IF NOT EXISTS `questions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `questions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `year` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `original` int(11) NOT NULL,
   `text` text COLLATE utf8_unicode_ci NOT NULL,
@@ -17180,27 +16916,17 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `count_partial` int(11) NOT NULL DEFAULT '0',
   `note4` text COLLATE utf8_unicode_ci,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `image` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `questions_group_id_foreign` (`group_id`),
-  KEY `questions_state_id_foreign` (`state_id`),
-  KEY `questions_city_id_foreign` (`city_id`),
-  KEY `questions_institution_id_foreign` (`institution_id`),
-  KEY `questions_office_id_foreign` (`office_id`),
-  KEY `questions_subject_id_foreign` (`subject_id`),
-  KEY `questions_source_id_foreign` (`source_id`),
-  KEY `fk_questions_teacher_id` (`teacher_id`)
+  `image` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `questions_executions`
+-- Table structure for table `questions_executions`
 --
 
-DROP TABLE IF EXISTS `questions_executions`;
-CREATE TABLE IF NOT EXISTS `questions_executions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `questions_executions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `group_id` int(10) UNSIGNED NOT NULL,
   `execution_id` int(10) UNSIGNED NOT NULL,
   `question_id` int(10) UNSIGNED NOT NULL,
@@ -17209,63 +16935,48 @@ CREATE TABLE IF NOT EXISTS `questions_executions` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `time` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `grade` double(8,2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `questions_executions_group_id_foreign` (`group_id`),
-  KEY `questions_executions_execution_id_foreign` (`execution_id`),
-  KEY `questions_executions_question_id_foreign` (`question_id`)
+  `grade` double(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `question_notes`
+-- Table structure for table `question_notes`
 --
 
-DROP TABLE IF EXISTS `question_notes`;
-CREATE TABLE IF NOT EXISTS `question_notes` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `question_notes` (
+  `id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
   `question_id` int(10) UNSIGNED NOT NULL,
   `note` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_question_notes_1` (`question_id`),
-  KEY `fk_question_notes_2` (`student_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ratings`
+-- Table structure for table `ratings`
 --
 
-DROP TABLE IF EXISTS `ratings`;
-CREATE TABLE IF NOT EXISTS `ratings` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ratings` (
+  `id` int(10) UNSIGNED NOT NULL,
   `course_id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
   `criterion_id` int(10) UNSIGNED NOT NULL,
   `rate` int(11) NOT NULL DEFAULT '0',
-  `enrollment_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ratings_course_id_foreign` (`course_id`),
-  KEY `ratings_student_id_foreign` (`student_id`),
-  KEY `ratings_criterion_id_foreign` (`criterion_id`),
-  KEY `fk_ratings_enrollment_id` (`enrollment_id`)
+  `enrollment_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `representative_commissions`
+-- Table structure for table `representative_commissions`
 --
 
-DROP TABLE IF EXISTS `representative_commissions`;
-CREATE TABLE IF NOT EXISTS `representative_commissions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `representative_commissions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `representative_id` int(10) UNSIGNED NOT NULL,
   `period_type` int(11) NOT NULL,
   `range_begin` decimal(9,2) NOT NULL,
@@ -17274,29 +16985,24 @@ CREATE TABLE IF NOT EXISTS `representative_commissions` (
   `date_begin` datetime NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_representative_commissions_representative_id` (`representative_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `roles`
+-- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `roles_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -17314,12 +17020,11 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sections`
+-- Table structure for table `sections`
 --
 
-DROP TABLE IF EXISTS `sections`;
-CREATE TABLE IF NOT EXISTS `sections` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sections` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -17331,31 +17036,34 @@ CREATE TABLE IF NOT EXISTS `sections` (
   `active` tinyint(1) DEFAULT '1',
   `show_tag_cloud` tinyint(1) NOT NULL DEFAULT '0',
   `menu_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `banner` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `sections_name_unique` (`name`)
+  `banner` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`, `color`, `slug`, `addimg`, `sequence`, `active`, `show_tag_cloud`, `menu_name`, `banner`) VALUES
+(1, 'Cursos de Programação', '2017-12-02 15:25:46', '2017-12-02 15:50:02', NULL, '', 'cursos-de-programacao', NULL, 1, 1, 0, 'Cursos', '');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sectors`
+-- Table structure for table `sectors`
 --
 
-DROP TABLE IF EXISTS `sectors`;
-CREATE TABLE IF NOT EXISTS `sectors` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sectors` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `hours_to_reply` smallint(6) NOT NULL,
-  `message_finish` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `message_finish` varchar(2000) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `sectors`
+-- Dumping data for table `sectors`
 --
 
 INSERT INTO `sectors` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`, `hours_to_reply`, `message_finish`) VALUES
@@ -17386,92 +17094,80 @@ INSERT INTO `sectors` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sector_user`
+-- Table structure for table `sector_user`
 --
 
-DROP TABLE IF EXISTS `sector_user`;
-CREATE TABLE IF NOT EXISTS `sector_user` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sector_user` (
+  `id` int(10) UNSIGNED NOT NULL,
   `sector_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sessions`
+-- Table structure for table `sessions`
 --
 
-DROP TABLE IF EXISTS `sessions`;
-CREATE TABLE IF NOT EXISTS `sessions` (
+CREATE TABLE `sessions` (
   `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `payload` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `last_activity` int(11) NOT NULL,
-  UNIQUE KEY `sessions_id_unique` (`id`)
+  `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sliders`
+-- Table structure for table `sliders`
 --
 
-DROP TABLE IF EXISTS `sliders`;
-CREATE TABLE IF NOT EXISTS `sliders` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sliders` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `img` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `orientation` char(1) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sources`
+-- Table structure for table `sources`
 --
 
-DROP TABLE IF EXISTS `sources`;
-CREATE TABLE IF NOT EXISTS `sources` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sources` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `states`
+-- Table structure for table `states`
 --
 
-DROP TABLE IF EXISTS `states`;
-CREATE TABLE IF NOT EXISTS `states` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `states` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `short` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `country_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `states_short_unique` (`short`),
-  KEY `fk_states_1` (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `states`
+-- Dumping data for table `states`
 --
 
 INSERT INTO `states` (`id`, `name`, `short`, `country_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -17506,23 +17202,20 @@ INSERT INTO `states` (`id`, `name`, `short`, `country_id`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `studentgroups`
+-- Table structure for table `studentgroups`
 --
 
-DROP TABLE IF EXISTS `studentgroups`;
-CREATE TABLE IF NOT EXISTS `studentgroups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `studentgroups` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `partner_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_studentgroups_partner_id` (`partner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `studentgroups`
+-- Dumping data for table `studentgroups`
 --
 
 INSERT INTO `studentgroups` (`id`, `name`, `partner_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -17592,128 +17285,112 @@ INSERT INTO `studentgroups` (`id`, `name`, `partner_id`, `created_at`, `updated_
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `study_plans`
+-- Table structure for table `study_plans`
 --
 
-DROP TABLE IF EXISTS `study_plans`;
-CREATE TABLE IF NOT EXISTS `study_plans` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `study_plans` (
+  `id` int(10) UNSIGNED NOT NULL,
   `daily_time` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_study_plans_1` (`user_id`)
+  `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `subjects`
+-- Table structure for table `subjects`
 --
 
-DROP TABLE IF EXISTS `subjects`;
-CREATE TABLE IF NOT EXISTS `subjects` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subjects` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `subject_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `subjects_subject_id_foreign` (`subject_id`)
+  `subject_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `subjects_books`
+-- Table structure for table `subjects_books`
 --
 
-DROP TABLE IF EXISTS `subjects_books`;
-CREATE TABLE IF NOT EXISTS `subjects_books` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subjects_books` (
+  `id` int(10) UNSIGNED NOT NULL,
   `books_products_id` int(10) UNSIGNED NOT NULL,
   `subjects_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_book_products_subjects_id` (`books_products_id`),
-  KEY `fk_subjects_books_subjects_id` (`subjects_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `subjects_courses`
+-- Table structure for table `subjects_courses`
 --
 
-DROP TABLE IF EXISTS `subjects_courses`;
-CREATE TABLE IF NOT EXISTS `subjects_courses` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subjects_courses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `subject_id` int(10) UNSIGNED DEFAULT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `exam_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `subjects_courses_subject_id_foreign` (`subject_id`),
-  KEY `subjects_courses_course_id_foreign` (`course_id`),
-  KEY `fk_subjects_courses_exam_id` (`exam_id`)
+  `exam_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `subjects_packages`
+-- Table structure for table `subjects_packages`
 --
 
-DROP TABLE IF EXISTS `subjects_packages`;
-CREATE TABLE IF NOT EXISTS `subjects_packages` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subjects_packages` (
+  `id` int(10) UNSIGNED NOT NULL,
   `subject_id` int(10) UNSIGNED NOT NULL,
   `package_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `exam_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_subject_package_relation_id` (`subject_id`),
-  KEY `fk_exam_subjects_packages_id` (`exam_id`)
+  `exam_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `subsections`
+-- Table structure for table `subsections`
 --
 
-DROP TABLE IF EXISTS `subsections`;
-CREATE TABLE IF NOT EXISTS `subsections` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subsections` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `section_id` int(10) UNSIGNED NOT NULL,
-  `slug` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `subsections_section_id_foreign` (`section_id`)
+  `slug` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `subsections`
+--
+
+INSERT INTO `subsections` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`, `section_id`, `slug`) VALUES
+(1, 'Cursos Disponíveis', '2017-12-02 15:26:08', '2017-12-02 15:26:08', NULL, 1, 'cursos-disponiveis');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `suppliers`
+-- Table structure for table `suppliers`
 --
 
-DROP TABLE IF EXISTS `suppliers`;
-CREATE TABLE IF NOT EXISTS `suppliers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `suppliers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `company_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `contact` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fone` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -17722,92 +17399,101 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
   `country_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `surveys`
+-- Table structure for table `surveys`
 --
 
-DROP TABLE IF EXISTS `surveys`;
-CREATE TABLE IF NOT EXISTS `surveys` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `surveys` (
+  `id` int(10) UNSIGNED NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `questions` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `surveys`
+--
+
+INSERT INTO `surveys` (`id`, `description`, `questions`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Avaliação da Área do Aluno - 1', '"Facilidade de localizar as informações (quadro de avisos, calendário, evolução no curso, resultados)","Facilidade de localizar as funcionalidades (acesso as aulas e SAAP\'s, anotações, avaliação, fale conosco)","Qualidade na exibição dos vídeos","Aparência e design","Você indicaria o Brasil Jurídico aos seus amigos?","Qual a sua opinião a respeito da nossa plataforma? Deixe aqui suas sugestões e críticas."', '2015-07-14 16:48:27', '2015-07-14 16:48:27', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `survey_simple_responses`
+-- Table structure for table `survey_simple_responses`
 --
 
-DROP TABLE IF EXISTS `survey_simple_responses`;
-CREATE TABLE IF NOT EXISTS `survey_simple_responses` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `survey_simple_responses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `survey_id` int(10) UNSIGNED NOT NULL,
   `response` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_survey_simple_responses_user_id` (`user_id`),
-  KEY `fk_survey_simple_responses_survey_id` (`survey_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `survey_simple_responses`
+--
+
+INSERT INTO `survey_simple_responses` (`id`, `user_id`, `survey_id`, `response`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(6, 8929, 1, '-', '2017-12-02 18:17:10', '2017-12-02 18:17:10', NULL),
+(7, 8929, 1, '-', '2017-12-02 18:31:00', '2017-12-02 18:31:00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tags`
+-- Table structure for table `tags`
 --
 
-DROP TABLE IF EXISTS `tags`;
-CREATE TABLE IF NOT EXISTS `tags` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tags` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `user_moderator_id` int(10) UNSIGNED DEFAULT NULL,
-  `active_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tags_name_unique` (`name`),
-  KEY `fk_tags_1` (`user_moderator_id`)
+  `active_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `description`, `created_at`, `updated_at`, `deleted_at`, `user_moderator_id`, `active_at`) VALUES
+(1, 'Java', NULL, '2017-12-02 15:28:33', '2017-12-02 18:27:15', NULL, NULL, NULL),
+(2, 'noticia', NULL, '2017-12-02 19:10:23', '2017-12-02 19:10:23', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `teacher_lesson`
+-- Table structure for table `teacher_lesson`
 --
 
-DROP TABLE IF EXISTS `teacher_lesson`;
-CREATE TABLE IF NOT EXISTS `teacher_lesson` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `teacher_lesson` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `lesson_id` int(10) UNSIGNED NOT NULL,
-  `percentage` decimal(5,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `percentage` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `teacher_ratings`
+-- Table structure for table `teacher_ratings`
 --
 
-DROP TABLE IF EXISTS `teacher_ratings`;
-CREATE TABLE IF NOT EXISTS `teacher_ratings` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `teacher_ratings` (
+  `id` int(10) UNSIGNED NOT NULL,
   `content_rating` int(11) DEFAULT NULL,
   `teaching_rating` int(11) DEFAULT NULL,
   `teacher_id` int(10) UNSIGNED NOT NULL,
@@ -17815,22 +17501,17 @@ CREATE TABLE IF NOT EXISTS `teacher_ratings` (
   `execution_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_teacher_ratings_exams_id` (`exam_id`),
-  KEY `fk_teacher_ratings_executions_id` (`execution_id`),
-  KEY `fk_teacher_ratings_teachers_id` (`teacher_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `teacher_statements`
+-- Table structure for table `teacher_statements`
 --
 
-DROP TABLE IF EXISTS `teacher_statements`;
-CREATE TABLE IF NOT EXISTS `teacher_statements` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `teacher_statements` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_teacher_id` int(10) UNSIGNED NOT NULL,
   `order_id` int(10) UNSIGNED DEFAULT NULL,
   `buyer_name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -17853,21 +17534,17 @@ CREATE TABLE IF NOT EXISTS `teacher_statements` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `anticipation` smallint(6) DEFAULT NULL,
   `partnerorder_id` int(10) UNSIGNED DEFAULT NULL,
-  `partnerorderpayment_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_teacher_statements_user_teacher_id` (`user_teacher_id`),
-  KEY `fk_teacher_statements_order_id` (`order_id`)
+  `partnerorderpayment_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tickets`
+-- Table structure for table `tickets`
 --
 
-DROP TABLE IF EXISTS `tickets`;
-CREATE TABLE IF NOT EXISTS `tickets` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tickets` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_student_id` int(10) UNSIGNED NOT NULL,
   `sector_id` int(10) UNSIGNED NOT NULL,
   `message` text COLLATE utf8_unicode_ci NOT NULL,
@@ -17878,38 +17555,32 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `content_id` int(10) UNSIGNED DEFAULT NULL,
-  `enrollment_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_tickets_content_id` (`content_id`),
-  KEY `fk_tickets_enrollment_id` (`enrollment_id`)
+  `enrollment_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ticket_messages`
+-- Table structure for table `ticket_messages`
 --
 
-DROP TABLE IF EXISTS `ticket_messages`;
-CREATE TABLE IF NOT EXISTS `ticket_messages` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ticket_messages` (
+  `id` int(10) UNSIGNED NOT NULL,
   `ticket_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `message` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `track_carrinho`
+-- Table structure for table `track_carrinho`
 --
 
-DROP TABLE IF EXISTS `track_carrinho`;
-CREATE TABLE IF NOT EXISTS `track_carrinho` (
+CREATE TABLE `track_carrinho` (
   `path` varchar(100) DEFAULT NULL,
   `ip` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -17919,12 +17590,11 @@ CREATE TABLE IF NOT EXISTS `track_carrinho` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `track_cart`
+-- Table structure for table `track_cart`
 --
 
-DROP TABLE IF EXISTS `track_cart`;
-CREATE TABLE IF NOT EXISTS `track_cart` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `track_cart` (
+  `id` int(10) UNSIGNED NOT NULL,
   `path` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `ip` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -17932,19 +17602,107 @@ CREATE TABLE IF NOT EXISTS `track_cart` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `session` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `order_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `track_cart`
+--
+
+INSERT INTO `track_cart` (`id`, `path`, `user_id`, `ip`, `created_at`, `updated_at`, `deleted_at`, `session`, `order_id`) VALUES
+(1, 'carrinho/add/1/course', 123, '127.0.0.1', '2017-12-02 17:54:35', '2017-12-02 17:54:35', NULL, 'f024aa0fd2d77839dcf5eb03b80768af2dc8e03f', NULL),
+(2, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 17:54:36', '2017-12-02 17:54:36', NULL, 'f024aa0fd2d77839dcf5eb03b80768af2dc8e03f', 1),
+(3, 'carrinho/add/1/course', 8929, '127.0.0.1', '2017-12-02 18:17:36', '2017-12-02 18:17:36', NULL, '504f97e55491105e7ee59c2b82a01026d5b01969', 1),
+(4, 'carrinho/add/1/course', 123, '127.0.0.1', '2017-12-02 19:37:09', '2017-12-02 19:37:09', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', NULL),
+(5, 'carrinho/autenticacao', 123, '127.0.0.1', '2017-12-02 19:37:12', '2017-12-02 19:37:12', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(6, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:37:12', '2017-12-02 19:37:12', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(7, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:37:51', '2017-12-02 19:37:51', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(8, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:37:59', '2017-12-02 19:37:59', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(9, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:38:04', '2017-12-02 19:38:04', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(10, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:38:08', '2017-12-02 19:38:08', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(11, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:38:16', '2017-12-02 19:38:16', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(12, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:38:45', '2017-12-02 19:38:45', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(13, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:38:52', '2017-12-02 19:38:52', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(14, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:39:00', '2017-12-02 19:39:00', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(15, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:39:08', '2017-12-02 19:39:08', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(16, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:39:24', '2017-12-02 19:39:24', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(17, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:40:13', '2017-12-02 19:40:13', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(18, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:40:31', '2017-12-02 19:40:31', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(19, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:40:42', '2017-12-02 19:40:42', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(20, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:41:15', '2017-12-02 19:41:15', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(21, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:41:32', '2017-12-02 19:41:32', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(22, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:42:19', '2017-12-02 19:42:19', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(23, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:42:40', '2017-12-02 19:42:40', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(24, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:43:25', '2017-12-02 19:43:25', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(25, 'carrinho/pagamento', 123, '127.0.0.1', '2017-12-02 19:43:30', '2017-12-02 19:43:30', NULL, 'dd2e9854716e91f600ed3312bb52b36b976576ee', 3),
+(26, 'carrinho/autenticacao', 8929, '127.0.0.1', '2017-12-02 19:45:48', '2017-12-02 19:45:48', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(27, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:45:48', '2017-12-02 19:45:48', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(28, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:50:26', '2017-12-02 19:50:26', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(29, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:51:00', '2017-12-02 19:51:00', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(30, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:51:26', '2017-12-02 19:51:26', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(31, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:51:39', '2017-12-02 19:51:39', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(32, 'carrinho/autenticacao', 8929, '127.0.0.1', '2017-12-02 19:51:45', '2017-12-02 19:51:45', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(33, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:51:45', '2017-12-02 19:51:45', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(34, 'carrinho/autenticacao', 8929, '127.0.0.1', '2017-12-02 19:53:14', '2017-12-02 19:53:14', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(35, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:53:14', '2017-12-02 19:53:14', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(36, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:54:03', '2017-12-02 19:54:03', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(37, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:54:34', '2017-12-02 19:54:34', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(38, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:54:51', '2017-12-02 19:54:51', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(39, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:55:07', '2017-12-02 19:55:07', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(40, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:55:20', '2017-12-02 19:55:20', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(41, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:55:33', '2017-12-02 19:55:33', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(42, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:55:51', '2017-12-02 19:55:51', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(43, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:56:14', '2017-12-02 19:56:14', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(44, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:56:57', '2017-12-02 19:56:57', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(45, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:57:28', '2017-12-02 19:57:28', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(46, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:57:51', '2017-12-02 19:57:51', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(47, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:58:13', '2017-12-02 19:58:13', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(48, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:58:22', '2017-12-02 19:58:22', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(49, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:59:13', '2017-12-02 19:59:13', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(50, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 19:59:23', '2017-12-02 19:59:23', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(51, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:09:50', '2017-12-02 20:09:50', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(52, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:11:35', '2017-12-02 20:11:35', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(53, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:15:28', '2017-12-02 20:15:28', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(54, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:18:20', '2017-12-02 20:18:20', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(55, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:19:18', '2017-12-02 20:19:18', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(56, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:21:30', '2017-12-02 20:21:30', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(57, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:25:04', '2017-12-02 20:25:04', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(58, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:26:26', '2017-12-02 20:26:26', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(59, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:27:28', '2017-12-02 20:27:28', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(60, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:27:44', '2017-12-02 20:27:44', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(61, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:27:55', '2017-12-02 20:27:55', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(62, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:46:10', '2017-12-02 20:46:10', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(63, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:49:14', '2017-12-02 20:49:14', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(64, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 20:50:37', '2017-12-02 20:50:37', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(65, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:50:37', '2017-12-02 20:50:37', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(66, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 20:52:54', '2017-12-02 20:52:54', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(67, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:52:54', '2017-12-02 20:52:54', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(68, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 20:57:43', '2017-12-02 20:57:43', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(69, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:03:50', '2017-12-02 21:03:50', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(70, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:05:46', '2017-12-02 21:05:46', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(71, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:07:20', '2017-12-02 21:07:20', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(72, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:09:00', '2017-12-02 21:09:00', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(73, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:12:44', '2017-12-02 21:12:44', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(74, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:12:46', '2017-12-02 21:12:46', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(75, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:14:24', '2017-12-02 21:14:24', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(76, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 21:19:31', '2017-12-02 21:19:31', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(77, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 21:19:59', '2017-12-02 21:19:59', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(78, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:20:01', '2017-12-02 21:20:01', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(79, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 21:22:32', '2017-12-02 21:22:32', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(80, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 21:23:57', '2017-12-02 21:23:57', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(81, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 21:24:08', '2017-12-02 21:24:08', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(82, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 21:24:17', '2017-12-02 21:24:17', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(83, 'carrinho/pagamento', 8929, '127.0.0.1', '2017-12-02 21:24:18', '2017-12-02 21:24:18', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3),
+(84, 'pagseguro/send', 8929, '127.0.0.1', '2017-12-02 21:25:25', '2017-12-02 21:25:25', NULL, '89443a1c7dcb502eba10b590c22caf2473eaea7d', 3);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `transactions`
+-- Table structure for table `transactions`
 --
 
-DROP TABLE IF EXISTS `transactions`;
-CREATE TABLE IF NOT EXISTS `transactions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `transactions` (
+  `id` int(10) UNSIGNED NOT NULL,
   `order_id` int(11) NOT NULL,
   `payment_hub` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `payment_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -17962,19 +17720,17 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `status_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `status_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -18024,42 +17780,35 @@ CREATE TABLE IF NOT EXISTS `users` (
   `video_quality` smallint(6) NOT NULL DEFAULT '0',
   `occupation_id` int(10) UNSIGNED DEFAULT NULL,
   `last_data_update` date DEFAULT NULL,
-  `meta_description` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`),
-  KEY `fk_users_1` (`city_id`),
-  KEY `fk_users_occupation_id` (`occupation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8930 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `meta_description` text COLLATE utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `status`, `confirmation_code`, `confirmed`, `remember_token`, `created_at`, `updated_at`, `deleted_at`, `photo`, `cel`, `personal_id`, `address`, `professional_number`, `bank`, `agency`, `account`, `tags`, `neighborhood`, `city_id`, `zip`, `address_number`, `address_comp`, `is_newsletter_subscriber`, `gender`, `birthdate`, `last_access`, `resume`, `linkcv`, `video`, `youtube`, `facebook`, `instagram`, `has_children`, `company_id`, `orders_count`, `linkedin`, `jusbrasil`, `twitter`, `periscope`, `last_session_id`, `list_on_site`, `slug`, `educational_title`, `featured`, `video_quality`, `occupation_id`, `last_data_update`, `meta_description`) VALUES
-(123, 'Administrador', 'admin@admin.com', '$2y$10$syoXPXSSh64TOwL1xjODrOoq9sF66T2axZ5gGeBmWHcKh2CW/ekQi', 1, 'ef77c135342ae6b38f57dc47a7284586', 1, 'vbEkY0eta8cm9FPDXhheq3rQAsNrsb0o9Lg7v9DAxXshw85BWXrKFFbP5IlT', '2015-06-11 18:18:57', '2017-09-20 19:46:07', NULL, NULL, '(71) 981625358', '073.011.215-20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2906501, '43.815-300', NULL, NULL, NULL, 'M', '1994-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 0, 1, NULL, NULL, NULL),
-(8929, 'Gilson de Melo Oliveira', 'junnyorr.sirnandes@gmail.com', '$2y$10$RejJ.pie02IUc0sCZRdnsuReJqv3Sy.bsDYwlbZVBkyGyUgdeKBw6', 1, 'd1ede6eff71badd7ad520ddde69eb963', 1, '4bqEd0DI5iCEtJR7B5NKQi9MtUi9XEeS8E9uTUKUmhWPAgldbGlcN0V60kah', '2015-06-18 17:05:48', '2017-03-15 19:06:55', NULL, '', '(71) 81625358_', '073.011.215-20', '', '', NULL, NULL, NULL, NULL, '', 2906501, '43.815-200', '', '', 0, 'M', '1994-12-31', '2016-05-30 16:26:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 0, 1, NULL, '2016-08-12', NULL);
+(123, 'Administrador', 'admin@admin.com', '$2y$10$syoXPXSSh64TOwL1xjODrOoq9sF66T2axZ5gGeBmWHcKh2CW/ekQi', 1, 'ef77c135342ae6b38f57dc47a7284586', 1, 'sb8pNonV3jvOoJMKm4F6ZStlndBNTcBclRe6SYSM3VxsD8lAnZRmUSunbwkQ', '2015-06-11 18:18:57', '2017-12-02 19:45:28', NULL, NULL, '(71) 981625358', '073.011.215-20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2906501, '43.815-300', NULL, NULL, NULL, 'M', '1994-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 0, 1, NULL, NULL, NULL),
+(8929, 'Gilson de Melo Oliveira', 'junnyorr.sirnandes@gmail.com', '$2y$10$RejJ.pie02IUc0sCZRdnsuReJqv3Sy.bsDYwlbZVBkyGyUgdeKBw6', 1, 'd1ede6eff71badd7ad520ddde69eb963', 1, 'GmqQUXNj61ahkUUAX8DxGHJVzIILZ6SKmNDgEmsr9tpKDQ8UqpMfOqsM8i3q', '2015-06-18 17:05:48', '2017-12-02 19:09:02', NULL, '', '7181625358', '073.011.215-20', 'Rua Bahia', '', '', '', '', NULL, 'Nova Candeias', 2906501, '43.815-200', '', '', 0, 'M', '1994-12-31', '2016-05-30 16:26:26', '', '', '', '', '', '', 0, '', 1, '', '', '', '', NULL, 1, 'gilson-de-melo-oliveira', '', 1, 1, NULL, '2017-12-02', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_providers`
+-- Table structure for table `user_providers`
 --
 
-DROP TABLE IF EXISTS `user_providers`;
-CREATE TABLE IF NOT EXISTS `user_providers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user_providers` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `provider` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `provider_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `user_providers_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=625 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `user_providers`
+-- Dumping data for table `user_providers`
 --
 
 INSERT INTO `user_providers` (`id`, `user_id`, `provider`, `provider_id`, `avatar`, `created_at`, `updated_at`) VALUES
@@ -18693,12 +18442,11 @@ INSERT INTO `user_providers` (`id`, `user_id`, `provider`, `provider_id`, `avata
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `videos`
+-- Table structure for table `videos`
 --
 
-DROP TABLE IF EXISTS `videos`;
-CREATE TABLE IF NOT EXISTS `videos` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `videos` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -18710,36 +18458,32 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `activation_date` datetime NOT NULL,
-  `hits` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `hits` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `video_user`
+-- Table structure for table `video_user`
 --
 
-DROP TABLE IF EXISTS `video_user`;
-CREATE TABLE IF NOT EXISTS `video_user` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `video_user` (
+  `id` int(10) UNSIGNED NOT NULL,
   `video_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `view`
+-- Table structure for table `view`
 --
 
-DROP TABLE IF EXISTS `view`;
-CREATE TABLE IF NOT EXISTS `view` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `view` (
+  `id` int(10) UNSIGNED NOT NULL,
   `enrollment_id` int(10) UNSIGNED NOT NULL,
   `content_id` int(10) UNSIGNED NOT NULL,
   `max_view` smallint(6) NOT NULL,
@@ -18752,21 +18496,27 @@ CREATE TABLE IF NOT EXISTS `view` (
   `accumulated_percent` int(10) UNSIGNED DEFAULT NULL,
   `like` smallint(6) DEFAULT NULL,
   `like_content` smallint(6) DEFAULT NULL,
-  `like_teaching` smallint(6) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_view_content_id` (`content_id`),
-  KEY `fk_view_enrollment_id` (`enrollment_id`)
+  `like_teaching` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `view`
+--
+
+INSERT INTO `view` (`id`, `enrollment_id`, `content_id`, `max_view`, `view`, `created_at`, `updated_at`, `deleted_at`, `state`, `percent`, `accumulated_percent`, `like`, `like_content`, `like_teaching`) VALUES
+(1, 1, 1, 2, 0, '2017-12-02 18:41:16', '2017-12-02 18:41:16', NULL, '0', NULL, 0, 0, NULL, NULL),
+(2, 1, 2, 2, 0, '2017-12-02 18:46:59', '2017-12-02 18:46:59', NULL, '0', NULL, 0, 0, NULL, NULL),
+(3, 1, 3, 2, 0, '2017-12-02 18:47:30', '2017-12-02 18:47:30', NULL, '0', NULL, 0, 0, NULL, NULL),
+(4, 1, 4, 2, 0, '2017-12-02 18:47:33', '2017-12-02 18:47:33', NULL, '0', NULL, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `view_exams`
+-- Table structure for table `view_exams`
 --
 
-DROP TABLE IF EXISTS `view_exams`;
-CREATE TABLE IF NOT EXISTS `view_exams` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `view_exams` (
+  `id` int(10) UNSIGNED NOT NULL,
   `enrollment_id` int(10) UNSIGNED DEFAULT NULL,
   `question_id` int(10) UNSIGNED NOT NULL,
   `max_view` smallint(6) NOT NULL,
@@ -18774,22 +18524,17 @@ CREATE TABLE IF NOT EXISTS `view_exams` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `execution_id` int(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_view_exams_question_id` (`question_id`),
-  KEY `fk_view_exams_enrollment_id` (`enrollment_id`),
-  KEY `fk_execution_view_exams_id` (`execution_id`)
+  `execution_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `view_log`
+-- Table structure for table `view_log`
 --
 
-DROP TABLE IF EXISTS `view_log`;
-CREATE TABLE IF NOT EXISTS `view_log` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `view_log` (
+  `id` int(10) UNSIGNED NOT NULL,
   `enrollment_id` int(10) UNSIGNED NOT NULL,
   `content_id` int(10) UNSIGNED NOT NULL,
   `datetime_view` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -18799,21 +18544,33 @@ CREATE TABLE IF NOT EXISTS `view_log` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `watched_time` int(11) NOT NULL DEFAULT '0',
   `user_agent` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ip` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_view_log_content_id` (`content_id`),
-  KEY `fk_view_log_enrollment_id` (`enrollment_id`)
+  `ip` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `view_log`
+--
+
+INSERT INTO `view_log` (`id`, `enrollment_id`, `content_id`, `datetime_view`, `video_index_seconds`, `created_at`, `updated_at`, `deleted_at`, `watched_time`, `user_agent`, `ip`) VALUES
+(1, 1, 1, '2017-12-02 18:41:16', 0, '2017-12-02 18:41:16', '2017-12-02 18:41:16', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(2, 1, 1, '2017-12-02 18:42:13', 0, '2017-12-02 18:42:13', '2017-12-02 18:42:13', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(3, 1, 1, '2017-12-02 18:43:24', 0, '2017-12-02 18:43:24', '2017-12-02 18:43:24', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(4, 1, 1, '2017-12-02 18:46:21', 0, '2017-12-02 18:46:21', '2017-12-02 18:46:21', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(5, 1, 2, '2017-12-02 18:47:00', 0, '2017-12-02 18:47:00', '2017-12-02 18:47:00', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(6, 1, 3, '2017-12-02 18:47:30', 0, '2017-12-02 18:47:30', '2017-12-02 18:47:30', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(7, 1, 4, '2017-12-02 18:47:33', 0, '2017-12-02 18:47:33', '2017-12-02 18:47:33', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(8, 1, 4, '2017-12-02 18:49:54', 0, '2017-12-02 18:49:54', '2017-12-02 18:49:54', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(9, 1, 4, '2017-12-02 18:51:39', 0, '2017-12-02 18:51:39', '2017-12-02 18:51:39', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1'),
+(10, 1, 4, '2017-12-02 18:53:05', 0, '2017-12-02 18:53:05', '2017-12-02 18:53:06', NULL, 0, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36', '127.0.0.1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `webinars`
+-- Table structure for table `webinars`
 --
 
-DROP TABLE IF EXISTS `webinars`;
-CREATE TABLE IF NOT EXISTS `webinars` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `webinars` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime DEFAULT NULL,
@@ -18821,20 +18578,17 @@ CREATE TABLE IF NOT EXISTS `webinars` (
   `courses_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_webinars_courses_id` (`courses_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshops`
+-- Table structure for table `workshops`
 --
 
-DROP TABLE IF EXISTS `workshops`;
-CREATE TABLE IF NOT EXISTS `workshops` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshops` (
+  `id` int(10) UNSIGNED NOT NULL,
   `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `content` varchar(4000) COLLATE utf8_unicode_ci NOT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
@@ -18844,20 +18598,17 @@ CREATE TABLE IF NOT EXISTS `workshops` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `evaluation_type` smallint(6) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `fk_workshops_course_id` (`course_id`)
+  `evaluation_type` smallint(6) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshop_activities`
+-- Table structure for table `workshop_activities`
 --
 
-DROP TABLE IF EXISTS `workshop_activities`;
-CREATE TABLE IF NOT EXISTS `workshop_activities` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshop_activities` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_id` int(10) UNSIGNED DEFAULT NULL,
   `description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `url_document` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
@@ -18877,73 +18628,61 @@ CREATE TABLE IF NOT EXISTS `workshop_activities` (
   `personal_evaluation` smallint(6) NOT NULL DEFAULT '0',
   `explanation_url` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `text` longtext COLLATE utf8_unicode_ci,
-  `average_grade` double(8,2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_workshop_activities_workshop` (`workshop_id`)
+  `average_grade` double(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshop_activities_lessons`
+-- Table structure for table `workshop_activities_lessons`
 --
 
-DROP TABLE IF EXISTS `workshop_activities_lessons`;
-CREATE TABLE IF NOT EXISTS `workshop_activities_lessons` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshop_activities_lessons` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_activity_id` int(10) UNSIGNED DEFAULT NULL,
   `lesson_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_workshop_activities_activity_id` (`workshop_activity_id`),
-  KEY `fk_workshop_acitivities_lessons_id` (`lesson_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshop_coordinators`
+-- Table structure for table `workshop_coordinators`
 --
 
-DROP TABLE IF EXISTS `workshop_coordinators`;
-CREATE TABLE IF NOT EXISTS `workshop_coordinators` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshop_coordinators` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_id` int(10) UNSIGNED NOT NULL,
-  `teacher_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`)
+  `teacher_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshop_criterias`
+-- Table structure for table `workshop_criterias`
 --
 
-DROP TABLE IF EXISTS `workshop_criterias`;
-CREATE TABLE IF NOT EXISTS `workshop_criterias` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshop_criterias` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_id` int(10) UNSIGNED DEFAULT NULL,
   `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `explanation` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
   `max_grade` double(8,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_workshop_criterias_workshop` (`workshop_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshop_evaluation_groups`
+-- Table structure for table `workshop_evaluation_groups`
 --
 
-DROP TABLE IF EXISTS `workshop_evaluation_groups`;
-CREATE TABLE IF NOT EXISTS `workshop_evaluation_groups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshop_evaluation_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
   `description` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `workshop_id` int(10) UNSIGNED DEFAULT NULL,
   `position` smallint(6) DEFAULT NULL,
@@ -18952,41 +18691,33 @@ CREATE TABLE IF NOT EXISTS `workshop_evaluation_groups` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_workshop_evaluation_groups_workshop` (`workshop_id`)
+  `is_active` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshop_group_tutors`
+-- Table structure for table `workshop_group_tutors`
 --
 
-DROP TABLE IF EXISTS `workshop_group_tutors`;
-CREATE TABLE IF NOT EXISTS `workshop_group_tutors` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshop_group_tutors` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_evaluation_group_id` int(10) UNSIGNED DEFAULT NULL,
   `tutor_id` int(10) UNSIGNED DEFAULT NULL,
   `activity_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_workshop_group_tutors_workshop_evaluation_group` (`workshop_evaluation_group_id`),
-  KEY `fk_workshop_group_tutors_tutor` (`tutor_id`),
-  KEY `fk_workshop_group_tutors_activity` (`activity_id`)
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `workshop_tutors`
+-- Table structure for table `workshop_tutors`
 --
 
-DROP TABLE IF EXISTS `workshop_tutors`;
-CREATE TABLE IF NOT EXISTS `workshop_tutors` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workshop_tutors` (
+  `id` int(10) UNSIGNED NOT NULL,
   `workshop_id` int(10) UNSIGNED DEFAULT NULL,
   `criteria_id` int(10) UNSIGNED DEFAULT NULL,
   `tutor_id` int(10) UNSIGNED DEFAULT NULL,
@@ -18996,11 +18727,7 @@ CREATE TABLE IF NOT EXISTS `workshop_tutors` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_workshop_tutors_workshop` (`workshop_id`),
-  KEY `fk_workshop_tutors_criteria` (`criteria_id`),
-  KEY `fk_workshop_tutors_tutor` (`tutor_id`)
+  `is_active` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -19008,48 +18735,1725 @@ CREATE TABLE IF NOT EXISTS `workshop_tutors` (
 --
 
 --
+-- Indexes for table `advertising_partners`
+--
+ALTER TABLE `advertising_partners`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `analysis`
+--
+ALTER TABLE `analysis`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_analysis_subject_id` (`subject_id`),
+  ADD KEY `fk_analysis_analysis_exam_group_id` (`analysis_exam_group_id`);
+
+--
+-- Indexes for table `analysis_exams`
+--
+ALTER TABLE `analysis_exams`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_analysis_exams_source_id` (`source_id`),
+  ADD KEY `fk_analysis_exams_office_id` (`office_id`),
+  ADD KEY `fk_analysis_exams_institution_id` (`institution_id`);
+
+--
+-- Indexes for table `analysis_exams_groups`
+--
+ALTER TABLE `analysis_exams_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_analysis_exams_groups_analysis_exam_group_id` (`analysis_exam_group_id`),
+  ADD KEY `fk_analysis_exams_groups_analysis_exam_id` (`analysis_exam_id`);
+
+--
+-- Indexes for table `analysis_exam_groups`
+--
+ALTER TABLE `analysis_exam_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `analysis_exam_subjects`
+--
+ALTER TABLE `analysis_exam_subjects`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_analysis_exam_subjects_analysis_exam_id` (`analysis_exam_id`),
+  ADD KEY `fk_analysis_exam_subjects_subject_id` (`subject_id`);
+
+--
+-- Indexes for table `analysis_subjects`
+--
+ALTER TABLE `analysis_subjects`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_analysis_subjects_subject_id` (`subject_id`),
+  ADD KEY `fk_analysis_subjects_analysis_id` (`analysis_id`);
+
+--
+-- Indexes for table `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `answers_question_id_foreign` (`question_id`);
+
+--
+-- Indexes for table `answers_executions`
+--
+ALTER TABLE `answers_executions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `answers_executions_question_execution_id_foreign` (`question_execution_id`),
+  ADD KEY `answers_executions_answer_id_foreign` (`answer_id`);
+
+--
 -- Indexes for table `articles`
 --
+ALTER TABLE `articles`
+  ADD PRIMARY KEY (`id`);
 ALTER TABLE `articles` ADD FULLTEXT KEY `search` (`title`,`content`,`tags`);
+
+--
+-- Indexes for table `article_user`
+--
+ALTER TABLE `article_user`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ask_the_teacher`
 --
+ALTER TABLE `ask_the_teacher`
+  ADD PRIMARY KEY (`id`);
 ALTER TABLE `ask_the_teacher` ADD FULLTEXT KEY `search` (`question`,`answer`);
+
+--
+-- Indexes for table `ask_the_teacher_history`
+--
+ALTER TABLE `ask_the_teacher_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assigned_roles`
+--
+ALTER TABLE `assigned_roles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `assigned_roles_user_id_foreign` (`user_id`),
+  ADD KEY `assigned_roles_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `attempt_to_register_on_the_cart`
+--
+ALTER TABLE `attempt_to_register_on_the_cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_order_id` (`order_id`);
+
+--
+-- Indexes for table `banners`
+--
+ALTER TABLE `banners`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_banners_course_id` (`course_id`),
+  ADD KEY `fk_banners_package_id` (`package_id`);
+
+--
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_books_products_id` (`product_id`),
+  ADD KEY `fk_books_user_id` (`user_id`);
+
+--
+-- Indexes for table `campaigns`
+--
+ALTER TABLE `campaigns`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_cities_1` (`state_id`);
+
+--
+-- Indexes for table `configs`
+--
+ALTER TABLE `configs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_configs_1` (`user_changed_id`);
+
+--
+-- Indexes for table `contents`
+--
+ALTER TABLE `contents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_contents_lesson_id` (`lesson_id`);
+
+--
+-- Indexes for table `content_comments`
+--
+ALTER TABLE `content_comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `content_notes`
+--
+ALTER TABLE `content_notes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_content_notes_1` (`content_id`),
+  ADD KEY `fk_content_notes_2` (`student_id`);
+
+--
+-- Indexes for table `coordinators_courses`
+--
+ALTER TABLE `coordinators_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_coordinators_courses_course_id` (`course_id`),
+  ADD KEY `fk_coordinators_courses_coordinator_id` (`coordinator_id`);
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `countries_short_unique` (`short`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `coupons_partner_id_foreign` (`partner_id`),
+  ADD KEY `coupons_advertisingpartner_id_foreign` (`advertisingpartner_id`),
+  ADD KEY `fk_coupons_user_id_created_by` (`user_id_created_by`),
+  ADD KEY `fk_coupons_user_id_representative` (`user_id_representative`);
+
+--
+-- Indexes for table `coupon_course`
+--
+ALTER TABLE `coupon_course`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `coupon_course_coupon_id_foreign` (`coupon_id`),
+  ADD KEY `coupon_course_course_id_foreign` (`course_id`);
+
+--
+-- Indexes for table `coupon_module`
+--
+ALTER TABLE `coupon_module`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `coupon_module_coupon_id_foreign` (`coupon_id`),
+  ADD KEY `coupon_module_module_id_foreign` (`module_id`);
+
+--
+-- Indexes for table `coupon_user`
+--
+ALTER TABLE `coupon_user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `coupon_user_coupon_id_foreign` (`coupon_id`),
+  ADD KEY `coupon_user_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `courses`
 --
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_courses_1_idx` (`subsection_id`),
+  ADD KEY `fk_courses_2` (`user_admin_id`),
+  ADD KEY `fk_exam_course_id` (`exam_id`),
+  ADD KEY `fk_courses_is_active` (`is_active`),
+  ADD KEY `fk_courses_activation_date` (`activation_date`),
+  ADD KEY `fk_courses_featured` (`featured`);
 ALTER TABLE `courses` ADD FULLTEXT KEY `search` (`title`,`description`,`course_content`,`tags`);
+
+--
+-- Indexes for table `courses_aggregated_courses`
+--
+ALTER TABLE `courses_aggregated_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `courses_aggregated_courses_course_id_bought_foreign` (`course_id_bought`),
+  ADD KEY `courses_aggregated_courses_course_id_extra_foreign` (`course_id_extra`);
+
+--
+-- Indexes for table `courses_aggregated_exams`
+--
+ALTER TABLE `courses_aggregated_exams`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `courses_aggregated_exams_course_id_bought_foreign` (`course_id_bought`),
+  ADD KEY `courses_aggregated_exams_exam_id_extra_foreign` (`exam_id_extra`);
+
+--
+-- Indexes for table `courses_alerts`
+--
+ALTER TABLE `courses_alerts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_courses_alerts_course_id` (`course_id`);
+
+--
+-- Indexes for table `courses_calendars`
+--
+ALTER TABLE `courses_calendars`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_courses_calendars_course_id` (`course_id`);
+
+--
+-- Indexes for table `course_books`
+--
+ALTER TABLE `course_books`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_book_products_course_books_id` (`books_products_id`),
+  ADD KEY `fk_books_courses_id` (`courses_id`);
+
+--
+-- Indexes for table `course_contents`
+--
+ALTER TABLE `course_contents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_course_course_contents_id` (`course_id`);
+
+--
+-- Indexes for table `course_teachers`
+--
+ALTER TABLE `course_teachers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_course_teachers_1` (`course_id`),
+  ADD KEY `fk_course_teachers_2` (`teacher_id`);
+
+--
+-- Indexes for table `criteria`
+--
+ALTER TABLE `criteria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `domain`
+--
+ALTER TABLE `domain`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enrollments`
+--
+ALTER TABLE `enrollments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_enrollments_course_id` (`course_id`),
+  ADD KEY `fk_enrollments_module_id` (`module_id`),
+  ADD KEY `fk_enrollments_lesson_id` (`lesson_id`),
+  ADD KEY `fk_enrollments_student_id` (`student_id`),
+  ADD KEY `fk_enrollments_order_id` (`order_id`),
+  ADD KEY `enrollments_exam_id_foreign` (`exam_id`),
+  ADD KEY `fk_enrollments_partner_id` (`partner_id`),
+  ADD KEY `enrollments_is_active` (`is_active`),
+  ADD KEY `fk_enrollments_user_id_created_by` (`user_id_created_by`),
+  ADD KEY `fk_course_enrollment_enrollment_id` (`course_enrollment_id`),
+  ADD KEY `fk_certification_individual_user_id` (`certification_individual_user_id`),
+  ADD KEY `fk_enrollments_date_begin` (`date_begin`),
+  ADD KEY `fk_enrollments_date_end` (`date_end`);
+
+--
+-- Indexes for table `error_logs`
+--
+ALTER TABLE `error_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exams`
+--
+ALTER TABLE `exams`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `exams_course_id_foreign` (`course_id`),
+  ADD KEY `exams_subsection_id_foreign` (`subsection_id`),
+  ADD KEY `fk_exam_teacher_message_id` (`teacher_message_id`);
+
+--
+-- Indexes for table `exams_books`
+--
+ALTER TABLE `exams_books`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_book_products_exams_books_id` (`books_products_id`),
+  ADD KEY `fk_books_exams_id` (`exams_id`);
+
+--
+-- Indexes for table `exams_courses`
+--
+ALTER TABLE `exams_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `exams_courses_exam_id_foreign` (`exam_id`),
+  ADD KEY `exams_courses_course_id_foreign` (`course_id`);
+
+--
+-- Indexes for table `exam_packages`
+--
+ALTER TABLE `exam_packages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `exam_packages_package_id_foreign` (`package_id`),
+  ADD KEY `exam_packages_exam_id_foreign` (`exam_id`);
+
+--
+-- Indexes for table `executions`
+--
+ALTER TABLE `executions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `executions_enrollment_id_foreign` (`enrollment_id`),
+  ADD KEY `exam_id` (`exam_id`),
+  ADD KEY `executions_last_question_execution_id_foreign` (`last_question_execution_id`),
+  ADD KEY `fk_lesson_executions` (`lesson_id`),
+  ADD KEY `fk_course_executions` (`course_id`);
+
+--
+-- Indexes for table `faqcategory`
+--
+ALTER TABLE `faqcategory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_faqs_1` (`category_faq_id`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `groups_exam_id_foreign` (`exam_id`),
+  ADD KEY `fk_groups_lesson` (`lesson_id`),
+  ADD KEY `fk_groups_lcourse` (`course_id`);
+
+--
+-- Indexes for table `group_question`
+--
+ALTER TABLE `group_question`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `group_question_question_id_foreign` (`question_id`),
+  ADD KEY `group_question_group_id_foreign` (`group_id`),
+  ADD KEY `group_question_sequence` (`sequence`);
+
+--
+-- Indexes for table `group_subject`
+--
+ALTER TABLE `group_subject`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_source_group_subject_id` (`source_id`);
+
+--
+-- Indexes for table `institutions`
+--
+ALTER TABLE `institutions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_reserved_reserved_at_index` (`queue`,`reserved`,`reserved_at`);
+
+--
+-- Indexes for table `lessons`
+--
+ALTER TABLE `lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_lesson_module_id` (`module_id`),
+  ADD KEY `fk_exam_lesson_id` (`exam_id`);
+
+--
+-- Indexes for table `lesson_teachers`
+--
+ALTER TABLE `lesson_teachers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_lesson_teachers_1` (`lesson_id`),
+  ADD KEY `fk_lesson_teachers_2` (`teacher_id`);
+
+--
+-- Indexes for table `mailing_register`
+--
+ALTER TABLE `mailing_register`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `mailing_register_email_campaign_id_unique` (`email`,`campaign_id`);
+
+--
+-- Indexes for table `modules`
+--
+ALTER TABLE `modules`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_module_course_id` (`course_id`);
+
+--
+-- Indexes for table `module_teachers`
+--
+ALTER TABLE `module_teachers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_module_teachers_1` (`module_id`),
+  ADD KEY `fk_module_teachers_2` (`teacher_id`);
+
+--
+-- Indexes for table `my_workshop_activities`
+--
+ALTER TABLE `my_workshop_activities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_my_workshop_activities_workshop` (`workshop_id`),
+  ADD KEY `fk_my_workshop_activities_activity` (`activity_id`),
+  ADD KEY `fk_my_workshop_activities_enrollment_id` (`enrollment_id`);
+
+--
+-- Indexes for table `my_workshop_activities_time`
+--
+ALTER TABLE `my_workshop_activities_time`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_activity_workshop_time_id` (`activity_id`),
+  ADD KEY `fk_enrollment_workshop_time_id` (`enrollment_id`);
+
+--
+-- Indexes for table `my_workshop_evaluations`
+--
+ALTER TABLE `my_workshop_evaluations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_my_workshop_evaluations_my_activity` (`my_activity_id`),
+  ADD KEY `fk_my_workshop_evaluations_tutor` (`tutor_id`),
+  ADD KEY `fk_my_workshop_evaluations_criteria` (`criteria_id`);
+
+--
+-- Indexes for table `my_workshop_tutors`
+--
+ALTER TABLE `my_workshop_tutors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_my_workshop_tutors_workshop` (`workshop_id`),
+  ADD KEY `fk_my_workshop_tutors_criteria` (`criteria_id`),
+  ADD KEY `fk_my_workshop_tutors_tutor` (`tutor_id`),
+  ADD KEY `fk_my_workshop_tutors_activity_id` (`activity_id`),
+  ADD KEY `fk_my_workshop_tutors_enrollment_id` (`enrollment_id`);
 
 --
 -- Indexes for table `news`
 --
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_news_domain_id` (`domain_id`);
 ALTER TABLE `news` ADD FULLTEXT KEY `search` (`title`,`content`,`tags`);
+
+--
+-- Indexes for table `newsletters`
+--
+ALTER TABLE `newsletters`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `newsletters_email_unique` (`email`);
+
+--
+-- Indexes for table `notification_message`
+--
+ALTER TABLE `notification_message`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notification_user`
+--
+ALTER TABLE `notification_user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notification_user_user_id_foreign` (`user_id`),
+  ADD KEY `fk_notification_message_id` (`notification_message_id`);
+
+--
+-- Indexes for table `occupations`
+--
+ALTER TABLE `occupations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `offices`
+--
+ALTER TABLE `offices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `offices_institution_id_foreign` (`institution_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_orders_student_id` (`student_id`),
+  ADD KEY `fk_orders_coupon_id` (`coupon_id`),
+  ADD KEY `fk_orders_status_id` (`status_id`),
+  ADD KEY `fk_orders_partner_id` (`partner_id`);
+
+--
+-- Indexes for table `order_courses`
+--
+ALTER TABLE `order_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_order_courses_order_id` (`order_id`),
+  ADD KEY `fk_order_courses_course_id` (`course_id`),
+  ADD KEY `fk_order_courses_user_id_external_payment` (`user_id_external_payment`);
+
+--
+-- Indexes for table `order_lessons`
+--
+ALTER TABLE `order_lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_order_lessons_order_id` (`order_id`),
+  ADD KEY `fk_order_lessons_lesson_id` (`lesson_id`);
+
+--
+-- Indexes for table `order_modules`
+--
+ALTER TABLE `order_modules`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_order_modules_order_id` (`order_id`),
+  ADD KEY `fk_order_modules_module_id` (`module_id`);
+
+--
+-- Indexes for table `order_packages`
+--
+ALTER TABLE `order_packages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_order_packages_order_id` (`order_id`),
+  ADD KEY `fk_order_packages_package_id` (`package_id`);
+
+--
+-- Indexes for table `order_status`
+--
+ALTER TABLE `order_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `origin_external`
+--
+ALTER TABLE `origin_external`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `packages`
 --
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `packages_subsection_id_foreign` (`subsection_id`);
 ALTER TABLE `packages` ADD FULLTEXT KEY `search` (`title`,`description`,`tags`);
+
+--
+-- Indexes for table `package_teachers`
+--
+ALTER TABLE `package_teachers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_package_teachers_1` (`package_id`),
+  ADD KEY `fk_package_teachers_2` (`teacher_id`);
+
+--
+-- Indexes for table `partnerorders`
+--
+ALTER TABLE `partnerorders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_partnerorders_partner_id` (`partner_id`),
+  ADD KEY `fk_partnerorders_course_id` (`course_id`);
+
+--
+-- Indexes for table `partnerorder_payments`
+--
+ALTER TABLE `partnerorder_payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_partnerorder_payments_user_id_create` (`user_id_create`),
+  ADD KEY `fk_partnerorder_payments_user_id_paid` (`user_id_paid`);
+
+--
+-- Indexes for table `partners`
+--
+ALTER TABLE `partners`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `partner_managers`
+--
+ALTER TABLE `partner_managers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_partner_managers_partners_id` (`partner_id`),
+  ADD KEY `fk_partner_managers_users_id` (`user_id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`),
+  ADD KEY `password_resets_token_index` (`token`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_unique` (`name`);
+
+--
+-- Indexes for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `permission_role_permission_id_foreign` (`permission_id`),
+  ADD KEY `permission_role_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `permission_user`
+--
+ALTER TABLE `permission_user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `permission_user_permission_id_foreign` (`permission_id`),
+  ADD KEY `permission_user_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `preenrollments`
+--
+ALTER TABLE `preenrollments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_preenrollments_partner_id` (`partner_id`),
+  ADD KEY `fk_preenrollments_course_id` (`course_id`),
+  ADD KEY `fk_preenrollments_student_id` (`student_id`),
+  ADD KEY `fk_preenrollments_studentgroup_id` (`studentgroup_id`),
+  ADD KEY `fk_preenrollments_partnerorder_id` (`partnerorder_id`),
+  ADD KEY `fk_preenrollments_enrollment_id` (`enrollment_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_products_suppliers_id` (`supplier_id`);
+
+--
+-- Indexes for table `products_url`
+--
+ALTER TABLE `products_url`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_products_url_products_id` (`products_id`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `questions_group_id_foreign` (`group_id`),
+  ADD KEY `questions_state_id_foreign` (`state_id`),
+  ADD KEY `questions_city_id_foreign` (`city_id`),
+  ADD KEY `questions_institution_id_foreign` (`institution_id`),
+  ADD KEY `questions_office_id_foreign` (`office_id`),
+  ADD KEY `questions_subject_id_foreign` (`subject_id`),
+  ADD KEY `questions_source_id_foreign` (`source_id`),
+  ADD KEY `fk_questions_teacher_id` (`teacher_id`);
+
+--
+-- Indexes for table `questions_executions`
+--
+ALTER TABLE `questions_executions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `questions_executions_group_id_foreign` (`group_id`),
+  ADD KEY `questions_executions_execution_id_foreign` (`execution_id`),
+  ADD KEY `questions_executions_question_id_foreign` (`question_id`);
+
+--
+-- Indexes for table `question_notes`
+--
+ALTER TABLE `question_notes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_question_notes_1` (`question_id`),
+  ADD KEY `fk_question_notes_2` (`student_id`);
+
+--
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ratings_course_id_foreign` (`course_id`),
+  ADD KEY `ratings_student_id_foreign` (`student_id`),
+  ADD KEY `ratings_criterion_id_foreign` (`criterion_id`),
+  ADD KEY `fk_ratings_enrollment_id` (`enrollment_id`);
+
+--
+-- Indexes for table `representative_commissions`
+--
+ALTER TABLE `representative_commissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_representative_commissions_representative_id` (`representative_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_unique` (`name`);
+
+--
+-- Indexes for table `sections`
+--
+ALTER TABLE `sections`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `sections_name_unique` (`name`);
+
+--
+-- Indexes for table `sectors`
+--
+ALTER TABLE `sectors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sector_user`
+--
+ALTER TABLE `sector_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD UNIQUE KEY `sessions_id_unique` (`id`);
+
+--
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sources`
+--
+ALTER TABLE `sources`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `states`
+--
+ALTER TABLE `states`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `states_short_unique` (`short`),
+  ADD KEY `fk_states_1` (`country_id`);
+
+--
+-- Indexes for table `studentgroups`
+--
+ALTER TABLE `studentgroups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_studentgroups_partner_id` (`partner_id`);
+
+--
+-- Indexes for table `study_plans`
+--
+ALTER TABLE `study_plans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_study_plans_1` (`user_id`);
+
+--
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subjects_subject_id_foreign` (`subject_id`);
+
+--
+-- Indexes for table `subjects_books`
+--
+ALTER TABLE `subjects_books`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_book_products_subjects_id` (`books_products_id`),
+  ADD KEY `fk_subjects_books_subjects_id` (`subjects_id`);
+
+--
+-- Indexes for table `subjects_courses`
+--
+ALTER TABLE `subjects_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subjects_courses_subject_id_foreign` (`subject_id`),
+  ADD KEY `subjects_courses_course_id_foreign` (`course_id`),
+  ADD KEY `fk_subjects_courses_exam_id` (`exam_id`);
+
+--
+-- Indexes for table `subjects_packages`
+--
+ALTER TABLE `subjects_packages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_subject_package_relation_id` (`subject_id`),
+  ADD KEY `fk_exam_subjects_packages_id` (`exam_id`);
+
+--
+-- Indexes for table `subsections`
+--
+ALTER TABLE `subsections`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subsections_section_id_foreign` (`section_id`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `surveys`
+--
+ALTER TABLE `surveys`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survey_simple_responses`
+--
+ALTER TABLE `survey_simple_responses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_survey_simple_responses_user_id` (`user_id`),
+  ADD KEY `fk_survey_simple_responses_survey_id` (`survey_id`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tags_name_unique` (`name`),
+  ADD KEY `fk_tags_1` (`user_moderator_id`);
+
+--
+-- Indexes for table `teacher_lesson`
+--
+ALTER TABLE `teacher_lesson`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teacher_ratings`
+--
+ALTER TABLE `teacher_ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_teacher_ratings_exams_id` (`exam_id`),
+  ADD KEY `fk_teacher_ratings_executions_id` (`execution_id`),
+  ADD KEY `fk_teacher_ratings_teachers_id` (`teacher_id`);
+
+--
+-- Indexes for table `teacher_statements`
+--
+ALTER TABLE `teacher_statements`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_teacher_statements_user_teacher_id` (`user_teacher_id`),
+  ADD KEY `fk_teacher_statements_order_id` (`order_id`);
+
+--
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tickets_content_id` (`content_id`),
+  ADD KEY `fk_tickets_enrollment_id` (`enrollment_id`);
+
+--
+-- Indexes for table `ticket_messages`
+--
+ALTER TABLE `ticket_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `track_cart`
+--
+ALTER TABLE `track_cart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `fk_users_1` (`city_id`),
+  ADD KEY `fk_users_occupation_id` (`occupation_id`);
+
+--
+-- Indexes for table `user_providers`
+--
+ALTER TABLE `user_providers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_providers_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `videos`
 --
+ALTER TABLE `videos`
+  ADD PRIMARY KEY (`id`);
 ALTER TABLE `videos` ADD FULLTEXT KEY `search` (`title`,`content`,`tags`);
 
+--
+-- Indexes for table `video_user`
+--
+ALTER TABLE `video_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `view`
+--
+ALTER TABLE `view`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_view_content_id` (`content_id`),
+  ADD KEY `fk_view_enrollment_id` (`enrollment_id`);
+
+--
+-- Indexes for table `view_exams`
+--
+ALTER TABLE `view_exams`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_view_exams_question_id` (`question_id`),
+  ADD KEY `fk_view_exams_enrollment_id` (`enrollment_id`),
+  ADD KEY `fk_execution_view_exams_id` (`execution_id`);
+
+--
+-- Indexes for table `view_log`
+--
+ALTER TABLE `view_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_view_log_content_id` (`content_id`),
+  ADD KEY `fk_view_log_enrollment_id` (`enrollment_id`);
+
+--
+-- Indexes for table `webinars`
+--
+ALTER TABLE `webinars`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_webinars_courses_id` (`courses_id`);
+
+--
+-- Indexes for table `workshops`
+--
+ALTER TABLE `workshops`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_workshops_course_id` (`course_id`);
+
+--
+-- Indexes for table `workshop_activities`
+--
+ALTER TABLE `workshop_activities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_workshop_activities_workshop` (`workshop_id`);
+
+--
+-- Indexes for table `workshop_activities_lessons`
+--
+ALTER TABLE `workshop_activities_lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_workshop_activities_activity_id` (`workshop_activity_id`),
+  ADD KEY `fk_workshop_acitivities_lessons_id` (`lesson_id`);
+
+--
+-- Indexes for table `workshop_coordinators`
+--
+ALTER TABLE `workshop_coordinators`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `workshop_criterias`
+--
+ALTER TABLE `workshop_criterias`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_workshop_criterias_workshop` (`workshop_id`);
+
+--
+-- Indexes for table `workshop_evaluation_groups`
+--
+ALTER TABLE `workshop_evaluation_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_workshop_evaluation_groups_workshop` (`workshop_id`);
+
+--
+-- Indexes for table `workshop_group_tutors`
+--
+ALTER TABLE `workshop_group_tutors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_workshop_group_tutors_workshop_evaluation_group` (`workshop_evaluation_group_id`),
+  ADD KEY `fk_workshop_group_tutors_tutor` (`tutor_id`),
+  ADD KEY `fk_workshop_group_tutors_activity` (`activity_id`);
+
+--
+-- Indexes for table `workshop_tutors`
+--
+ALTER TABLE `workshop_tutors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_workshop_tutors_workshop` (`workshop_id`),
+  ADD KEY `fk_workshop_tutors_criteria` (`criteria_id`),
+  ADD KEY `fk_workshop_tutors_tutor` (`tutor_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `advertising_partners`
+--
+ALTER TABLE `advertising_partners`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `analysis`
+--
+ALTER TABLE `analysis`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `analysis_exams`
+--
+ALTER TABLE `analysis_exams`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `analysis_exams_groups`
+--
+ALTER TABLE `analysis_exams_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `analysis_exam_groups`
+--
+ALTER TABLE `analysis_exam_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `analysis_exam_subjects`
+--
+ALTER TABLE `analysis_exam_subjects`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `analysis_subjects`
+--
+ALTER TABLE `analysis_subjects`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `answers_executions`
+--
+ALTER TABLE `answers_executions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `article_user`
+--
+ALTER TABLE `article_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ask_the_teacher`
+--
+ALTER TABLE `ask_the_teacher`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ask_the_teacher_history`
+--
+ALTER TABLE `ask_the_teacher_history`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `assigned_roles`
+--
+ALTER TABLE `assigned_roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16769;
+--
+-- AUTO_INCREMENT for table `attempt_to_register_on_the_cart`
+--
+ALTER TABLE `attempt_to_register_on_the_cart`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `banners`
+--
+ALTER TABLE `banners`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `campaigns`
+--
+ALTER TABLE `campaigns`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5300109;
+--
+-- AUTO_INCREMENT for table `configs`
+--
+ALTER TABLE `configs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `contents`
+--
+ALTER TABLE `contents`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `content_comments`
+--
+ALTER TABLE `content_comments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `content_notes`
+--
+ALTER TABLE `content_notes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `coordinators_courses`
+--
+ALTER TABLE `coordinators_courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `coupon_course`
+--
+ALTER TABLE `coupon_course`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `coupon_module`
+--
+ALTER TABLE `coupon_module`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `coupon_user`
+--
+ALTER TABLE `coupon_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `courses_aggregated_courses`
+--
+ALTER TABLE `courses_aggregated_courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `courses_aggregated_exams`
+--
+ALTER TABLE `courses_aggregated_exams`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `courses_alerts`
+--
+ALTER TABLE `courses_alerts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `courses_calendars`
+--
+ALTER TABLE `courses_calendars`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `course_books`
+--
+ALTER TABLE `course_books`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `course_contents`
+--
+ALTER TABLE `course_contents`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `course_teachers`
+--
+ALTER TABLE `course_teachers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `criteria`
+--
+ALTER TABLE `criteria`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `domain`
+--
+ALTER TABLE `domain`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `enrollments`
+--
+ALTER TABLE `enrollments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `error_logs`
+--
+ALTER TABLE `error_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `exams`
+--
+ALTER TABLE `exams`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `exams_books`
+--
+ALTER TABLE `exams_books`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `exams_courses`
+--
+ALTER TABLE `exams_courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `exam_packages`
+--
+ALTER TABLE `exam_packages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `executions`
+--
+ALTER TABLE `executions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `faqcategory`
+--
+ALTER TABLE `faqcategory`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `group_question`
+--
+ALTER TABLE `group_question`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `group_subject`
+--
+ALTER TABLE `group_subject`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `institutions`
+--
+ALTER TABLE `institutions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `lessons`
+--
+ALTER TABLE `lessons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `lesson_teachers`
+--
+ALTER TABLE `lesson_teachers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `mailing_register`
+--
+ALTER TABLE `mailing_register`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `modules`
+--
+ALTER TABLE `modules`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `module_teachers`
+--
+ALTER TABLE `module_teachers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `my_workshop_activities`
+--
+ALTER TABLE `my_workshop_activities`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `my_workshop_activities_time`
+--
+ALTER TABLE `my_workshop_activities_time`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `my_workshop_evaluations`
+--
+ALTER TABLE `my_workshop_evaluations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `my_workshop_tutors`
+--
+ALTER TABLE `my_workshop_tutors`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `newsletters`
+--
+ALTER TABLE `newsletters`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `notification_message`
+--
+ALTER TABLE `notification_message`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `notification_user`
+--
+ALTER TABLE `notification_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `occupations`
+--
+ALTER TABLE `occupations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `offices`
+--
+ALTER TABLE `offices`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `order_courses`
+--
+ALTER TABLE `order_courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `order_lessons`
+--
+ALTER TABLE `order_lessons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order_modules`
+--
+ALTER TABLE `order_modules`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order_packages`
+--
+ALTER TABLE `order_packages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order_status`
+--
+ALTER TABLE `order_status`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `origin_external`
+--
+ALTER TABLE `origin_external`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `package_teachers`
+--
+ALTER TABLE `package_teachers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `partnerorders`
+--
+ALTER TABLE `partnerorders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `partnerorder_payments`
+--
+ALTER TABLE `partnerorder_payments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `partners`
+--
+ALTER TABLE `partners`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `partner_managers`
+--
+ALTER TABLE `partner_managers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+--
+-- AUTO_INCREMENT for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+--
+-- AUTO_INCREMENT for table `permission_user`
+--
+ALTER TABLE `permission_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `preenrollments`
+--
+ALTER TABLE `preenrollments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `products_url`
+--
+ALTER TABLE `products_url`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `questions_executions`
+--
+ALTER TABLE `questions_executions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `question_notes`
+--
+ALTER TABLE `question_notes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `representative_commissions`
+--
+ALTER TABLE `representative_commissions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `sections`
+--
+ALTER TABLE `sections`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `sectors`
+--
+ALTER TABLE `sectors`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT for table `sector_user`
+--
+ALTER TABLE `sector_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `sources`
+--
+ALTER TABLE `sources`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `states`
+--
+ALTER TABLE `states`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT for table `studentgroups`
+--
+ALTER TABLE `studentgroups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+--
+-- AUTO_INCREMENT for table `study_plans`
+--
+ALTER TABLE `study_plans`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subjects_books`
+--
+ALTER TABLE `subjects_books`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subjects_courses`
+--
+ALTER TABLE `subjects_courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subjects_packages`
+--
+ALTER TABLE `subjects_packages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subsections`
+--
+ALTER TABLE `subsections`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `surveys`
+--
+ALTER TABLE `surveys`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `survey_simple_responses`
+--
+ALTER TABLE `survey_simple_responses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `teacher_lesson`
+--
+ALTER TABLE `teacher_lesson`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `teacher_ratings`
+--
+ALTER TABLE `teacher_ratings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `teacher_statements`
+--
+ALTER TABLE `teacher_statements`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ticket_messages`
+--
+ALTER TABLE `ticket_messages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `track_cart`
+--
+ALTER TABLE `track_cart`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8930;
+--
+-- AUTO_INCREMENT for table `user_providers`
+--
+ALTER TABLE `user_providers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=625;
+--
+-- AUTO_INCREMENT for table `videos`
+--
+ALTER TABLE `videos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `video_user`
+--
+ALTER TABLE `video_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `view`
+--
+ALTER TABLE `view`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `view_exams`
+--
+ALTER TABLE `view_exams`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `view_log`
+--
+ALTER TABLE `view_log`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `webinars`
+--
+ALTER TABLE `webinars`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshops`
+--
+ALTER TABLE `workshops`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshop_activities`
+--
+ALTER TABLE `workshop_activities`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshop_activities_lessons`
+--
+ALTER TABLE `workshop_activities_lessons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshop_coordinators`
+--
+ALTER TABLE `workshop_coordinators`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshop_criterias`
+--
+ALTER TABLE `workshop_criterias`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshop_evaluation_groups`
+--
+ALTER TABLE `workshop_evaluation_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshop_group_tutors`
+--
+ALTER TABLE `workshop_group_tutors`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `workshop_tutors`
+--
+ALTER TABLE `workshop_tutors`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `analysis`
+-- Constraints for table `analysis`
 --
 ALTER TABLE `analysis`
   ADD CONSTRAINT `fk_analysis_analysis_exam_group_id` FOREIGN KEY (`analysis_exam_group_id`) REFERENCES `analysis_exam_groups` (`id`),
   ADD CONSTRAINT `fk_analysis_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`);
 
 --
--- Limitadores para a tabela `analysis_exams`
+-- Constraints for table `analysis_exams`
 --
 ALTER TABLE `analysis_exams`
   ADD CONSTRAINT `fk_analysis_exams_institution_id` FOREIGN KEY (`institution_id`) REFERENCES `institutions` (`id`),
@@ -19057,80 +20461,80 @@ ALTER TABLE `analysis_exams`
   ADD CONSTRAINT `fk_analysis_exams_source_id` FOREIGN KEY (`source_id`) REFERENCES `sources` (`id`);
 
 --
--- Limitadores para a tabela `analysis_exams_groups`
+-- Constraints for table `analysis_exams_groups`
 --
 ALTER TABLE `analysis_exams_groups`
   ADD CONSTRAINT `fk_analysis_exams_groups_analysis_exam_group_id` FOREIGN KEY (`analysis_exam_group_id`) REFERENCES `analysis_exam_groups` (`id`),
   ADD CONSTRAINT `fk_analysis_exams_groups_analysis_exam_id` FOREIGN KEY (`analysis_exam_id`) REFERENCES `analysis_exams` (`id`);
 
 --
--- Limitadores para a tabela `analysis_exam_subjects`
+-- Constraints for table `analysis_exam_subjects`
 --
 ALTER TABLE `analysis_exam_subjects`
   ADD CONSTRAINT `fk_analysis_exam_subjects_analysis_exam_id` FOREIGN KEY (`analysis_exam_id`) REFERENCES `analysis_exams` (`id`),
   ADD CONSTRAINT `fk_analysis_exam_subjects_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`);
 
 --
--- Limitadores para a tabela `analysis_subjects`
+-- Constraints for table `analysis_subjects`
 --
 ALTER TABLE `analysis_subjects`
   ADD CONSTRAINT `fk_analysis_subjects_analysis_id` FOREIGN KEY (`analysis_id`) REFERENCES `analysis` (`id`),
   ADD CONSTRAINT `fk_analysis_subjects_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`);
 
 --
--- Limitadores para a tabela `answers`
+-- Constraints for table `answers`
 --
 ALTER TABLE `answers`
   ADD CONSTRAINT `answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
 
 --
--- Limitadores para a tabela `answers_executions`
+-- Constraints for table `answers_executions`
 --
 ALTER TABLE `answers_executions`
   ADD CONSTRAINT `answers_executions_answer_id_foreign` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`id`),
   ADD CONSTRAINT `answers_executions_question_execution_id_foreign` FOREIGN KEY (`question_execution_id`) REFERENCES `questions_executions` (`id`);
 
 --
--- Limitadores para a tabela `attempt_to_register_on_the_cart`
+-- Constraints for table `attempt_to_register_on_the_cart`
 --
 ALTER TABLE `attempt_to_register_on_the_cart`
   ADD CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 
 --
--- Limitadores para a tabela `books`
+-- Constraints for table `books`
 --
 ALTER TABLE `books`
   ADD CONSTRAINT `fk_books_products_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `fk_books_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `cities`
+-- Constraints for table `cities`
 --
 ALTER TABLE `cities`
   ADD CONSTRAINT `fk_cities_1` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`);
 
 --
--- Limitadores para a tabela `configs`
+-- Constraints for table `configs`
 --
 ALTER TABLE `configs`
   ADD CONSTRAINT `fk_configs_1` FOREIGN KEY (`user_changed_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `content_notes`
+-- Constraints for table `content_notes`
 --
 ALTER TABLE `content_notes`
   ADD CONSTRAINT `fk_content_notes_1` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`),
   ADD CONSTRAINT `fk_content_notes_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `coordinators_courses`
+-- Constraints for table `coordinators_courses`
 --
 ALTER TABLE `coordinators_courses`
   ADD CONSTRAINT `fk_coordinators_courses_coordinator_id` FOREIGN KEY (`coordinator_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `fk_coordinators_courses_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
--- Limitadores para a tabela `coupons`
+-- Constraints for table `coupons`
 --
 ALTER TABLE `coupons`
   ADD CONSTRAINT `coupons_advertisingpartner_id_foreign` FOREIGN KEY (`advertisingpartner_id`) REFERENCES `advertising_partners` (`id`),
@@ -19139,40 +20543,40 @@ ALTER TABLE `coupons`
   ADD CONSTRAINT `fk_coupons_user_id_representative` FOREIGN KEY (`user_id_representative`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `courses`
+-- Constraints for table `courses`
 --
 ALTER TABLE `courses`
   ADD CONSTRAINT `fk_exam_course_id` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`);
 
 --
--- Limitadores para a tabela `courses_aggregated_courses`
+-- Constraints for table `courses_aggregated_courses`
 --
 ALTER TABLE `courses_aggregated_courses`
   ADD CONSTRAINT `courses_aggregated_courses_course_id_bought_foreign` FOREIGN KEY (`course_id_bought`) REFERENCES `courses` (`id`),
   ADD CONSTRAINT `courses_aggregated_courses_course_id_extra_foreign` FOREIGN KEY (`course_id_extra`) REFERENCES `courses` (`id`);
 
 --
--- Limitadores para a tabela `courses_aggregated_exams`
+-- Constraints for table `courses_aggregated_exams`
 --
 ALTER TABLE `courses_aggregated_exams`
   ADD CONSTRAINT `courses_aggregated_exams_course_id_bought_foreign` FOREIGN KEY (`course_id_bought`) REFERENCES `courses` (`id`),
   ADD CONSTRAINT `courses_aggregated_exams_exam_id_extra_foreign` FOREIGN KEY (`exam_id_extra`) REFERENCES `exams` (`id`);
 
 --
--- Limitadores para a tabela `course_books`
+-- Constraints for table `course_books`
 --
 ALTER TABLE `course_books`
   ADD CONSTRAINT `fk_book_products_course_books_id` FOREIGN KEY (`books_products_id`) REFERENCES `books` (`product_id`),
   ADD CONSTRAINT `fk_books_courses_id` FOREIGN KEY (`courses_id`) REFERENCES `courses` (`id`);
 
 --
--- Limitadores para a tabela `course_contents`
+-- Constraints for table `course_contents`
 --
 ALTER TABLE `course_contents`
   ADD CONSTRAINT `fk_course_course_contents_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
--- Limitadores para a tabela `enrollments`
+-- Constraints for table `enrollments`
 --
 ALTER TABLE `enrollments`
   ADD CONSTRAINT `fk_certification_individual_user_id` FOREIGN KEY (`certification_individual_user_id`) REFERENCES `users` (`id`),
@@ -19181,21 +20585,21 @@ ALTER TABLE `enrollments`
   ADD CONSTRAINT `fk_enrollments_user_id_created_by` FOREIGN KEY (`user_id_created_by`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `exams`
+-- Constraints for table `exams`
 --
 ALTER TABLE `exams`
   ADD CONSTRAINT `exams_subsection_id_foreign` FOREIGN KEY (`subsection_id`) REFERENCES `subsections` (`id`),
   ADD CONSTRAINT `fk_exam_teacher_message_id` FOREIGN KEY (`teacher_message_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `exams_books`
+-- Constraints for table `exams_books`
 --
 ALTER TABLE `exams_books`
   ADD CONSTRAINT `fk_book_products_exams_books_id` FOREIGN KEY (`books_products_id`) REFERENCES `books` (`product_id`),
   ADD CONSTRAINT `fk_books_exams_id` FOREIGN KEY (`exams_id`) REFERENCES `exams` (`id`);
 
 --
--- Limitadores para a tabela `executions`
+-- Constraints for table `executions`
 --
 ALTER TABLE `executions`
   ADD CONSTRAINT `executions_last_question_execution_id_foreign` FOREIGN KEY (`last_question_execution_id`) REFERENCES `questions_executions` (`id`) ON DELETE CASCADE,
@@ -19203,26 +20607,26 @@ ALTER TABLE `executions`
   ADD CONSTRAINT `fk_lesson_executions` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`);
 
 --
--- Limitadores para a tabela `groups`
+-- Constraints for table `groups`
 --
 ALTER TABLE `groups`
   ADD CONSTRAINT `fk_groups_lcourse` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
   ADD CONSTRAINT `fk_groups_lesson` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`);
 
 --
--- Limitadores para a tabela `group_subject`
+-- Constraints for table `group_subject`
 --
 ALTER TABLE `group_subject`
   ADD CONSTRAINT `fk_source_group_subject_id` FOREIGN KEY (`source_id`) REFERENCES `sources` (`id`);
 
 --
--- Limitadores para a tabela `lessons`
+-- Constraints for table `lessons`
 --
 ALTER TABLE `lessons`
   ADD CONSTRAINT `fk_exam_lesson_id` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`);
 
 --
--- Limitadores para a tabela `my_workshop_activities`
+-- Constraints for table `my_workshop_activities`
 --
 ALTER TABLE `my_workshop_activities`
   ADD CONSTRAINT `fk_my_workshop_activities_activity` FOREIGN KEY (`activity_id`) REFERENCES `workshop_activities` (`id`),
@@ -19230,14 +20634,14 @@ ALTER TABLE `my_workshop_activities`
   ADD CONSTRAINT `fk_my_workshop_activities_workshop` FOREIGN KEY (`workshop_id`) REFERENCES `workshops` (`id`);
 
 --
--- Limitadores para a tabela `my_workshop_activities_time`
+-- Constraints for table `my_workshop_activities_time`
 --
 ALTER TABLE `my_workshop_activities_time`
   ADD CONSTRAINT `fk_activity_workshop_time_id` FOREIGN KEY (`activity_id`) REFERENCES `workshop_activities` (`id`),
   ADD CONSTRAINT `fk_enrollment_workshop_time_id` FOREIGN KEY (`enrollment_id`) REFERENCES `enrollments` (`id`);
 
 --
--- Limitadores para a tabela `my_workshop_evaluations`
+-- Constraints for table `my_workshop_evaluations`
 --
 ALTER TABLE `my_workshop_evaluations`
   ADD CONSTRAINT `fk_my_workshop_evaluations_criteria` FOREIGN KEY (`criteria_id`) REFERENCES `workshop_criterias` (`id`),
@@ -19245,7 +20649,7 @@ ALTER TABLE `my_workshop_evaluations`
   ADD CONSTRAINT `fk_my_workshop_evaluations_tutor` FOREIGN KEY (`tutor_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `my_workshop_tutors`
+-- Constraints for table `my_workshop_tutors`
 --
 ALTER TABLE `my_workshop_tutors`
   ADD CONSTRAINT `fk_my_workshop_tutors_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `workshop_activities` (`id`),
@@ -19255,45 +20659,45 @@ ALTER TABLE `my_workshop_tutors`
   ADD CONSTRAINT `fk_my_workshop_tutors_workshop` FOREIGN KEY (`workshop_id`) REFERENCES `workshops` (`id`);
 
 --
--- Limitadores para a tabela `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_orders_partner_id` FOREIGN KEY (`partner_id`) REFERENCES `partners` (`id`);
 
 --
--- Limitadores para a tabela `order_courses`
+-- Constraints for table `order_courses`
 --
 ALTER TABLE `order_courses`
   ADD CONSTRAINT `fk_order_courses_user_id_external_payment` FOREIGN KEY (`user_id_external_payment`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `partnerorder_payments`
+-- Constraints for table `partnerorder_payments`
 --
 ALTER TABLE `partnerorder_payments`
   ADD CONSTRAINT `fk_partnerorder_payments_user_id_create` FOREIGN KEY (`user_id_create`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `fk_partnerorder_payments_user_id_paid` FOREIGN KEY (`user_id_paid`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `partner_managers`
+-- Constraints for table `partner_managers`
 --
 ALTER TABLE `partner_managers`
   ADD CONSTRAINT `fk_partner_managers_partners_id` FOREIGN KEY (`partner_id`) REFERENCES `partners` (`id`),
   ADD CONSTRAINT `fk_partner_managers_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_products_suppliers_id` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`id`);
 
 --
--- Limitadores para a tabela `products_url`
+-- Constraints for table `products_url`
 --
 ALTER TABLE `products_url`
   ADD CONSTRAINT `fk_products_url_products_id` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
 --
--- Limitadores para a tabela `questions`
+-- Constraints for table `questions`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `fk_questions_teacher_id` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`),
@@ -19303,96 +20707,96 @@ ALTER TABLE `questions`
   ADD CONSTRAINT `questions_subject_id_foreign` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`);
 
 --
--- Limitadores para a tabela `ratings`
+-- Constraints for table `ratings`
 --
 ALTER TABLE `ratings`
   ADD CONSTRAINT `fk_ratings_enrollment_id` FOREIGN KEY (`enrollment_id`) REFERENCES `enrollments` (`id`);
 
 --
--- Limitadores para a tabela `representative_commissions`
+-- Constraints for table `representative_commissions`
 --
 ALTER TABLE `representative_commissions`
   ADD CONSTRAINT `fk_representative_commissions_representative_id` FOREIGN KEY (`representative_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `subjects`
+-- Constraints for table `subjects`
 --
 ALTER TABLE `subjects`
   ADD CONSTRAINT `subjects_subject_id_foreign` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE;
 
 --
--- Limitadores para a tabela `subjects_books`
+-- Constraints for table `subjects_books`
 --
 ALTER TABLE `subjects_books`
   ADD CONSTRAINT `fk_book_products_subjects_id` FOREIGN KEY (`books_products_id`) REFERENCES `books` (`product_id`),
   ADD CONSTRAINT `fk_subjects_books_subjects_id` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`);
 
 --
--- Limitadores para a tabela `subjects_packages`
+-- Constraints for table `subjects_packages`
 --
 ALTER TABLE `subjects_packages`
   ADD CONSTRAINT `fk_exam_subjects_packages_id` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`),
   ADD CONSTRAINT `fk_subject_package_relation_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`);
 
 --
--- Limitadores para a tabela `survey_simple_responses`
+-- Constraints for table `survey_simple_responses`
 --
 ALTER TABLE `survey_simple_responses`
   ADD CONSTRAINT `fk_survey_simple_responses_survey_id` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`id`),
   ADD CONSTRAINT `fk_survey_simple_responses_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `tickets`
+-- Constraints for table `tickets`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `fk_tickets_content_id` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`),
   ADD CONSTRAINT `fk_tickets_enrollment_id` FOREIGN KEY (`enrollment_id`) REFERENCES `enrollments` (`id`);
 
 --
--- Limitadores para a tabela `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `fk_users_occupation_id` FOREIGN KEY (`occupation_id`) REFERENCES `occupations` (`id`);
 
 --
--- Limitadores para a tabela `webinars`
+-- Constraints for table `webinars`
 --
 ALTER TABLE `webinars`
   ADD CONSTRAINT `fk_webinars_courses_id` FOREIGN KEY (`courses_id`) REFERENCES `courses` (`id`);
 
 --
--- Limitadores para a tabela `workshops`
+-- Constraints for table `workshops`
 --
 ALTER TABLE `workshops`
   ADD CONSTRAINT `fk_workshops_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
--- Limitadores para a tabela `workshop_activities`
+-- Constraints for table `workshop_activities`
 --
 ALTER TABLE `workshop_activities`
   ADD CONSTRAINT `fk_workshop_activities_workshop` FOREIGN KEY (`workshop_id`) REFERENCES `workshops` (`id`);
 
 --
--- Limitadores para a tabela `workshop_activities_lessons`
+-- Constraints for table `workshop_activities_lessons`
 --
 ALTER TABLE `workshop_activities_lessons`
   ADD CONSTRAINT `fk_workshop_acitivities_lessons_id` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`),
   ADD CONSTRAINT `fk_workshop_activities_activity_id` FOREIGN KEY (`workshop_activity_id`) REFERENCES `workshop_activities` (`id`);
 
 --
--- Limitadores para a tabela `workshop_criterias`
+-- Constraints for table `workshop_criterias`
 --
 ALTER TABLE `workshop_criterias`
   ADD CONSTRAINT `fk_workshop_criterias_workshop` FOREIGN KEY (`workshop_id`) REFERENCES `workshops` (`id`);
 
 --
--- Limitadores para a tabela `workshop_evaluation_groups`
+-- Constraints for table `workshop_evaluation_groups`
 --
 ALTER TABLE `workshop_evaluation_groups`
   ADD CONSTRAINT `fk_workshop_evaluation_groups_workshop` FOREIGN KEY (`workshop_id`) REFERENCES `workshops` (`id`);
 
 --
--- Limitadores para a tabela `workshop_group_tutors`
+-- Constraints for table `workshop_group_tutors`
 --
 ALTER TABLE `workshop_group_tutors`
   ADD CONSTRAINT `fk_workshop_group_tutors_activity` FOREIGN KEY (`activity_id`) REFERENCES `workshop_activities` (`id`),
@@ -19400,13 +20804,12 @@ ALTER TABLE `workshop_group_tutors`
   ADD CONSTRAINT `fk_workshop_group_tutors_workshop_evaluation_group` FOREIGN KEY (`workshop_evaluation_group_id`) REFERENCES `workshop_evaluation_groups` (`id`);
 
 --
--- Limitadores para a tabela `workshop_tutors`
+-- Constraints for table `workshop_tutors`
 --
 ALTER TABLE `workshop_tutors`
   ADD CONSTRAINT `fk_workshop_tutors_criteria` FOREIGN KEY (`criteria_id`) REFERENCES `workshop_criterias` (`id`),
   ADD CONSTRAINT `fk_workshop_tutors_tutor` FOREIGN KEY (`tutor_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `fk_workshop_tutors_workshop` FOREIGN KEY (`workshop_id`) REFERENCES `workshops` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
