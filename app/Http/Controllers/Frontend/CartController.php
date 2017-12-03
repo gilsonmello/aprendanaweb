@@ -399,20 +399,6 @@ class CartController extends Controller {
 
         $dataXml = $response->xml();
 
-        //file_put_contents(public_path() . '/teste/' . date('d_m_Y__H_i_s') . '.xml', $dataXml);
-        //Verificando se ouve erro na requisição, se houver, tento fazer a busca da transação na conta do compliance
-        if (count($dataXml->error) > 0 || is_null($dataXml) || empty($dataXml)) {
-            $request = [
-                'url' => 'https://ws.pagseguro.uol.com.br/v2/transactions/notifications/' . $code,
-                'params' => [
-                    'email' => config('laravelpagseguro.compliance.credentials.email'),
-                    'token' => config('laravelpagseguro.compliance.credentials.token')
-                ]
-            ];
-            $response = \HttpClient::get($request);
-            $dataXml = $response->xml();
-        }
-
         $this->order->updateFromPagseguroFeedback($dataXml);
 
         file_put_contents(public_path() . '/log_pagseguro/' . date('d_m_Y__H_i_s') . '.xml', $response->content());
