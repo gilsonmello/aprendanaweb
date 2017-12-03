@@ -198,3 +198,93 @@ Stack trace:
 #55 /home/miran452/public_html/aprendanaweb/bootstrap/cache/compiled.php(2240): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #56 /home/miran452/public_html/aprendanaweb/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #57 {main}  
+[2017-12-03 15:17:34] local.INFO: User Logged In: Gilson de Melo Oliveira  
+[2017-12-03 15:17:35] local.INFO: Informação do authenticate: GET /dashboard HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:           gzip, deflate
+Accept-Language:           en-US,en;q=0.5
+Connection:                keep-alive
+Cookie:                    XSRF-TOKEN=eyJpdiI6IkFEQXlUVmFQXC9RVVdYZHQ5Rjl5ZTlRPT0iLCJ2YWx1ZSI6ImhQV3dmNDNCT1hqU25hb0k5ZnZ1NzNTTmVsUnVWbWFreHlXOTF4VnN6bTJrazh0bXNHUmtUcVo4UUwyZ3NmM09wK1cxaWgyZ0lVaEV6b1BkaXR3TWVnPT0iLCJtYWMiOiJmMzU0ODFkZTFiMmFkMjg1ZjIwNTNlNDA2YjM3Mjg0YTAxNTEwZTQzZGM0MjVmZjkwOWJjZDY4OGUyZDJmOGIxIn0%3D; bj_session=eyJpdiI6InhEakphQVdObmRYTmtnNFM4QVRaS1E9PSIsInZhbHVlIjoiY1FFSXFsXC9SSm5raHhpazMyNzJsNFQ4UEZaNFQ0NkJRK3BpZVp4a2NUM3ZwSW1qZHlhRVVzRGhoYWROa0JLcWV3UnpcL0tycUZoRWJVRENRVGVtRWoyQT09IiwibWFjIjoiMzY0ZTNhZjBhM2U5YTg3ZjRlZjljNmQwNWIzZjhiMjc1MzdkZjFiZTVlNTI0YjU5ZmZlYjlkMzFjNTcxODg5NSJ9; _ga=GA1.1.412722824.1512324892; _gid=GA1.1.1579238492.1512324892
+Host:                      localhost:8000
+Referer:                   http://localhost:8000/
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0
+
+  
+[2017-12-03 15:17:35] local.INFO: log.EXAM  
+[2017-12-03 15:21:02] local.INFO: Informação do authenticate: GET /dashboard HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:           gzip, deflate
+Accept-Language:           en-US,en;q=0.5
+Connection:                keep-alive
+Cookie:                    XSRF-TOKEN=eyJpdiI6IlVpcFZKTzcyWUtBU0ZTeW5BWDk3RVE9PSIsInZhbHVlIjoiaVFYXC8xcWJWRm5tUXFsaTN2Q0kzMlhITVJMS0Y5Q3YzZ2xCUk5LYURXelZ2S3NRdDZnT3JEa1h0OEVIcFlwUDY4ekE5MmEraFBLSHQ5MjdRN3BrTmtnPT0iLCJtYWMiOiJiYTM3MDlmYTViZmQ4ZjRiOWQ3MTI1ODUyYjEwYWIxMzY1NjE2OWVhZDRiMmFjOWZmZTc2OTYyMTEwYjJkNmE0In0%3D; bj_session=eyJpdiI6IjRVbm9cL2x3aTVvNWhTdHBJRUVLVGxnPT0iLCJ2YWx1ZSI6Ik1paUw0UnVnT3dKTkpuK1JRc3IwY3I4MW5PNTNnQjdLNXgzM2xqSFNqUnF3bUpTRXFXV0hZZDNPTGxIM2poZmk2WEc2ZFJabmxwNzBLdTdhdjZ2S1BRPT0iLCJtYWMiOiJhNmE1OTBlNzNhOTkyMWQwNjZhZTY3ZDFjZWZhMmRmMmRjMjMyZTIwMDMyMTQ0NTBkZTBmZTYwM2I0OTNlMmJjIn0%3D; _ga=GA1.1.412722824.1512324892; _gid=GA1.1.1579238492.1512324892
+Host:                      localhost:8000
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0
+
+  
+[2017-12-03 15:21:02] local.INFO: log.EXAM  
+[2017-12-03 15:23:58] local.INFO: Informação do authenticate: GET /dashboard HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:           gzip, deflate
+Accept-Language:           en-US,en;q=0.5
+Connection:                keep-alive
+Cookie:                    XSRF-TOKEN=eyJpdiI6ImJ4cVliRWF5Nm80OFRESURsQStRN2c9PSIsInZhbHVlIjoiajBGTlRmZzBZWlBjbGdcL0QyWUVRM0N0K3EzaTZXNytaTkxHU3VkN0NHd3hZUnRZMlZNQWpZXC9yTmlkNk5NeVFpc1VYRnU1d1dNaDdGd2hRNGF4WGM4Zz09IiwibWFjIjoiZTA4MWNiMjI5ZDAwZmQ0YWMxNDg0OTgwYjhkYTQxYWIwNWI2YWM0MTM3ZGE3ZmVlN2Q4NzkwYmQxNmRlY2JkZCJ9; bj_session=eyJpdiI6IlZYZHRCdjRVVGY1SU1hRDhkaTNydVE9PSIsInZhbHVlIjoiQ2tiZHQwcE82SW5YZWE2ejlmVWpzZ3VVOTYyZFkrbWx0R0txNjJBRnJZdm10ejNKUzJQaHk5eEZWTmN1cEZMZXk4a1VTaHZWOWpNc0V1Q1JJcWczQmc9PSIsIm1hYyI6ImYyZTM4M2QzYWE5YTNiNjEyMDI2ZjczYzczMmQ1NWU0NTA0Nzg5YWJjMTQ3YzA5MWQ2YjczMzk5ZGMxZmE3YTUifQ%3D%3D; _ga=GA1.1.412722824.1512324892; _gid=GA1.1.1579238492.1512324892
+Host:                      localhost:8000
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0
+
+  
+[2017-12-03 15:23:58] local.INFO: log.EXAM  
+[2017-12-03 15:24:33] local.INFO: Informação do authenticate: GET /auth/logout HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:           gzip, deflate
+Accept-Language:           en-US,en;q=0.5
+Connection:                keep-alive
+Cookie:                    XSRF-TOKEN=eyJpdiI6Im5pNzYrTU1NZjJqWWZOK2tHVG1rR0E9PSIsInZhbHVlIjoiWEdXZlJjVmJLSXJZMTNlTlF1ZWNDb1dJYnVQeHFcL3hCOWMxdEVWSkhxRU4rWkxISEw1V3dQWDVtaTQ4ZVJWZUVcLytMZDBNUVpsNEt2WGFoNXdVR1R5QT09IiwibWFjIjoiZWNkZjI3MDRjZmVhZTAyY2M4MTNmMmVhZThiZjM0OWZiZGI1MmM0YTJkNTMzMThlYWExYThmMWZmNDA4NjQ3MyJ9; bj_session=eyJpdiI6Im5SWnFkWGFVOXROdGozRG5xbW5PMlE9PSIsInZhbHVlIjoidUoyWExKbitXMUV4ZzVMRG5QV2swRThuZWt4Z2dkeWdCeFFPcGFpdU5rQ1l2TlZKSzgxc3BVbHBKS0RUU1ViS2xzRGpLMXdiYndvSGoyVUZNYU5yTlE9PSIsIm1hYyI6ImE0NmFmZmQ2NDM3ZDJjODcwNzcxMWZjZjNkNTBlN2Q3ZTM3MmUyMjU0Y2FkMDM4M2YyYzc5NDI2MjM3NzM0MzMifQ%3D%3D; _ga=GA1.1.412722824.1512324892; _gid=GA1.1.1579238492.1512324892
+Host:                      localhost:8000
+Referer:                   http://localhost:8000/dashboard
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0
+
+  
+[2017-12-03 15:24:33] local.INFO: User Logged Out: Gilson de Melo Oliveira  
+[2017-12-03 15:24:48] local.INFO: User Logged In: Gilson de Melo Oliveira  
+[2017-12-03 15:24:48] local.INFO: Informação do authenticate: GET /dashboard HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:           gzip, deflate
+Accept-Language:           en-US,en;q=0.5
+Connection:                keep-alive
+Cookie:                    XSRF-TOKEN=eyJpdiI6IjhDdFF3YjllNG5KQStLVHNTRzlTR2c9PSIsInZhbHVlIjoiR1psRlZBUnBGSTBaNnZHbFNpVGlaTmhBcWlSMTVuSWJBYWxaZHB1TXVEcFI2VnlKYTF6cFNwWmNjYkhDWW9oTmw1ajVlQUJRd080QkFjdmZtS0NyM3c9PSIsIm1hYyI6ImFhYzI1NTk2OTY3OGVhMjZkZmFiNDM2OTFiMTUyOWNjZTVkMGZlOThlNTkzNWI3YTQ3M2I1MGZkM2E5ODYzMzcifQ%3D%3D; bj_session=eyJpdiI6IkU0YklNSEt1NEhoaWY0cXNXd2h2R0E9PSIsInZhbHVlIjoiZ2VSMTY2WklxbDY0OEJEYXBVbjBhSllmMGZMcXRUdithdGZ3NU9laVkwWHRnS1wvMFZ4bWZsUkxkUFBjbytrZ1h6OXYyeWFZTUJQN3ZiM1hZdFd0REtnPT0iLCJtYWMiOiI1OGUzMzU5N2JmNzEyMTY5YTA5MDRjMGIyOTcxY2ZlYzRkNjRmYWFjZWE1NzEwOGVmMjMzMDk5OGJlYzkzYzAwIn0%3D; _ga=GA1.1.412722824.1512324892; _gid=GA1.1.1579238492.1512324892; _gat=1
+Host:                      localhost:8000
+Referer:                   http://localhost:8000/
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0
+
+  
+[2017-12-03 15:24:48] local.INFO: log.EXAM  
+[2017-12-03 15:24:57] local.INFO: Informação do authenticate: GET /profile/8929/edit HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:           gzip, deflate
+Accept-Language:           en-US,en;q=0.5
+Connection:                keep-alive
+Cookie:                    XSRF-TOKEN=eyJpdiI6InRRanVVN0dhQ2I5eFRLbFQxQ1ptWlE9PSIsInZhbHVlIjoiTk9ib1pmalEyS09EZG5nV0hhY2J5WjJxNlVBMTlQaG83TXhHTUh1T2F1WjJDVmJzWm96Wm93RXpaSTRHdHFFWXRCVjNYK2hcL1YzN0pYb2FXaXV6cUtBPT0iLCJtYWMiOiI3Mzg1YmM2NjZjYjhhMTlhOTBmNjEzNTJiNzNlZTEwYmY3NjY2M2FlOTlmNzBiYzkyOGExOWNiNDQwOTBhZjFhIn0%3D; bj_session=eyJpdiI6IjdzZ3lsYlM2ZmhTdlZqd0tzaDY5Wmc9PSIsInZhbHVlIjoiWVNHT2VpclN3Umc3YTN1d0ZsSzZZUldOQTc5TXRmWEtsWkpjdU94cGNUaDlIeVdFcVN0QklHVHJaYllXbFg5bXdSZG9VZHdtRVl4ejhMd1wvZm1EMWhRPT0iLCJtYWMiOiJiOTIxMTNiZmMyOTMyNTQ5ZGU3MDM5ZTg3MzRiNmE2MGNhYWEzYTVhMGJlYmQ1MjFiOTA4M2ViN2Y3MWY5NTNiIn0%3D; _ga=GA1.1.412722824.1512324892; _gid=GA1.1.1579238492.1512324892; _gat=1
+Host:                      localhost:8000
+Referer:                   http://localhost:8000/dashboard
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0
+
+  
+[2017-12-03 15:25:36] local.INFO: Informação do authenticate: GET /auth/logout HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:           gzip, deflate
+Accept-Language:           en-US,en;q=0.5
+Connection:                keep-alive
+Cookie:                    XSRF-TOKEN=eyJpdiI6ImRoaDVkcnhSaE5QNTB6M1psa0FlRmc9PSIsInZhbHVlIjoiNDhxWXVRd1Z1NkxEbFNESmdJU25oMGVXczJqbkRXUVg1TnVnWlg4UzNcL3d5b2ZFY3ZPU0g5MGlUQ3lLWVlYZjR2aDNXMzZZVGZwVFF6YytXZzdIUmNBPT0iLCJtYWMiOiJlYWExNmNiZThhMGUyN2ZkOTJjNjUyYzg0Mzk4YzJjNTVkYTkzOGQzNjhiOWY3Y2Q2N2VjZWI4NTUzZWEyMDVhIn0%3D; bj_session=eyJpdiI6IlZFZ2x1bjdxNlpKQ0g5NlpJT2h6dEE9PSIsInZhbHVlIjoiSEJIN0dCTVdkWmVVVG50Vlh2RTJhc2RvWnVlaTZJM0pQdW9CQnJuK0txSEV2eGxOY3pXdDNHODI3MVpBaFlJZlpiVHFpTkJvWW5hbW41MHQwZmhCRFE9PSIsIm1hYyI6ImZjNWZjYTg0ODdmNDYyMzM4ZWU2Nzk1OTgzYTM1OWFjYzE4YTEzODcwYmYxOTQ1ZjcxMDg4NzdmZDdmNThiNGIifQ%3D%3D; _ga=GA1.1.412722824.1512324892; _gid=GA1.1.1579238492.1512324892
+Host:                      localhost:8000
+Referer:                   http://localhost:8000/profile/8929/edit
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0
+
+  
+[2017-12-03 15:25:36] local.INFO: User Logged Out: Gilson de Melo Oliveira  

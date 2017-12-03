@@ -91,7 +91,7 @@
             
             <div class="col-lg-12 col-md-10 col-sm-10">
 
-                    <h3>Você ainda não adquiriu nenhum curso ou SAAP. <a href="/" style="text-decoration: underline;">Acesse a loja Brasil Jurídico.</a></h3>
+                    <h3>Você ainda não adquiriu nenhum curso ou SAAP. <a href="/" style="text-decoration: underline;">Acesse a loja Aprenda na Web.</a></h3>
 
             </div>
   
