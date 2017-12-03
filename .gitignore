@@ -3,6 +3,7 @@ vendor/
 !public/js/vendor/
 node_modules/
 npm-debug.log
+public/log_pagseguro/
 
 # Laravel 4 specific
 bootstrap/compiled.php
