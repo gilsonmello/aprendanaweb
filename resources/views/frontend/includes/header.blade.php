@@ -60,9 +60,9 @@
                                                     {!! Form::submit(trans('labels.login_button'), ['id' => 'btnLogin', 'style' => 'width:40%;', 'class' => 'btn btn-success pull-right']) !!}
                                                 </div>
 
-                                                <div>
+                                                {{-- <div>
                                                     <a href="/auth/login/facebook" id="btn-facebook-solid" style="width:100%" class="btn btn-facebook btn-info mb-md ml-xs mr-xs">Conecte com o <i class="fa fa-facebook"></i></a>
-                                                </div>
+                                                </div> --}}
                                                 {!! Form::close() !!}
                                             </div>
                                             <div class="create-account">

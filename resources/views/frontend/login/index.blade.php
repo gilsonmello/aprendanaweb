@@ -15,9 +15,9 @@
         <div class="col-sm-6">
           <div class="ragister-account account-login">
             <h1 class="section-title title">JÁ É CADASTRADO?</h1>
-            <div class="login-options text-center">
+            {{-- <div class="login-options text-center">
               <a href="/auth/login/facebook" class="facebook-login"><i class="fa fa-facebook"></i> Login com Facebook</a>
-            </div>
+            </div> --}}
 
             {!! Form::open(['id' => "registation-form", 'name' => "registation-form", 'url' => 'auth/login', 'class' => 'form-horizontal', 'role' => 'form']) !!}
 
