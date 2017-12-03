@@ -383,8 +383,12 @@ class CartController extends Controller {
         ////////////// To tests //////////////
         //$code = '7F7AA96F474A474A222664BC9F8EFA8680C4';
 
+        $environment = config('laravelpagseguro.use-sandbox');
+
+        $host = ($environment == 'local') ? config('laravelpagseguro.host.sandbox') : config('laravelpagseguro.host.production');
+
         $request = [
-            'url' => 'https://ws.pagseguro.uol.com.br/v2/transactions/notifications/' . $code,
+            'url' => $host.'/v2/transactions/notifications/' . $code,
             'params' => [
                 'email' => config('laravelpagseguro.credentials.email'),
                 'token' => config('laravelpagseguro.credentials.token')
