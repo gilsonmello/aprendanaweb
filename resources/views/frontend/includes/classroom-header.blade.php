@@ -2,7 +2,7 @@
 
     <div class="logo-container">
         <a href="/dashboard" class="logo" >
-            <img src="/img/frontend/aprendanaweb.jpg" alt="Brasil Jurídico" width="190" />
+            <img src="/img/frontend/aprendanaweb.jpg" alt="Brasil Jurídico" width="70" height="70" />
         </a>
         <!--div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
             <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
